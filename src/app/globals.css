@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3E4FB0;
+  --color-accent: #FFB606;
+  --color-dark: #1A1A2E;
+  --color-gray-light: #F8F9FA;
+  --color-gray-text: #6B7280;
+  --color-border: #E5E7EB;
+}
+
+@layer base {
+  body {
+    @apply text-[#4a5568] bg-[#e0e5ec];
+  }
+}
+
+@layer utilities {
+  .neo-bg {
+    background-color: #f8f9fa;
+  }
+  .neo-flat {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+  }
+  .neo-flat-sm {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+  }
+  .neo-pressed {
+    background-color: #f3f4f6;
+    border: 1px solid #e5e7eb;
+  }
+  .neo-button {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease-in-out;
+  }
+  .neo-button:hover {
+    background-color: #f3f4f6;
+  }
+  .neo-button:active {
+    background-color: #e5e7eb;
+  }
+}
+
+/* Ken Burns Animations */
+@keyframes kb-zoom-in-left {
+  0%   { transform: scale(1.0) translateX(0px); }
+  100% { transform: scale(1.15) translateX(-30px); }
+}
+@keyframes kb-zoom-in-right {
+  0%   { transform: scale(1.0) translateX(0px); }
+  100% { transform: scale(1.15) translateX(30px); }
+}
+@keyframes kb-zoom-out-up {
+  0%   { transform: scale(1.15) translateY(0px); }
+  100% { transform: scale(1.0) translateY(-20px); }
+}
+@keyframes kb-zoom-in-down {
+  0%   { transform: scale(1.0) translateY(0px); }
+  100% { transform: scale(1.12) translateY(20px); }
+}
+@keyframes kb-zoom-out-left {
+  0%   { transform: scale(1.12) translateX(20px); }
+  100% { transform: scale(1.0) translateX(-20px); }
+}
+
+.animate-kb-1 { animation: kb-zoom-in-left 5s ease-in-out forwards; }
+.animate-kb-2 { animation: kb-zoom-in-right 5s ease-in-out forwards; }
+.animate-kb-3 { animation: kb-zoom-out-up 5s ease-in-out forwards; }
+.animate-kb-4 { animation: kb-zoom-in-down 5s ease-in-out forwards; }
+.animate-kb-5 { animation: kb-zoom-out-left 5s ease-in-out forwards; }
+
+/* Force remove all tailwind shadows globally per user request */
+* {
+  --tw-shadow: 0 0 #0000 !important;
+  --tw-shadow-colored: 0 0 #0000 !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}

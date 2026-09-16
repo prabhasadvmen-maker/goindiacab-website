@@ -1,0 +1,32 @@
+export const siteConfig = {
+  name: "GoIndiaCab",
+  fullName: "Go India Cab",
+  tagline: "Book Cab & Taxi Services Across India",
+  description: "Go India Cab is the best taxi service in Delhi NCR. Book reliable one-way, round-trip, local and airport taxi services across India.",
+  url: "https://www.goindiacab.com",
+  logo: "/GoIndiaCab logo.png",
+  favicon: "/GoIndiaCab Favicon icon.png",
+  phone: {
+    booking1: "+91-9792-000-555",
+    booking2: "+91-8433-381-888",
+    support: "+91-9557-479-080",
+  },
+  email: "info@goindiacab.com",
+  address: "WZ- 69, First Floor Todapur Periphery Rd, Todapur, New Delhi, Delhi 110012",
+  social: {
+    instagram: "https://www.instagram.com/goindiacab",
+    facebook: "https://www.facebook.com/share/18X457cbdL/",
+    twitter: "https://x.com/goindiacab",
+    linkedin: "https://www.linkedin.com/company/goindiacab/",
+    tripadvisor: "https://www.tripadvisor.in/Attraction_Review-g304551-d32698767-Reviews-Go_India_Cab-New_Delhi_National_Capital_Territory_of_Delhi.html",
+  },
+  stats: {
+    happyCustomers: "99%",
+    experiencedDrivers: "100%",
+    yearsOfExperience: "10+",
+    drivingCompleted: "700,000+",
+  },
+  fareStarting: "₹11/km",
+  googleRating: "4.9",
+  googleReviewCount: "418+",
+}
