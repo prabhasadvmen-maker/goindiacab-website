@@ -11,9 +11,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.goindiacab.com"),
   title: "Book Cab & Taxi Services Across India | GoIndiaCab",
   description: "Book reliable one-way, round-trip, local and airport taxi services across India with GoIndiaCab. Best cab service in Delhi.",
   icons: {
@@ -41,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans antialiased min-h-screen flex flex-col`}>
+      <body className={`${poppins.variable} font-sans antialiased min-h-screen flex flex-col overflow-x-hidden w-full`}>
         <Header />
         <main className="flex-grow">
           {children}

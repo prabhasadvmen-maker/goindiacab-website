@@ -13,10 +13,21 @@ export function ContactFormSection() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
-    setTimeout(() => {
-      setStatus('success');
-      setTimeout(() => setStatus('idle'), 5000);
-    }, 1500);
+    
+    const form = e.currentTarget;
+    const name = (form.querySelector('#contact_name') as HTMLInputElement).value;
+    const phone = (form.querySelector('#contact_phone') as HTMLInputElement).value;
+    const email = (form.querySelector('#contact_email') as HTMLInputElement).value;
+    const message = (form.querySelector('#contact_message') as HTMLTextAreaElement).value;
+
+    const subject = encodeURIComponent(`New Inquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\nMessage:\n${message}`);
+    
+    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
+
+    setStatus('success');
+    form.reset();
+    setTimeout(() => setStatus('idle'), 5000);
   };
 
   return (

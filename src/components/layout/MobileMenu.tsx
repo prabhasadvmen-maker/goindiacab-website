@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/src/config/site";
 import { navItems } from "@/src/config/navigation";
-import { X, ChevronDown, Phone, CreditCard, ArrowRight, Home, Users, Car, MapPin, Map, Bus, FileText } from "lucide-react";
+import { X, ChevronDown, Phone, CreditCard, ArrowRight, FileText, Smartphone, LogIn, Home, Users, Car, MapPin, MapIcon, Bus } from "lucide-react";
 import clsx from "clsx";
 
 interface MobileMenuProps {
@@ -24,7 +24,7 @@ function getMobileNavIcon(label: string) {
     case "Taxi Outstation Services":
       return <MapPin className="w-4 h-4" />;
     case "Popular Routes":
-      return <Map className="w-4 h-4" />;
+      return <MapIcon className="w-4 h-4" />;
     case "Tempo Traveller in Delhi":
       return <Bus className="w-4 h-4" />;
     case "Blogs":
@@ -60,52 +60,47 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* Mobile Drawer Navigation List */}
       <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
         <nav className="flex flex-col space-y-2">
-          {navItems.map((item) => (
-            <div key={item.label} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
-              {item.children ? (
-                <div>
-                  <button
-                    onClick={() => toggleAccordion(item.label)}
-                    className="flex items-center justify-between w-full p-3.5 text-left font-semibold text-gray-800 hover:text-[#0B4A9C]"
-                  >
-                    <div className="flex items-center space-x-2.5">
-                      <span className="text-[#0B4A9C]">{getMobileNavIcon(item.label)}</span>
-                      <span className="text-sm">{item.label}</span>
-                    </div>
-                    <ChevronDown className={clsx("w-4 h-4 text-gray-500 transition-transform", openAccordion === item.label ? "rotate-180 text-[#0B4A9C]" : "")} />
-                  </button>
-                  <div className={clsx("overflow-hidden transition-all duration-200", openAccordion === item.label ? "max-h-[500px] border-t border-gray-100 bg-blue-50/50" : "max-h-0")}>
-                    <div className="flex flex-col py-2 px-4 space-y-2">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          href={child.href}
-                          onClick={onClose}
-                          className="text-xs font-medium text-gray-700 hover:text-[#0B4A9C] py-1.5 transition"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  href={item.href}
-                  onClick={onClose}
-                  className={clsx(
-                    "flex items-center space-x-2.5 p-3.5 font-semibold text-sm transition",
-                    item.label === "Home" ? "bg-[#0B4A9C] text-white" : "text-gray-800 hover:text-[#0B4A9C]"
-                  )}
-                >
-                  <span className={item.label === "Home" ? "text-white" : "text-[#0B4A9C]"}>
-                    {getMobileNavIcon(item.label)}
-                  </span>
-                  <span>{item.label}</span>
-                </Link>
-              )}
-            </div>
-          ))}
+          {/* Blog Link */}
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
+            <Link
+              href="/blogs"
+              onClick={onClose}
+              className="flex items-center space-x-2.5 p-3.5 font-semibold text-sm text-gray-800 hover:text-[#0B4A9C] transition"
+            >
+              <span className="text-[#0B4A9C]">
+                <FileText className="w-4 h-4" />
+              </span>
+              <span>Blog</span>
+            </Link>
+          </div>
+
+          {/* Download App Link */}
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
+            <Link
+              href="/download-app"
+              onClick={onClose}
+              className="flex items-center space-x-2.5 p-3.5 font-semibold text-sm text-gray-800 hover:text-[#0B4A9C] transition"
+            >
+              <span className="text-[#0B4A9C]">
+                <Smartphone className="w-4 h-4" />
+              </span>
+              <span>Download App</span>
+            </Link>
+          </div>
+
+          {/* Login Link */}
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-xs">
+            <Link
+              href="/login"
+              onClick={onClose}
+              className="flex items-center space-x-2.5 p-3.5 font-semibold text-sm text-gray-800 hover:text-[#0B4A9C] transition"
+            >
+              <span className="text-[#0B4A9C]">
+                <LogIn className="w-4 h-4" />
+              </span>
+              <span>Login</span>
+            </Link>
+          </div>
         </nav>
       </div>
 

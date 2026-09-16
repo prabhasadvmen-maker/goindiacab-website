@@ -14,6 +14,7 @@ import { ReviewsSection } from "@/src/components/home/ReviewsSection";
 import { TrustedSection } from "@/src/components/home/TrustedSection";
 import { QuickLinksSection } from "@/src/components/home/QuickLinksSection";
 import { homeFaqs } from "@/src/data/faqs";
+import { WelcomePopup } from "@/src/components/common/WelcomePopup";
 
 export const metadata: Metadata = {
   title: "Book Cab & Taxi Services Across India | GoIndiaCab",
@@ -66,6 +67,7 @@ export default function HomePage() {
       <ReviewsSection />
       <TrustedSection />
       <QuickLinksSection />
+      <WelcomePopup />
     </>
   );
 }

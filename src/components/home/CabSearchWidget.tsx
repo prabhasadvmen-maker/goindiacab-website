@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { 
-  Car, 
-  Plane, 
-  Clock, 
-  MapPin, 
-  Locate, 
-  Plus, 
-  Calendar, 
-  Briefcase, 
+import {
+  Car,
+  Plane,
+  Clock,
+  MapPin,
+  Locate,
+  Plus,
+  Calendar,
+  Briefcase,
   Search,
   ShieldCheck,
   ArrowRight,
@@ -31,14 +31,14 @@ export function CabSearchWidget() {
   const [tripType, setTripType] = useState<"oneway" | "roundtrip">("oneway");
   const [airportType, setAirportType] = useState<"drop" | "pickup">("drop");
   const [hourlyPackage, setHourlyPackage] = useState("8 Hrs / 80 Km");
-  
+
   const [fromLocation, setFromLocation] = useState("Delhi / NCR, India");
   const [toLocation, setToLocation] = useState("");
   const [sameDropForHourly, setSameDropForHourly] = useState(false);
-  
+
   const [hasStop, setHasStop] = useState(false);
   const [stopLocation, setStopLocation] = useState("");
-  
+
   const [startDate, setStartDate] = useState("Today, 10:30 AM");
   const [travellers, setTravellers] = useState("1 Traveller, 1 Day");
 
@@ -65,7 +65,7 @@ export function CabSearchWidget() {
 
   return (
     <section className="w-full relative overflow-hidden pt-8 pb-16 bg-slate-900">
-      
+
       {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
@@ -80,74 +80,23 @@ export function CabSearchWidget() {
       </div>
 
       <div className="max-w-[1380px] mx-auto px-4 sm:px-6 relative z-10">
-        
-        {/* Main Hero Row: Left Features | Center Booking Card | Right Graphic */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center mb-12">
-          
-          {/* Left Column: Heading & Bullet Points */}
-          <div className="hidden lg:flex lg:col-span-3 flex-col justify-center pr-2 drop-shadow-md">
-            <h1 className="text-3xl xl:text-4xl font-black text-white leading-[1.15] mb-6 drop-shadow-lg">
-              Reliable <br />
-              Cabs for <br />
-              Every <br />
-              <span className="relative text-[#38bdf8] inline-block mt-1">
-                Journey
-                <span className="absolute -bottom-1 left-0 right-0 h-1.5 bg-[#FF6600] rounded-full"></span>
-              </span>
-            </h1>
 
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs shadow-md border border-white/20 flex items-center justify-center text-[#00A5D9] flex-shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-black text-white drop-shadow-sm">Safe & Secure Rides</span>
-              </li>
-              
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs shadow-md border border-white/20 flex items-center justify-center text-[#00A5D9] flex-shrink-0">
-                  <Car className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-black text-white drop-shadow-sm">Professional Drivers</span>
-              </li>
+        {/* Main Hero Row: Centered Booking Card */}
+        <div className="max-w-[1100px] mx-auto mb-6">
 
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs shadow-md border border-white/20 flex items-center justify-center text-[#00A5D9] flex-shrink-0">
-                  <CheckCircle2 className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-black text-white drop-shadow-sm">Transparent Pricing</span>
-              </li>
+          <div className="w-full">
 
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs shadow-md border border-white/20 flex items-center justify-center text-[#00A5D9] flex-shrink-0">
-                  <Headphones className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-black text-white drop-shadow-sm">24/7 Customer Support</span>
-              </li>
-            </ul>
-          </div>
+            <div className="bg-white rounded-[20px] shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-100 p-2 sm:p-2.5 relative z-20">
 
-          {/* Center Column: Floating Booking Card */}
-          <div className="lg:col-span-6 w-full">
-            
-            {/* Mobile Header Title */}
-            <div className="block lg:hidden text-center mb-6">
-              <h1 className="text-2xl sm:text-3xl font-black text-gray-900">
-                Reliable Cabs for <span className="text-[#00A5D9]">Every Journey</span>
-              </h1>
-            </div>
-
-            <div className="bg-white rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-100 p-5 sm:p-7 relative z-20">
-              
               {/* 1. Top Navigation Tabs (Outstation, Airport, Hourly Rentals) */}
-              <div className="flex items-center justify-around pb-3 border-b border-gray-100 mb-4">
+              <div className="flex items-center justify-around pb-1.5 border-b border-gray-100 mb-1.5">
                 {/* Outstation */}
                 <button
                   type="button"
                   onClick={() => setTab("outstation")}
                   style={{ cursor: "pointer" }}
                   className={clsx(
-                    "flex items-center gap-2 pb-2.5 px-3 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
+                    "flex items-center gap-1.5 pb-1.5 px-2 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
                     tab === "outstation"
                       ? "text-[#00A5D9]"
                       : "text-gray-500 hover:text-gray-800"
@@ -166,7 +115,7 @@ export function CabSearchWidget() {
                   onClick={() => setTab("airport")}
                   style={{ cursor: "pointer" }}
                   className={clsx(
-                    "flex items-center gap-2 pb-2.5 px-3 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
+                    "flex items-center gap-1.5 pb-1.5 px-2 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
                     tab === "airport"
                       ? "text-[#00A5D9]"
                       : "text-gray-500 hover:text-gray-800"
@@ -185,7 +134,7 @@ export function CabSearchWidget() {
                   onClick={() => setTab("hourly")}
                   style={{ cursor: "pointer" }}
                   className={clsx(
-                    "flex items-center gap-2 pb-2.5 px-3 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
+                    "flex items-center gap-1.5 pb-1.5 px-2 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
                     tab === "hourly"
                       ? "text-[#00A5D9]"
                       : "text-gray-500 hover:text-gray-800"
@@ -200,8 +149,8 @@ export function CabSearchWidget() {
               </div>
 
               {/* 2. Quality Banner */}
-              <div className="bg-[#f0f6ff] border border-blue-100 rounded-xl px-4 py-2.5 flex items-center justify-between shadow-xs mb-4">
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-gray-700">
+              <div className="bg-[#f0f6ff] border border-blue-100 rounded-lg px-3 py-1 flex items-center justify-between shadow-xs mb-1.5">
+                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-700">
                   <ShieldCheck className="w-4 h-4 text-[#00A5D9]" />
                   <span>Clean and Quality cabs • 100% On-time guarantee</span>
                 </div>
@@ -212,18 +161,18 @@ export function CabSearchWidget() {
                 </div>
               </div>
 
-              <form onSubmit={handleSearch} className="space-y-4">
-                           {/* 3. TRIP TYPE SELECTION & REQUIREMENTS */}
+              <form onSubmit={handleSearch} className="space-y-1.5">
+                {/* 3. TRIP TYPE SELECTION & REQUIREMENTS */}
                 {tab === "outstation" && (
                   <div>
                     {/* Outstation One Way & Round Trip Toggle */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                       {/* One Way */}
                       <div
                         onClick={() => setTripType("oneway")}
                         style={{ cursor: "pointer" }}
                         className={clsx(
-                          "p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 cursor-pointer",
+                          "p-2 rounded-xl border-2 transition-all flex items-center gap-2 cursor-pointer",
                           tripType === "oneway"
                             ? "bg-[#eef7ff] border-[#00A5D9] shadow-xs"
                             : "bg-white border-gray-200 hover:border-gray-300"
@@ -251,13 +200,13 @@ export function CabSearchWidget() {
                         onClick={() => setTripType("roundtrip")}
                         style={{ cursor: "pointer" }}
                         className={clsx(
-                          "p-3.5 rounded-2xl border-2 transition-all flex items-center justify-between gap-3 cursor-pointer",
+                          "p-2 rounded-xl border-2 transition-all flex items-center justify-between gap-2 cursor-pointer",
                           tripType === "roundtrip"
                             ? "bg-[#eef7ff] border-[#00A5D9] shadow-xs"
                             : "bg-white border-gray-200 hover:border-gray-300"
                         )}
                       >
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
                           <input
                             type="radio"
                             name="triptype"
@@ -282,7 +231,7 @@ export function CabSearchWidget() {
                     </div>
 
                     {/* Point (1): Extra line on GST / Tax extra */}
-                    <div className="mt-2 flex items-center gap-1.5 text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-200/80">
+                    <div className="mt-1 flex items-center gap-1.5 text-xs font-bold text-amber-700 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/80">
                       <Info className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
                       <span>Note: Toll, State Tax & GST Extra as applicable.</span>
                     </div>
@@ -315,27 +264,27 @@ export function CabSearchWidget() {
                 )}
 
                 {/* 4. Location Fields (FROM, Checkbox for Same Pickup & Drop-off, TO) */}
-                <div className="space-y-3">
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
+                <div className="space-y-1.5">
+
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-1.5 items-center">
                     {/* FROM Input */}
                     <div className="md:col-span-5 relative">
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                        <label className="text-[11px] font-black text-gray-500 uppercase tracking-wider">
+                      <div className="flex items-center gap-1 mb-0.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-wider">
                           FROM
                         </label>
                       </div>
 
                       <div className="relative flex items-center">
-                        <MapPin className="w-4 h-4 absolute left-3.5 text-gray-400 pointer-events-none" />
+                        <MapPin className="w-4 h-4 absolute left-3 text-gray-400 pointer-events-none" />
                         <input
                           type="text"
                           value={fromLocation}
                           onChange={(e) => setFromLocation(e.target.value)}
                           required
                           placeholder="Enter pickup city or location"
-                          className="w-full pl-10 pr-9 py-3 bg-white border border-gray-300 rounded-xl text-xs sm:text-sm font-extrabold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#00A5D9] transition-all shadow-2xs"
+                          className="w-full pl-9 pr-9 py-2 bg-white border border-gray-300 rounded-xl text-xs sm:text-sm font-extrabold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#00A5D9] transition-all shadow-2xs"
                         />
                         <button
                           type="button"
@@ -354,20 +303,20 @@ export function CabSearchWidget() {
                     </div>
 
                     {/* Add a Stop Center Button */}
-                    <div className="md:col-span-2 flex flex-col items-center justify-center pt-2">
+                    <div className="md:col-span-2 flex flex-col items-center justify-center pt-1">
                       <button
                         type="button"
                         onClick={() => setHasStop(!hasStop)}
                         style={{ cursor: "pointer" }}
                         className="group flex flex-col items-center justify-center text-center cursor-pointer"
                       >
-                        <div className="w-8 h-8 rounded-full bg-[#0066FF] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                          {hasStop ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                        <div className="w-6 h-6 rounded-full bg-[#0066FF] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                          {hasStop ? <X className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
                         </div>
-                        <span className="text-[10px] font-extrabold text-[#0066FF] mt-1">
+                        <span className="text-[9px] font-extrabold text-[#0066FF] mt-0.5">
                           {hasStop ? "- Remove Stop" : "Add a Stop"}
                         </span>
-                        <span className="text-[9px] text-gray-400 font-semibold leading-tight">
+                        <span className="text-[8px] text-gray-400 font-semibold leading-none">
                           (Sightseeing, Hotel...)
                         </span>
                       </button>
@@ -375,24 +324,24 @@ export function CabSearchWidget() {
 
                     {/* TO Input */}
                     <div className="md:col-span-5 relative">
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#FF6600]"></span>
-                        <label className="text-[11px] font-black text-gray-500 uppercase tracking-wider">
+                      <div className="flex items-center gap-1 mb-0.5">
+                        <span className="w-2 h-2 rounded-full bg-[#FF6600]"></span>
+                        <label className="text-[10px] font-black text-gray-500 uppercase tracking-wider">
                           TO
                         </label>
                       </div>
 
                       <div className="relative flex items-center">
-                        <MapPin className="w-4 h-4 absolute left-3.5 text-gray-400 pointer-events-none" />
+                        <MapPin className="w-4 h-4 absolute left-3 text-gray-400 pointer-events-none" />
                         <input
                           type="text"
                           value={toLocation}
                           disabled={tab === "hourly" && sameDropForHourly}
                           onChange={(e) => setToLocation(e.target.value)}
                           required={tab !== "hourly"}
-                          placeholder={tab === "hourly" && sameDropForHourly ? "Same as Pickup Location" : "Enter destination city or landmark"}
+                          placeholder={tab === "hourly" && sameDropForHourly ? "Same as Pickup" : "Enter destination"}
                           className={clsx(
-                            "w-full pl-10 pr-4 py-3 border rounded-xl text-xs sm:text-sm font-extrabold focus:outline-none transition-all shadow-2xs",
+                            "w-full pl-9 pr-4 py-2 border rounded-xl text-xs sm:text-sm font-extrabold focus:outline-none transition-all shadow-2xs",
                             tab === "hourly" && sameDropForHourly
                               ? "bg-gray-100 text-gray-600 border-gray-300 cursor-not-allowed"
                               : "bg-white text-gray-900 border-gray-300 focus:border-[#00A5D9]"
@@ -405,7 +354,7 @@ export function CabSearchWidget() {
                   {/* Checkbox exclusively for Hourly Rentals Tab */}
                   {tab === "hourly" && (
                     <div className="flex items-center gap-2 pt-1">
-                      <label 
+                      <label
                         onClick={() => setSameDropForHourly(!sameDropForHourly)}
                         style={{ cursor: "pointer" }}
                         className="inline-flex items-center gap-2 bg-[#f0f9ff] border border-blue-200/90 text-blue-900 px-3 py-1.5 rounded-lg text-xs font-black hover:bg-blue-100/70 transition-colors cursor-pointer select-none"
@@ -440,19 +389,19 @@ export function CabSearchWidget() {
                 )}
 
                 {/* 5. Trip Details Row (Date & Time + Travellers) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+
                   {/* START DATE & TIME */}
-                  <div className="p-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0">
-                        <Calendar className="w-4 h-4" />
+                  <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0">
+                        <Calendar className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <span className="block text-[9px] font-black text-gray-400 uppercase tracking-wider">
+                        <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider">
                           TRIP START DATE & TIME
                         </span>
-                        <span className="text-xs sm:text-sm font-black text-gray-900 block mt-0.5">
+                        <span className="text-xs font-black text-gray-900 block leading-tight">
                           {startDate}
                         </span>
                       </div>
@@ -472,16 +421,16 @@ export function CabSearchWidget() {
                   </div>
 
                   {/* TRAVELLERS & DAYS */}
-                  <div className="p-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-lg bg-blue-100 text-[#0066FF] flex items-center justify-center flex-shrink-0">
-                        <Briefcase className="w-4 h-4" />
+                  <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-blue-100 text-[#0066FF] flex items-center justify-center flex-shrink-0">
+                        <Briefcase className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <span className="block text-[9px] font-black text-gray-400 uppercase tracking-wider">
+                        <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider">
                           TRAVELLERS & BAGS
                         </span>
-                        <span className="text-xs sm:text-sm font-black text-gray-900 block mt-0.5">
+                        <span className="text-xs font-black text-gray-900 block leading-tight">
                           {travellers}
                         </span>
                       </div>
@@ -506,9 +455,9 @@ export function CabSearchWidget() {
                 <button
                   type="submit"
                   style={{ cursor: "pointer" }}
-                  className="w-full py-4 px-8 rounded-xl bg-gradient-to-r from-[#FF6600] to-[#E65200] hover:from-[#e65200] hover:to-[#cc4400] text-white font-black text-base sm:text-lg tracking-wider uppercase shadow-lg shadow-orange-500/25 transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer active:scale-[0.99]"
+                  className="w-full py-2 px-8 rounded-xl bg-gradient-to-r from-[#FF6600] to-[#E65200] hover:from-[#e65200] hover:to-[#cc4400] text-white font-black text-base tracking-wider uppercase shadow-lg shadow-orange-500/25 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
                 >
-                  <Search className="w-5 h-5 stroke-[3]" />
+                  <Search className="w-4 h-4 stroke-[3]" />
                   <span>SEARCH CABS</span>
                 </button>
 
@@ -517,18 +466,77 @@ export function CabSearchWidget() {
             </div>
           </div>
 
-          {/* Right Column: Decorative Tagline */}
-          <div className="hidden lg:flex lg:col-span-3 flex-col items-center justify-center relative">
-            <div className="text-center">
-              <span className="font-serif italic text-2xl text-white font-bold tracking-wide drop-shadow-md">
-                Travel Made Easy
-              </span>
-              <svg className="w-32 h-3 text-[#FF6600] mx-auto mt-0.5" viewBox="0 0 100 20" fill="none" stroke="currentColor">
-                <path d="M5 15 Q 50 2 95 15" strokeWidth="3" strokeLinecap="round" />
-              </svg>
+
+
+        </div>
+
+        {/* Rating Section */}
+        <div className="flex flex-col items-center justify-center mt-6 mb-2 z-20 relative">
+          <div className="flex items-center gap-3 mb-4">
+            <svg className="w-6 h-8 text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9.99 21.65c-1.57-2.31-2.91-5.11-3.66-8.3C5.55 10 5.48 6.78 6 3.63a.5.5 0 0 1 .84-.27c1.33 1.25 3.01 2.21 5.06 2.76 1.48.4 3.06.58 4.75.52.28 0 .49.25.43.53-.78 3.55-2.58 6.7-5.26 9.17-1.16 1.07-2.42 2-3.76 2.78-1.51.87-2.82 1.95-3.88 3.25a.5.5 0 0 1-.8-.01.5.5 0 0 1 0-.01l6.6-1.58z" />
+            </svg>
+            <span className="text-white font-bold text-lg sm:text-xl drop-shadow-md tracking-wide">India's Top Rated Car Rental Service</span>
+            <svg className="w-6 h-8 text-white drop-shadow-md transform scale-x-[-1]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9.99 21.65c-1.57-2.31-2.91-5.11-3.66-8.3C5.55 10 5.48 6.78 6 3.63a.5.5 0 0 1 .84-.27c1.33 1.25 3.01 2.21 5.06 2.76 1.48.4 3.06.58 4.75.52.28 0 .49.25.43.53-.78 3.55-2.58 6.7-5.26 9.17-1.16 1.07-2.42 2-3.76 2.78-1.51.87-2.82 1.95-3.88 3.25a.5.5 0 0 1-.8-.01.5.5 0 0 1 0-.01l6.6-1.58z" />
+            </svg>
+          </div>
+          
+          <div className="bg-white rounded-[2rem] py-3.5 px-8 sm:px-12 shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-wrap items-center justify-center gap-8 sm:gap-14 border border-white/40">
+            {/* App Store */}
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 bg-[#007AFF] rounded-xl flex items-center justify-center text-white shadow-sm">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.48.06 2.58.74 3.32 1.76-2.9 1.63-2.39 5.38.43 6.64-1.28 2.05-1.46 3.58-2.42 4.53zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-extrabold text-gray-900 text-sm leading-tight">App Store</span>
+                <div className="flex text-[#ffb400] text-xs my-0.5 gap-[1px]">
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                </div>
+                <span className="text-[11px] font-bold text-gray-800 leading-tight">(4.2K+ Reviews)</span>
+              </div>
+            </div>
+
+            {/* Google */}
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 bg-gray-50 rounded-full flex items-center justify-center shadow-sm border border-gray-100">
+                <svg className="w-6 h-6" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-extrabold text-gray-900 text-sm leading-tight">Google</span>
+                <div className="flex text-[#ffb400] text-xs my-0.5 gap-[1px]">
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                </div>
+                <span className="text-[11px] font-bold text-gray-800 leading-tight">(6.1K+ Reviews)</span>
+              </div>
+            </div>
+
+            {/* Play Store */}
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 flex items-center justify-center">
+                <svg className="w-9 h-9" viewBox="0 0 24 24"><path fill="#00e676" d="M3.7,2.2l12.4,12.4l3.1-1.8c1.1-0.6,1.1-1.7,0-2.3l-12.7-7.3C5.5,2.7,4.3,2.4,3.7,2.2z"/><path fill="#29b6f6" d="M2.5,2.7v18.7c0,0.5,0.4,0.8,0.8,0.5l9.9-9.9L2.5,2.7z"/><path fill="#ff3d00" d="M16.1,14.6l-2.9-2.9L3.3,21.5c0.4,0.3,1.1,0.3,1.9-0.2l10.9-6.3L16.1,14.6z"/><path fill="#ffc107" d="M19.2,12.7L16.1,14.6L13.2,11.7l2.9-2.9l3.1,1.8C20.3,11.1,20.3,12.2,19.2,12.7z"/></svg>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-extrabold text-gray-900 text-sm leading-tight">Play Store</span>
+                <div className="flex text-[#ffb400] text-xs my-0.5 gap-[1px]">
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                  <Star className="w-[14px] h-[14px] fill-current" />
+                </div>
+                <span className="text-[11px] font-bold text-gray-800 leading-tight">(15.5K+ Reviews)</span>
+              </div>
             </div>
           </div>
-
         </div>
 
       </div>

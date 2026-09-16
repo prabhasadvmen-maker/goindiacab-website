@@ -23,7 +23,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative w-full h-[360px] sm:h-[420px] md:h-[460px] lg:h-[490px] overflow-hidden">
+    <section className="relative w-full h-[480px] sm:h-[560px] md:h-[620px] lg:h-[680px] overflow-hidden">
       {images.map((src, i) => (
         <div
           key={src}
