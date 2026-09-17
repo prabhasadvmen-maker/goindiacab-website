@@ -27,7 +27,7 @@ export default function Header() {
         </Link>
 
         {/* Center: 24x7 Call Badge (Exact Savaari style badge from screenshot) */}
-        <div className="hidden md:flex items-center justify-center">
+        <div className="hidden lg:flex items-center justify-center">
           <a
             href={`tel:${siteConfig.phone.booking1}`}
             className="inline-flex items-center rounded-lg border-2 border-[#00A5D9] bg-white text-[#00A5D9] overflow-hidden text-xs sm:text-sm font-black hover:opacity-90 transition-all shadow-sm"

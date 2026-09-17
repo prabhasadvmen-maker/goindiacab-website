@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/src/config/site";
@@ -6,18 +7,18 @@ import { Breadcrumb } from "@/src/components/common/Breadcrumb";
 import { BookingForm } from "@/src/components/booking/BookingForm";
 import { Button } from "@/src/components/common/Button";
 import { FAQSection } from "@/src/components/faq/FAQSection";
-import { cabServiceLocalities } from "@/src/data/localities";
+import { taxiServiceLocalities } from "@/src/data/localities";
 import { Check, MapPin, ShieldCheck, CarFront } from "lucide-react";
 
 export function generateStaticParams() {
-  return cabServiceLocalities.map((locality) => ({
+  return taxiServiceLocalities.map((locality) => ({
     slug: locality.slug,
   }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const locality = cabServiceLocalities.find((l) => l.slug === slug);
+  const locality = taxiServiceLocalities.find((l) => l.slug === slug);
   
   if (!locality) {
     return { title: "Not Found" };
@@ -26,13 +27,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: locality.metaTitle,
     description: locality.metaDescription,
-    alternates: { canonical: `${siteConfig.url}/cab-service-in-${locality.slug}` },
+    alternates: { canonical: `${siteConfig.url}/taxi-service-in-${locality.slug}` },
   };
 }
 
-export default async function CabServiceLocalityPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function TaxiServiceLocalityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const locality = cabServiceLocalities.find((l) => l.slug === slug);
+  const locality = taxiServiceLocalities.find((l) => l.slug === slug);
   
   if (!locality) {
     notFound();
@@ -40,13 +41,22 @@ export default async function CabServiceLocalityPage({ params }: { params: Promi
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="bg-gray-light py-12 md:py-16 border-b border-border">
+      <div className="bg-gray-light py-12 md:py-16 border-b border-border overflow-hidden">
         <Container>
-          <Breadcrumb items={[{ label: `Cab Service in ${locality.area}` }]} />
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex-1">
+
+          <Breadcrumb items={[{ label: `Taxi Service in ${locality.area}` }]} />
           <h1 className="text-4xl md:text-5xl font-bold text-dark mt-4">
             {locality.title}
           </h1>
           <p className="text-gray-text mt-4 max-w-2xl text-lg">{locality.description}</p>
+        
+            </div>
+            <div className="w-full md:w-1/2 lg:w-2/5 flex justify-end">
+              <Image src="/premium-cab.png" alt="Premium Cab Service" width={600} height={400} className="object-cover rounded-xl shadow-2xl hover:scale-105 transition-transform duration-500" priority />
+            </div>
+          </div>
         </Container>
       </div>
 
@@ -55,9 +65,9 @@ export default async function CabServiceLocalityPage({ params }: { params: Promi
           
           <div className="lg:col-span-2 space-y-12">
             <section>
-              <h2 className="text-3xl font-bold text-dark mb-6">About Our Service in {locality.area}</h2>
+              <h2 className="text-3xl font-bold text-dark mb-6">About Our Taxi Service in {locality.area}</h2>
               <p className="text-gray-text text-lg leading-relaxed mb-6">
-                Go India Cab offers premium and affordable cab services in <strong>{locality.area}, {locality.city}</strong>. Whether you need a local drop, an airport transfer, or an outstation trip from {locality.area}, we have a wide range of well-maintained vehicles to cater to your needs.
+                Go India Cab offers premium and affordable taxi services in <strong>{locality.area}, {locality.city}</strong>. Whether you need a local drop, an airport transfer, or an outstation trip from {locality.area}, we have a wide range of well-maintained vehicles to cater to your needs.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -100,7 +110,7 @@ export default async function CabServiceLocalityPage({ params }: { params: Promi
 
             {locality.faqs && locality.faqs.length > 0 && (
               <div className="pt-8 border-t border-border">
-                <FAQSection faqs={locality.faqs} title={`FAQs about Cab Service in ${locality.area}`} />
+                <FAQSection faqs={locality.faqs} title={`FAQs about Taxi Service in ${locality.area}`} />
               </div>
             )}
           </div>
@@ -109,7 +119,7 @@ export default async function CabServiceLocalityPage({ params }: { params: Promi
             <div className="sticky top-28">
               <BookingForm variant="sidebar" />
               <div className="mt-6 bg-gray-50 p-6 rounded-2xl border border-border text-center">
-                <p className="text-sm text-gray-text mb-2">Need a cab right now?</p>
+                <p className="text-sm text-gray-text mb-2">Need a taxi right now?</p>
                 <p className="text-dark font-bold text-xl mb-4">Call our dispatcher</p>
                 <a href={`tel:${siteConfig.phone.booking1}`}>
                   <Button className="w-full text-lg">{siteConfig.phone.booking1}</Button>

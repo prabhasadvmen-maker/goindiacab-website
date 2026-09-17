@@ -44,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans antialiased min-h-screen flex flex-col overflow-x-hidden w-full`}>
+      <body className={`${poppins.variable} font-sans antialiased min-h-screen flex flex-col`}>
         <Header />
         <main className="flex-grow">
           {children}

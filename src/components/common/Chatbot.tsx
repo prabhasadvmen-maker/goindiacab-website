@@ -46,7 +46,7 @@ export function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start">
+    <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start pointer-events-none">
       
       {/* Chat Window */}
       <div 
@@ -137,7 +137,7 @@ export function Chatbot() {
       <button 
         onClick={toggleChat}
         className={clsx(
-          "w-16 h-16 rounded-full flex items-center justify-center text-white shadow-xl transition-transform duration-300 hover:scale-110",
+          "w-16 h-16 rounded-full flex items-center justify-center text-white shadow-xl transition-transform duration-300 hover:scale-110 pointer-events-auto",
           isOpen ? "bg-gray-800" : "bg-[#3f51b5]"
         )}
         aria-label="Open Chat Support"

@@ -15,9 +15,12 @@ export function TrustedSection() {
   // Helper to get a locality by slug
   const getLocality = (slug: string) => {
     const loc = allLocalities.find(l => l.slug === slug);
+    const isTaxi = taxiServiceLocalities.some(t => t.slug === slug);
     return { 
       name: loc ? loc.area : slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), 
-      slug 
+      slug,
+      href: isTaxi ? `/taxi-service-in-${slug}` : `/cab-service-in-${slug}`,
+      titlePrefix: isTaxi ? "Taxi Service in" : "Cab Service in"
     };
   };
 
@@ -56,7 +59,7 @@ export function TrustedSection() {
   ];
 
   return (
-    <section className="py-16 neo-bg">
+    <section className="py-16 neo-bg relative z-10">
       <Container>
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-[28px] font-extrabold text-[#2d3748]">
@@ -67,13 +70,15 @@ export function TrustedSection() {
 
         {/* Tabs */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex flex-wrap sm:flex-nowrap neo-pressed p-2 rounded-2xl">
+          <div className="inline-flex flex-wrap sm:flex-nowrap neo-pressed p-2 rounded-2xl gap-1">
             {tabs.map((tab, index) => (
               <button
                 key={tab.name}
                 onClick={() => setActiveTab(index)}
+                type="button"
+                style={{ cursor: "pointer" }}
                 className={clsx(
-                  "px-6 py-3 font-bold text-sm md:text-base transition-all whitespace-nowrap rounded-xl m-1",
+                  "px-6 py-3 font-bold text-sm md:text-base transition-all whitespace-nowrap rounded-xl cursor-pointer select-none",
                   activeTab === index 
                     ? "neo-flat text-[#3f51b5]" 
                     : "text-[#718096] hover:text-[#4a5568]"
@@ -90,14 +95,14 @@ export function TrustedSection() {
           {tabs[activeTab].areas.map((area, idx) => (
             <Link 
               key={`${area.slug}-${idx}`} 
-              href={`/cab-service-in-${area.slug}`}
-              className="flex items-center px-4 py-4 rounded-3xl neo-flat group transition-all duration-300 hover:-translate-y-1 border-4 border-[#e0e5ec]"
+              href={area.href}
+              className="flex items-center px-4 py-4 rounded-3xl neo-flat group transition-all duration-300 hover:-translate-y-1 border-4 border-[#e0e5ec] cursor-pointer"
             >
               <div className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center neo-pressed mr-4">
                 <Car className="w-6 h-6 text-[#3f51b5]" />
               </div>
               <span className="text-[13px] md:text-[14px] font-extrabold text-[#4a5568] leading-snug group-hover:text-[#3f51b5] transition-colors">
-                Cab Service in<br/>{area.name}
+                {area.titlePrefix}<br/>{area.name}
               </span>
             </Link>
           ))}
