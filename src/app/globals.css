@@ -42,6 +42,13 @@
   .neo-button:active {
     background-color: #e5e7eb;
   }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Ken Burns Animations */

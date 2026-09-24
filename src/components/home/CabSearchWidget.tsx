@@ -166,7 +166,7 @@ export function CabSearchWidget() {
                 {tab === "outstation" && (
                   <div>
                     {/* Outstation One Way & Round Trip Toggle */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                    <div className="grid grid-cols-2 gap-1.5">
                       {/* One Way */}
                       <div
                         onClick={() => setTripType("oneway")}
@@ -482,58 +482,58 @@ export function CabSearchWidget() {
             </svg>
           </div>
 
-          <div className="bg-white rounded-[2rem] py-3.5 px-8 sm:px-12 shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-wrap items-center justify-center gap-8 sm:gap-14 border border-white/40">
+          <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] py-4 px-2 sm:py-3.5 sm:px-12 shadow-[0_8px_30px_rgb(0,0,0,0.12)] grid grid-cols-3 sm:flex sm:flex-row items-start sm:items-center justify-center gap-2 sm:gap-14 border border-white/40 w-full sm:w-fit mx-auto max-w-[360px] sm:max-w-none">
             {/* App Store */}
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 bg-[#007AFF] rounded-xl flex items-center justify-center text-white shadow-sm">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.48.06 2.58.74 3.32 1.76-2.9 1.63-2.39 5.38.43 6.64-1.28 2.05-1.46 3.58-2.42 4.53zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" /></svg>
+            <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3.5 text-center sm:text-left">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 bg-[#007AFF] rounded-xl flex items-center justify-center text-white shadow-sm flex-shrink-0">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.48.06 2.58.74 3.32 1.76-2.9 1.63-2.39 5.38.43 6.64-1.28 2.05-1.46 3.58-2.42 4.53zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" /></svg>
               </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold text-gray-900 text-sm leading-tight">App Store</span>
-                <div className="flex text-[#ffb400] text-xs my-0.5 gap-[1px]">
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
+              <div className="flex flex-col items-center sm:items-start mt-1 sm:mt-0">
+                <span className="font-extrabold text-gray-900 text-[10px] sm:text-sm leading-tight">App Store</span>
+                <div className="flex text-[#ffb400] text-[9px] sm:text-xs my-0.5 gap-[1px]">
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
                 </div>
-                <span className="text-[11px] font-bold text-gray-800 leading-tight">(4.2K+ Reviews)</span>
+                <span className="text-[9px] sm:text-[11px] font-bold text-gray-800 leading-tight">(4.2K+)</span>
               </div>
             </div>
 
             {/* Google */}
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 bg-gray-50 rounded-full flex items-center justify-center shadow-sm border border-gray-100">
-                <svg className="w-6 h-6" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
+            <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3.5 text-center sm:text-left">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 bg-gray-50 rounded-full flex items-center justify-center shadow-sm border border-gray-100 flex-shrink-0">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" /><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
               </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold text-gray-900 text-sm leading-tight">Google</span>
-                <div className="flex text-[#ffb400] text-xs my-0.5 gap-[1px]">
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
+              <div className="flex flex-col items-center sm:items-start mt-1 sm:mt-0">
+                <span className="font-extrabold text-gray-900 text-[10px] sm:text-sm leading-tight">Google</span>
+                <div className="flex text-[#ffb400] text-[9px] sm:text-xs my-0.5 gap-[1px]">
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
                 </div>
-                <span className="text-[11px] font-bold text-gray-800 leading-tight">(6.1K+ Reviews)</span>
+                <span className="text-[9px] sm:text-[11px] font-bold text-gray-800 leading-tight">(6.1K+)</span>
               </div>
             </div>
 
             {/* Play Store */}
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 flex items-center justify-center">
-                <svg className="w-9 h-9" viewBox="0 0 24 24"><path fill="#00e676" d="M3.7,2.2l12.4,12.4l3.1-1.8c1.1-0.6,1.1-1.7,0-2.3l-12.7-7.3C5.5,2.7,4.3,2.4,3.7,2.2z" /><path fill="#29b6f6" d="M2.5,2.7v18.7c0,0.5,0.4,0.8,0.8,0.5l9.9-9.9L2.5,2.7z" /><path fill="#ff3d00" d="M16.1,14.6l-2.9-2.9L3.3,21.5c0.4,0.3,1.1,0.3,1.9-0.2l10.9-6.3L16.1,14.6z" /><path fill="#ffc107" d="M19.2,12.7L16.1,14.6L13.2,11.7l2.9-2.9l3.1,1.8C20.3,11.1,20.3,12.2,19.2,12.7z" /></svg>
+            <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3.5 text-center sm:text-left">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center flex-shrink-0">
+                <svg className="w-7 h-7 sm:w-9 sm:h-9" viewBox="0 0 24 24"><path fill="#00e676" d="M3.7,2.2l12.4,12.4l3.1-1.8c1.1-0.6,1.1-1.7,0-2.3l-12.7-7.3C5.5,2.7,4.3,2.4,3.7,2.2z" /><path fill="#29b6f6" d="M2.5,2.7v18.7c0,0.5,0.4,0.8,0.8,0.5l9.9-9.9L2.5,2.7z" /><path fill="#ff3d00" d="M16.1,14.6l-2.9-2.9L3.3,21.5c0.4,0.3,1.1,0.3,1.9-0.2l10.9-6.3L16.1,14.6z" /><path fill="#ffc107" d="M19.2,12.7L16.1,14.6L13.2,11.7l2.9-2.9l3.1,1.8C20.3,11.1,20.3,12.2,19.2,12.7z" /></svg>
               </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold text-gray-900 text-sm leading-tight">Play Store</span>
-                <div className="flex text-[#ffb400] text-xs my-0.5 gap-[1px]">
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
-                  <Star className="w-[14px] h-[14px] fill-current" />
+              <div className="flex flex-col items-center sm:items-start mt-1 sm:mt-0">
+                <span className="font-extrabold text-gray-900 text-[10px] sm:text-sm leading-tight">Play Store</span>
+                <div className="flex text-[#ffb400] text-[9px] sm:text-xs my-0.5 gap-[1px]">
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
+                  <Star className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] fill-current" />
                 </div>
-                <span className="text-[11px] font-bold text-gray-800 leading-tight">(15.5K+ Reviews)</span>
+                <span className="text-[9px] sm:text-[11px] font-bold text-gray-800 leading-tight">(15.5K+)</span>
               </div>
             </div>
           </div>
