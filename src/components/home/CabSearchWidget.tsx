@@ -41,8 +41,31 @@ export function CabSearchWidget() {
   const [hasStop, setHasStop] = useState(false);
   const [stopLocation, setStopLocation] = useState("");
 
-  const [startDate, setStartDate] = useState("Today, 10:30 AM");
+  const [startDate, setStartDate] = useState("Loading...");
   const [travellers, setTravellers] = useState("1 Traveller, 1 Day");
+
+  // Auto-update Start Date to Current Time
+  useEffect(() => {
+    const updateDateTime = () => {
+      const now = new Date();
+      
+      const dayStr = "Today";
+
+      let hours = now.getHours();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; 
+      const minutes = now.getMinutes();
+      
+      const strTime = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ' ' + ampm;
+      
+      setStartDate(`${dayStr}, ${strTime}`);
+    };
+
+    updateDateTime();
+    const interval = setInterval(updateDateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Sync TO location if Same Pickup & Drop-off is checked in Hourly Rentals
   useEffect(() => {
