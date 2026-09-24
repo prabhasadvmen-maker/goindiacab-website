@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Car,
   Plane,
@@ -27,6 +28,7 @@ import Image from "next/image";
 import { siteConfig } from "@/src/config/site";
 
 export function CabSearchWidget() {
+  const router = useRouter();
   const [tab, setTab] = useState<"outstation" | "airport" | "hourly">("outstation");
   const [tripType, setTripType] = useState<"oneway" | "roundtrip">("oneway");
   const [airportType, setAirportType] = useState<"drop" | "pickup">("drop");
@@ -55,12 +57,19 @@ export function CabSearchWidget() {
       alert("Please enter destination city or landmark!");
       return;
     }
-    const mode = tab === "outstation" ? tripType.toUpperCase() : tab === "airport" ? `AIRPORT (${airportType.toUpperCase()})` : `HOURLY (${hourlyPackage})`;
-    const text = encodeURIComponent(
-      `Hi GoIndiaCab! I want to book a cab.\nTab: ${tab.toUpperCase()} (${mode})\nFrom: ${fromLocation}\nTo: ${toLocation || 'Hourly Rental'}\nDate: ${startDate}\nDetails: ${travellers}`
-    );
-    const phoneNumber = siteConfig.phone.booking1.replace(/\D/g, "");
-    window.open(`https://wa.me/${phoneNumber}?text=${text}`, "_blank");
+    
+    const params = new URLSearchParams({
+      tab,
+      tripType,
+      airportType,
+      hourlyPackage,
+      from: fromLocation,
+      to: toLocation || 'Local Drop',
+      date: startDate,
+      travellers
+    });
+
+    router.push(`/search?${params.toString()}`);
   };
 
   return (
