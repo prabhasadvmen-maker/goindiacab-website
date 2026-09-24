@@ -196,17 +196,15 @@ export function CabSearchWidget() {
               <form onSubmit={handleSearch} className="space-y-1.5">
                 {/* 3. TRIP TYPE SELECTION & REQUIREMENTS */}
                 {tab === "outstation" && (
-                  <div>
+                  <div className="mb-3">
                     {/* Outstation One Way & Round Trip Toggle */}
-                    <div className="grid grid-cols-2 gap-1.5">
+                    <div className="grid grid-cols-2 gap-3 max-w-[340px]">
                       {/* One Way */}
-                      <div
-                        onClick={() => setTripType("oneway")}
-                        style={{ cursor: "pointer" }}
+                      <label
                         className={clsx(
-                          "p-2 rounded-xl border-2 transition-all flex items-center gap-2 cursor-pointer",
+                          "py-2.5 px-4 rounded-xl border-2 transition-all flex items-center justify-center gap-2.5 cursor-pointer",
                           tripType === "oneway"
-                            ? "bg-[#eef7ff] border-[#00A5D9] shadow-xs"
+                            ? "bg-[#eef7ff] border-[#00A5D9] shadow-sm"
                             : "bg-white border-gray-200 hover:border-gray-300"
                         )}
                       >
@@ -217,55 +215,34 @@ export function CabSearchWidget() {
                           onChange={() => setTripType("oneway")}
                           className="w-4 h-4 text-[#00A5D9] accent-[#00A5D9] cursor-pointer"
                         />
-                        <div>
-                          <h4 className="font-extrabold text-sm text-gray-900 leading-none">
-                            One Way
-                          </h4>
-                          <p className="text-xs text-gray-500 font-medium mt-1">
-                            Get dropped off
-                          </p>
-                        </div>
-                      </div>
+                        <span className="font-extrabold text-sm text-gray-900 whitespace-nowrap">
+                          One Way
+                        </span>
+                      </label>
 
                       {/* Round Trip */}
-                      <div
-                        onClick={() => setTripType("roundtrip")}
-                        style={{ cursor: "pointer" }}
+                      <label
                         className={clsx(
-                          "p-2 rounded-xl border-2 transition-all flex items-center justify-between gap-2 cursor-pointer",
+                          "py-2.5 px-4 rounded-xl border-2 transition-all flex items-center justify-center gap-2.5 cursor-pointer relative",
                           tripType === "roundtrip"
-                            ? "bg-[#eef7ff] border-[#00A5D9] shadow-xs"
+                            ? "bg-[#eef7ff] border-[#00A5D9] shadow-sm"
                             : "bg-white border-gray-200 hover:border-gray-300"
                         )}
                       >
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name="triptype"
-                            checked={tripType === "roundtrip"}
-                            onChange={() => setTripType("roundtrip")}
-                            className="w-4 h-4 text-[#00A5D9] accent-[#00A5D9] cursor-pointer"
-                          />
-                          <div>
-                            <h4 className="font-extrabold text-sm text-gray-900 leading-none">
-                              Round Trip
-                            </h4>
-                            <p className="text-xs text-gray-500 font-medium mt-1">
-                              Keep cab till return
-                            </p>
-                          </div>
-                        </div>
-
-                        <span className="bg-[#00b074] text-white text-[10px] font-black px-2 py-0.5 rounded shadow-2xs">
-                          Save more
+                        <input
+                          type="radio"
+                          name="triptype"
+                          checked={tripType === "roundtrip"}
+                          onChange={() => setTripType("roundtrip")}
+                          className="w-4 h-4 text-[#00A5D9] accent-[#00A5D9] cursor-pointer"
+                        />
+                        <span className="font-extrabold text-sm text-gray-900 whitespace-nowrap">
+                          Round Trip
                         </span>
-                      </div>
-                    </div>
-
-                    {/* Point (1): Extra line on GST / Tax extra */}
-                    <div className="mt-1 flex items-center gap-1.5 text-xs font-bold text-amber-700 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200/80">
-                      <Info className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
-                      <span>Note: Toll, State Tax & GST Extra as applicable.</span>
+                        <span className="absolute -top-2.5 -right-2 bg-[#00b074] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-sm">
+                          Save
+                        </span>
+                      </label>
                     </div>
                   </div>
                 )}
@@ -316,7 +293,7 @@ export function CabSearchWidget() {
                           onChange={(e) => setFromLocation(e.target.value)}
                           required
                           placeholder="Enter pickup city or location"
-                          className="w-full pl-9 pr-9 py-2 bg-white border border-gray-300 rounded-xl text-xs sm:text-sm font-extrabold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#00A5D9] transition-all shadow-2xs"
+                          className="w-full pl-9 pr-9 py-3 bg-white border border-gray-300 rounded-xl text-sm sm:text-base font-extrabold text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#00A5D9] transition-all shadow-sm"
                         />
                         <button
                           type="button"
@@ -335,21 +312,17 @@ export function CabSearchWidget() {
                     </div>
 
                     {/* Add a Stop Center Button */}
-                    <div className="md:col-span-2 flex flex-col items-center justify-center pt-1">
+                    <div className="md:col-span-2 flex flex-col items-center justify-center pt-0 md:pt-4">
                       <button
                         type="button"
                         onClick={() => setHasStop(!hasStop)}
-                        style={{ cursor: "pointer" }}
-                        className="group flex flex-col items-center justify-center text-center cursor-pointer"
+                        className="group flex flex-col md:flex-row items-center justify-center gap-1.5 bg-blue-50/80 hover:bg-blue-100 border border-blue-100 px-3 md:px-4 py-1.5 rounded-full transition-colors cursor-pointer shadow-sm mx-auto"
                       >
-                        <div className="w-6 h-6 rounded-full bg-[#0066FF] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                          {hasStop ? <X className="w-3 h-3" /> : <Plus className="w-3 h-3" />}
+                        <div className="w-4 h-4 md:w-4 md:h-4 rounded-full bg-[#0066FF] text-white flex items-center justify-center shadow-sm flex-shrink-0">
+                          {hasStop ? <X className="w-2.5 h-2.5" /> : <Plus className="w-2.5 h-2.5" />}
                         </div>
-                        <span className="text-[9px] font-extrabold text-[#0066FF] mt-0.5">
-                          {hasStop ? "- Remove Stop" : "Add a Stop"}
-                        </span>
-                        <span className="text-[8px] text-gray-400 font-semibold leading-none">
-                          (Sightseeing, Hotel...)
+                        <span className="text-[10px] md:text-xs font-extrabold text-[#0066FF] whitespace-nowrap">
+                          {hasStop ? "Remove Stop" : "Add Stop"}
                         </span>
                       </button>
                     </div>
@@ -373,7 +346,7 @@ export function CabSearchWidget() {
                           required={tab !== "hourly"}
                           placeholder={tab === "hourly" && sameDropForHourly ? "Same as Pickup" : "Enter destination"}
                           className={clsx(
-                            "w-full pl-9 pr-4 py-2 border rounded-xl text-xs sm:text-sm font-extrabold focus:outline-none transition-all shadow-2xs",
+                            "w-full pl-9 pr-4 py-3 border rounded-xl text-sm sm:text-base font-extrabold focus:outline-none transition-all shadow-sm",
                             tab === "hourly" && sameDropForHourly
                               ? "bg-gray-100 text-gray-600 border-gray-300 cursor-not-allowed"
                               : "bg-white text-gray-900 border-gray-300 focus:border-[#00A5D9]"
