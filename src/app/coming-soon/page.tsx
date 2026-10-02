@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Clock } from "lucide-react";
+import Link from "next/link";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { siteConfig } from "@/src/config/site";
 
-export default function HomePage() {
+export default function ComingSoonPage() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -87,7 +88,35 @@ export default function HomePage() {
           ))}
         </div>
 
+        {/* Divider */}
+        <div className="w-16 h-1 bg-[#FF6600] rounded-full mx-auto mb-8" />
 
+        {/* Contact Info */}
+        <p className="text-gray-400 text-sm mb-4">Need a cab right now? Contact us:</p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+          <a
+            href={`tel:${siteConfig.phone.booking1}`}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#00A5D9] text-white font-bold text-sm hover:bg-[#0090c0] transition-all"
+          >
+            <Phone className="w-4 h-4" />
+            {siteConfig.phone.booking1}
+          </a>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 text-white font-bold text-sm hover:bg-white/20 transition-all border border-white/10"
+          >
+            <Mail className="w-4 h-4" />
+            {siteConfig.email}
+          </a>
+        </div>
+
+        {/* Back to Home */}
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium transition-colors"
+        >
+          ← Back to Home
+        </Link>
       </div>
     </div>
   );
