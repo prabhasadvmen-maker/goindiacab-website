@@ -42,7 +42,7 @@ export default function HomePage() {
       {/* Logo */}
       <div className="mb-8 relative z-10">
         <Image
-          src={siteConfig.logo}
+          src="/Goindiacabs logo.png"
           alt={siteConfig.name}
           width={200}
           height={55}

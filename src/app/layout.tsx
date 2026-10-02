@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: "Book Cab & Taxi Services Across India | GoIndiaCab",
   description: "Book reliable one-way, round-trip, local and airport taxi services across India with GoIndiaCab. Best cab service in Delhi.",
   icons: {
-    icon: "/GoIndiaCab Favicon icon.png",
+    icon: "/Goindiacabs logo.png",
   },
   openGraph: {
     title: "Book Cab & Taxi Services Across India | GoIndiaCab",
