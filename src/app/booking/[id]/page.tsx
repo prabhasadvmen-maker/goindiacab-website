@@ -2,7 +2,7 @@
 
 import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Calendar, CheckCircle2, Download, MessageCircle, Phone, User, Car } from "lucide-react";
+import { ArrowRight, Calendar, Check, CheckCircle2, Download, MessageCircle, Phone, User, Car, XCircle } from "lucide-react";
 import { siteConfig } from "@/src/config/site";
 import { getBooking } from "@/src/lib/api";
 import { formatDate, formatTime, inr, useStoredString } from "@/src/lib/booking";
@@ -18,7 +18,33 @@ type Confirmed = {
   };
   status: string;
   paymentStatus?: "pending" | "paid" | "failed";
+  confirmedAt?: string;
+  statusHistory?: { status: string; at: string }[];
+  cancelReason?: string;
+  driver?: { name: string; phone: string; vehicleNumber: string } | null;
 };
+
+const STEPS = [
+  { key: "confirmed", label: "Booking Confirmed", pending: "We have received your booking." },
+  { key: "assigned", label: "Driver Assigned", pending: "We are assigning a driver to your trip." },
+  { key: "in_progress", label: "Trip Started", pending: "Your trip will start at the pickup time." },
+  { key: "completed", label: "Trip Completed", pending: "You will see this once you reach your destination." },
+] as const;
+
+const HEADLINE: Record<string, string> = {
+  confirmed: "Booking Confirmed!",
+  assigned: "Driver Assigned",
+  in_progress: "Trip In Progress",
+  completed: "Trip Completed",
+  cancelled: "Booking Cancelled",
+};
+
+const stamp = (iso?: string) =>
+  iso
+    ? new Date(iso).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "short", hour: "numeric", minute: "2-digit", hour12: true })
+    : "";
+
+const REFRESH_MS = 30_000;
 
 export default function BookingPage({ params }: { params: Promise<{ id: string }> }) {
   const { id: rawId } = use(params);
@@ -27,14 +53,22 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
   const [shown, setShown] = useState(false);
   const [remote, setRemote] = useState<Confirmed | null | undefined>(undefined);
 
+  const finished = remote?.status === "completed" || remote?.status === "cancelled";
+
+  // Live tracking: refresh every 30s until the trip is completed or cancelled.
   useEffect(() => {
     let cancelled = false;
-    getBooking(id).then((b) => {
+    const load = () => getBooking(id).then((b) => {
       if (cancelled) return;
-      setRemote(b && b.bookingId === id ? { ...b, passenger: { ...b.passenger, instructions: "" } } : null);
+      setRemote((prev) =>
+        b && b.bookingId === id ? { ...b, passenger: { ...b.passenger, instructions: "" } } : prev === undefined ? null : prev
+      );
     });
-    return () => { cancelled = true; };
-  }, [id]);
+    load();
+    if (finished) return () => { cancelled = true; };
+    const timer = setInterval(() => { if (!document.hidden) load(); }, REFRESH_MS);
+    return () => { cancelled = true; clearInterval(timer); };
+  }, [id, finished]);
 
   const state = useMemo<"loading" | "missing" | Confirmed>(() => {
     if (remote) return remote;
@@ -65,6 +99,12 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
   }
 
   const b = state;
+  const cancelled = b.status === "cancelled";
+  const currentIdx = STEPS.findIndex((s) => s.key === b.status);
+  const stepTime = (key: string) => {
+    const hit = [...(b.statusHistory ?? [])].reverse().find((h) => h.status === key);
+    return hit?.at ?? (key === "confirmed" ? b.confirmedAt : undefined);
+  };
   const dateTime = `${formatDate(b.trip.date)}, ${formatTime(b.trip.time)}`;
   const waText = encodeURIComponent(
     `Hi GoIndiaCab, my booking is confirmed.\nBooking ID: ${b.bookingId}\nTrip: ${b.trip.from} to ${b.trip.to}\nDate: ${dateTime}\nCab: ${b.vehicle.name} (${b.vehicle.model})\nTotal: ${inr(b.fare.total)}\nName: ${b.passenger.name}`
@@ -76,25 +116,100 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
       <div className="max-w-xl mx-auto px-4">
         <div className="text-center mb-6">
           <div
-            className={`mx-auto w-20 h-20 rounded-full bg-green-100 flex items-center justify-center transition-all duration-700 ${
+            className={`mx-auto w-20 h-20 rounded-full ${cancelled ? "bg-red-100" : "bg-green-100"} flex items-center justify-center transition-all duration-700 ${
               shown ? "opacity-100 scale-100" : "opacity-0 scale-50"
             }`}
           >
-            <CheckCircle2 className="w-12 h-12 text-green-600" />
+            {cancelled ? <XCircle className="w-12 h-12 text-red-600" /> : <CheckCircle2 className="w-12 h-12 text-green-600" />}
           </div>
           <h1 className={`text-2xl font-bold text-gray-900 mt-4 transition-opacity duration-700 ${shown ? "opacity-100" : "opacity-0"}`}>
-            Booking Confirmed!
+            {HEADLINE[b.status] ?? "Booking Status"}
           </h1>
         </div>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="p-5 bg-green-50 border-b border-green-100">
-            <p className="text-sm font-bold text-green-700 flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> BOOKING CONFIRMED</p>
+          <div className={`p-5 border-b ${cancelled ? "bg-red-50 border-red-100" : "bg-green-50 border-green-100"}`}>
+            <p className={`text-sm font-bold flex items-center gap-2 ${cancelled ? "text-red-700" : "text-green-700"}`}>
+              {cancelled ? <XCircle className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />} {(HEADLINE[b.status] ?? b.status).replace("!", "").toUpperCase()}
+            </p>
             {b.paymentStatus && b.paymentStatus !== "paid" && (
               <p className="mt-1 text-sm font-semibold text-amber-700">Payment {b.paymentStatus === "failed" ? "failed" : "pending"}</p>
             )}
             <p className="mt-2 text-gray-800">Booking ID: <b>{b.bookingId}</b></p>
-            <p className="text-gray-800">Status: <b className="capitalize">{b.status}</b></p>
+          </div>
+
+          {/* Live tracking */}
+          <div className="p-5 border-b border-gray-100">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-xs font-bold uppercase tracking-wide text-gray-400">Track your booking</p>
+              {!finished && (
+                <span className="flex items-center gap-1.5 text-[11px] font-semibold text-green-600 print:hidden">
+                  <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" /></span>
+                  Live
+                </span>
+              )}
+            </div>
+
+            {cancelled ? (
+              <div className="rounded-xl bg-red-50 border border-red-100 p-4 text-sm">
+                <p className="font-bold text-red-700">This booking was cancelled{stepTime("cancelled") ? ` on ${stamp(stepTime("cancelled"))}` : ""}.</p>
+                {b.cancelReason && <p className="mt-1 text-red-700/90">Reason: {b.cancelReason}</p>}
+                <p className="mt-2 text-gray-600">For any payment-related questions, call {siteConfig.phone.booking1}.</p>
+              </div>
+            ) : (
+              <ol>
+                {STEPS.map((s, i) => {
+                  const done = i < currentIdx || (i === currentIdx && s.key === "completed");
+                  const active = i === currentIdx && !done;
+                  const reached = i <= currentIdx;
+                  const time = stepTime(s.key);
+                  return (
+                    <li key={s.key} className="flex gap-3">
+                      <div className="flex flex-col items-center">
+                        <span
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold ${
+                            done ? "bg-green-600 border-green-600 text-white" : active ? "border-[#FF6600] bg-orange-50 text-[#FF6600] ring-4 ring-orange-100" : "border-gray-200 bg-white text-gray-300"
+                          }`}
+                        >
+                          {done ? <Check className="w-4 h-4" /> : i + 1}
+                        </span>
+                        {i < STEPS.length - 1 && <span className={`w-0.5 flex-1 min-h-6 ${i < currentIdx ? "bg-green-500" : "bg-gray-200"}`} />}
+                      </div>
+                      <div className="pb-5">
+                        <p className={`text-sm font-bold leading-7 ${reached ? "text-gray-900" : "text-gray-400"}`}>{s.label}</p>
+                        <p className="text-xs text-gray-500">
+                          {reached ? (time ? stamp(time) : "Done") : s.pending}
+                        </p>
+                        {s.key === "assigned" && active && !b.driver && (
+                          <p className="mt-1 text-xs text-gray-500">Driver details will appear here shortly.</p>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            )}
+
+            {!cancelled && currentIdx === 0 && (
+              <p className="mt-1 rounded-lg bg-blue-50 px-3 py-2 text-xs text-blue-800">
+                A driver has not been assigned yet. You will get an email and see the driver details on this page as soon as one is assigned.
+              </p>
+            )}
+
+            {!cancelled && currentIdx >= 1 && b.driver && (
+              <div className="mt-1 flex items-center justify-between gap-3 rounded-xl border border-indigo-100 bg-indigo-50 p-4">
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-indigo-500">Your driver</p>
+                  <p className="font-bold text-gray-900 truncate">{b.driver.name}</p>
+                  {b.driver.vehicleNumber && <p className="text-xs text-gray-600">Vehicle no. <b className="font-mono">{b.driver.vehicleNumber}</b></p>}
+                </div>
+                {b.driver.phone && (
+                  <a href={`tel:${b.driver.phone}`} className="shrink-0 flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-bold text-white print:hidden">
+                    <Phone className="w-4 h-4" /> Call
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="p-5 space-y-3 text-sm text-gray-700 border-b border-gray-100">

@@ -305,6 +305,10 @@ export type BookingDetail = {
     payLater: number;
   };
   bookedAt: string;
+  confirmedAt?: string;
+  statusHistory?: { status: string; at: string }[];
+  cancelReason?: string;
+  driver?: { name: string; phone: string; vehicleNumber: string } | null;
 };
 
 export async function getBooking(bookingId: string): Promise<BookingDetail | null> {
