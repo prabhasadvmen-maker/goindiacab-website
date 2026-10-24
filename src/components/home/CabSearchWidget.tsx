@@ -10,46 +10,83 @@ import {
 import clsx from "clsx";
 import Image from "next/image";
 import { siteConfig } from "@/src/config/site";
-import { suggestLocations, type LocationSuggestion } from "@/src/lib/api";
+import {
+  suggestLocations, suggestDestinations, getWebConfig, formatCancelWindow,
+  type LocationSuggestion, type WebConfig,
+} from "@/src/lib/api";
 
-const STATIC_CITIES = [
-  "Delhi", "New Delhi", "Delhi NCR", "Noida", "Gurgaon", "Faridabad",
-  "Agra", "Jaipur", "Chandigarh", "Haridwar", "Dehradun", "Shimla",
-  "Manali", "Amritsar", "Varanasi", "Lucknow", "Mathura", "Ayodhya",
-];
+/** Popular cities, local packages and policy text come from the admin-managed website config. */
+function useWebConfig() {
+  const [config, setConfig] = useState<WebConfig | null>(null);
+  useEffect(() => {
+    let alive = true;
+    getWebConfig().then((c) => { if (alive) setConfig(c); });
+    return () => { alive = false; };
+  }, []);
+  return config;
+}
+
+const RECENT_KEY = "gic_recent_places";
 
 function LocationInput({
-  value, onChange, placeholder, required, disabled,
+  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel,
 }: {
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
+  mode?: "from" | "to";
+  ariaLabel?: string;
 }) {
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
+  const [active, setActive] = useState(-1);
+  const [recent, setRecent] = useState<string[]>([]);
   const ref = useRef<HTMLDivElement>(null);
+  const popular = useWebConfig()?.popularCities ?? [];
+  const reqId = useRef(0);
+  const skipNext = useRef(false);
+
+  const q = value.trim();
+  const showPopular = open && !disabled && q.length < 2 && (popular.length > 0 || recent.length > 0);
+  const showList = open && !disabled && q.length >= 2 && suggestions.length > 0;
+  const showEmpty = open && !disabled && q.length >= 2 && searched && !loading && suggestions.length === 0;
+
+  // Debounced live search. Stale responses are dropped via reqId.
+  useEffect(() => {
+    if (disabled) return;
+    if (skipNext.current) { skipNext.current = false; return; }
+    if (q.length < 2) {
+      reqId.current++;
+      setSuggestions([]);
+      setLoading(false);
+      setSearched(false);
+      return;
+    }
+    const id = ++reqId.current;
+    setSearched(false);
+    const timer = setTimeout(async () => {
+      setLoading(true);
+      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q);
+      if (id !== reqId.current) return;
+      setLoading(false);
+      setSuggestions(results);
+      setSearched(true);
+      setActive(-1);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [q, mode, disabled]);
 
   useEffect(() => {
-    const q = value.trim();
-    if (q.length < 2) { setSuggestions([]); return; }
-    const timer = setTimeout(async () => {
-      const api = await suggestLocations(q);
-      if (api.length > 0) {
-        setSuggestions(api);
-      } else {
-        setSuggestions(
-          STATIC_CITIES
-            .filter((c) => c.toLowerCase().includes(q.toLowerCase()))
-            .slice(0, 6)
-            .map((c) => ({ label: c, value: c }))
-        );
-      }
-      setOpen(true);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [value]);
+    if (!open) return;
+    try {
+      const list = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
+      setRecent(Array.isArray(list) ? list.slice(0, 5) : []);
+    } catch { setRecent([]); }
+  }, [open]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -58,6 +95,37 @@ function LocationInput({
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  const handleSelect = (val: string) => {
+    try {
+      const list: string[] = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
+      const next = [val, ...list.filter((x) => x.toLowerCase() !== val.toLowerCase())].slice(0, 5);
+      localStorage.setItem(RECENT_KEY, JSON.stringify(next));
+    } catch { /* storage unavailable */ }
+    if (val.trim() !== q) skipNext.current = true;
+    reqId.current++;
+    setSuggestions([]);
+    setSearched(false);
+    setLoading(false);
+    setActive(-1);
+    setOpen(false);
+    onChange(val);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") { setOpen(false); return; }
+    if (!showList) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive((i) => (i + 1) % suggestions.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive((i) => (i <= 0 ? suggestions.length - 1 : i - 1));
+    } else if (e.key === "Enter" && active >= 0) {
+      e.preventDefault();
+      handleSelect(suggestions[active].value);
+    }
+  };
 
   return (
     <div className="relative" ref={ref}>
@@ -68,25 +136,90 @@ function LocationInput({
         disabled={disabled}
         required={required}
         placeholder={placeholder}
+        aria-label={ariaLabel}
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded={showList || showPopular}
         autoComplete="off"
+        onFocus={() => setOpen(true)}
         onChange={(e) => { onChange(e.target.value); setOpen(true); }}
-        onKeyDown={(e) => { if (e.key === "Escape") setOpen(false); }}
+        onKeyDown={handleKeyDown}
         className={clsx(
-          "w-full pl-9 pr-4 py-3 border rounded-xl text-sm sm:text-base font-extrabold focus:outline-none transition-all shadow-sm",
+          "w-full pl-9 pr-9 py-3 border rounded-xl text-sm sm:text-base font-extrabold focus:outline-none transition-all shadow-sm",
           disabled
             ? "bg-gray-100 text-gray-600 border-gray-300 cursor-not-allowed"
             : "bg-white text-gray-900 border-gray-300 focus:border-[#00A5D9]"
         )}
       />
-      {open && suggestions.length > 0 && (
-        <ul className="absolute z-40 left-0 right-0 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden">
-          {suggestions.map((s) => (
-            <li key={s.value}>
+      {loading ? (
+        <div className="absolute right-3 top-1/2 -translate-y-1/2">
+          <div className="w-4 h-4 border-2 border-[#00A5D9] border-t-transparent rounded-full animate-spin" />
+        </div>
+      ) : value && !disabled ? (
+        <button
+          type="button"
+          aria-label="Clear"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => { skipNext.current = false; onChange(""); setOpen(true); }}
+          className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 cursor-pointer"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      ) : null}
+
+      {/* Recent searches + popular cities */}
+      {showPopular && (
+        <div className="absolute z-40 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+          <div className="max-h-72 overflow-y-auto py-1">
+            {recent.length > 0 && (
+              <>
+                <p className="px-3 pt-2 pb-1 text-[11px] font-bold text-gray-400 uppercase tracking-wide">Recent Searches</p>
+                {recent.map((name) => (
+                  <button
+                    key={`r-${name}`}
+                    type="button"
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => handleSelect(name)}
+                    className="w-full text-left px-3 py-2.5 text-sm font-medium text-gray-900 hover:bg-blue-50 cursor-pointer"
+                  >
+                    {name}
+                  </button>
+                ))}
+              </>
+            )}
+            {popular.length > 0 && (
+              <p className="px-3 pt-3 pb-1 text-[11px] font-bold text-gray-400 uppercase tracking-wide">Popular Cities</p>
+            )}
+            {popular.map((dest) => (
+              <button
+                key={dest.name}
+                type="button"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => handleSelect(dest.name)}
+                className="w-full text-left px-3 py-2.5 text-sm font-medium text-gray-900 hover:bg-blue-50 cursor-pointer flex items-center justify-between gap-2"
+              >
+                {dest.name}
+                <span className="text-xs font-normal text-gray-400">{dest.state}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Search suggestions */}
+      {showList && (
+        <ul role="listbox" className="absolute z-40 left-0 right-0 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden max-h-72 overflow-y-auto">
+          {suggestions.map((s, i) => (
+            <li key={`${s.value}-${i}`} role="option" aria-selected={i === active}>
               <button
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
-                onClick={() => { onChange(s.value); setOpen(false); }}
-                className="w-full text-left px-3 py-2.5 text-sm text-gray-700 hover:bg-blue-50 flex items-center gap-2 cursor-pointer"
+                onMouseEnter={() => setActive(i)}
+                onClick={() => handleSelect(s.value)}
+                className={clsx(
+                  "w-full text-left px-3 py-2.5 text-sm text-gray-700 flex items-center gap-2 cursor-pointer",
+                  i === active ? "bg-blue-50" : "hover:bg-blue-50"
+                )}
               >
                 <MapPin className="w-3.5 h-3.5 text-gray-400 shrink-0" /> {s.label}
               </button>
@@ -94,48 +227,52 @@ function LocationInput({
           ))}
         </ul>
       )}
+
+      {showEmpty && (
+        <div className="absolute z-40 left-0 right-0 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg px-3 py-3 text-sm text-gray-500">
+          No matching places found. Try a different spelling.
+        </div>
+      )}
     </div>
   );
 }
+
+const todayLocal = () => {
+  const d = new Date();
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0, 10);
+};
+const cityKey = (v: string) => v.split(",")[0].trim().toLowerCase();
 
 export function CabSearchWidget() {
   const router = useRouter();
   const [tab, setTab] = useState<"outstation" | "airport" | "hourly">("outstation");
   const [tripType, setTripType] = useState<"oneway" | "roundtrip">("oneway");
-  const [airportType, setAirportType] = useState<"drop" | "pickup">("drop");
-  const [hourlyPackage, setHourlyPackage] = useState("8 Hrs / 80 Km");
+  const config = useWebConfig();
+  const [hourlyPackage, setHourlyPackage] = useState("");
 
-  const [fromLocation, setFromLocation] = useState("Delhi");
+  const [fromLocation, setFromLocation] = useState("");
   const [toLocation, setToLocation] = useState("");
   const [sameDropForHourly, setSameDropForHourly] = useState(false);
 
   const [hasStop, setHasStop] = useState(false);
   const [stopLocation, setStopLocation] = useState("");
 
-  const [startDate, setStartDate] = useState("Loading...");
-  const [travellers, setTravellers] = useState("1 Traveller, 1 Day");
+  const [pickupDate, setPickupDate] = useState("");
+  const [pickupTime, setPickupTime] = useState("");
+  const [passengers, setPassengers] = useState("2");
+  const [formError, setFormError] = useState("");
+  const activePackage = config?.localPackages.find((p) => p.label === hourlyPackage)?.label ?? config?.localPackages[0]?.label ?? "";
+  const maxPassengers = config?.maxSeats || Number(passengers) || 1;
 
-  // Auto-update Start Date to Current Time
+  // Set default date/time to now
   useEffect(() => {
-    const updateDateTime = () => {
-      const now = new Date();
-      const dayStr = "Today";
-      let hours = now.getHours();
-      const ampm = hours >= 12 ? "PM" : "AM";
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-      const minutes = now.getMinutes();
-      const strTime =
-        hours.toString().padStart(2, "0") +
-        ":" +
-        minutes.toString().padStart(2, "0") +
-        " " +
-        ampm;
-      setStartDate(`${dayStr}, ${strTime}`);
-    };
-    updateDateTime();
-    const interval = setInterval(updateDateTime, 60000);
-    return () => clearInterval(interval);
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    setPickupDate(now.toISOString().slice(0, 10));
+    const h = String(now.getHours()).padStart(2, "0");
+    const m = String(now.getMinutes()).padStart(2, "0");
+    setPickupTime(`${h}:${m}`);
   }, []);
 
   // Sync TO location if Same Pickup & Drop-off is checked in Hourly Rentals
@@ -147,10 +284,24 @@ export function CabSearchWidget() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!toLocation && tab !== "hourly") {
-      alert("Please enter destination city or landmark!");
-      return;
+    const from = fromLocation.trim();
+    const to = toLocation.trim();
+    const stop = hasStop ? stopLocation.trim() : "";
+
+    if (!from) return setFormError("Please enter pickup city or location.");
+    if (!to && tab !== "hourly") return setFormError("Please enter destination city or landmark.");
+    if (tab !== "hourly" && cityKey(from) === cityKey(to)) return setFormError("Pickup and destination cannot be the same.");
+    if (stop && (cityKey(stop) === cityKey(from) || cityKey(stop) === cityKey(to))) {
+      return setFormError("Intermediate stop must be different from pickup and destination.");
     }
+    if (pickupDate < todayLocal()) return setFormError("Pickup date cannot be in the past.");
+    if (pickupDate === todayLocal() && pickupTime) {
+      const [h, m] = pickupTime.split(":").map(Number);
+      const pickup = new Date();
+      pickup.setHours(h, m, 0, 0);
+      if (pickup.getTime() < Date.now() - 15 * 60 * 1000) return setFormError("Pickup time has already passed.");
+    }
+    setFormError("");
 
     // Map to /search page params
     let tripTypeParam = "oneway";
@@ -158,31 +309,26 @@ export function CabSearchWidget() {
     if (tab === "airport") tripTypeParam = "airport";
     if (tab === "hourly") tripTypeParam = "local";
 
-    const today = new Date();
-    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-    const dateStr = today.toISOString().slice(0, 10);
-
-    const now = new Date();
-    let h = now.getHours();
-    const m = now.getMinutes();
-    const timeStr = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-
     const params = new URLSearchParams({
-      from: fromLocation,
-      to: toLocation || "Local Drop",
-      date: dateStr,
-      time: timeStr,
+      from,
+      to: to || "Local Drop",
+      date: pickupDate,
+      time: pickupTime,
       tripType: tripTypeParam,
-      passengers: "2",
+      passengers,
     });
 
-    if (tab === "hourly") params.set("pkg", hourlyPackage);
+    if (tab === "hourly") {
+      if (!activePackage) return setFormError("No rental packages are available right now.");
+      params.set("pkg", activePackage);
+    }
+    if (stop) params.set("stop", stop);
 
     router.push(`/search?${params.toString()}`);
   };
 
   return (
-    <section className="w-full relative overflow-hidden pt-8 pb-16 bg-slate-900">
+    <section className="w-full relative pt-8 pb-16 bg-slate-900">
 
       {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -200,7 +346,7 @@ export function CabSearchWidget() {
 
         <div className="max-w-[1100px] mx-auto mb-6">
           <div className="w-full">
-            <div className="bg-white rounded-[20px] shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-100 p-2 sm:p-2.5 relative z-20">
+            <div className="bg-white rounded-[20px] shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-100 p-2 sm:p-2.5 relative z-30">
 
               {/* 1. Top Navigation Tabs */}
               <div className="flex items-center justify-around pb-1.5 border-b border-gray-100 mb-1.5 overflow-x-auto whitespace-nowrap hide-scrollbar">
@@ -315,14 +461,17 @@ export function CabSearchWidget() {
                       Select Package Duration:
                     </label>
                     <div className="flex items-center gap-2 overflow-x-auto">
-                      {["4 Hrs / 40 Km", "8 Hrs / 80 Km", "12 Hrs / 120 Km"].map((pkg) => (
+                      {config && config.localPackages.length === 0 && (
+                        <span className="text-xs font-bold text-gray-500">No rental packages available right now.</span>
+                      )}
+                      {(config?.localPackages ?? []).map(({ label: pkg }) => (
                         <button
                           key={pkg}
                           type="button"
                           onClick={() => setHourlyPackage(pkg)}
                           className={clsx(
                             "py-1.5 px-3.5 rounded-lg text-xs font-extrabold border whitespace-nowrap transition-all cursor-pointer",
-                            hourlyPackage === pkg
+                            activePackage === pkg
                               ? "bg-[#00A5D9] text-white border-[#00A5D9] shadow-xs"
                               : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
                           )}
@@ -347,6 +496,7 @@ export function CabSearchWidget() {
                       <LocationInput
                         value={fromLocation}
                         onChange={setFromLocation}
+                        ariaLabel="From"
                         placeholder="Enter pickup city or location"
                         required
                       />
@@ -356,7 +506,7 @@ export function CabSearchWidget() {
                     <div className="md:col-span-2 flex flex-col items-center justify-center pt-0 md:pt-4">
                       <button
                         type="button"
-                        onClick={() => setHasStop(!hasStop)}
+                        onClick={() => { if (hasStop) setStopLocation(""); setHasStop(!hasStop); }}
                         className="group flex flex-col md:flex-row items-center justify-center gap-1.5 bg-blue-50/80 hover:bg-blue-100 border border-blue-100 px-3 md:px-4 py-1.5 rounded-full transition-colors cursor-pointer shadow-sm mx-auto"
                       >
                         <div className="w-4 h-4 rounded-full bg-[#0066FF] text-white flex items-center justify-center shadow-sm flex-shrink-0">
@@ -377,6 +527,7 @@ export function CabSearchWidget() {
                       <LocationInput
                         value={toLocation}
                         onChange={setToLocation}
+                        mode="to"
                         placeholder={tab === "hourly" && sameDropForHourly ? "Same as Pickup" : "Enter destination"}
                         required={tab !== "hourly"}
                         disabled={tab === "hourly" && sameDropForHourly}
@@ -404,76 +555,82 @@ export function CabSearchWidget() {
                 {/* Optional Stop Field */}
                 {hasStop && (
                   <div className="bg-blue-50/70 p-3 rounded-xl border border-blue-200">
-                    <label className="block text-xs font-bold text-blue-900 mb-1">
-                      Intermediate Stop:
-                    </label>
-                    <input
-                      type="text"
+                    <div className="flex items-center gap-1 mb-1">
+                      <span className="w-2 h-2 rounded-full bg-blue-500" />
+                      <label className="text-[10px] font-black text-blue-900 uppercase tracking-wider">Intermediate Stop</label>
+                    </div>
+                    <LocationInput
                       value={stopLocation}
-                      onChange={(e) => setStopLocation(e.target.value)}
-                      placeholder="e.g. Mathura / Vrindavan / Sightseeing stop"
-                      className="w-full px-3 py-2 bg-white border border-blue-300 rounded-lg text-xs font-semibold text-gray-900 focus:outline-none"
+                      onChange={setStopLocation}
+                      mode="to"
+                      placeholder="e.g. Mathura, Vrindavan, Agra..."
                     />
                   </div>
                 )}
 
                 {/* 5. Trip Details Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
 
-                  {/* START DATE & TIME */}
-                  <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center justify-between min-w-0">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0">
-                        <Calendar className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0">
-                        <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider truncate">
-                          TRIP START DATE &amp; TIME
-                        </span>
-                        <span className="text-xs font-black text-gray-900 block leading-tight truncate">
-                          {startDate}
-                        </span>
-                      </div>
+                  {/* DATE */}
+                  <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center gap-2 min-w-0">
+                    <div className="w-7 h-7 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-3.5 h-3.5" />
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const newDate = prompt("Enter Trip Start Date & Time:", startDate);
-                        if (newDate) setStartDate(newDate);
-                      }}
-                      className="text-xs font-extrabold text-[#0066FF] hover:underline px-2 py-1 cursor-pointer"
-                    >
-                      Change
-                    </button>
+                    <div className="min-w-0 flex-1">
+                      <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider">DATE</span>
+                      <input
+                        type="date"
+                        value={pickupDate}
+                        min={todayLocal()}
+                        onChange={(e) => setPickupDate(e.target.value)}
+                        required
+                        className="w-full text-xs font-black text-gray-900 bg-transparent outline-none cursor-pointer"
+                      />
+                    </div>
                   </div>
 
-                  {/* TRAVELLERS & DAYS */}
-                  <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center justify-between min-w-0">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-blue-100 text-[#0066FF] flex items-center justify-center flex-shrink-0">
-                        <Briefcase className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0">
-                        <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider truncate">
-                          TRAVELLERS &amp; BAGS
-                        </span>
-                        <span className="text-xs font-black text-gray-900 block leading-tight truncate">
-                          {travellers}
-                        </span>
-                      </div>
+                  {/* TIME */}
+                  <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center gap-2 min-w-0">
+                    <div className="w-7 h-7 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-3.5 h-3.5" />
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const count = prompt("Enter Travellers & Days:", travellers);
-                        if (count) setTravellers(count);
-                      }}
-                      className="text-xs font-extrabold text-[#0066FF] hover:underline px-2 py-1 cursor-pointer"
-                    >
-                      Edit
-                    </button>
+                    <div className="min-w-0 flex-1">
+                      <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider">TIME</span>
+                      <input
+                        type="time"
+                        value={pickupTime}
+                        onChange={(e) => setPickupTime(e.target.value)}
+                        required
+                        className="w-full text-xs font-black text-gray-900 bg-transparent outline-none cursor-pointer"
+                      />
+                    </div>
+                  </div>
+
+                  {/* PASSENGERS */}
+                  <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center gap-2 min-w-0">
+                    <div className="w-7 h-7 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="w-3.5 h-3.5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider">PASSENGERS</span>
+                      <select
+                        value={passengers}
+                        onChange={(e) => setPassengers(e.target.value)}
+                        className="w-full text-xs font-black text-gray-900 bg-transparent outline-none cursor-pointer"
+                      >
+                        {Array.from({ length: Math.max(maxPassengers, 1) }, (_, i) => i + 1).map((n) => (
+                          <option key={n} value={String(n)}>{n} Passenger{n > 1 ? "s" : ""}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
+
+                {formError && (
+                  <div role="alert" className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm font-bold rounded-lg px-3 py-2">
+                    <X className="w-4 h-4 shrink-0" /> {formError}
+                  </div>
+                )}
 
                 {/* 6. CTA Button */}
                 <button
@@ -490,7 +647,7 @@ export function CabSearchWidget() {
         </div>
 
         {/* Rating Section */}
-        <div className="flex flex-col items-center justify-center mt-6 mb-2 z-20 relative">
+        <div className="flex flex-col items-center justify-center mt-6 mb-2 z-10 relative">
           <div className="flex items-center gap-3 mb-4">
             <span className="text-white font-bold text-lg sm:text-xl drop-shadow-md tracking-wide">
               India&apos;s Top Rated Car Rental Service
@@ -529,7 +686,7 @@ export function CabSearchWidget() {
               </div>
               <div className="flex flex-col items-center sm:items-start mt-1 sm:mt-0">
                 <span className="font-extrabold text-gray-900 text-[10px] sm:text-sm leading-tight">Free Cancel</span>
-                <span className="text-[9px] sm:text-[11px] font-bold text-gray-500 leading-tight">Up to 1hr before</span>
+                <span className="text-[9px] sm:text-[11px] font-bold text-gray-500 leading-tight">{config ? `Up to ${formatCancelWindow(config.freeCancelMinutes)} before` : "Before pickup"}</span>
               </div>
             </div>
 

@@ -33,11 +33,25 @@ export class ApiError extends Error {
 // ─── 1. Location Autocomplete ─────────────────────────────────────────────────
 export type LocationSuggestion = { label: string; value: string };
 
+// FROM — only DB cities (North India list)
 export async function suggestLocations(q: string): Promise<LocationSuggestion[]> {
   if (q.trim().length < 2) return [];
   try {
     const data = await apiFetch<{ suggestions: LocationSuggestion[] }>(
       `/api/locations/suggest?q=${encodeURIComponent(q)}`
+    );
+    return data.suggestions ?? [];
+  } catch {
+    return [];
+  }
+}
+
+// TO — Google Places API (unlimited, any location in India)
+export async function suggestDestinations(q: string): Promise<LocationSuggestion[]> {
+  if (q.trim().length < 2) return [];
+  try {
+    const data = await apiFetch<{ suggestions: LocationSuggestion[] }>(
+      `/api/locations/suggest-destination?q=${encodeURIComponent(q)}`
     );
     return data.suggestions ?? [];
   } catch {
@@ -56,10 +70,11 @@ export type DistanceResult = {
 /** "Delhi / NCR, India" -> "Delhi" (the API wants a plain city name). */
 const cityName = (s: string) => s.split(",")[0].replace(/\s*\/\s*NCR$/i, "").trim();
 
-export async function getDistanceApi(from: string, to: string): Promise<DistanceResult | null> {
+export async function getDistanceApi(from: string, to: string, stop?: string): Promise<DistanceResult | null> {
   try {
+    const stopQs = stop?.trim() ? `&stop=${encodeURIComponent(cityName(stop))}` : "";
     return await apiFetch<DistanceResult>(
-      `/api/distance?from=${encodeURIComponent(cityName(from))}&to=${encodeURIComponent(cityName(to))}`
+      `/api/distance?from=${encodeURIComponent(cityName(from))}&to=${encodeURIComponent(cityName(to))}${stopQs}`
     );
   } catch {
     return null;
@@ -79,18 +94,56 @@ export type ApiVehicle = {
   name: string;
   model: string;
   seats: number;
+  bags: number;
+  rating: number;
+  gstPercent: number;
+  fuelType?: string;
   imageUrl: string;
   packages: VehiclePackage[];
 };
 
-export async function getVehicles(): Promise<ApiVehicle[]> {
+/** null = the request failed; [] = the request worked but no vehicle is active. */
+export async function getVehicles(): Promise<ApiVehicle[] | null> {
   try {
     const data = await apiFetch<{ vehicles: ApiVehicle[] }>("/api/fare/vehicles");
     return data.vehicles ?? [];
   } catch {
-    return [];
+    return null;
   }
 }
+
+// ─── 3c. Website config (popular cities, local packages, policy) ─────────────
+export type WebConfig = {
+  popularCities: { name: string; state: string }[];
+  localPackages: { label: string; hours: number; km: number }[];
+  maxSeats: number;
+  freeCancelMinutes: number;
+  partPaymentPercent: number;
+  policies: { kind: "included" | "excluded"; title: string; text: string }[];
+};
+
+let configPromise: Promise<WebConfig | null> | null = null;
+
+/** Cached for the lifetime of the page; a failed load is retried on the next call. */
+export function getWebConfig(): Promise<WebConfig | null> {
+  if (!configPromise) {
+    configPromise = apiFetch<WebConfig>("/api/web-config")
+      .then((c): WebConfig => ({
+        ...c,
+        popularCities: c.popularCities ?? [],
+        localPackages: c.localPackages ?? [],
+        policies: c.policies ?? [],
+      }))
+      .catch(() => {
+        configPromise = null;
+        return null;
+      });
+  }
+  return configPromise;
+}
+
+export const formatCancelWindow = (mins: number) =>
+  mins >= 60 && mins % 60 === 0 ? `${mins / 60}hr` : `${mins}min`;
 
 // ─── 3b. Fare Calculation ─────────────────────────────────────────────────────
 export type FareResult = {
@@ -125,6 +178,53 @@ export async function calculateFareApi(params: {
   }
 }
 
+// ─── 3d. Coupons ──────────────────────────────────────────────────────────────
+export type CartQuery = {
+  vehicleType: string;
+  distanceKm: number;
+  tripType: string;
+  package?: string;
+  days?: number;
+};
+
+export type CouponOffer = {
+  code: string;
+  title: string;
+  description: string;
+  eligible: boolean;
+  discount: number;
+  reason: string;
+};
+
+export type CouponResult = {
+  valid: true;
+  code: string;
+  title: string;
+  discount: number;
+  total: number;
+  finalTotal: number;
+};
+
+export async function getAvailableCoupons(cart: CartQuery): Promise<CouponOffer[]> {
+  const qs = new URLSearchParams({
+    vehicleType: cart.vehicleType,
+    distanceKm: String(cart.distanceKm),
+    tripType: cart.tripType,
+    ...(cart.package ? { package: cart.package } : {}),
+  });
+  try {
+    const data = await apiFetch<{ coupons: CouponOffer[] }>(`/api/coupons/available?${qs.toString()}`);
+    return data.coupons ?? [];
+  } catch {
+    return [];
+  }
+}
+
+/** Throws ApiError with a customer-readable message when the coupon cannot be applied. */
+export async function validateCoupon(cart: CartQuery & { code: string; mobile?: string }): Promise<CouponResult> {
+  return apiFetch<CouponResult>("/api/coupons/validate", { method: "POST", body: JSON.stringify(cart) });
+}
+
 // ─── 4. Create Booking ────────────────────────────────────────────────────────
 export type CreateBookingPayload = {
   passenger: {
@@ -138,6 +238,7 @@ export type CreateBookingPayload = {
   trip: {
     from: string;
     to: string;
+    stop?: string;
     date: string;
     time: string;
     tripType: string;
@@ -146,7 +247,7 @@ export type CreateBookingPayload = {
     days?: number;
   };
   vehicle: { id: string };
-  fare: { paymentOption: "part" | "full" };
+  fare: { paymentOption: "part" | "full"; couponCode?: string };
 };
 
 export type CreateBookingResult = {
@@ -155,6 +256,8 @@ export type CreateBookingResult = {
   status: string;
   fare: {
     total: number;
+    discount: number;
+    couponCode: string;
     paymentOption: string;
     paidNow: number;
     payLater: number;
@@ -183,6 +286,7 @@ export type BookingDetail = {
   trip: {
     from: string;
     to: string;
+    stop?: string;
     date: string;
     time: string;
     tripType: string;
@@ -190,6 +294,8 @@ export type BookingDetail = {
   };
   vehicle: { name: string; model: string };
   fare: {
+    discount?: number;
+    couponCode?: string;
     baseFare: number;
     extraKmFare: number;
     driverAllowance: number;

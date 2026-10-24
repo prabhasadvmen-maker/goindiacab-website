@@ -98,7 +98,7 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
           </div>
 
           <div className="p-5 space-y-3 text-sm text-gray-700 border-b border-gray-100">
-            <p className="flex items-center gap-2"><Car className="w-4 h-4 text-[#0B4A9C]" /> {b.trip.from} <ArrowRight className="w-3.5 h-3.5" /> {b.trip.to}</p>
+            <p className="flex items-center gap-2"><Car className="w-4 h-4 text-[#0B4A9C]" /> {b.trip.from} <ArrowRight className="w-3.5 h-3.5" /> {b.trip.to || "Local Rental"}</p>
             <p className="flex items-center gap-2"><Calendar className="w-4 h-4 text-[#0B4A9C]" /> {dateTime}</p>
             <p className="flex items-center gap-2"><User className="w-4 h-4 text-[#0B4A9C]" /> {b.passenger.name} | {b.passenger.mobile}</p>
             <p className="flex items-center gap-2"><Car className="w-4 h-4 text-[#0B4A9C]" /> {b.vehicle.name} ({b.vehicle.model})</p>
@@ -113,7 +113,7 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
             {b.fare.addons?.map((a) => (
               <div key={a.label} className="flex justify-between"><span>{a.label}</span><span>{inr(a.price)}</span></div>
             ))}
-            <div className="flex justify-between"><span>GST (5%)</span><span>{inr(b.fare.gst)}</span></div>
+            <div className="flex justify-between"><span>GST</span><span>{inr(b.fare.gst)}</span></div>
             {!!b.fare.discount && <div className="flex justify-between text-green-600"><span>Coupon discount</span><span>- {inr(b.fare.discount)}</span></div>}
             <div className="flex justify-between border-t pt-2 text-base font-bold text-gray-900"><span>Total Fare</span><span>{inr(b.fare.total)}</span></div>
             <div className="flex justify-between"><span>{b.paymentStatus === "paid" ? "Paid online" : "Due now"}</span><span>{inr(b.fare.paidNow ?? b.fare.total)}</span></div>
