@@ -338,16 +338,16 @@ export default function CheckoutPage() {
                   {vehicle.fuelType && <span className="flex items-center gap-1"><Fuel className="w-4 h-4 text-gray-400" /> {vehicle.fuelType}</span>}
                 </p>
               </div>
-              <div className="relative w-28 sm:w-36 shrink-0 rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
+              <div className="w-28 sm:w-36 shrink-0 rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={vehicle.image}
                   alt={vehicle.name}
                   onError={(e) => { if (!e.currentTarget.src.endsWith(FALLBACK_IMG)) e.currentTarget.src = FALLBACK_IMG; }}
-                  className="w-full h-20 sm:h-24 object-cover"
+                  className="w-full h-20 sm:h-24 object-contain"
                 />
                 {vehicle.fuelType && (
-                  <span className="absolute bottom-0 inset-x-0 bg-teal-600/95 text-white text-[11px] font-bold text-center py-0.5">{vehicle.fuelType}</span>
+                  <span className="block bg-teal-600 text-white text-[11px] font-bold text-center py-0.5">{vehicle.fuelType}</span>
                 )}
               </div>
             </div>

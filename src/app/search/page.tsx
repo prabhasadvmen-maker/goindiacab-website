@@ -392,15 +392,15 @@ function SearchInner() {
                 <div key={cab.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow">
                   <div className="flex flex-col sm:flex-row gap-4">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <div className="relative w-full sm:w-48 shrink-0 rounded-xl overflow-hidden bg-gray-50">
+                    <div className="w-full sm:w-48 shrink-0 rounded-xl overflow-hidden bg-gray-50">
                       <img
                         src={cab.image}
                         alt={cab.name}
                         onError={(e) => { if (!e.currentTarget.src.endsWith(FALLBACK_IMG)) e.currentTarget.src = FALLBACK_IMG; }}
-                        className="w-full h-36 sm:h-28 object-cover"
+                        className="w-full aspect-[16/10] sm:aspect-auto sm:h-28 object-contain"
                       />
                       {cab.fuelType && (
-                        <span className="absolute bottom-0 inset-x-0 bg-teal-600/95 text-white text-[11px] font-bold text-center py-0.5">{cab.fuelType}</span>
+                        <span className="block bg-teal-600 text-white text-[11px] font-bold text-center py-0.5">{cab.fuelType}</span>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
