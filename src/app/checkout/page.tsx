@@ -82,7 +82,7 @@ export default function CheckoutPage() {
   }, [raw, booking, router]);
 
   // Coupons the customer can pick from, with eligibility for this exact cart.
-  const cartKey = booking ? `${booking.vehicle.id}|${booking.distanceKm}|${booking.tripType}|${booking.pkg ?? ""}` : "";
+  const cartKey = booking ? `${booking.vehicle.id}|${booking.distanceKm}|${booking.tripType}|${booking.pkg ?? ""}|${booking.days ?? 1}` : "";
   useEffect(() => {
     if (!booking) return;
     let alive = true;
@@ -91,6 +91,7 @@ export default function CheckoutPage() {
       distanceKm: booking.distanceKm,
       tripType: apiTripType(booking.tripType),
       package: booking.pkg,
+      days: booking.days,
     }).then((list) => {
       if (alive) setOffers([...list].sort((a, b) => Number(b.eligible) - Number(a.eligible) || b.discount - a.discount));
     });
@@ -136,6 +137,7 @@ export default function CheckoutPage() {
         distanceKm: km,
         tripType: apiTripType(booking.tripType),
         package: booking.pkg,
+        days: booking.days,
         mobile: form.mobile.length === 10 ? form.mobile : undefined,
       });
       setCoupon({ code: r.code, title: r.title, discount: r.discount });
@@ -176,6 +178,7 @@ export default function CheckoutPage() {
           date: booking.date, time: booking.time,
           tripType: apiTripType(booking.tripType), distanceKm: km,
           ...(isLocal ? { package: booking.pkg } : {}),
+          ...(booking.returnDate ? { returnDate: booking.returnDate, days: booking.days } : {}),
         },
         vehicle: { id: vehicle.id },
         fare: { paymentOption: pay, ...(coupon ? { couponCode: coupon.code } : {}) },

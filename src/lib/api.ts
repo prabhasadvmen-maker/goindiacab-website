@@ -248,6 +248,7 @@ export type CreateBookingPayload = {
     distanceKm: number;
     package?: string;
     days?: number;
+    returnDate?: string;
   };
   vehicle: { id: string };
   fare: { paymentOption: "part" | "full"; couponCode?: string };

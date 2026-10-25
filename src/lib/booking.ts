@@ -35,6 +35,8 @@ export type BookingData = {
   tripType: string;
   passengers: string;
   stop?: string;
+  returnDate?: string;
+  days?: number;
   vehicle: {
     id: string;
     name: string;
@@ -96,4 +98,11 @@ export const TRIP_LABEL: Record<string, string> = {
   roundtrip: "Round Trip",
   local: "Local Rental",
   airport: "Airport Transfer",
+};
+
+/** Round trip: number of calendar days from pickup to return, inclusive (same day = 1). */
+export const tripDays = (date: string, returnDate?: string) => {
+  if (!date || !returnDate) return 1;
+  const diff = Math.round((Date.parse(returnDate) - Date.parse(date)) / 86_400_000);
+  return Number.isFinite(diff) ? Math.min(30, Math.max(1, diff + 1)) : 1;
 };

@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import {
   FALLBACK_IMG, TRIP_LABEL, formatDate,
-  apiTripType, inr, nowMs,
+  apiTripType, inr, nowMs, tripDays,
   type BookingData, type CabOption, type FareBreakdown,
 } from "@/src/lib/booking";
 import {
@@ -108,6 +108,8 @@ function SearchInner() {
   const passengers = sp.get("passengers") ?? "2";
   const pkgParam = sp.get("pkg") ?? "";
   const stop = sp.get("stop") ?? "";
+  const returnDate = tripType === "roundtrip" ? sp.get("returnDate") ?? "" : "";
+  const days = tripDays(date, returnDate);
 
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState<Sort>("price");
@@ -188,6 +190,7 @@ function SearchInner() {
         distanceKm: km,
         tripType: apiTripType(tripType),
         package: tripType === "local" ? activePkg : undefined,
+        days,
       })));
       if (cancelled) return;
 
@@ -218,7 +221,7 @@ function SearchInner() {
 
     load();
     return () => { cancelled = true; };
-  }, [from, to, stop, date, time, tripType, pkgParam, reloadKey]);
+  }, [from, to, stop, date, time, tripType, pkgParam, days, reloadKey]);
 
   const sameCity = from.trim().toLowerCase() === to.trim().toLowerCase() && tripType !== "local";
 
@@ -232,6 +235,7 @@ function SearchInner() {
     const data: BookingData = {
       from, to, date, time, tripType, passengers,
       ...(stop ? { stop } : {}),
+      ...(returnDate ? { returnDate, days } : {}),
       vehicle: {
         id: cab.id, name: cab.name, model: cab.model,
         seats: cab.seats, image: cab.image, gstPercent: cab.gstPercent,
@@ -261,6 +265,7 @@ function SearchInner() {
     const p = new URLSearchParams({ ...draft, from: f, to: t });
     if (tripType === "local" && pkg) p.set("pkg", pkg);
     if (stop) p.set("stop", stop);
+    if (returnDate) p.set("returnDate", returnDate);
     router.replace(`/search?${p.toString()}`);
     setEditing(false);
   };

@@ -259,10 +259,12 @@ export function CabSearchWidget() {
   const [stopLocation, setStopLocation] = useState("");
 
   const [pickupDate, setPickupDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
   const [pickupTime, setPickupTime] = useState("");
   const [passengers, setPassengers] = useState("2");
   const [formError, setFormError] = useState("");
   const activePackage = config?.localPackages.find((p) => p.label === hourlyPackage)?.label ?? config?.localPackages[0]?.label ?? "";
+  const isRoundTrip = tab === "outstation" && tripType === "roundtrip";
   const maxPassengers = config?.maxSeats || Number(passengers) || 1;
 
   // Set default date/time to now
@@ -295,6 +297,8 @@ export function CabSearchWidget() {
       return setFormError("Intermediate stop must be different from pickup and destination.");
     }
     if (pickupDate < todayLocal()) return setFormError("Pickup date cannot be in the past.");
+    if (isRoundTrip && !returnDate) return setFormError("Please select a return date.");
+    if (isRoundTrip && returnDate < pickupDate) return setFormError("Return date cannot be before the pickup date.");
     if (pickupDate === todayLocal() && pickupTime) {
       const [h, m] = pickupTime.split(":").map(Number);
       const pickup = new Date();
@@ -328,6 +332,7 @@ export function CabSearchWidget() {
       params.set("pkg", activePackage);
     }
     if (stop) params.set("stop", stop);
+    if (isRoundTrip) params.set("returnDate", returnDate);
 
     router.push(`/search?${params.toString()}`);
   };
@@ -574,7 +579,7 @@ export function CabSearchWidget() {
                 )}
 
                 {/* 5. Trip Details Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+                <div className={clsx("grid grid-cols-1 gap-1.5", isRoundTrip ? "sm:grid-cols-4" : "sm:grid-cols-3")}>
 
                   {/* DATE */}
                   <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center gap-2 min-w-0">
@@ -593,6 +598,26 @@ export function CabSearchWidget() {
                       />
                     </div>
                   </div>
+
+                  {/* RETURN DATE (round trip only) */}
+                  {isRoundTrip && (
+                    <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center gap-2 min-w-0">
+                      <div className="w-7 h-7 rounded-lg bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
+                        <Calendar className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider">RETURN DATE</span>
+                        <input
+                          type="date"
+                          value={returnDate}
+                          min={pickupDate || todayLocal()}
+                          onChange={(e) => setReturnDate(e.target.value)}
+                          required
+                          className="w-full text-xs font-black text-gray-900 bg-transparent outline-none cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   {/* TIME */}
                   <div className="p-1 px-3 bg-[#f8fafc] rounded-xl border border-gray-200 flex items-center gap-2 min-w-0">
