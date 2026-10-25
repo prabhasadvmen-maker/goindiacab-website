@@ -10,8 +10,29 @@
 }
 
 @layer base {
+  /* iOS Safari: stop sideways scrolling ("zig-zag") from anything that pokes past the screen edge.
+     `clip` (unlike `hidden`) keeps position: sticky working on the header. */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
   body {
     @apply text-[#4a5568] bg-[#e0e5ec];
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+  img, video, svg, iframe {
+    max-width: 100%;
+  }
+  /* iOS zooms into any focused field under 16px and then leaves the page shifted sideways. */
+  @media (max-width: 767px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
   }
 }
 
