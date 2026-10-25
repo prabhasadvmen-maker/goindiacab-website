@@ -67,8 +67,9 @@ export type DistanceResult = {
   source: "admin" | "cache" | "api";
 };
 
-/** "Delhi / NCR, India" -> "Delhi" (the API wants a plain city name). */
-const cityName = (s: string) => s.split(",")[0].replace(/\s*\/\s*NCR$/i, "").trim();
+/** "Delhi / NCR, India" -> "Delhi"; "Agra, Uttar Pradesh" keeps its state so same-named places are not confused. */
+const cityName = (s: string) =>
+  s.replace(/\s*\/\s*NCR/i, "").replace(/,?\s*India\s*$/i, "").trim();
 
 export async function getDistanceApi(from: string, to: string, stop?: string): Promise<DistanceResult | null> {
   try {
