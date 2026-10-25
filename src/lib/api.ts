@@ -71,13 +71,15 @@ export type DistanceResult = {
 const cityName = (s: string) =>
   s.replace(/\s*\/\s*NCR/i, "").replace(/,?\s*India\s*$/i, "").trim();
 
+/** null = could not calculate; throws ApiError(SERVICE_NOT_AVAILABLE) when the pickup is outside the service area. */
 export async function getDistanceApi(from: string, to: string, stop?: string): Promise<DistanceResult | null> {
   try {
     const stopQs = stop?.trim() ? `&stop=${encodeURIComponent(cityName(stop))}` : "";
     return await apiFetch<DistanceResult>(
       `/api/distance?from=${encodeURIComponent(cityName(from))}&to=${encodeURIComponent(cityName(to))}${stopQs}`
     );
-  } catch {
+  } catch (err) {
+    if (err instanceof ApiError && err.code === "SERVICE_NOT_AVAILABLE") throw err;
     return null;
   }
 }

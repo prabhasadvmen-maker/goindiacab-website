@@ -230,7 +230,7 @@ function LocationInput({
 
       {showEmpty && (
         <div className="absolute z-40 left-0 right-0 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg px-3 py-3 text-sm text-gray-500">
-          No matching places found. Try a different spelling.
+          {mode === "from" ? "Service not available at this location." : "No matching places found. Try a different spelling."}
         </div>
       )}
     </div>
@@ -282,7 +282,7 @@ export function CabSearchWidget() {
     }
   }, [tab, sameDropForHourly, fromLocation]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const from = fromLocation.trim();
     const to = toLocation.trim();
@@ -300,6 +300,11 @@ export function CabSearchWidget() {
       const pickup = new Date();
       pickup.setHours(h, m, 0, 0);
       if (pickup.getTime() < Date.now() - 15 * 60 * 1000) return setFormError("Pickup time has already passed.");
+    }
+    // Pickup must be one of the cities we serve (same list the FROM suggestions show).
+    const served = await suggestLocations(from);
+    if (!served.some((c) => cityKey(c.value) === cityKey(from))) {
+      return setFormError("Service is not available at this pickup location. Please pick a city from the list.");
     }
     setFormError("");
 

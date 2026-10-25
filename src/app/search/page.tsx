@@ -13,7 +13,7 @@ import {
 } from "@/src/lib/booking";
 import {
   getDistanceApi, getVehicles, calculateFareApi, getWebConfig, formatCancelWindow,
-  type ApiVehicle,
+  ApiError, type ApiVehicle,
 } from "@/src/lib/api";
 
 type Sort = "price" | "rating";
@@ -160,7 +160,13 @@ function SearchInner() {
         activePkg = chosen.label;
         km = chosen.km;
       } else {
-        const distRes = await getDistanceApi(from, to, stop);
+        let distRes: Awaited<ReturnType<typeof getDistanceApi>>;
+        try {
+          distRes = await getDistanceApi(from, to, stop);
+        } catch (err) {
+          if (cancelled) return;
+          return fail(err instanceof ApiError ? "Service is not available at this pickup location." : "We could not calculate the distance for this route. Please check the locations and try again.");
+        }
         if (cancelled) return;
         if (!distRes) return fail("We could not calculate the distance for this route. Please check the locations and try again.");
         km = distRes.distanceKm;
