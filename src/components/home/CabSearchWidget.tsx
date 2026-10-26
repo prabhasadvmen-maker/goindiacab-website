@@ -29,9 +29,10 @@ function useWebConfig() {
 const RECENT_KEY = "gic_recent_places";
 
 function LocationInput({
-  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel, airportsOnly,
+  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel, airportsOnly, cityScope,
 }: {
   airportsOnly?: boolean;
+  cityScope?: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
@@ -71,7 +72,7 @@ function LocationInput({
     setSearched(false);
     const timer = setTimeout(async () => {
       setLoading(true);
-      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q, airportsOnly);
+      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q, airportsOnly, cityScope);
       if (id !== reqId.current) return;
       setLoading(false);
       setSuggestions(results);
@@ -79,7 +80,7 @@ function LocationInput({
       setActive(-1);
     }, 250);
     return () => clearTimeout(timer);
-  }, [q, mode, disabled, airportsOnly]);
+  }, [q, mode, disabled, airportsOnly, cityScope]);
 
   useEffect(() => {
     if (!open) return;
@@ -282,6 +283,11 @@ export function CabSearchWidget() {
   useEffect(() => {
     if (tab === "airport") setToLocation("");
   }, [tab]);
+
+  // Airports are scoped to the pickup city, so a changed pickup city invalidates the chosen airport.
+  useEffect(() => {
+    if (tab === "airport") setToLocation("");
+  }, [tab, fromLocation.split(",")[0].trim().toLowerCase()]);
 
   // Sync TO location if Same Pickup & Drop-off is checked in Hourly Rentals
   useEffect(() => {
@@ -545,9 +551,10 @@ export function CabSearchWidget() {
                         onChange={setToLocation}
                         mode="to"
                         airportsOnly={tab === "airport"}
+                        cityScope={cityKey(fromLocation)}
                         placeholder={
                           tab === "hourly" && sameDropForHourly ? "Same as Pickup"
-                            : tab === "airport" ? "Enter airport name"
+                            : tab === "airport" ? (fromLocation.trim() ? "Enter airport name" : "Select pickup city first")
                             : "Enter destination"
                         }
                         required={tab !== "hourly"}
