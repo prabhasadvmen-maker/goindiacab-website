@@ -52,7 +52,7 @@ function LocationInput({
   const skipNext = useRef(false);
 
   const q = value.trim();
-  const showPopular = open && !disabled && q.length < 2 && (popular.length > 0 || recent.length > 0);
+  const showPopular = open && !disabled && !airportsOnly && q.length < 2 && (popular.length > 0 || recent.length > 0);
   const showList = open && !disabled && q.length >= 2 && suggestions.length > 0;
   const showEmpty = open && !disabled && q.length >= 2 && searched && !loading && suggestions.length === 0;
 
@@ -98,7 +98,7 @@ function LocationInput({
   }, []);
 
   const handleSelect = (val: string) => {
-    try {
+    if (!airportsOnly) try {
       const list: string[] = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
       const next = [val, ...list.filter((x) => x.toLowerCase() !== val.toLowerCase())].slice(0, 5);
       localStorage.setItem(RECENT_KEY, JSON.stringify(next));
