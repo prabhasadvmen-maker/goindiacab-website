@@ -51,7 +51,7 @@ export async function suggestDestinations(q: string, airportsOnly = false, city 
   if (q.trim().length < 2) return [];
   try {
     const data = await apiFetch<{ suggestions: LocationSuggestion[] }>(
-      `/api/locations/suggest-destination?q=${encodeURIComponent(q)}${airportsOnly ? `&type=airport&city=${encodeURIComponent(city)}` : ""}`
+      `/api/locations/suggest-destination?q=${encodeURIComponent(q)}${airportsOnly ? "&type=airport" : ""}${city ? `&city=${encodeURIComponent(city)}` : ""}`
     );
     return data.suggestions ?? [];
   } catch {

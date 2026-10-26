@@ -53,7 +53,7 @@ function LocationInput({
   const skipNext = useRef(false);
 
   const q = value.trim();
-  const showPopular = open && !disabled && !airportsOnly && q.length < 2 && (popular.length > 0 || recent.length > 0);
+  const showPopular = open && !disabled && !airportsOnly && !cityScope && q.length < 2 && (popular.length > 0 || recent.length > 0);
   const showList = open && !disabled && q.length >= 2 && suggestions.length > 0;
   const showEmpty = open && !disabled && q.length >= 2 && searched && !loading && suggestions.length === 0;
 
@@ -99,7 +99,7 @@ function LocationInput({
   }, []);
 
   const handleSelect = (val: string) => {
-    if (!airportsOnly) try {
+    if (!airportsOnly && !cityScope) try {
       const list: string[] = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
       const next = [val, ...list.filter((x) => x.toLowerCase() !== val.toLowerCase())].slice(0, 5);
       localStorage.setItem(RECENT_KEY, JSON.stringify(next));
@@ -245,11 +245,17 @@ const todayLocal = () => {
   return d.toISOString().slice(0, 10);
 };
 const cityKey = (v: string) => v.split(",")[0].trim().toLowerCase();
+// "Indira Gandhi International Airport, New Delhi, Delhi" -> "new delhi|delhi" (city of an airport label, with its alias)
+const airportCity = (label: string) => {
+  const [, a = "", b = ""] = label.split(",").map((s) => s.trim().toLowerCase());
+  return b && a.includes(b) ? `${a}|${b}` : a;
+};
 
 export function CabSearchWidget() {
   const router = useRouter();
   const [tab, setTab] = useState<"outstation" | "airport" | "hourly">("outstation");
   const [tripType, setTripType] = useState<"oneway" | "roundtrip">("oneway");
+  const [airportDir, setAirportDir] = useState<"from" | "to">("from");
   const config = useWebConfig();
   const [hourlyPackage, setHourlyPackage] = useState("");
 
@@ -279,15 +285,20 @@ export function CabSearchWidget() {
     setPickupTime(`${h}:${m}`);
   }, []);
 
-  // A destination typed on another tab isn't an airport, so drop it when entering the Airport tab.
-  useEffect(() => {
-    if (tab === "airport") setToLocation("");
-  }, [tab]);
+  const airportFrom = tab === "airport" && airportDir === "from";
+  const airportTo = tab === "airport" && airportDir === "to";
+  // Airport trips stay inside one city: the TO side is scoped to the FROM side's city.
+  const airportScope = airportFrom ? airportCity(fromLocation) : cityKey(fromLocation);
 
-  // Airports are scoped to the pickup city, so a changed pickup city invalidates the chosen airport.
+  // Entering the Airport tab or switching direction: earlier entries don't fit, start clean.
+  useEffect(() => {
+    if (tab === "airport") { setFromLocation(""); setToLocation(""); }
+  }, [tab, airportDir]);
+
+  // The chosen TO place belongs to the FROM city, so a changed FROM city invalidates it.
   useEffect(() => {
     if (tab === "airport") setToLocation("");
-  }, [tab, fromLocation.split(",")[0].trim().toLowerCase()]);
+  }, [tab, airportScope]);
 
   // Sync TO location if Same Pickup & Drop-off is checked in Hourly Rentals
   useEffect(() => {
@@ -318,9 +329,14 @@ export function CabSearchWidget() {
       if (pickup.getTime() < Date.now() - 15 * 60 * 1000) return setFormError("Pickup time has already passed.");
     }
     // Pickup must be one of the cities we serve (same list the FROM suggestions show).
-    const served = await suggestLocations(from);
-    if (!served.some((c) => cityKey(c.value) === cityKey(from))) {
-      return setFormError("Service is not available at this pickup location. Please pick a city from the list.");
+    // For an airport pickup, the airport's city is what must be served.
+    const pickupCities = airportFrom ? airportCity(from).split("|").filter(Boolean) : [cityKey(from)];
+    const servedLists = await Promise.all(pickupCities.map((c) => suggestLocations(c)));
+    const isServed = servedLists.some((list, i) => list.some((c) => cityKey(c.value) === pickupCities[i]));
+    if (!isServed) {
+      return setFormError(airportFrom
+        ? "Service is not available at this airport. Please pick an airport from the list."
+        : "Service is not available at this pickup location. Please pick a city from the list.");
     }
     setFormError("");
 
@@ -343,6 +359,7 @@ export function CabSearchWidget() {
       if (!activePackage) return setFormError("No rental packages are available right now.");
       params.set("pkg", activePackage);
     }
+    if (tab === "airport") params.set("airportDir", airportDir);
     if (stop) params.set("stop", stop);
     if (isRoundTrip) params.set("returnDate", returnDate);
 
@@ -477,6 +494,33 @@ export function CabSearchWidget() {
                   </div>
                 )}
 
+                {tab === "airport" && (
+                  <div className="mb-3">
+                    <div className="grid grid-cols-2 gap-3 max-w-[480px]">
+                      {([["from", "Pickup from Airport"], ["to", "Drop to Airport"]] as const).map(([dir, label]) => (
+                        <label
+                          key={dir}
+                          className={clsx(
+                            "py-2.5 px-4 rounded-xl border-2 transition-all flex items-center justify-center gap-2.5 cursor-pointer",
+                            airportDir === dir
+                              ? "bg-[#eef7ff] border-[#00A5D9] shadow-sm"
+                              : "bg-white border-gray-200 hover:border-gray-300"
+                          )}
+                        >
+                          <input
+                            type="radio"
+                            name="airportdir"
+                            checked={airportDir === dir}
+                            onChange={() => setAirportDir(dir)}
+                            className="w-4 h-4 accent-[#00A5D9] cursor-pointer"
+                          />
+                          <span className="font-extrabold text-sm text-gray-900 whitespace-nowrap">{label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {tab === "hourly" && (
                   <div className="p-3 bg-blue-50/60 rounded-xl border border-blue-200/80">
                     <label className="block text-xs font-extrabold text-blue-900 mb-2">
@@ -519,7 +563,9 @@ export function CabSearchWidget() {
                         value={fromLocation}
                         onChange={setFromLocation}
                         ariaLabel="From"
-                        placeholder="Enter pickup city or location"
+                        mode={airportFrom ? "to" : "from"}
+                        airportsOnly={airportFrom}
+                        placeholder={airportFrom ? "Enter airport name" : "Enter pickup city or location"}
                         required
                       />
                     </div>
@@ -550,11 +596,12 @@ export function CabSearchWidget() {
                         value={toLocation}
                         onChange={setToLocation}
                         mode="to"
-                        airportsOnly={tab === "airport"}
-                        cityScope={cityKey(fromLocation)}
+                        airportsOnly={airportTo}
+                        cityScope={tab === "airport" ? airportScope : undefined}
                         placeholder={
                           tab === "hourly" && sameDropForHourly ? "Same as Pickup"
-                            : tab === "airport" ? (fromLocation.trim() ? "Enter airport name" : "Select pickup city first")
+                            : airportTo ? (fromLocation.trim() ? "Enter airport name" : "Select pickup city first")
+                            : airportFrom ? (fromLocation.trim() ? "Enter drop location in this city" : "Select airport first")
                             : "Enter destination"
                         }
                         required={tab !== "hourly"}
