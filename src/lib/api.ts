@@ -47,11 +47,11 @@ export async function suggestLocations(q: string): Promise<LocationSuggestion[]>
 }
 
 // TO — Google Places API (unlimited, any location in India)
-export async function suggestDestinations(q: string): Promise<LocationSuggestion[]> {
+export async function suggestDestinations(q: string, airportsOnly = false): Promise<LocationSuggestion[]> {
   if (q.trim().length < 2) return [];
   try {
     const data = await apiFetch<{ suggestions: LocationSuggestion[] }>(
-      `/api/locations/suggest-destination?q=${encodeURIComponent(q)}`
+      `/api/locations/suggest-destination?q=${encodeURIComponent(q)}${airportsOnly ? "&type=airport" : ""}`
     );
     return data.suggestions ?? [];
   } catch {

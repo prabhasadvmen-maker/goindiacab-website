@@ -29,8 +29,9 @@ function useWebConfig() {
 const RECENT_KEY = "gic_recent_places";
 
 function LocationInput({
-  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel,
+  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel, airportsOnly,
 }: {
+  airportsOnly?: boolean;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
@@ -70,7 +71,7 @@ function LocationInput({
     setSearched(false);
     const timer = setTimeout(async () => {
       setLoading(true);
-      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q);
+      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q, airportsOnly);
       if (id !== reqId.current) return;
       setLoading(false);
       setSuggestions(results);
@@ -78,7 +79,7 @@ function LocationInput({
       setActive(-1);
     }, 250);
     return () => clearTimeout(timer);
-  }, [q, mode, disabled]);
+  }, [q, mode, disabled, airportsOnly]);
 
   useEffect(() => {
     if (!open) return;
@@ -276,6 +277,11 @@ export function CabSearchWidget() {
     const m = String(now.getMinutes()).padStart(2, "0");
     setPickupTime(`${h}:${m}`);
   }, []);
+
+  // A destination typed on another tab isn't an airport, so drop it when entering the Airport tab.
+  useEffect(() => {
+    if (tab === "airport") setToLocation("");
+  }, [tab]);
 
   // Sync TO location if Same Pickup & Drop-off is checked in Hourly Rentals
   useEffect(() => {
@@ -538,7 +544,12 @@ export function CabSearchWidget() {
                         value={toLocation}
                         onChange={setToLocation}
                         mode="to"
-                        placeholder={tab === "hourly" && sameDropForHourly ? "Same as Pickup" : "Enter destination"}
+                        airportsOnly={tab === "airport"}
+                        placeholder={
+                          tab === "hourly" && sameDropForHourly ? "Same as Pickup"
+                            : tab === "airport" ? "Enter airport name"
+                            : "Enter destination"
+                        }
                         required={tab !== "hourly"}
                         disabled={tab === "hourly" && sameDropForHourly}
                       />
