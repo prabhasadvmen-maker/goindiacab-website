@@ -10,6 +10,7 @@ import {
 import clsx from "clsx";
 import Image from "next/image";
 import { siteConfig } from "@/src/config/site";
+import { AIRPORTS, searchAirports } from "@/src/lib/airports";
 import {
   suggestLocations, suggestDestinations, getWebConfig, formatCancelWindow,
   type LocationSuggestion, type WebConfig,
@@ -29,10 +30,10 @@ function useWebConfig() {
 const RECENT_KEY = "gic_recent_places";
 
 function LocationInput({
-  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel, airportsOnly, cityScope,
+  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel, bare,
 }: {
-  airportsOnly?: boolean;
-  cityScope?: string;
+  /** Airport tab address fields: any place via search, without the popular-cities / recent lists. */
+  bare?: boolean;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
@@ -53,7 +54,7 @@ function LocationInput({
   const skipNext = useRef(false);
 
   const q = value.trim();
-  const showPopular = open && !disabled && !airportsOnly && !cityScope && q.length < 2 && (popular.length > 0 || recent.length > 0);
+  const showPopular = open && !disabled && !bare && q.length < 2 && (popular.length > 0 || recent.length > 0);
   const showList = open && !disabled && q.length >= 2 && suggestions.length > 0;
   const showEmpty = open && !disabled && q.length >= 2 && searched && !loading && suggestions.length === 0;
 
@@ -72,7 +73,7 @@ function LocationInput({
     setSearched(false);
     const timer = setTimeout(async () => {
       setLoading(true);
-      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q, airportsOnly, cityScope);
+      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q);
       if (id !== reqId.current) return;
       setLoading(false);
       setSuggestions(results);
@@ -80,7 +81,7 @@ function LocationInput({
       setActive(-1);
     }, 250);
     return () => clearTimeout(timer);
-  }, [q, mode, disabled, airportsOnly, cityScope]);
+  }, [q, mode, disabled]);
 
   useEffect(() => {
     if (!open) return;
@@ -99,7 +100,7 @@ function LocationInput({
   }, []);
 
   const handleSelect = (val: string) => {
-    if (!airportsOnly && !cityScope) try {
+    if (!bare) try {
       const list: string[] = JSON.parse(localStorage.getItem(RECENT_KEY) || "[]");
       const next = [val, ...list.filter((x) => x.toLowerCase() !== val.toLowerCase())].slice(0, 5);
       localStorage.setItem(RECENT_KEY, JSON.stringify(next));
@@ -239,23 +240,116 @@ function LocationInput({
   );
 }
 
+/** Airport picker: popular airports on focus, filtered by airport name or city as you type. Only a listed airport can be chosen. */
+function AirportInput({
+  value, onChange, placeholder, ariaLabel,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+  ariaLabel?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(-1);
+  const ref = useRef<HTMLDivElement>(null);
+  const options = searchAirports(value);
+  const picked = AIRPORTS.some((a) => a.label === value);
+  const showList = open && !picked;
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const select = (label: string) => { onChange(label); setOpen(false); setActive(-1); };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") { setOpen(false); return; }
+    if (!showList || options.length === 0) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); setActive((i) => (i + 1) % options.length); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setActive((i) => (i <= 0 ? options.length - 1 : i - 1)); }
+    else if (e.key === "Enter" && active >= 0) { e.preventDefault(); select(options[active].label); }
+  };
+
+  return (
+    <div className="relative" ref={ref}>
+      <Plane className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+      <input
+        type="text"
+        value={value}
+        required
+        placeholder={placeholder}
+        aria-label={ariaLabel}
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded={showList}
+        autoComplete="off"
+        onFocus={() => setOpen(true)}
+        onChange={(e) => { onChange(e.target.value); setOpen(true); setActive(-1); }}
+        onKeyDown={handleKeyDown}
+        className="w-full pl-9 pr-9 py-3 border rounded-xl text-sm sm:text-base font-extrabold focus:outline-none transition-all shadow-sm bg-white text-gray-900 border-gray-300 focus:border-[#00A5D9]"
+      />
+      {value && (
+        <button
+          type="button"
+          aria-label="Clear"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => { onChange(""); setOpen(true); }}
+          className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 cursor-pointer"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      )}
+
+      {showList && (
+        <div className="absolute z-40 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+          <div className="max-h-72 overflow-y-auto py-1">
+            {options.length === 0 ? (
+              <p className="px-3 py-3 text-sm text-gray-500">No airport found. Try the airport or city name.</p>
+            ) : (
+              <>
+                {!value.trim() && <p className="px-3 pt-2 pb-1 text-[11px] font-bold text-gray-400 uppercase tracking-wide">Popular Airports</p>}
+                {options.map((a, i) => (
+                  <button
+                    key={a.label}
+                    type="button"
+                    role="option"
+                    aria-selected={i === active}
+                    onMouseDown={(e) => e.preventDefault()}
+                    onMouseEnter={() => setActive(i)}
+                    onClick={() => select(a.label)}
+                    className={clsx(
+                      "w-full text-left px-3 py-2.5 text-sm font-medium text-gray-900 cursor-pointer",
+                      i === active ? "bg-blue-50" : "hover:bg-blue-50"
+                    )}
+                  >
+                    {a.label}
+                  </button>
+                ))}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 const todayLocal = () => {
   const d = new Date();
   d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
   return d.toISOString().slice(0, 10);
 };
 const cityKey = (v: string) => v.split(",")[0].trim().toLowerCase();
-// "Indira Gandhi International Airport, New Delhi, Delhi" -> "new delhi|delhi" (city of an airport label, with its alias)
-const airportCity = (label: string) => {
-  const [, a = "", b = ""] = label.split(",").map((s) => s.trim().toLowerCase());
-  return b && a.includes(b) ? `${a}|${b}` : a;
-};
 
 export function CabSearchWidget() {
   const router = useRouter();
   const [tab, setTab] = useState<"outstation" | "airport" | "hourly">("outstation");
   const [tripType, setTripType] = useState<"oneway" | "roundtrip">("oneway");
-  const [airportDir, setAirportDir] = useState<"from" | "to">("from");
+  const [airportDir, setAirportDir] = useState<"from" | "to">("to");
   const config = useWebConfig();
   const [hourlyPackage, setHourlyPackage] = useState("");
 
@@ -287,18 +381,11 @@ export function CabSearchWidget() {
 
   const airportFrom = tab === "airport" && airportDir === "from";
   const airportTo = tab === "airport" && airportDir === "to";
-  // Airport trips stay inside one city: the TO side is scoped to the FROM side's city.
-  const airportScope = airportFrom ? airportCity(fromLocation) : cityKey(fromLocation);
 
   // Entering the Airport tab or switching direction: earlier entries don't fit, start clean.
   useEffect(() => {
     if (tab === "airport") { setFromLocation(""); setToLocation(""); }
   }, [tab, airportDir]);
-
-  // The chosen TO place belongs to the FROM city, so a changed FROM city invalidates it.
-  useEffect(() => {
-    if (tab === "airport") setToLocation("");
-  }, [tab, airportScope]);
 
   // Sync TO location if Same Pickup & Drop-off is checked in Hourly Rentals
   useEffect(() => {
@@ -328,15 +415,16 @@ export function CabSearchWidget() {
       pickup.setHours(h, m, 0, 0);
       if (pickup.getTime() < Date.now() - 15 * 60 * 1000) return setFormError("Pickup time has already passed.");
     }
-    // Pickup must be one of the cities we serve (same list the FROM suggestions show).
-    // For an airport pickup, the airport's city is what must be served.
-    const pickupCities = airportFrom ? airportCity(from).split("|").filter(Boolean) : [cityKey(from)];
-    const servedLists = await Promise.all(pickupCities.map((c) => suggestLocations(c)));
-    const isServed = servedLists.some((list, i) => list.some((c) => cityKey(c.value) === pickupCities[i]));
-    if (!isServed) {
-      return setFormError(airportFrom
-        ? "Service is not available at this airport. Please pick an airport from the list."
-        : "Service is not available at this pickup location. Please pick a city from the list.");
+    if (tab === "airport") {
+      // Airport side must be one of the listed airports; the address side is any searched place.
+      const airportSide = airportFrom ? from : to;
+      if (!AIRPORTS.some((a) => a.label === airportSide)) return setFormError("Please select an airport from the list.");
+    } else {
+      // Pickup must be one of the cities we serve (same list the FROM suggestions show).
+      const served = await suggestLocations(from);
+      if (!served.some((c) => cityKey(c.value) === cityKey(from))) {
+        return setFormError("Service is not available at this pickup location. Please pick a city from the list.");
+      }
     }
     setFormError("");
 
@@ -559,15 +647,19 @@ export function CabSearchWidget() {
                         <span className="w-2 h-2 rounded-full bg-emerald-500" />
                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-wider">FROM</label>
                       </div>
-                      <LocationInput
-                        value={fromLocation}
-                        onChange={setFromLocation}
-                        ariaLabel="From"
-                        mode={airportFrom ? "to" : "from"}
-                        airportsOnly={airportFrom}
-                        placeholder={airportFrom ? "Enter airport name" : "Enter pickup city or location"}
-                        required
-                      />
+                      {airportFrom ? (
+                        <AirportInput value={fromLocation} onChange={setFromLocation} ariaLabel="From airport" placeholder="Start typing airport name or city" />
+                      ) : (
+                        <LocationInput
+                          value={fromLocation}
+                          onChange={setFromLocation}
+                          ariaLabel="From"
+                          mode={airportTo ? "to" : "from"}
+                          bare={airportTo}
+                          placeholder={airportTo ? "Enter pickup address" : "Enter pickup city or location"}
+                          required
+                        />
+                      )}
                     </div>
 
                     {/* Add Stop Button */}
@@ -592,21 +684,23 @@ export function CabSearchWidget() {
                         <span className="w-2 h-2 rounded-full bg-[#FF6600]" />
                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-wider">TO</label>
                       </div>
-                      <LocationInput
-                        value={toLocation}
-                        onChange={setToLocation}
-                        mode="to"
-                        airportsOnly={airportTo}
-                        cityScope={tab === "airport" ? airportScope : undefined}
-                        placeholder={
-                          tab === "hourly" && sameDropForHourly ? "Same as Pickup"
-                            : airportTo ? (fromLocation.trim() ? "Enter airport name" : "Select pickup city first")
-                            : airportFrom ? (fromLocation.trim() ? "Enter drop location in this city" : "Select airport first")
-                            : "Enter destination"
-                        }
-                        required={tab !== "hourly"}
-                        disabled={tab === "hourly" && sameDropForHourly}
-                      />
+                      {airportTo ? (
+                        <AirportInput value={toLocation} onChange={setToLocation} ariaLabel="Drop airport" placeholder="Start typing airport name or city" />
+                      ) : (
+                        <LocationInput
+                          value={toLocation}
+                          onChange={setToLocation}
+                          mode="to"
+                          bare={airportFrom}
+                          placeholder={
+                            tab === "hourly" && sameDropForHourly ? "Same as Pickup"
+                              : airportFrom ? "Enter drop address"
+                              : "Enter destination"
+                          }
+                          required={tab !== "hourly"}
+                          disabled={tab === "hourly" && sameDropForHourly}
+                        />
+                      )}
                     </div>
                   </div>
 
