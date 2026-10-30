@@ -15,13 +15,17 @@ export default function Header() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-2.5 flex items-center justify-between gap-2 sm:gap-4">
         
         {/* Left: Brand Logo */}
-        <Link href="/" className="flex-shrink-0">
+        <Link
+          href="/"
+          aria-label={`${siteConfig.name} home`}
+          className="flex-shrink-0 inline-flex items-center rounded-xl border border-gray-200 bg-white px-2 py-1.5 sm:px-3 sm:py-2 shadow-sm ring-1 ring-black/[0.02] transition hover:border-[#00A5D9]/60 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00A5D9]/50"
+        >
           <Image
             src={siteConfig.logo}
             alt={siteConfig.name}
             width={454}
             height={133}
-            className="w-auto h-9 min-[400px]:h-10 sm:h-12 md:h-14 object-contain"
+            className="w-auto h-7 min-[400px]:h-8 sm:h-10 md:h-11 object-contain"
             priority
           />
         </Link>

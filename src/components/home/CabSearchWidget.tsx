@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import {
   Car, Plane, Clock, MapPin, Plus, Calendar,
   Briefcase, Search, ShieldCheck, Star,
-  Headphones, X, CheckSquare, Square, ArrowLeftRight
+  Headphones, X, ArrowLeftRight, ChevronDown
 } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
 import { siteConfig } from "@/src/config/site";
+import { TimeSelect } from "@/src/components/common/TimeSelect";
 import { AIRPORTS, searchAirports } from "@/src/lib/airports";
 import {
   suggestLocations, suggestDestinations, getWebConfig, formatCancelWindow,
@@ -399,7 +400,6 @@ export function CabSearchWidget() {
 
   const [fromLocation, setFromLocation] = useState("");
   const [toLocation, setToLocation] = useState("");
-  const [sameDropForHourly, setSameDropForHourly] = useState(false);
 
   const [hasStop, setHasStop] = useState(false);
   const [stopLocation, setStopLocation] = useState("");
@@ -409,6 +409,8 @@ export function CabSearchWidget() {
   const [pickupTime, setPickupTime] = useState("");
   const [passengers, setPassengers] = useState("2");
   const [formError, setFormError] = useState("");
+  const packages = config?.localPackages ?? [];
+  const hourlyCities = config?.hourlyCities ?? [];
   const activePackage = config?.localPackages.find((p) => p.label === hourlyPackage)?.label ?? config?.localPackages[0]?.label ?? "";
   const isRoundTrip = tab === "outstation" && tripType === "roundtrip";
   const maxPassengers = config?.maxSeats || Number(passengers) || 1;
@@ -426,17 +428,11 @@ export function CabSearchWidget() {
   const airportFrom = tab === "airport" && airportDir === "from";
   const airportTo = tab === "airport" && airportDir === "to";
 
-  // Entering the Airport tab or switching direction: earlier entries don't fit, start clean.
+  // Entering the Airport or Hourly tab (or switching direction): earlier entries don't fit, start clean.
   useEffect(() => {
     if (tab === "airport") { setFromLocation(""); setToLocation(""); }
+    if (tab === "hourly") setFromLocation("");
   }, [tab, airportDir]);
-
-  // Sync TO location if Same Pickup & Drop-off is checked in Hourly Rentals
-  useEffect(() => {
-    if (tab === "hourly" && sameDropForHourly) {
-      setToLocation(fromLocation);
-    }
-  }, [tab, sameDropForHourly, fromLocation]);
 
   const swapPlaces = () => {
     setFromLocation(toLocation);
@@ -449,7 +445,7 @@ export function CabSearchWidget() {
     const to = toLocation.trim();
     const stop = tab === "outstation" && hasStop ? stopLocation.trim() : "";
 
-    if (!from) return setFormError("Please enter pickup city or location.");
+    if (!from) return setFormError(tab === "hourly" ? "Please select a pickup city." : "Please enter pickup city or location.");
     if (!to && tab !== "hourly") return setFormError("Please enter destination city or landmark.");
     if (tab !== "hourly" && cityKey(from) === cityKey(to)) return setFormError("Pickup and destination cannot be the same.");
     if (stop && (cityKey(stop) === cityKey(from) || cityKey(stop) === cityKey(to))) {
@@ -463,6 +459,9 @@ export function CabSearchWidget() {
       const pickup = new Date();
       pickup.setHours(h, m, 0, 0);
       if (pickup.getTime() < Date.now() - 15 * 60 * 1000) return setFormError("Pickup time has already passed.");
+    }
+    if (tab === "hourly" && hourlyCities.length > 0 && !hourlyCities.some((c) => cityKey(c.name) === cityKey(from))) {
+      return setFormError("Hourly rentals are available only in the listed cities.");
     }
     if (tab === "airport") {
       // Airport side must be one of the listed airports; the address side is any searched place.
@@ -480,7 +479,7 @@ export function CabSearchWidget() {
 
     const params = new URLSearchParams({
       from,
-      to: to || "Local Drop",
+      to: tab === "hourly" ? "" : to, // hourly rentals have a pickup city and a package, no drop
       date: pickupDate,
       time: pickupTime,
       tripType: tripTypeParam,
@@ -582,37 +581,66 @@ export function CabSearchWidget() {
                   />
                 )}
 
-                {tab === "hourly" && (
-                  <div className="p-3 bg-blue-50/60 rounded-xl border border-blue-200/80">
-                    <label className="block text-xs font-extrabold text-blue-900 mb-2">
-                      Select Package Duration:
-                    </label>
-                    <div className="flex items-center gap-2 overflow-x-auto">
-                      {config && config.localPackages.length === 0 && (
-                        <span className="text-xs font-bold text-gray-500">No rental packages available right now.</span>
-                      )}
-                      {(config?.localPackages ?? []).map(({ label: pkg }) => (
-                        <button
-                          key={pkg}
-                          type="button"
-                          onClick={() => setHourlyPackage(pkg)}
-                          className={clsx(
-                            "py-1.5 px-3.5 rounded-lg text-xs font-extrabold border whitespace-nowrap transition-all cursor-pointer",
-                            activePackage === pkg
-                              ? "bg-[#00A5D9] text-white border-[#00A5D9] shadow-xs"
-                              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-                          )}
-                        >
-                          ⏱️ {pkg}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
                 {/* 4. Location fields */}
                 <div className="space-y-2">
-                  <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-1.5 md:gap-2 md:items-end">
+                  {tab === "hourly" && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5 md:gap-3">
+                      {/* Pickup city */}
+                      <div className="relative min-w-0">
+                        <div className="flex items-center gap-1 mb-0.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                          <label className="text-[10px] font-black text-gray-500 uppercase tracking-wider">City</label>
+                        </div>
+                        <div className="relative">
+                          <MapPin className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                          <select
+                            aria-label="Pickup city"
+                            value={fromLocation}
+                            onChange={(e) => setFromLocation(e.target.value)}
+                            required
+                            className={clsx(
+                              "w-full appearance-none pl-9 pr-9 py-3 border rounded-xl text-sm sm:text-base font-extrabold bg-white border-gray-300 focus:outline-none focus:border-[#00A5D9] shadow-sm cursor-pointer transition-all",
+                              fromLocation ? "text-gray-900" : "text-gray-500"
+                            )}
+                          >
+                            <option value="">Select pickup city</option>
+                            {hourlyCities.map((c) => (
+                              <option key={c.name} value={c.name}>{c.name}</option>
+                            ))}
+                          </select>
+                          <ChevronDown className="w-4 h-4 text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        </div>
+                      </div>
+
+                      {/* Package */}
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1 mb-0.5">
+                          <Clock className="w-2.5 h-2.5 text-[#00A5D9]" />
+                          <label htmlFor="hourly-package" className="text-[10px] font-black text-gray-500 uppercase tracking-wider">Select package</label>
+                        </div>
+                        <div className="relative">
+                          <select
+                            id="hourly-package"
+                            value={activePackage}
+                            onChange={(e) => setHourlyPackage(e.target.value)}
+                            disabled={packages.length === 0}
+                            required
+                            className="w-full appearance-none pl-3 pr-9 py-3 border rounded-xl text-sm sm:text-base font-extrabold bg-white text-gray-900 border-gray-300 focus:outline-none focus:border-[#00A5D9] shadow-sm cursor-pointer disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed transition-all"
+                          >
+                            {packages.length === 0 ? (
+                              <option value="">No rental packages available</option>
+                            ) : (
+                              packages.map((p) => <option key={p.label} value={p.label}>{p.label}</option>)
+                            )}
+                          </select>
+                          <ChevronDown className="w-4 h-4 text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {tab !== "hourly" && (
+                  <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-1 md:gap-2 md:items-end">
 
                     {/* FROM */}
                     <div className="relative min-w-0">
@@ -636,7 +664,7 @@ export function CabSearchWidget() {
                     </div>
 
                     {/* Swap FROM <-> TO (outstation only) */}
-                    <div className="relative z-10 flex justify-end md:justify-center -my-3.5 md:my-0 md:pb-1 pr-4 md:pr-0">
+                    <div className="relative z-10 flex justify-end md:justify-center py-0.5 md:py-0 md:pb-1 pr-1 md:pr-0">
                       {tab === "outstation" ? (
                         <button
                           type="button"
@@ -644,7 +672,7 @@ export function CabSearchWidget() {
                           disabled={!fromLocation && !toLocation}
                           aria-label="Swap pickup and destination"
                           title="Swap pickup and destination"
-                          className="w-9 h-9 rounded-full bg-white border border-gray-300 text-[#00A5D9] shadow-sm flex items-center justify-center hover:bg-[#f0f9ff] hover:border-[#00A5D9] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                          className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-white border border-gray-300 text-[#00A5D9] shadow-sm flex items-center justify-center hover:bg-[#f0f9ff] hover:border-[#00A5D9] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
                         >
                           <ArrowLeftRight className="w-4 h-4 rotate-90 md:rotate-0" />
                         </button>
@@ -667,17 +695,13 @@ export function CabSearchWidget() {
                           onChange={setToLocation}
                           mode="to"
                           bare={airportFrom}
-                          placeholder={
-                            tab === "hourly" && sameDropForHourly ? "Same as Pickup"
-                              : airportFrom ? "Enter drop address"
-                              : "Enter destination"
-                          }
-                          required={tab !== "hourly"}
-                          disabled={tab === "hourly" && sameDropForHourly}
+                          placeholder={airportFrom ? "Enter drop address" : "Enter destination"}
+                          required
                         />
                       )}
                     </div>
                   </div>
+                  )}
 
                   {/* Optional stop on the way (outstation only) */}
                   {tab === "outstation" && (
@@ -713,22 +737,6 @@ export function CabSearchWidget() {
                         <Plus className="w-3.5 h-3.5" /> Add a stop on the way
                       </button>
                     )
-                  )}
-
-                  {/* Same Pickup & Drop checkbox for Hourly */}
-                  {tab === "hourly" && (
-                    <div className="flex items-center gap-2 pt-1">
-                      <label
-                        onClick={() => setSameDropForHourly(!sameDropForHourly)}
-                        className="inline-flex items-center gap-2 bg-[#f0f9ff] border border-blue-200/90 text-blue-900 px-3 py-1.5 rounded-lg text-xs font-black hover:bg-blue-100/70 transition-colors cursor-pointer select-none"
-                      >
-                        {sameDropForHourly
-                          ? <CheckSquare className="w-4 h-4 text-[#00A5D9]" />
-                          : <Square className="w-4 h-4 text-gray-400" />
-                        }
-                        <span>Same Pickup &amp; Drop-off point</span>
-                      </label>
-                    </div>
                   )}
                 </div>
 
@@ -780,13 +788,7 @@ export function CabSearchWidget() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <span className="block text-[8px] font-black text-gray-400 uppercase tracking-wider">TIME</span>
-                      <input
-                        type="time"
-                        value={pickupTime}
-                        onChange={(e) => setPickupTime(e.target.value)}
-                        required
-                        className="w-full text-xs font-black text-gray-900 bg-transparent outline-none cursor-pointer"
-                      />
+                      <TimeSelect value={pickupTime} onChange={setPickupTime} ariaLabel="Pickup time" />
                     </div>
                   </div>
 

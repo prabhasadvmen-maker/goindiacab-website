@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { TimeSelect } from "@/src/components/common/TimeSelect";
 import {
   ArrowRight, Briefcase, Car, ChevronDown, ChevronUp,
   BadgeCheck, Clock, Filter, Fuel, Pencil, Route, ShieldCheck, Snowflake, Sparkles, Star, Users, X,
@@ -131,6 +132,7 @@ function SearchInner() {
   const [pkg, setPkg] = useState(pkgParam);
   const [cancelText, setCancelText] = useState("");
   const [loadError, setLoadError] = useState("");
+  const [hourlyCities, setHourlyCities] = useState<string[]>([]);
   const [reloadKey, setReloadKey] = useState(0);
 
   // Sync draft when URL params change
@@ -153,13 +155,20 @@ function SearchInner() {
     async function load() {
       const config = await getWebConfig();
       if (cancelled) return;
-      if (config) setCancelText(formatCancelWindow(config.freeCancelMinutes));
+      if (config) {
+        setCancelText(formatCancelWindow(config.freeCancelMinutes));
+        setHourlyCities(config.hourlyCities.map((c) => c.name));
+      }
 
       // Step 1: distance / included km for the selected trip type
       let km = 0;
       let mins = 0;
       let activePkg = "";
       if (tripType === "local") {
+        const allowed = config?.hourlyCities ?? [];
+        if (allowed.length > 0 && !allowed.some((c) => c.name.toLowerCase() === from.split(",")[0].trim().toLowerCase())) {
+          return fail("Hourly rentals are available only in selected cities. Please choose a pickup city from the list.");
+        }
         const pkgs = config?.localPackages ?? [];
         const chosen = pkgs.find((p) => p.label === pkgParam) ?? pkgs[0];
         if (!chosen) return fail("Local rental packages are not available right now.");
@@ -214,6 +223,8 @@ function SearchInner() {
             billableKm: apiFare.billableKm,
             includedKm: apiFare.includedKm,
             perKmAfter: apiFare.perKmAfter,
+            includedHours: apiFare.includedHours,
+            perHourAfter: apiFare.perHourAfter,
           },
           partPercent: apiFare.paymentOptions?.part?.percent,
         });
@@ -247,6 +258,7 @@ function SearchInner() {
         seats: cab.seats, image: cab.image, gstPercent: cab.gstPercent,
         rating: cab.rating, fuelType: cab.fuelType,
         includedKm: fare.includedKm, billableKm: fare.billableKm, bags: cab.bags, perKmAfter: fare.perKmAfter,
+        includedHours: fare.includedHours, perHourAfter: fare.perHourAfter,
         fare: {
           baseFare: fare.baseFare, extraKmFare: fare.extraKmFare,
           driverAllowance: fare.driverAllowance, gst: fare.gst, total: fare.total,
@@ -263,9 +275,10 @@ function SearchInner() {
 
   const applyModify = () => {
     const f = draft.from.trim();
-    const t = draft.to.trim();
-    if (!f || !t) return setDraftErr("Enter both FROM and TO");
-    if (f.toLowerCase() === t.toLowerCase()) return setDraftErr("From and To cannot be the same");
+    const isLocalTrip = tripType === "local";
+    const t = isLocalTrip ? "" : draft.to.trim();
+    if (!f || (!isLocalTrip && !t)) return setDraftErr(isLocalTrip ? "Enter the pickup city" : "Enter both FROM and TO");
+    if (!isLocalTrip && f.toLowerCase() === t.toLowerCase()) return setDraftErr("From and To cannot be the same");
     if (!draft.date) return setDraftErr("Select a pickup date");
     setDraftErr("");
     const p = new URLSearchParams({ ...draft, from: f, to: t });
@@ -318,11 +331,17 @@ function SearchInner() {
       <div className="sticky top-16 z-30 bg-[#0B4A9C] text-white shadow-md">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           <div className="min-w-0 text-sm sm:text-base font-semibold truncate">
-            {from || "—"} 
-            {stop && <span className="text-white/70"> → {stop}</span>}
-            <ArrowRight className="inline w-4 h-4 mx-1" /> {to || "—"}
+            {from || "—"}
+            {tripType === "local" ? (
+              <span className="text-white/80 font-normal"> · {TRIP_LABEL.local}{pkg ? ` · ${pkg}` : ""}</span>
+            ) : (
+              <>
+                {stop && <span className="text-white/70"> → {stop}</span>}
+                <ArrowRight className="inline w-4 h-4 mx-1" /> {to || "—"}
+              </>
+            )}
             <span className="hidden sm:inline text-white/80 font-normal">
-              {" "}| {date ? formatDate(date) : "—"} | {airportDir ? AIRPORT_DIR_LABEL[airportDir] : TRIP_LABEL[tripType] ?? tripType}
+              {" "}| {date ? formatDate(date) : "—"}{tripType === "local" ? "" : ` | ${airportDir ? AIRPORT_DIR_LABEL[airportDir] : TRIP_LABEL[tripType] ?? tripType}`}
             </span>
           </div>
           <button
@@ -335,14 +354,21 @@ function SearchInner() {
         {editing && (
           <div className="bg-white text-gray-800 border-t border-gray-100">
             <div className="max-w-6xl mx-auto px-4 py-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 items-end">
-              <input aria-label="From" className={inputCls} value={draft.from} onChange={(e) => setDraft({ ...draft, from: e.target.value })} placeholder="From" />
-              <input aria-label="To" className={inputCls} value={draft.to} onChange={(e) => setDraft({ ...draft, to: e.target.value })} placeholder="To" />
+              {tripType === "local" && hourlyCities.length > 0 ? (
+                <select aria-label="From" className={inputCls} value={draft.from} onChange={(e) => setDraft({ ...draft, from: e.target.value })}>
+                  {!hourlyCities.some((c) => c.toLowerCase() === draft.from.trim().toLowerCase()) && <option value={draft.from}>{draft.from || "Select city"}</option>}
+                  {hourlyCities.map((c) => <option key={c} value={c}>{c}</option>)}
+                </select>
+              ) : (
+                <input aria-label="From" className={inputCls} value={draft.from} onChange={(e) => setDraft({ ...draft, from: e.target.value })} placeholder="From" />
+              )}
+              {tripType !== "local" && <input aria-label="To" className={inputCls} value={draft.to} onChange={(e) => setDraft({ ...draft, to: e.target.value })} placeholder="To" />}
               <input aria-label="Date" type="date" className={inputCls} value={draft.date} onChange={(e) => setDraft({ ...draft, date: e.target.value })} />
-              <input aria-label="Time" type="time" className={inputCls} value={draft.time} onChange={(e) => setDraft({ ...draft, time: e.target.value })} />
-              <select aria-label="Trip type" className={inputCls} value={draft.tripType} onChange={(e) => setDraft({ ...draft, tripType: e.target.value })}>
+              <div className={`${inputCls} flex items-center`}><TimeSelect ariaLabel="Pickup time" value={draft.time} onChange={(time) => setDraft({ ...draft, time })} selectClassName="text-sm font-semibold" /></div>
+              {tripType !== "local" && <select aria-label="Trip type" className={inputCls} value={draft.tripType} onChange={(e) => setDraft({ ...draft, tripType: e.target.value })}>
                 <option value="oneway">One Way</option>
                 <option value="roundtrip">Round Trip</option>
-              </select>
+              </select>}
               <div className="flex gap-2">
                 <select aria-label="Passengers" className={inputCls} value={draft.passengers} onChange={(e) => setDraft({ ...draft, passengers: e.target.value })}>
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => <option key={n}>{n}</option>)}

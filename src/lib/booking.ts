@@ -11,6 +11,8 @@ export type FareBreakdown = {
   billableKm: number;
   includedKm?: number;
   perKmAfter?: number;
+  includedHours?: number;
+  perHourAfter?: number;
 };
 
 export const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
@@ -51,6 +53,8 @@ export type BookingData = {
     billableKm?: number;
     bags?: number;
     perKmAfter?: number;
+    includedHours?: number;
+    perHourAfter?: number;
     fare: { baseFare: number; extraKmFare: number; driverAllowance: number; gst: number; total: number };
   };
   distanceKm: number;

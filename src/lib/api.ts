@@ -123,6 +123,8 @@ export async function getVehicles(): Promise<ApiVehicle[] | null> {
 // ─── 3c. Website config (popular cities, local packages, policy) ─────────────
 export type WebConfig = {
   popularCities: { name: string; state: string }[];
+  /** Cities where Hourly Rentals can start; empty = no restriction. */
+  hourlyCities: { name: string; state: string }[];
   localPackages: { label: string; hours: number; km: number }[];
   maxSeats: number;
   freeCancelMinutes: number;
@@ -150,6 +152,7 @@ export function getWebConfig(): Promise<WebConfig | null> {
       .then((c): WebConfig => ({
         ...c,
         popularCities: c.popularCities ?? [],
+        hourlyCities: c.hourlyCities ?? [],
         localPackages: c.localPackages ?? [],
         policies: c.policies ?? [],
         addons: c.addons ?? [],
@@ -175,6 +178,8 @@ export type FareResult = {
   billableKm: number;
   includedKm: number;
   perKmAfter: number;
+  includedHours?: number;
+  perHourAfter?: number;
   paymentOptions: {
     full: { paidNow: number; payLater: number };
     part: { percent: number; paidNow: number; payLater: number };

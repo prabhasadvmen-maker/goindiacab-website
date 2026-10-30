@@ -384,6 +384,7 @@ export default function CheckoutPage() {
     : [cityOf(booking.from), ...(booking.stop ? [cityOf(booking.stop)] : []), cityOf(booking.to), ...(booking.tripType === "roundtrip" ? [cityOf(booking.from)] : [])].join(" → ");
   const exclusionItems = [
     ...(vehicle.includedKm && vehicle.perKmAfter ? [`Beyond package km charged at ${inr(vehicle.perKmAfter)}/km after ${vehicle.includedKm} km`] : []),
+    ...(isLocal && vehicle.includedHours && vehicle.perHourAfter ? [`Beyond package hours charged at ${inr(vehicle.perHourAfter)}/hr after ${vehicle.includedHours} hrs`] : []),
     ...excluded.map((p) => p.text || p.title),
   ];
 
