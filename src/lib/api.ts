@@ -59,6 +59,11 @@ export async function suggestDestinations(q: string, airportsOnly = false, city 
   }
 }
 
+/** "Use my current location": GPS point -> street address. Throws ApiError when no address can be found. */
+export async function reverseGeocodeApi(lat: number, lng: number): Promise<{ address: string }> {
+  return apiFetch<{ address: string }>(`/api/locations/reverse?lat=${lat}&lng=${lng}`);
+}
+
 // ─── 2. Distance Calculation ──────────────────────────────────────────────────
 export type DistanceResult = {
   distanceKm: number;
@@ -122,7 +127,18 @@ export type WebConfig = {
   maxSeats: number;
   freeCancelMinutes: number;
   partPaymentPercent: number;
-  policies: { kind: "included" | "excluded"; title: string; text: string }[];
+  policies: { kind: "included" | "excluded"; title: string; text: string; tripTypes?: string[] }[];
+  addons: WebAddon[];
+};
+
+/** Optional checkout extras; the server prices them again when the booking is created. */
+export type WebAddon = {
+  code: string;
+  title: string;
+  price: number;
+  unit: "flat" | "perKm";
+  badge: string;
+  tripTypes: string[];
 };
 
 let configPromise: Promise<WebConfig | null> | null = null;
@@ -136,6 +152,7 @@ export function getWebConfig(): Promise<WebConfig | null> {
         popularCities: c.popularCities ?? [],
         localPackages: c.localPackages ?? [],
         policies: c.policies ?? [],
+        addons: c.addons ?? [],
       }))
       .catch(() => {
         configPromise = null;
@@ -170,6 +187,7 @@ export async function calculateFareApi(params: {
   tripType: string;
   package?: string;
   days?: number;
+  airportDir?: string;
 }): Promise<FareResult | null> {
   try {
     return await apiFetch<FareResult>("/api/fare/calculate", {
@@ -188,6 +206,7 @@ export type CartQuery = {
   tripType: string;
   package?: string;
   days?: number;
+  airportDir?: string;
 };
 
 export type CouponOffer = {
@@ -214,6 +233,7 @@ export async function getAvailableCoupons(cart: CartQuery): Promise<CouponOffer[
     distanceKm: String(cart.distanceKm),
     tripType: cart.tripType,
     ...(cart.package ? { package: cart.package } : {}),
+    ...(cart.airportDir ? { airportDir: cart.airportDir } : {}),
   });
   try {
     const data = await apiFetch<{ coupons: CouponOffer[] }>(`/api/coupons/available?${qs.toString()}`);
@@ -247,11 +267,12 @@ export type CreateBookingPayload = {
     tripType: string;
     distanceKm: number;
     package?: string;
+    airportDir?: string;
     days?: number;
     returnDate?: string;
   };
   vehicle: { id: string };
-  fare: { paymentOption: "part" | "full"; couponCode?: string };
+  fare: { paymentOption: "part" | "full"; couponCode?: string; addons?: string[] };
 };
 
 export type CreateBookingResult = {

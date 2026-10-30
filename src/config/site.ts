@@ -4,7 +4,7 @@ export const siteConfig = {
   tagline: "Book Cab & Taxi Services Across India",
   description: "Go India Cab is the best taxi service in Delhi NCR. Book reliable one-way, round-trip, local and airport taxi services across India.",
   url: "https://www.goindiacab.com",
-  logo: "/GoIndiaCab logo.png",
+  logo: "/goindiacab logo second.png",
   favicon: "/GoIndiaCab Favicon icon.png",
   phone: {
     booking1: "+91-9792-000-555",

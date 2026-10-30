@@ -33,6 +33,7 @@ export type BookingData = {
   date: string;
   time: string;
   tripType: string;
+  airportDir?: AirportDir;
   passengers: string;
   stop?: string;
   returnDate?: string;
@@ -47,6 +48,8 @@ export type BookingData = {
     rating?: number;
     fuelType?: string;
     includedKm?: number;
+    billableKm?: number;
+    bags?: number;
     perKmAfter?: number;
     fare: { baseFare: number; extraKmFare: number; driverAllowance: number; gst: number; total: number };
   };
@@ -56,8 +59,12 @@ export type BookingData = {
   selectedAt: number;
 };
 
-/** The backend only knows oneway | roundtrip | local; airport transfers are billed as one-way. */
-export const apiTripType = (t: string) => (t === "airport" ? "oneway" : t);
+/** Backend trip types: oneway | roundtrip | local | airport (airport is priced with its own rates). */
+export const apiTripType = (t: string) => t;
+
+/** "from" = pickup from the airport, "to" = drop to the airport. Only meaningful for airport trips. */
+export type AirportDir = "from" | "to";
+export const AIRPORT_DIR_LABEL: Record<AirportDir, string> = { from: "Airport Pickup", to: "Airport Drop" };
 
 const noopSubscribe = () => () => {};
 
