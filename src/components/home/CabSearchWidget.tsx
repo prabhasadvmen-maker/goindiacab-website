@@ -443,7 +443,7 @@ export function CabSearchWidget() {
     setToLocation(fromLocation);
   };
 
-  const handleSearch = async (e: React.FormEvent) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const from = fromLocation.trim();
     const to = toLocation.trim();
@@ -468,13 +468,8 @@ export function CabSearchWidget() {
       // Airport side must be one of the listed airports; the address side is any searched place.
       const airportSide = airportFrom ? from : to;
       if (!AIRPORTS.some((a) => a.label === airportSide)) return setFormError("Please select an airport from the list.");
-    } else {
-      // Pickup must be one of the cities we serve (same list the FROM suggestions show).
-      const served = await suggestLocations(from);
-      if (!served.some((c) => cityKey(c.value) === cityKey(from))) {
-        return setFormError("Service is not available at this pickup location. Please pick a city from the list.");
-      }
     }
+    // Any place in India is a valid pickup: the server prices the route from the typed/selected place, so no city-list check here.
     setFormError("");
 
     // Map to /search page params
