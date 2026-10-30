@@ -4,7 +4,7 @@ import { use, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Calendar, Check, CheckCircle2, Download, MessageCircle, Phone, User, Car, XCircle } from "lucide-react";
 import { siteConfig } from "@/src/config/site";
-import { getBooking } from "@/src/lib/api";
+import { getBooking, receiptUrl } from "@/src/lib/api";
 import { formatDate, formatTime, inr, useStoredString } from "@/src/lib/booking";
 
 type Confirmed = {
@@ -106,10 +106,19 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
     return hit?.at ?? (key === "confirmed" ? b.confirmedAt : undefined);
   };
   const dateTime = `${formatDate(b.trip.date)}, ${formatTime(b.trip.time)}`;
+  const pdfUrl = new URL(receiptUrl(b.bookingId), window.location.origin).href; // absolute, so the link works when it is shared
   const waText = encodeURIComponent(
-    `Hi GoIndiaCab, my booking is confirmed.\nBooking ID: ${b.bookingId}\nTrip: ${b.trip.from} to ${b.trip.to}\nDate: ${dateTime}\nCab: ${b.vehicle.name} (${b.vehicle.model})\nTotal: ${inr(b.fare.total)}\nName: ${b.passenger.name}`
+    [
+      `*${siteConfig.name} booking ${b.status === "cancelled" ? "cancelled" : "confirmed"}*`,
+      `Booking ID: ${b.bookingId}`,
+      `Trip: ${b.trip.from}${b.trip.to ? ` to ${b.trip.to}` : ""}`,
+      `Date: ${dateTime}`,
+      `Cab: ${b.vehicle.name} (${b.vehicle.model})`,
+      `Total fare: ${inr(b.fare.total)}${b.fare.paymentOption === "cash" ? ` (pay ${inr(b.fare.payLater ?? b.fare.total)} to the driver)` : ""}`,
+      "",
+      `Download receipt (PDF): ${pdfUrl}`,
+    ].join("\n")
   );
-  const waNumber = siteConfig.phone.booking1.replace(/\D/g, "");
 
   return (
     <div className="bg-gray-50 min-h-screen py-10 print:bg-white print:py-0">
@@ -245,16 +254,20 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
         </div>
 
         <div className="mt-6 grid gap-3 print:hidden">
-          <button onClick={() => window.print()} className="py-3.5 rounded-xl bg-[#0B4A9C] text-white font-bold shadow-lg flex items-center justify-center gap-2 cursor-pointer">
-            <Download className="w-5 h-5" /> Download Confirmation
-          </button>
           <a
-            href={`https://wa.me/${waNumber}?text=${waText}`}
+            href={pdfUrl}
+            download
+            className="py-3.5 rounded-xl bg-[#0B4A9C] text-white font-bold shadow-lg flex items-center justify-center gap-2"
+          >
+            <Download className="w-5 h-5" /> Download Receipt (PDF)
+          </a>
+          <a
+            href={`https://wa.me/?text=${waText}`}
             target="_blank"
             rel="noopener noreferrer"
             className="py-3.5 rounded-xl bg-green-600 text-white font-bold shadow-lg flex items-center justify-center gap-2"
           >
-            <MessageCircle className="w-5 h-5" /> Share on WhatsApp
+            <MessageCircle className="w-5 h-5" /> Share Receipt on WhatsApp
           </a>
           <Link href="/" className="py-3.5 rounded-xl bg-[#FF6600] text-white font-bold shadow-lg text-center">Book Another Cab</Link>
         </div>

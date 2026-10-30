@@ -30,6 +30,9 @@ export class ApiError extends Error {
   }
 }
 
+/** PDF receipt for a booking (the server sends it as a download). */
+export const receiptUrl = (bookingId: string) => `${BASE}/api/booking/${encodeURIComponent(bookingId)}/receipt`;
+
 // ─── 1. Location Autocomplete ─────────────────────────────────────────────────
 export type LocationSuggestion = { label: string; value: string };
 
