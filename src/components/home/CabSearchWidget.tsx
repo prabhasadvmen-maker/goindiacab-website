@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   Car, Plane, Clock, MapPin, Plus, Calendar,
   Briefcase, Search, ShieldCheck, Star,
-  Headphones, X, ArrowLeftRight, ChevronDown
+  Headphones, X, ArrowLeftRight, ChevronDown, IndianRupee, Wallet
 } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
@@ -346,6 +346,73 @@ const todayLocal = () => {
 };
 const cityKey = (v: string) => v.split(",")[0].trim().toLowerCase();
 
+type TickerMessage = { icon: React.ComponentType<{ className?: string }>; text: string };
+
+/** One-line banner that rotates through short trust messages. Pauses on hover/focus; no auto-rotation for reduced-motion users. */
+function TrustTicker({ messages }: { messages: TickerMessage[] }) {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const count = messages.length;
+  const current = count ? index % count : 0;
+
+  useEffect(() => {
+    if (paused || count < 2) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setInterval(() => setIndex((i) => i + 1), 3500);
+    return () => clearInterval(t);
+  }, [paused, count]);
+
+  if (count === 0) return null;
+  return (
+    <div
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Why book with us"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+      className="bg-[#f0f6ff] border border-blue-100 rounded-lg pl-3 pr-2.5 mb-1.5 flex items-center justify-between gap-3"
+    >
+      <div className="relative h-8 overflow-hidden min-w-0 flex-1" aria-live={paused ? "polite" : "off"}>
+        {messages.map(({ icon: Icon, text }, i) => {
+          // the current message sits in place, the one before it leaves upwards, all others wait below (so the loop wraps smoothly)
+          const state = i === current ? "now" : i === (current - 1 + count) % count ? "left" : "next";
+          return (
+            <div
+              key={text}
+              aria-hidden={state !== "now"}
+              className={clsx(
+                "absolute inset-0 flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-700 transition-all duration-500 ease-in-out motion-reduce:transition-none",
+                state === "now" && "opacity-100 translate-y-0",
+                state === "left" && "opacity-0 -translate-y-full",
+                state === "next" && "opacity-0 translate-y-full"
+              )}
+            >
+              <Icon className="w-4 h-4 text-[#00A5D9] shrink-0" />
+              <span className="truncate">{text}</span>
+            </div>
+          );
+        })}
+      </div>
+      {count > 1 && (
+        <div className="flex items-center gap-1 shrink-0">
+          {messages.map(({ text }, i) => (
+            <button
+              key={text}
+              type="button"
+              aria-label={`Show message ${i + 1} of ${count}`}
+              aria-current={i === current}
+              onClick={() => setIndex(i)}
+              className={clsx("h-1.5 rounded-full transition-all cursor-pointer", i === current ? "w-4 bg-[#00A5D9]" : "w-1.5 bg-[#00A5D9]/30 hover:bg-[#00A5D9]/60")}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 const CATEGORY_TABS = [
   { id: "outstation", label: "Outstation", shortLabel: "Outstation", Icon: Car },
   { id: "airport", label: "Airport", shortLabel: "Airport", Icon: Plane },
@@ -433,6 +500,15 @@ export function CabSearchWidget() {
     if (tab === "airport") { setFromLocation(""); setToLocation(""); }
     if (tab === "hourly") setFromLocation("");
   }, [tab, airportDir]);
+
+  const tickerMessages: TickerMessage[] = [
+    { icon: ShieldCheck, text: "Clean and Quality cabs • 100% On-time guarantee" },
+    ...(config && config.freeCancelMinutes > 0 ? [{ icon: Clock, text: `Free cancellation up to ${formatCancelWindow(config.freeCancelMinutes)} before pickup` }] : []),
+    { icon: IndianRupee, text: "Transparent fares • Fuel & driver allowance included" },
+    { icon: Headphones, text: `24x7 support • ${siteConfig.phone.booking1}` },
+    ...(config && config.partPaymentPercent > 0 ? [{ icon: Wallet, text: `Book with just ${config.partPaymentPercent}% now, pay the rest to the driver` }] : []),
+    { icon: Star, text: `Rated ${siteConfig.googleRating}/5 by ${siteConfig.googleReviewCount} travellers on Google` },
+  ];
 
   const swapPlaces = () => {
     setFromLocation(toLocation);
@@ -544,13 +620,8 @@ export function CabSearchWidget() {
                 })}
               </div>
 
-              {/* 2. Quality Banner */}
-              <div className="bg-[#f0f6ff] border border-blue-100 rounded-lg px-3 py-1 flex flex-wrap items-center justify-between shadow-xs mb-1.5 gap-2">
-                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-700">
-                  <ShieldCheck className="w-4 h-4 text-[#00A5D9]" />
-                  <span>Clean and Quality cabs • 100% On-time guarantee</span>
-                </div>
-              </div>
+              {/* 2. Rotating trust messages */}
+              <TrustTicker messages={tickerMessages} />
 
               <form onSubmit={handleSearch} className="space-y-1.5">
 
