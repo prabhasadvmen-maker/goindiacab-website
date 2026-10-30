@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   Car, Plane, Clock, MapPin, Plus, Calendar,
   Briefcase, Search, ShieldCheck, Star,
-  Headphones, X, CheckSquare, Square
+  Headphones, X, CheckSquare, Square, ArrowLeftRight
 } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
@@ -345,6 +345,50 @@ const todayLocal = () => {
 };
 const cityKey = (v: string) => v.split(",")[0].trim().toLowerCase();
 
+const CATEGORY_TABS = [
+  { id: "outstation", label: "Outstation", shortLabel: "Outstation", Icon: Car },
+  { id: "airport", label: "Airport", shortLabel: "Airport", Icon: Plane },
+  { id: "hourly", label: "Hourly Rentals", shortLabel: "Hourly", Icon: Clock },
+] as const;
+
+/** Pill-style radio group: native radios stay in the DOM (keyboard + screen readers), the label is the visible button. */
+function Segmented<T extends string>({ name, value, onChange, options, className }: {
+  name: string;
+  value: T;
+  onChange: (v: T) => void;
+  options: { value: T; label: string; badge?: string }[];
+  className?: string;
+}) {
+  return (
+    <div
+      role="radiogroup"
+      className={clsx("grid gap-1 rounded-xl bg-gray-100 p-1", className)}
+      style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}
+    >
+      {options.map((o) => {
+        const on = o.value === value;
+        return (
+          <label
+            key={o.value}
+            className={clsx(
+              "flex items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-[13px] sm:text-sm font-extrabold cursor-pointer select-none transition-all focus-within:ring-2 focus-within:ring-[#00A5D9]/40",
+              on ? "bg-[#00A5D9] text-white shadow-sm" : "text-gray-700 hover:bg-white/70"
+            )}
+          >
+            <input type="radio" name={name} checked={on} onChange={() => onChange(o.value)} className="sr-only" />
+            <span className="whitespace-nowrap">{o.label}</span>
+            {o.badge && (
+              <span className={clsx("rounded px-1.5 py-0.5 text-[9px] font-black leading-none", on ? "bg-white/25 text-white" : "bg-[#00b074] text-white")}>
+                {o.badge}
+              </span>
+            )}
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
 export function CabSearchWidget() {
   const router = useRouter();
   const [tab, setTab] = useState<"outstation" | "airport" | "hourly">("outstation");
@@ -394,11 +438,16 @@ export function CabSearchWidget() {
     }
   }, [tab, sameDropForHourly, fromLocation]);
 
+  const swapPlaces = () => {
+    setFromLocation(toLocation);
+    setToLocation(fromLocation);
+  };
+
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const from = fromLocation.trim();
     const to = toLocation.trim();
-    const stop = hasStop ? stopLocation.trim() : "";
+    const stop = tab === "outstation" && hasStop ? stopLocation.trim() : "";
 
     if (!from) return setFormError("Please enter pickup city or location.");
     if (!to && tab !== "hourly") return setFormError("Please enter destination city or landmark.");
@@ -475,55 +524,30 @@ export function CabSearchWidget() {
           <div className="w-full">
             <div className="bg-white rounded-[20px] shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-gray-100 p-2 sm:p-2.5 relative z-30">
 
-              {/* 1. Top Navigation Tabs */}
-              <div className="flex items-center justify-around pb-1.5 border-b border-gray-100 mb-1.5 overflow-x-auto whitespace-nowrap hide-scrollbar">
-                {/* Outstation */}
-                <button
-                  type="button"
-                  onClick={() => setTab("outstation")}
-                  className={clsx(
-                    "flex items-center gap-1.5 pb-1.5 px-2 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
-                    tab === "outstation" ? "text-[#00A5D9]" : "text-gray-500 hover:text-gray-800"
-                  )}
-                >
-                  <Car className="w-5 h-5" />
-                  <span>Outstation</span>
-                  {tab === "outstation" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-1 bg-[#00A5D9] rounded-full" />
-                  )}
-                </button>
-
-                {/* Airport */}
-                <button
-                  type="button"
-                  onClick={() => setTab("airport")}
-                  className={clsx(
-                    "flex items-center gap-1.5 pb-1.5 px-2 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
-                    tab === "airport" ? "text-[#00A5D9]" : "text-gray-500 hover:text-gray-800"
-                  )}
-                >
-                  <Plane className="w-5 h-5" />
-                  <span>Airport</span>
-                  {tab === "airport" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-1 bg-[#00A5D9] rounded-full" />
-                  )}
-                </button>
-
-                {/* Hourly Rentals */}
-                <button
-                  type="button"
-                  onClick={() => setTab("hourly")}
-                  className={clsx(
-                    "flex items-center gap-1.5 pb-1.5 px-2 font-extrabold text-sm sm:text-base transition-all relative cursor-pointer",
-                    tab === "hourly" ? "text-[#00A5D9]" : "text-gray-500 hover:text-gray-800"
-                  )}
-                >
-                  <Clock className="w-5 h-5" />
-                  <span>Hourly Rentals</span>
-                  {tab === "hourly" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-1 bg-[#00A5D9] rounded-full" />
-                  )}
-                </button>
+              {/* 1. Trip category tabs */}
+              <div role="tablist" aria-label="Trip category" className="grid grid-cols-3 gap-1 rounded-xl bg-gray-100 p-1 mb-2">
+                {CATEGORY_TABS.map(({ id, label, shortLabel, Icon }) => {
+                  const active = tab === id;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => setTab(id)}
+                      className={clsx(
+                        "flex items-center justify-center gap-1.5 rounded-lg px-1 py-2 text-[13px] sm:text-sm font-extrabold transition-all cursor-pointer",
+                        active ? "bg-white text-[#00A5D9] shadow-sm ring-1 ring-black/5" : "text-gray-500 hover:text-gray-800"
+                      )}
+                    >
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                      <span className="truncate">
+                        <span className="sm:hidden">{shortLabel}</span>
+                        <span className="hidden sm:inline">{label}</span>
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
 
               {/* 2. Quality Banner */}
@@ -536,77 +560,31 @@ export function CabSearchWidget() {
 
               <form onSubmit={handleSearch} className="space-y-1.5">
 
-                {/* 3. Trip Type Selection */}
+                {/* 3. Trip type */}
                 {tab === "outstation" && (
-                  <div className="mb-3">
-                    <div className="grid grid-cols-2 gap-3 max-w-[340px]">
-                      <label
-                        className={clsx(
-                          "py-2.5 px-4 rounded-xl border-2 transition-all flex items-center justify-center gap-2.5 cursor-pointer",
-                          tripType === "oneway"
-                            ? "bg-[#eef7ff] border-[#00A5D9] shadow-sm"
-                            : "bg-white border-gray-200 hover:border-gray-300"
-                        )}
-                      >
-                        <input
-                          type="radio"
-                          name="triptype"
-                          checked={tripType === "oneway"}
-                          onChange={() => setTripType("oneway")}
-                          className="w-4 h-4 accent-[#00A5D9] cursor-pointer"
-                        />
-                        <span className="font-extrabold text-sm text-gray-900 whitespace-nowrap">One Way</span>
-                      </label>
-
-                      <label
-                        className={clsx(
-                          "py-2.5 px-4 rounded-xl border-2 transition-all flex items-center justify-center gap-2.5 cursor-pointer relative",
-                          tripType === "roundtrip"
-                            ? "bg-[#eef7ff] border-[#00A5D9] shadow-sm"
-                            : "bg-white border-gray-200 hover:border-gray-300"
-                        )}
-                      >
-                        <input
-                          type="radio"
-                          name="triptype"
-                          checked={tripType === "roundtrip"}
-                          onChange={() => setTripType("roundtrip")}
-                          className="w-4 h-4 accent-[#00A5D9] cursor-pointer"
-                        />
-                        <span className="font-extrabold text-sm text-gray-900 whitespace-nowrap">Round Trip</span>
-                        <span className="absolute -top-2.5 -right-2 bg-[#00b074] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-sm">
-                          Save
-                        </span>
-                      </label>
-                    </div>
-                  </div>
+                  <Segmented
+                    name="triptype"
+                    value={tripType}
+                    onChange={setTripType}
+                    className="sm:max-w-[320px]"
+                    options={[
+                      { value: "oneway", label: "One Way" },
+                      { value: "roundtrip", label: "Round Trip", badge: "Save" },
+                    ]}
+                  />
                 )}
 
                 {tab === "airport" && (
-                  <div className="mb-3">
-                    <div className="grid grid-cols-2 gap-3 max-w-[480px]">
-                      {([["from", "Pickup from Airport"], ["to", "Drop to Airport"]] as const).map(([dir, label]) => (
-                        <label
-                          key={dir}
-                          className={clsx(
-                            "py-2.5 px-4 rounded-xl border-2 transition-all flex items-center justify-center gap-2.5 cursor-pointer",
-                            airportDir === dir
-                              ? "bg-[#eef7ff] border-[#00A5D9] shadow-sm"
-                              : "bg-white border-gray-200 hover:border-gray-300"
-                          )}
-                        >
-                          <input
-                            type="radio"
-                            name="airportdir"
-                            checked={airportDir === dir}
-                            onChange={() => setAirportDir(dir)}
-                            className="w-4 h-4 accent-[#00A5D9] cursor-pointer"
-                          />
-                          <span className="font-extrabold text-sm text-gray-900 whitespace-nowrap">{label}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
+                  <Segmented
+                    name="airportdir"
+                    value={airportDir}
+                    onChange={setAirportDir}
+                    className="sm:max-w-[440px]"
+                    options={[
+                      { value: "from", label: "Pickup from Airport" },
+                      { value: "to", label: "Drop to Airport" },
+                    ]}
+                  />
                 )}
 
                 {tab === "hourly" && (
@@ -637,12 +615,12 @@ export function CabSearchWidget() {
                   </div>
                 )}
 
-                {/* 4. Location Fields */}
-                <div className="space-y-1.5">
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-1.5 items-center">
+                {/* 4. Location fields */}
+                <div className="space-y-2">
+                  <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] gap-1.5 md:gap-2 md:items-end">
 
                     {/* FROM */}
-                    <div className="md:col-span-5 relative min-w-0">
+                    <div className="relative min-w-0">
                       <div className="flex items-center gap-1 mb-0.5">
                         <span className="w-2 h-2 rounded-full bg-emerald-500" />
                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-wider">FROM</label>
@@ -662,24 +640,26 @@ export function CabSearchWidget() {
                       )}
                     </div>
 
-                    {/* Add Stop Button */}
-                    <div className="md:col-span-2 flex flex-col items-center justify-center pt-0 md:pt-4">
-                      <button
-                        type="button"
-                        onClick={() => { if (hasStop) setStopLocation(""); setHasStop(!hasStop); }}
-                        className="group flex flex-col md:flex-row items-center justify-center gap-1.5 bg-blue-50/80 hover:bg-blue-100 border border-blue-100 px-3 md:px-4 py-1.5 rounded-full transition-colors cursor-pointer shadow-sm mx-auto"
-                      >
-                        <div className="w-4 h-4 rounded-full bg-[#0066FF] text-white flex items-center justify-center shadow-sm flex-shrink-0">
-                          {hasStop ? <X className="w-2.5 h-2.5" /> : <Plus className="w-2.5 h-2.5" />}
-                        </div>
-                        <span className="text-[10px] md:text-xs font-extrabold text-[#0066FF] whitespace-nowrap">
-                          {hasStop ? "Remove Stop" : "Add Stop"}
-                        </span>
-                      </button>
+                    {/* Swap FROM <-> TO (outstation only) */}
+                    <div className="relative z-10 flex justify-end md:justify-center -my-3.5 md:my-0 md:pb-1 pr-4 md:pr-0">
+                      {tab === "outstation" ? (
+                        <button
+                          type="button"
+                          onClick={swapPlaces}
+                          disabled={!fromLocation && !toLocation}
+                          aria-label="Swap pickup and destination"
+                          title="Swap pickup and destination"
+                          className="w-9 h-9 rounded-full bg-white border border-gray-300 text-[#00A5D9] shadow-sm flex items-center justify-center hover:bg-[#f0f9ff] hover:border-[#00A5D9] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                        >
+                          <ArrowLeftRight className="w-4 h-4 rotate-90 md:rotate-0" />
+                        </button>
+                      ) : (
+                        <span className="hidden md:block w-9" />
+                      )}
                     </div>
 
                     {/* TO */}
-                    <div className="md:col-span-5 relative min-w-0">
+                    <div className="relative min-w-0">
                       <div className="flex items-center gap-1 mb-0.5">
                         <span className="w-2 h-2 rounded-full bg-[#FF6600]" />
                         <label className="text-[10px] font-black text-gray-500 uppercase tracking-wider">TO</label>
@@ -704,6 +684,42 @@ export function CabSearchWidget() {
                     </div>
                   </div>
 
+                  {/* Optional stop on the way (outstation only) */}
+                  {tab === "outstation" && (
+                    hasStop ? (
+                      <div className="flex items-start gap-2.5 rounded-xl border border-blue-200 bg-blue-50/60 p-2.5">
+                        <span className="mt-1 w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <label className="mb-0.5 block text-[10px] font-black uppercase tracking-wider text-blue-900">Stop on the way</label>
+                          <LocationInput
+                            value={stopLocation}
+                            onChange={setStopLocation}
+                            mode="to"
+                            required
+                            placeholder="e.g. Mathura, Vrindavan, Agra..."
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => { setStopLocation(""); setHasStop(false); }}
+                          aria-label="Remove stop"
+                          title="Remove stop"
+                          className="mt-4 rounded-full p-1.5 text-gray-500 hover:bg-white hover:text-red-600 cursor-pointer transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setHasStop(true)}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-[#00A5D9]/60 bg-[#f0f9ff] px-3.5 py-1.5 text-xs font-extrabold text-[#0B7AA8] hover:bg-[#e0f2fe] hover:border-[#00A5D9] cursor-pointer transition-colors"
+                      >
+                        <Plus className="w-3.5 h-3.5" /> Add a stop on the way
+                      </button>
+                    )
+                  )}
+
                   {/* Same Pickup & Drop checkbox for Hourly */}
                   {tab === "hourly" && (
                     <div className="flex items-center gap-2 pt-1">
@@ -720,22 +736,6 @@ export function CabSearchWidget() {
                     </div>
                   )}
                 </div>
-
-                {/* Optional Stop Field */}
-                {hasStop && (
-                  <div className="bg-blue-50/70 p-3 rounded-xl border border-blue-200">
-                    <div className="flex items-center gap-1 mb-1">
-                      <span className="w-2 h-2 rounded-full bg-blue-500" />
-                      <label className="text-[10px] font-black text-blue-900 uppercase tracking-wider">Intermediate Stop</label>
-                    </div>
-                    <LocationInput
-                      value={stopLocation}
-                      onChange={setStopLocation}
-                      mode="to"
-                      placeholder="e.g. Mathura, Vrindavan, Agra..."
-                    />
-                  </div>
-                )}
 
                 {/* 5. Trip Details Row */}
                 <div className={clsx("grid grid-cols-1 gap-1.5", isRoundTrip ? "sm:grid-cols-4" : "sm:grid-cols-3")}>

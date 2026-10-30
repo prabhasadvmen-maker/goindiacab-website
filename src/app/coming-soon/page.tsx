@@ -45,9 +45,9 @@ export default function ComingSoonPage() {
         <Image
           src={siteConfig.logo}
           alt={siteConfig.name}
-          width={200}
-          height={55}
-          className="h-12 w-auto"
+          width={454}
+          height={133}
+          className="h-14 w-auto bg-white p-1.5 rounded-xl shadow-lg"
           priority
         />
       </div>

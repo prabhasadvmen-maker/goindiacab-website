@@ -56,8 +56,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div className="relative bg-gray-50 flex flex-col w-[320px] sm:w-[360px] max-h-[85vh] rounded-[1.5rem] shadow-2xl overflow-hidden border border-white">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
-          <div className="flex items-center h-10">
-            <Image src={siteConfig.logo} alt={siteConfig.name} width={160} height={45} className="h-full w-auto object-contain" />
+          <div className="flex items-center h-11">
+            <Image src={siteConfig.logo} alt={siteConfig.name} width={454} height={133} className="h-full w-auto object-contain" />
           </div>
           <button onClick={onClose} className="p-1.5 text-gray-500 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors cursor-pointer">
             <X className="w-5 h-5" />

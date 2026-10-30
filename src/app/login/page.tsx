@@ -56,9 +56,9 @@ export default function LoginPage() {
                 <Image
                   src={siteConfig.logo}
                   alt={siteConfig.name}
-                  width={180}
-                  height={50}
-                  className="h-10 w-auto bg-white/90 p-1.5 rounded-xl shadow-md"
+                  width={454}
+                  height={133}
+                  className="h-12 w-auto bg-white p-1.5 rounded-xl shadow-md"
                 />
               </Link>
               <h2 className="text-2xl sm:text-3xl font-black leading-tight pt-4">
