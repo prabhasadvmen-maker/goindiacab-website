@@ -109,6 +109,12 @@ export default function CheckoutPage() {
   const [couponErr, setCouponErr] = useState("");
   const [couponBusy, setCouponBusy] = useState(false);
 
+  // Lifts the floating chat / call / WhatsApp / back-to-top buttons above the mobile pay bar.
+  useEffect(() => {
+    document.body.dataset.stickyCta = "true";
+    return () => { delete document.body.dataset.stickyCta; };
+  }, []);
+
   useEffect(() => {
     let alive = true;
     getWebConfig().then((c) => { if (alive) setWebConfig(c); });
@@ -803,7 +809,7 @@ export default function CheckoutPage() {
               <button
                 onClick={submit}
                 disabled={processing}
-                className="mt-5 w-full py-4 rounded-xl bg-[#F26A21] hover:bg-[#d95d1a] disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-lg font-extrabold tracking-wide shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2 cursor-pointer transition"
+                className="mt-5 w-full py-4 rounded-xl bg-[#F26A21] hover:bg-[#d95d1a] disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-lg font-extrabold tracking-wide shadow-lg shadow-orange-500/25 hidden lg:flex items-center justify-center gap-2 cursor-pointer transition"
               >
                 {processing ? (<><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>) : pay === "cash" ? "CONFIRM BOOKING" : `PROCEED & PAY ${inr(paidNow)}`}
               </button>
@@ -819,7 +825,7 @@ export default function CheckoutPage() {
       </div>
 
       {/* Mobile: always-visible pay bar */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.06)] pl-4 pr-20 py-3 flex items-center gap-3">
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.06)] px-4 py-3 flex items-center gap-3">
         <div className="shrink-0">
           <p className="text-[11px] text-gray-500 leading-none">Total</p>
           <p className="text-lg font-extrabold text-gray-900 leading-tight">{inr(total)}</p>

@@ -46,7 +46,7 @@ export function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start pointer-events-none">
+    <div className="floating-fab fixed bottom-6 left-6 z-50 flex flex-col items-start pointer-events-none">
       
       {/* Chat Window */}
       <div 

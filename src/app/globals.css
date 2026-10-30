@@ -106,3 +106,10 @@
   --tw-shadow-colored: 0 0 #0000 !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
+
+/* Pages with a sticky bottom action bar (checkout on phones) lift the floating buttons above it. */
+@media (max-width: 1023px) {
+  body[data-sticky-cta] .floating-fab {
+    bottom: 5.25rem !important;
+  }
+}
