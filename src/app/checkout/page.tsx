@@ -21,7 +21,7 @@ import {
 // pickupAddress / dropAddress stay null until the customer edits them; until then the searched From / To are used.
 type Form = { name: string; mobile: string; email: string; pickupAddress: string | null; dropAddress: string | null; instructions: string };
 type Key = keyof Form;
-type Pay = "part" | "full";
+type Pay = "part" | "full" | "cash"; // cash = pay the whole fare to the driver, nothing online
 type AppliedCoupon = { code: string; title: string; discount: number };
 
 const validators: Record<Key, (v: string) => string> = {
@@ -31,6 +31,15 @@ const validators: Record<Key, (v: string) => string> = {
   pickupAddress: (v) => (v.trim().length < 10 ? "Enter your full pickup address" : ""),
   dropAddress: () => "",
   instructions: () => "",
+};
+
+// Where each required field lives (aria-label) and how to name it when it is missing or invalid.
+const REQUIRED_KEYS = ["name", "mobile", "email", "pickupAddress"] as const;
+const FIELD_LABEL: Record<(typeof REQUIRED_KEYS)[number], { aria: string; text: string }> = {
+  name: { aria: "Full Name", text: "your full name" },
+  mobile: { aria: "Mobile No.", text: "a valid 10-digit mobile number" },
+  email: { aria: "Email ID", text: "a valid email (or leave it empty)" },
+  pickupAddress: { aria: "Pickup Location", text: "the full pickup address (house / street / area)" },
 };
 
 const cityOf = (s: string) => s.split(",")[0].trim();
@@ -159,7 +168,7 @@ export default function CheckoutPage() {
   const percent = booking.partPercent ?? webConfig?.partPaymentPercent ?? 0;
   const gstLabel = vehicle.gstPercent != null ? `GST (${vehicle.gstPercent}%)` : "GST";
   const partAmt = Math.round((total * percent) / 100);
-  const paidNow = pay === "part" ? partAmt : total;
+  const paidNow = pay === "part" ? partAmt : pay === "cash" ? 0 : total;
   const locked = createdId !== null; // coupon / payment option are frozen after the booking is created
   const deadline = webConfig ? cancelDeadline(booking.date, booking.time, webConfig.freeCancelMinutes) : null;
   const isLocal = booking.tripType === "local";
@@ -243,7 +252,14 @@ export default function CheckoutPage() {
       {} as Record<Key, string>
     );
     const isValid = (Object.keys(currentErrors) as Key[]).every((k) => !currentErrors[k]);
-    if (!isValid || processing) return;
+    if (processing) return;
+    if (!isValid) {
+      const first = REQUIRED_KEYS.find((k) => currentErrors[k]);
+      const el = first ? document.querySelector<HTMLElement>(`[aria-label="${FIELD_LABEL[first].aria}"]`) : null;
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      el?.focus({ preventScroll: true });
+      return;
+    }
 
     setProcessing(true);
     setApiError("");
@@ -288,13 +304,19 @@ export default function CheckoutPage() {
           fare: {
             ...vehicle.fare, discount: serverFare.discount, couponCode: serverFare.couponCode,
             addons: pickedAddons.map((a) => ({ label: addonName(a), price: addonCost(a) })),
-            total: serverFare.total, paidNow: serverFare.paidNow, payLater: serverFare.payLater,
+            total: serverFare.total, paidNow: serverFare.paidNow, payLater: serverFare.payLater, paymentOption: serverFare.paymentOption,
           },
           status: "confirmed",
           paymentStatus: "pending",
           bookedAt: new Date().toISOString(),
         }));
       } catch { /* ignore */ }
+
+      // Pay to driver: nothing to pay online, the booking is already confirmed.
+      if (pay === "cash") {
+        router.push("/booking/" + bookingId);
+        return;
+      }
 
       // Step 2: create the Razorpay order (amount is decided by the server)
       const order = await createPaymentOrder(bookingId);
@@ -362,6 +384,9 @@ export default function CheckoutPage() {
   const payOptions: { id: Pay; title: string; sub: string; amt: number }[] = [
     { id: "part", title: "Part Pay", sub: `Pay ${percent}% now and rest to the driver`, amt: partAmt },
     { id: "full", title: "Full Pay", sub: "Full amount", amt: total },
+    ...(webConfig?.cashToDriverEnabled
+      ? [{ id: "cash" as Pay, title: "Pay to Driver", sub: `Pay ${inr(total)} to the driver after the ride`, amt: 0 }]
+      : []),
   ];
 
   // Policies can be limited to certain trip types (empty = every trip type).
@@ -769,15 +794,25 @@ export default function CheckoutPage() {
             </div>
 
 
+              {pay === "cash" && (
+                <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+                  No online payment now. Please pay <b>{inr(total)}</b> to the driver (cash or UPI) after the ride.
+                </p>
+              )}
+
               <button
                 onClick={submit}
-                disabled={!valid || processing}
+                disabled={processing}
                 className="mt-5 w-full py-4 rounded-xl bg-[#F26A21] hover:bg-[#d95d1a] disabled:bg-gray-300 disabled:cursor-not-allowed text-white text-lg font-extrabold tracking-wide shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2 cursor-pointer transition"
               >
-                {processing ? (<><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>) : `PROCEED & PAY ${inr(paidNow)}`}
+                {processing ? (<><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>) : pay === "cash" ? "CONFIRM BOOKING" : `PROCEED & PAY ${inr(paidNow)}`}
               </button>
               {apiError && <p role="alert" className="text-sm text-red-600 text-center mt-3">{apiError}</p>}
-              {!valid && <p className="text-xs text-gray-500 text-center mt-2">Fill name, mobile and pickup location to continue</p>}
+              {!valid && (
+                <p className="text-xs text-amber-700 text-center mt-2">
+                  To continue, please enter: {REQUIRED_KEYS.filter((k) => errors[k]).map((k) => FIELD_LABEL[k].text).join(", ")}
+                </p>
+              )}
             </div>
           </div>
         </aside>
@@ -791,10 +826,10 @@ export default function CheckoutPage() {
         </div>
         <button
           onClick={submit}
-          disabled={!valid || processing}
+          disabled={processing}
           className="flex-1 py-3 rounded-xl bg-[#F26A21] disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-extrabold text-sm shadow-md cursor-pointer"
         >
-          {processing ? "Processing..." : `PAY ${inr(paidNow)}`}
+          {processing ? "Processing..." : pay === "cash" ? "CONFIRM BOOKING" : `PAY ${inr(paidNow)}`}
         </button>
       </div>
     </div>

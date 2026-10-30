@@ -14,7 +14,7 @@ type Confirmed = {
   vehicle: { name: string; model: string };
   fare: {
     baseFare: number; extraKmFare?: number; driverAllowance: number; gst: number; total: number;
-    addons?: { label: string; price: number }[]; discount?: number; paidNow?: number; payLater?: number;
+    addons?: { label: string; price: number }[]; discount?: number; paidNow?: number; payLater?: number; paymentOption?: string;
   };
   status: string;
   paymentStatus?: "pending" | "paid" | "failed";
@@ -132,8 +132,12 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
             <p className={`text-sm font-bold flex items-center gap-2 ${cancelled ? "text-red-700" : "text-green-700"}`}>
               {cancelled ? <XCircle className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />} {(HEADLINE[b.status] ?? b.status).replace("!", "").toUpperCase()}
             </p>
-            {b.paymentStatus && b.paymentStatus !== "paid" && (
-              <p className="mt-1 text-sm font-semibold text-amber-700">Payment {b.paymentStatus === "failed" ? "failed" : "pending"}</p>
+            {b.fare.paymentOption === "cash" ? (
+              <p className="mt-1 text-sm font-semibold text-amber-700">Pay {inr(b.fare.payLater ?? b.fare.total)} to the driver after the ride</p>
+            ) : (
+              b.paymentStatus && b.paymentStatus !== "paid" && (
+                <p className="mt-1 text-sm font-semibold text-amber-700">Payment {b.paymentStatus === "failed" ? "failed" : "pending"}</p>
+              )
             )}
             <p className="mt-2 text-gray-800">Booking ID: <b>{b.bookingId}</b></p>
           </div>
@@ -231,7 +235,7 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
             <div className="flex justify-between"><span>GST</span><span>{inr(b.fare.gst)}</span></div>
             {!!b.fare.discount && <div className="flex justify-between text-green-600"><span>Coupon discount</span><span>- {inr(b.fare.discount)}</span></div>}
             <div className="flex justify-between border-t pt-2 text-base font-bold text-gray-900"><span>Total Fare</span><span>{inr(b.fare.total)}</span></div>
-            <div className="flex justify-between"><span>{b.paymentStatus === "paid" ? "Paid online" : "Due now"}</span><span>{inr(b.fare.paidNow ?? b.fare.total)}</span></div>
+            {b.fare.paymentOption !== "cash" && <div className="flex justify-between"><span>{b.paymentStatus === "paid" ? "Paid online" : "Due now"}</span><span>{inr(b.fare.paidNow ?? b.fare.total)}</span></div>}
             <div className="flex justify-between font-semibold"><span>Pay to driver</span><span>{inr(b.fare.payLater ?? 0)}</span></div>
           </div>
 

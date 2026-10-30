@@ -129,6 +129,8 @@ export type WebConfig = {
   maxSeats: number;
   freeCancelMinutes: number;
   partPaymentPercent: number;
+  /** Customers may book now and pay the whole fare to the driver. Only true when the server says so. */
+  cashToDriverEnabled: boolean;
   policies: { kind: "included" | "excluded"; title: string; text: string; tripTypes?: string[] }[];
   addons: WebAddon[];
 };
@@ -153,6 +155,7 @@ export function getWebConfig(): Promise<WebConfig | null> {
         ...c,
         popularCities: c.popularCities ?? [],
         hourlyCities: c.hourlyCities ?? [],
+        cashToDriverEnabled: c.cashToDriverEnabled === true,
         localPackages: c.localPackages ?? [],
         policies: c.policies ?? [],
         addons: c.addons ?? [],
@@ -277,7 +280,7 @@ export type CreateBookingPayload = {
     returnDate?: string;
   };
   vehicle: { id: string };
-  fare: { paymentOption: "part" | "full"; couponCode?: string; addons?: string[] };
+  fare: { paymentOption: "part" | "full" | "cash"; couponCode?: string; addons?: string[] };
 };
 
 export type CreateBookingResult = {
