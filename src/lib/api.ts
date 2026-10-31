@@ -37,11 +37,11 @@ export const receiptUrl = (bookingId: string) => `${BASE}/api/booking/${encodeUR
 export type LocationSuggestion = { label: string; value: string };
 
 // FROM — only DB cities (North India list)
-export async function suggestLocations(q: string): Promise<LocationSuggestion[]> {
+export async function suggestLocations(q: string, outstation = false): Promise<LocationSuggestion[]> {
   if (q.trim().length < 2) return [];
   try {
     const data = await apiFetch<{ suggestions: LocationSuggestion[] }>(
-      `/api/locations/suggest?q=${encodeURIComponent(q)}`
+      `/api/locations/suggest?q=${encodeURIComponent(q)}${outstation ? "&area=outstation" : ""}`
     );
     return data.suggestions ?? [];
   } catch {
@@ -50,15 +50,25 @@ export async function suggestLocations(q: string): Promise<LocationSuggestion[]>
 }
 
 // TO — Google Places API (unlimited, any location in India)
-export async function suggestDestinations(q: string, airportsOnly = false, city = ""): Promise<LocationSuggestion[]> {
+export async function suggestDestinations(q: string, airportsOnly = false, city = "", outstation = false): Promise<LocationSuggestion[]> {
   if (q.trim().length < 2) return [];
   try {
     const data = await apiFetch<{ suggestions: LocationSuggestion[] }>(
-      `/api/locations/suggest-destination?q=${encodeURIComponent(q)}${airportsOnly ? "&type=airport" : ""}${city ? `&city=${encodeURIComponent(city)}` : ""}`
+      `/api/locations/suggest-destination?q=${encodeURIComponent(q)}${airportsOnly ? "&type=airport" : ""}${city ? `&city=${encodeURIComponent(city)}` : ""}${outstation ? "&area=outstation" : ""}`
     );
     return data.suggestions ?? [];
   } catch {
     return [];
+  }
+}
+
+/** Outstation guard: are all these places inside the served cities? Fails open if the check itself errors. */
+export async function checkServiceable(places: string[]): Promise<boolean> {
+  try {
+    const data = await apiFetch<{ serviceable: boolean }>(`/api/locations/serviceable?places=${encodeURIComponent(places.join("|"))}`);
+    return data.serviceable !== false;
+  } catch {
+    return true;
   }
 }
 

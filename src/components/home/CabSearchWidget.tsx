@@ -13,7 +13,7 @@ import { siteConfig } from "@/src/config/site";
 import { TimeSelect } from "@/src/components/common/TimeSelect";
 import { AIRPORTS, searchAirports } from "@/src/lib/airports";
 import {
-  suggestLocations, suggestDestinations, getWebConfig, formatCancelWindow,
+  suggestLocations, suggestDestinations, checkServiceable, getWebConfig, formatCancelWindow,
   type LocationSuggestion, type WebConfig,
 } from "@/src/lib/api";
 
@@ -31,8 +31,10 @@ function useWebConfig() {
 const RECENT_KEY = "gic_recent_places";
 
 function LocationInput({
-  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel, bare,
+  value, onChange, placeholder, required, disabled, mode = "from", ariaLabel, bare, outstation,
 }: {
+  /** One Way / Round Trip pickup (FROM): only the served cities (and hotels, stations, airports inside them). Drop and stop are unrestricted. */
+  outstation?: boolean;
   /** Airport tab address fields: any place via search, without the popular-cities / recent lists. */
   bare?: boolean;
   value: string;
@@ -74,7 +76,7 @@ function LocationInput({
     setSearched(false);
     const timer = setTimeout(async () => {
       setLoading(true);
-      const results = mode === "from" ? await suggestLocations(q) : await suggestDestinations(q);
+      const results = mode === "from" ? await suggestLocations(q, outstation) : await suggestDestinations(q, false, "", outstation);
       if (id !== reqId.current) return;
       setLoading(false);
       setSuggestions(results);
@@ -82,7 +84,7 @@ function LocationInput({
       setActive(-1);
     }, 250);
     return () => clearTimeout(timer);
-  }, [q, mode, disabled]);
+  }, [q, mode, disabled, outstation]);
 
   useEffect(() => {
     if (!open) return;
@@ -234,7 +236,9 @@ function LocationInput({
 
       {showEmpty && (
         <div className="absolute z-40 left-0 right-0 mt-1 bg-white border border-gray-100 rounded-xl shadow-lg px-3 py-3 text-sm text-gray-500">
-          {mode === "from" ? "Service not available at this location." : "No matching places found. Try a different spelling."}
+          {outstation
+            ? "Service not available at this location. We are starting soon!"
+            : mode === "from" ? "Service not available at this location." : "No matching places found. Try a different spelling."}
         </div>
       )}
     </div>
@@ -515,7 +519,7 @@ export function CabSearchWidget() {
     setToLocation(fromLocation);
   };
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const from = fromLocation.trim();
     const to = toLocation.trim();
@@ -543,6 +547,9 @@ export function CabSearchWidget() {
       // Airport side must be one of the listed airports; the address side is any searched place.
       const airportSide = airportFrom ? from : to;
       if (!AIRPORTS.some((a) => a.label === airportSide)) return setFormError("Please select an airport from the list.");
+    }
+    if (tab === "outstation" && !(await checkServiceable([from]))) {
+      return setFormError("Service not available at this location. We are starting soon!");
     }
     // Any place in India is a valid pickup: the server prices the route from the typed/selected place, so no city-list check here.
     setFormError("");
@@ -728,6 +735,7 @@ export function CabSearchWidget() {
                           ariaLabel="From"
                           mode={airportTo ? "to" : "from"}
                           bare={airportTo}
+                          outstation={tab === "outstation"}
                           placeholder={airportTo ? "Enter pickup address" : "Enter pickup city or location"}
                           required
                         />
