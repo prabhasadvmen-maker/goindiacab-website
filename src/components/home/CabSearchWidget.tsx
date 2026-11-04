@@ -586,7 +586,7 @@ export function CabSearchWidget() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/new_hero_bg.png"
+          src="/GoIndiaCab hero section image.png"
           alt="GoIndiaCab Hero Background"
           fill
           className="object-cover object-center opacity-85"
