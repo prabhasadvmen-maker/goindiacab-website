@@ -134,6 +134,11 @@ export default function InternationalCabServicePage() {
     <div className="bg-white">
       <JsonLd data={pageJsonLd} />
 
+      {/* Search: From / To opens the normal search results page */}
+      <div id="top" className="scroll-mt-20">
+        <CabSearchWidget />
+      </div>
+
       {/* Heading */}
       <div className="bg-gray-light py-10 md:py-14 border-b border-border">
         <Container>
@@ -142,14 +147,9 @@ export default function InternationalCabServicePage() {
             Cab Service in India from USA – <span className="text-primary">Safe, Reliable &amp; Affordable</span> Travel for International Visitors
           </h1>
           <p className="text-gray-text text-lg mt-4 max-w-3xl leading-relaxed">
-            Enter your pickup and drop below to see fares for a private car with driver in Delhi and across India.
+            Enter your pickup and drop in the search box above to see fares for a private car with driver in Delhi and across India.
           </p>
         </Container>
-      </div>
-
-      {/* Search: From / To opens the normal search results page */}
-      <div id="top" className="scroll-mt-20">
-        <CabSearchWidget />
       </div>
 
       <Container className="py-14 md:py-20">
