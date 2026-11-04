@@ -21,7 +21,7 @@ type Confirmed = {
   confirmedAt?: string;
   statusHistory?: { status: string; at: string }[];
   cancelReason?: string;
-  driver?: { name: string; phone: string; vehicleNumber: string } | null;
+  driver?: { name: string; phone: string; vehicleNumber: string; vehicleModel?: string } | null;
 };
 
 const STEPS = [
@@ -215,6 +215,7 @@ export default function BookingPage({ params }: { params: Promise<{ id: string }
                   <p className="text-[11px] font-bold uppercase tracking-wide text-indigo-500">Your driver</p>
                   <p className="font-bold text-gray-900 truncate">{b.driver.name}</p>
                   {b.driver.vehicleNumber && <p className="text-xs text-gray-600">Vehicle no. <b className="font-mono">{b.driver.vehicleNumber}</b></p>}
+                  {b.driver.vehicleModel && <p className="text-xs text-gray-600">{b.driver.vehicleModel}</p>}
                 </div>
                 {b.driver.phone && (
                   <a href={`tel:${b.driver.phone}`} className="shrink-0 flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-bold text-white print:hidden">
