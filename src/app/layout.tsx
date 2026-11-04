@@ -25,7 +25,10 @@ export const metadata: Metadata = {
   title: "Book Cab & Taxi Services Across India | GoIndiaCab",
   description: "Book reliable one-way, round-trip, local and airport taxi services across India with GoIndiaCab. Best cab service in Delhi.",
   icons: {
-    icon: "/Goindiacabs logo.png",
+    icon: "/Goindiacab favicon logo.jpeg",
+  },
+  verification: {
+    google: "_C_mT0ZojV60op4hOr-Mu3Gq99sA90sFPBVEB9JNKK0",
   },
   openGraph: {
     title: "Book Cab & Taxi Services Across India | GoIndiaCab",
