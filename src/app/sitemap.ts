@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy-policy',
     '/terms-conditions',
     '/delhi-jaipur-same-day-tour',
+    '/en-us/private-car-with-driver-delhi-india',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
