@@ -103,8 +103,8 @@ export default function Footer() {
         <div className="max-w-[1400px] mx-auto px-4 xl:px-8 flex flex-col md:flex-row justify-between items-center text-sm font-medium text-gray-300">
           <p>Copyright 2021 - {currentYear} Go India Cab – A Unit of Go My Trails Adventures Pvt. Ltd All Rights Reserved</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/en-us/private-car-with-driver-delhi-india" className="hover:text-white transition flex items-center">
-              <span className="text-[10px] mr-2">◉</span> USA Travellers
+            <Link href="/international-cab-service" className="hover:text-white transition flex items-center">
+              <span className="text-[10px] mr-2">◉</span> International Travellers
             </Link>
             <Link href="/privacy-policy" className="hover:text-white transition flex items-center">
               <span className="text-[10px] mr-2">◉</span> Privacy

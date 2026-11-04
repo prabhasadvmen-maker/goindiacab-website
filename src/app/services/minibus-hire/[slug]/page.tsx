@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Container } from "@/src/components/common/Container";
 import { BookingForm } from "@/src/components/booking/BookingForm";
 import { Breadcrumb } from "@/src/components/common/Breadcrumb";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export default async function GenericServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -9,6 +10,8 @@ export default async function GenericServicePage({ params }: { params: Promise<{
   
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       <div className="bg-gray-light py-12 md:py-16 border-b border-border overflow-hidden">
         <Container>
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">

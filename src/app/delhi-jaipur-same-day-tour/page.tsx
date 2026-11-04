@@ -4,6 +4,7 @@ import { Container } from "@/src/components/common/Container";
 import { Breadcrumb } from "@/src/components/common/Breadcrumb";
 import { BookingForm } from "@/src/components/booking/BookingForm";
 import Image from "next/image";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export const metadata: Metadata = {
   title: "Delhi Jaipur Same Day Tour | GoIndiaCab",
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 export default function DelhiJaipurSameDayTour() {
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       <div className="bg-gray-light py-12 md:py-16 border-b border-border relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-cover bg-center" style={{ backgroundImage: `url('https://www.goindiacab.com/wp-content/uploads/2024/12/delhi.jpg.webp')` }}></div>
         <Container className="relative z-10">

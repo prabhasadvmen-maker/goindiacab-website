@@ -9,6 +9,7 @@ import { JsonLd } from "@/src/components/seo/JsonLd";
 import { delhiRoutes } from "@/src/data/delhiRoutes";
 import { CheckCircle, MapPin, Clock, CreditCard } from "lucide-react";
 import Image from "next/image";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export function generateStaticParams() {
   return delhiRoutes.map((route) => ({
@@ -61,6 +62,8 @@ export default async function DelhiToCityRoutePage({ params }: { params: Promise
 
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       <JsonLd data={jsonLd} />
       <div className="bg-gray-light py-12 md:py-16 border-b border-border relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-cover bg-center" style={{ backgroundImage: `url('${route.image}')` }}></div>

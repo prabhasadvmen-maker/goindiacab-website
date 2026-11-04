@@ -9,6 +9,7 @@ import { Button } from "@/src/components/common/Button";
 import { FAQSection } from "@/src/components/faq/FAQSection";
 import { taxiServiceLocalities } from "@/src/data/localities";
 import { Check, MapPin, ShieldCheck, CarFront } from "lucide-react";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export function generateStaticParams() {
   return taxiServiceLocalities.map((locality) => ({
@@ -41,6 +42,8 @@ export default async function TaxiServiceLocalityPage({ params }: { params: Prom
 
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       <div className="bg-gray-light py-12 md:py-16 border-b border-border overflow-hidden">
         <Container>
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">

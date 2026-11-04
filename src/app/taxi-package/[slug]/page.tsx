@@ -10,6 +10,7 @@ import { taxiPackages } from "@/src/data/packages";
 import { Check, X, Calendar, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export function generateStaticParams() {
   return taxiPackages.map((pkg) => ({
@@ -49,6 +50,8 @@ export default async function PackageDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       
       {/* Clean Light Hero Section with Crisp Image Poster */}
       <div className="bg-gradient-to-b from-[#eef6fc] via-[#f8fafc] to-white py-10 md:py-14 border-b border-gray-200">

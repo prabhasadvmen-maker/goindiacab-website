@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/src/components/common/Breadcrumb";
 import { Card } from "@/src/components/common/Card";
 import { SectionTitle } from "@/src/components/common/SectionTitle";
 import { outstationRoutes } from "@/src/data/routes";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export const metadata: Metadata = {
   title: "Outstation Taxi Services | GoIndiaCab",
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
 export default function TaxiOutstationPage() {
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       <div className="bg-gray-light py-12 md:py-16 border-b border-border">
         <Container>
           <Breadcrumb items={[{ label: "Taxi Outstation Services" }]} />

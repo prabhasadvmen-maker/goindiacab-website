@@ -8,6 +8,7 @@ import { FAQSection } from "@/src/components/faq/FAQSection";
 import { ShieldCheck, Car, Clock, Phone, CheckCircle2, Star, MapPin, Award, Headphones } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 function formatSlug(slug: string): string {
   return slug
@@ -51,6 +52,8 @@ export default async function GenericCityServicePage({ params }: { params: Promi
 
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       
       {/* Top Hero Banner */}
       <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 py-12 md:py-16 text-white border-b border-gray-800 relative overflow-hidden">

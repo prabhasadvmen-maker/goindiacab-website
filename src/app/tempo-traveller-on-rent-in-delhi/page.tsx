@@ -4,6 +4,7 @@ import { Container } from "@/src/components/common/Container";
 import { Breadcrumb } from "@/src/components/common/Breadcrumb";
 import { Card } from "@/src/components/common/Card";
 import { SectionTitle } from "@/src/components/common/SectionTitle";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export const metadata: Metadata = {
   title: "Tempo Traveller on Rent in Delhi | Luxury & AC Force Traveller",
@@ -23,6 +24,8 @@ export default function TempoTravellerPage() {
 
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       <div className="bg-gray-light py-12 md:py-16 border-b border-border">
         <Container>
           <Breadcrumb items={[{ label: "Tempo Traveller in Delhi" }]} />

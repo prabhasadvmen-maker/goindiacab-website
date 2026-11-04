@@ -5,6 +5,7 @@ import { outstationRoutes, popularRoutes } from '@/src/data/routes';
 import { delhiRoutes } from '@/src/data/delhiRoutes';
 import { cabServiceLocalities, taxiServiceLocalities } from '@/src/data/localities';
 import { blogs } from '@/src/data/blogs';
+import { internationalPages, internationalHref } from '@/src/data/internationalPages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
@@ -28,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy-policy',
     '/terms-conditions',
     '/delhi-jaipur-same-day-tour',
-    '/en-us/private-car-with-driver-delhi-india',
+    '/international-cab-service',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -85,8 +86,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const internationalCountryPages = internationalPages.map((p) => ({
+    url: `${baseUrl}${internationalHref(p.locale)}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticPages,
+    ...internationalCountryPages,
     ...packagePages,
     ...outstationPages,
     ...popularRoutePages,

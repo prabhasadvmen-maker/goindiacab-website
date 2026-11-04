@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/src/components/common/Breadcrumb";
 import { BookingForm } from "@/src/components/booking/BookingForm";
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export const metadata: Metadata = {
   title: "16 Seater Tempo Traveller on Rent in Delhi | GoIndiaCab",
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 export default function Seater16Page() {
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       <div className="bg-gray-light py-12 md:py-16 border-b border-border">
         <Container>
           <Breadcrumb items={[{ label: "Tempo Traveller", href: "/tempo-traveller-on-rent-in-delhi" }, { label: "16 Seater" }]} />

@@ -10,6 +10,7 @@ import { popularRoutes } from "@/src/data/routes";
 import { Check, Clock, MapPin, Car } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export function generateStaticParams() {
   return popularRoutes.map((route) => ({
@@ -49,6 +50,8 @@ export default async function PopularRouteDetailPage({ params }: { params: Promi
 
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       {/* Hero Section */}
       <div className="bg-gray-light py-12 md:py-16 border-b border-border">
         <Container>

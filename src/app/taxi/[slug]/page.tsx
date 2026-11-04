@@ -10,6 +10,7 @@ import { outstationRoutes } from "@/src/data/routes";
 import { Check, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
 export function generateStaticParams() {
   return outstationRoutes.map((route) => ({
@@ -49,6 +50,8 @@ export default async function OutstationRoutePage({ params }: { params: Promise<
 
   return (
     <div className="bg-white min-h-screen">
+      <CabSearchWidget />
+
       {/* Hero Section */}
       <div className="bg-gray-light py-12 md:py-16 border-b border-border">
         <Container>
