@@ -401,3 +401,24 @@ export async function verifyPayment(payload: VerifyPaymentPayload): Promise<Veri
     body: JSON.stringify(payload),
   });
 }
+
+// ─── 8. Contact Inquiry ───────────────────────────────────────────────────────
+export type ContactInquiryPayload = {
+  name: string;
+  phone: string;
+  email?: string;
+  subject: string;
+  message: string;
+  serviceType?: string;
+  pickupLocation?: string;
+  dropLocation?: string;
+  travelDate?: string;
+  passengers?: number;
+};
+
+export async function submitContactInquiry(payload: ContactInquiryPayload): Promise<{ success: boolean; message: string }> {
+  return apiFetch<{ success: boolean; message: string }>("/api/contact", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
