@@ -56,6 +56,13 @@ export default function Header() {
           </Link>
 
           <Link
+            href="/contact-us"
+            className="hidden sm:inline-block whitespace-nowrap text-xs sm:text-sm font-bold text-gray-700 hover:text-[#00A5D9] transition-colors"
+          >
+            Contact Us
+          </Link>
+
+          <Link
             href="/download-app"
             className="hidden lg:inline-flex whitespace-nowrap items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 hover:border-[#00A5D9] text-gray-700 hover:text-[#00A5D9] font-bold text-xs transition-all shadow-sm"
           >

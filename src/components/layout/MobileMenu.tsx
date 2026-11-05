@@ -48,12 +48,12 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 xl:hidden">
+    <div className="fixed inset-0 z-[60] flex items-start justify-end p-3 pt-16 xl:hidden">
       {/* Semi-transparent backdrop that closes menu on click (no blur) */}
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
       
-      {/* Centered card menu */}
-      <div className="relative bg-gray-50 flex flex-col w-[320px] sm:w-[360px] max-h-[85vh] rounded-[1.5rem] shadow-2xl overflow-hidden border border-white">
+      {/* Card menu anchored top-right, under the header */}
+      <div className="mobile-drawer relative bg-gray-50 flex flex-col w-[320px] max-w-full sm:w-[360px] max-h-[85vh] rounded-[1.5rem] shadow-2xl overflow-hidden border border-white">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
           <div className="flex items-center h-11">
@@ -78,6 +78,20 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   <FileText className="w-4 h-4" />
                 </div>
                 <span>Blog</span>
+              </Link>
+            </div>
+
+            {/* Contact Us Link */}
+            <div className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-xs hover:shadow-md transition-shadow">
+              <Link
+                href="/contact-us"
+                onClick={onClose}
+                className="flex items-center space-x-3 p-3 font-bold text-sm text-gray-700 hover:text-[#00A5D9] transition-colors"
+              >
+                <div className="w-9 h-9 rounded-[10px] bg-blue-50/80 text-[#00A5D9] flex items-center justify-center border border-blue-100">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <span>Contact Us</span>
               </Link>
             </div>
 
