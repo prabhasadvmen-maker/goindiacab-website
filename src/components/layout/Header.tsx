@@ -12,7 +12,14 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("user_token"));
+    const check = () => setIsLoggedIn(!!localStorage.getItem("user_token"));
+    check();
+    window.addEventListener("user_login", check);
+    window.addEventListener("storage", check);
+    return () => {
+      window.removeEventListener("user_login", check);
+      window.removeEventListener("storage", check);
+    };
   }, []);
 
   const handleLogout = () => {

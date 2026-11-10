@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { Breadcrumb } from "@/src/components/common/Breadcrumb";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { siteConfig } from "@/src/config/site";
 import { ArrowRight, ShieldCheck, Lock, CheckCircle2, Car } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { Breadcrumb } from "@/src/components/common/Breadcrumb";
 
 const BASE = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -29,6 +30,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [userName, setUserName] = useState("");
+  const router = useRouter();
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,8 +58,10 @@ export default function LoginPage() {
       );
       localStorage.setItem("user_token", res.accessToken);
       localStorage.setItem("user_refresh", res.refreshToken);
+      window.dispatchEvent(new Event("user_login"));
       setUserName(res.user?.name || "");
       setIsSuccess(true);
+      setTimeout(() => router.push("/"), 1500);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Invalid OTP");
     } finally {
