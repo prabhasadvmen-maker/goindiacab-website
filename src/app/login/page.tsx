@@ -3,33 +3,76 @@
 import { useState } from "react";
 import { Breadcrumb } from "@/src/components/common/Breadcrumb";
 import { siteConfig } from "@/src/config/site";
-import { User, Phone, ArrowRight, ShieldCheck, Lock, CheckCircle2, Car } from "lucide-react";
+import { ArrowRight, ShieldCheck, Lock, CheckCircle2, Car } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+const BASE = process.env.NEXT_PUBLIC_API_URL || "";
+
+async function apiPost<T>(path: string, body: object): Promise<T> {
+  const res = await fetch(`${BASE}${path}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.message || "Something went wrong");
+  return json as T;
+}
 
 export default function LoginPage() {
   const [role, setRole] = useState<"customer" | "driver">("customer");
   const [mobile, setMobile] = useState("");
   const [step, setStep] = useState<"mobile" | "otp">("mobile");
-  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [userName, setUserName] = useState("");
 
-  const handleSendOtp = (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (mobile.length === 10) {
+    if (mobile.length !== 10) { setError("Please enter a valid 10-digit mobile number"); return; }
+    setError(""); setLoading(true);
+    try {
+      await apiPost("/api/v1/user/auth/send-otp", { phone: mobile });
       setStep("otp");
-    } else {
-      alert("Please enter a valid 10-digit mobile number!");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to send OTP");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleVerifyOtp = (e: React.FormEvent) => {
+  const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     const enteredOtp = otp.join("");
-    if (enteredOtp.length === 4) {
+    if (enteredOtp.length !== 6) { setError("Please enter the 6-digit OTP"); return; }
+    setError(""); setLoading(true);
+    try {
+      const res = await apiPost<{ accessToken: string; refreshToken: string; user: { name: string } }>(
+        "/api/v1/user/auth/verify-otp",
+        { phone: mobile, otp: enteredOtp }
+      );
+      localStorage.setItem("user_token", res.accessToken);
+      localStorage.setItem("user_refresh", res.refreshToken);
+      setUserName(res.user?.name || "");
       setIsSuccess(true);
-    } else {
-      alert("Please enter 4-digit OTP (e.g. 1234)");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Invalid OTP");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    setError(""); setLoading(true);
+    try {
+      await apiPost("/api/v1/user/auth/resend-otp", { phone: mobile });
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to resend OTP");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,7 +133,7 @@ export default function LoginPage() {
             <div className="flex items-center bg-gray-100 p-1 rounded-2xl mb-8 max-w-sm">
               <button
                 type="button"
-                onClick={() => { setRole("customer"); setStep("mobile"); setIsSuccess(false); }}
+                onClick={() => { setRole("customer"); setStep("mobile"); setIsSuccess(false); setError(""); setOtp(["","","","","",""]); }}
                 className={`flex-1 py-2.5 text-xs font-black rounded-xl transition-all cursor-pointer ${
                   role === "customer"
                     ? "bg-white text-[#00A5D9] shadow-sm"
@@ -102,7 +145,7 @@ export default function LoginPage() {
 
               <button
                 type="button"
-                onClick={() => { setRole("driver"); setStep("mobile"); setIsSuccess(false); }}
+                onClick={() => { setRole("driver"); setStep("mobile"); setIsSuccess(false); setError(""); setOtp(["","","","","",""]); }}
                 className={`flex-1 py-2.5 text-xs font-black rounded-xl transition-all cursor-pointer ${
                   role === "driver"
                     ? "bg-white text-[#FF6600] shadow-sm"
@@ -120,7 +163,7 @@ export default function LoginPage() {
                 </div>
                 <h3 className="text-2xl font-black text-gray-900">Successfully Logged In!</h3>
                 <p className="text-sm font-bold text-gray-600">
-                  Welcome back! You are now logged in to GoIndiaCab {role === "driver" ? "Driver Portal" : "Customer Portal"}.
+                  Welcome{userName ? `, ${userName}` : ""}! You are now logged in to GoIndiaCab {role === "driver" ? "Driver Portal" : "Customer Portal"}.
                 </p>
                 <Link
                   href="/"
@@ -159,24 +202,20 @@ export default function LoginPage() {
                   </div>
                 </div>
 
+                {error && <p className="text-xs font-bold text-red-500">{error}</p>}
+
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[#FF6600] hover:bg-[#e65200] text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-orange-500/20 transition flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={loading}
+                  className="w-full py-4 bg-[#FF6600] hover:bg-[#e65200] text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-orange-500/20 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                 >
-                  <span>Get OTP</span>
-                  <ArrowRight className="w-4 h-4" />
+                  {loading ? <span>Sending...</span> : <><span>Get OTP</span><ArrowRight className="w-4 h-4" /></>}
                 </button>
 
                 <p className="text-[11px] font-bold text-gray-400 text-center">
                   By logging in, you agree to GoIndiaCab's{" "}
-                  <Link href="/terms-conditions" className="text-[#00A5D9] underline">
-                    Terms & Conditions
-                  </Link>{" "}
-                  and{" "}
-                  <Link href="/privacy-policy" className="text-[#00A5D9] underline">
-                    Privacy Policy
-                  </Link>
-                  .
+                  <Link href="/terms-conditions" className="text-[#00A5D9] underline">Terms & Conditions</Link>{" "}and{" "}
+                  <Link href="/privacy-policy" className="text-[#00A5D9] underline">Privacy Policy</Link>.
                 </p>
               </form>
             ) : (
@@ -185,53 +224,49 @@ export default function LoginPage() {
                   <h3 className="text-2xl font-black text-gray-900">Enter Verification Code</h3>
                   <p className="text-xs font-bold text-gray-500 mt-1">
                     OTP sent to <span className="text-gray-900 font-black">+91 {mobile}</span>.{" "}
-                    <button
-                      type="button"
-                      onClick={() => setStep("mobile")}
-                      className="text-[#00A5D9] underline cursor-pointer"
-                    >
+                    <button type="button" onClick={() => { setStep("mobile"); setError(""); setOtp(["","","","","",""]); }} className="text-[#00A5D9] underline cursor-pointer">
                       Edit Number
                     </button>
                   </p>
                 </div>
 
-                <div className="flex gap-3 justify-center py-2">
-                  {[0, 1, 2, 3].map((idx) => (
+                <div className="flex gap-2 justify-center py-2">
+                  {[0,1,2,3,4,5].map((idx) => (
                     <input
                       key={idx}
                       id={`otp-${idx}`}
                       type="text"
+                      inputMode="numeric"
                       maxLength={1}
                       value={otp[idx]}
                       onChange={(e) => {
-                        const val = e.target.value;
+                        const val = e.target.value.replace(/\D/g, "");
                         const newOtp = [...otp];
                         newOtp[idx] = val;
                         setOtp(newOtp);
-                        if (val && idx < 3) {
-                          const nextInput = document.getElementById(`otp-${idx + 1}`);
-                          nextInput?.focus();
-                        }
+                        if (val && idx < 5) document.getElementById(`otp-${idx + 1}`)?.focus();
                       }}
-                      className="w-14 h-14 text-center text-xl font-black bg-gray-50 border-2 border-gray-300 rounded-2xl text-gray-900 focus:outline-none focus:border-[#00A5D9] focus:bg-white transition"
+                      onKeyDown={(e) => {
+                        if (e.key === "Backspace" && !otp[idx] && idx > 0) document.getElementById(`otp-${idx - 1}`)?.focus();
+                      }}
+                      className="w-11 h-12 text-center text-xl font-black bg-gray-50 border-2 border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:border-[#00A5D9] focus:bg-white transition"
                     />
                   ))}
                 </div>
 
+                {error && <p className="text-xs font-bold text-red-500 text-center">{error}</p>}
+
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[#00A5D9] hover:bg-[#008db9] text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-blue-500/20 transition flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={loading}
+                  className="w-full py-4 bg-[#00A5D9] hover:bg-[#008db9] text-white font-black text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-blue-500/20 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                 >
                   <Lock className="w-4 h-4" />
-                  <span>Verify OTP & Continue</span>
+                  <span>{loading ? "Verifying..." : "Verify OTP & Continue"}</span>
                 </button>
 
                 <div className="text-center">
-                  <button
-                    type="button"
-                    onClick={() => alert("OTP Resent to +91 " + mobile)}
-                    className="text-xs font-bold text-[#00A5D9] hover:underline cursor-pointer"
-                  >
+                  <button type="button" onClick={handleResendOtp} disabled={loading} className="text-xs font-bold text-[#00A5D9] hover:underline cursor-pointer disabled:opacity-50">
                     Didn't receive code? Resend OTP
                   </button>
                 </div>

@@ -1,14 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/src/config/site";
-import { Phone, Smartphone, User, Menu } from "lucide-react";
+import { Phone, Smartphone, User, LogOut, Menu } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("user_token"));
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user_token");
+    localStorage.removeItem("user_refresh");
+    setIsLoggedIn(false);
+  };
 
   return (
     <header className="w-full bg-white z-50 sticky top-0 border-b border-gray-200/80 shadow-sm">
@@ -70,13 +81,23 @@ export default function Header() {
             <span>Download App</span>
           </Link>
 
-          <Link
-            href="/login"
-            className="hidden sm:inline-flex whitespace-nowrap items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 hover:border-[#00A5D9] text-gray-700 hover:text-[#00A5D9] font-bold text-xs transition-all shadow-sm"
-          >
-            <User className="w-3.5 h-3.5 text-gray-500" />
-            <span>Login</span>
-          </Link>
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="hidden sm:inline-flex whitespace-nowrap items-center gap-1.5 px-3 py-1.5 rounded-lg border border-red-200 hover:border-red-400 text-red-500 hover:text-red-600 font-bold text-xs transition-all shadow-sm cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Logout</span>
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="hidden sm:inline-flex whitespace-nowrap items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gray-300 hover:border-[#00A5D9] text-gray-700 hover:text-[#00A5D9] font-bold text-xs transition-all shadow-sm"
+            >
+              <User className="w-3.5 h-3.5 text-gray-500" />
+              <span>Login</span>
+            </Link>
+          )}
 
           {/* Mobile / tablet call button: shows the number so it can be read and tapped to call */}
           <a
