@@ -1,7 +1,59 @@
 import { Locality } from "@/src/types"
 
 export const cabServiceLocalities: Locality[] = [
-  { slug: "delhi", area: "Delhi", city: "Delhi", title: "Cab Service in Delhi", metaTitle: "Best Cab Service in Delhi | GoIndiaCab", metaDescription: "Book reliable cab service in Delhi. GoIndiaCab offers affordable taxi service in Delhi for local, outstation and airport transfers.", description: "Looking for the best cab service in Delhi? GoIndiaCab provides safe, reliable and affordable taxi services across Delhi NCR.", services: ["Local Cab", "Airport Transfer", "Outstation", "Corporate"], nearbyAreas: ["Aerocity", "Connaught Place", "Karol Bagh", "Rohini"], faqs: [] },
+  {
+    slug: "delhi",
+    area: "Delhi",
+    city: "Delhi",
+    title: "Cab Service in Delhi for Local, Airport & Outstation Travel",
+    metaTitle: "Cab Service in Delhi | Local, Airport & Outstation Taxi – Go India Cab",
+    metaDescription: "Book a cab service in Delhi for local travel, airport transfers and outstation trips. Choose one-way or round-trip options and request a fare quote from Go India Cab.",
+    description: "Need a dependable cab service in Delhi for a city ride, airport transfer or an outstation journey? Go India Cab helps you request a taxi for different travel needs. Share your pickup point, destination and travel date to check available cab options and review the fare before confirming.",
+    services: ["Local Cab", "Airport Transfer", "Outstation Cab", "One-Way Cab", "Round-Trip Taxi", "Corporate Cab"],
+    nearbyAreas: ["Aerocity", "Connaught Place", "Karol Bagh", "Rohini", "Dwarka", "Noida", "Gurugram", "Ghaziabad", "Faridabad", "IGI Airport"],
+    faqs: [
+      {
+        question: "How can I book a cab service in Delhi with Go India Cab?",
+        answer: "Enter your pickup and drop locations, choose the trip type and travel date, and submit the booking search or enquiry. You can also call +91-9792-000-555 for booking assistance."
+      },
+      {
+        question: "Does Go India Cab provide local taxi service in Delhi?",
+        answer: "Yes. Go India Cab provides local cab service in Delhi for appointments, shopping, meetings, hotel transfers and city travel. Share your pickup point, destination, date and required duration to confirm availability and the applicable package."
+      },
+      {
+        question: "Can I book an airport taxi in Delhi?",
+        answer: "Yes. Airport transfers are available for IGI Airport. Provide your flight number, terminal, pickup or drop details and travel time, then confirm waiting and parking terms before booking."
+      },
+      {
+        question: "Can I book a one-way outstation cab from Delhi?",
+        answer: "Yes. You can request a one-way cab for supported routes from Delhi. Availability and fare conditions depend on your destination, date and vehicle. Confirm any applicable driver return or route charges before booking."
+      },
+      {
+        question: "Can I book a round-trip taxi from Delhi?",
+        answer: "Yes. Share the onward and return dates, locations and planned stops. Confirm included kilometres, driver allowance and overnight charges before confirming."
+      },
+      {
+        question: "Which is the best cab service in Delhi for outstation travel?",
+        answer: "Compare route availability, vehicle suitability, fare inclusions, driver allowance, tolls, cancellation terms and support before choosing. Request a complete fare breakup from Go India Cab before confirming."
+      },
+      {
+        question: "How can I book a Delhi to Agra cab?",
+        answer: "Visit the dedicated Delhi to Agra cab service page, enter your pickup point and travel date, and request the available vehicle and fare."
+      },
+      {
+        question: "What charges should I check before confirming a taxi in Delhi?",
+        answer: "Ask whether the quote includes fuel, driver allowance, tolls, parking, state taxes, waiting time and extra kilometres. Also confirm cancellation, night and route-change charges."
+      },
+      {
+        question: "Does Go India Cab offer corporate cab service in Delhi?",
+        answer: "Corporate cab service is available. Contact the team to verify availability, billing, recurring schedules and service terms for your requirement."
+      },
+      {
+        question: "Which areas in Delhi does Go India Cab serve?",
+        answer: "Go India Cab serves across Delhi NCR including Aerocity, Connaught Place, Karol Bagh, Rohini, Dwarka, Noida, Gurugram, Ghaziabad and Faridabad. Contact the team to confirm availability for your exact pickup address."
+      }
+    ]
+  },
   { slug: "aerocity", area: "Aerocity", city: "Delhi", title: "Cab Service in Aerocity", metaTitle: "Cab Service in Aerocity Delhi | GoIndiaCab", metaDescription: "Book cab service in Aerocity Delhi. Airport taxi pickup and drop available 24/7.", description: "GoIndiaCab provides reliable cab service in Aerocity Delhi for airport transfers and local travel.", services: ["Airport Transfer", "Local Cab", "Corporate"], nearbyAreas: ["IGI Airport", "Dwarka", "Mahipalpur"], faqs: [] },
   { slug: "agra", area: "Agra", city: "Agra", title: "Cab Service in Agra", metaTitle: "Cab Service in Agra | GoIndiaCab", metaDescription: "Book cab service in Agra. Visit Taj Mahal and other attractions with GoIndiaCab.", description: "GoIndiaCab offers best cab service in Agra for sightseeing, local travel and outstation trips.", services: ["Local Sightseeing", "Outstation", "Airport Transfer"], nearbyAreas: ["Mathura", "Vrindavan", "Fatehpur Sikri"], faqs: [] },
   { slug: "connaught-place", area: "Connaught Place", city: "Delhi", title: "Cab Service in Connaught Place", metaTitle: "Cab Service in Connaught Place | GoIndiaCab", metaDescription: "Book cab service in Connaught Place Delhi. 24/7 taxi available.", description: "GoIndiaCab provides reliable cab service in Connaught Place for local and outstation travel.", services: ["Local Cab", "Airport Transfer", "Outstation"], nearbyAreas: ["Karol Bagh", "Paharganj", "Chandni Chowk"], faqs: [] },
