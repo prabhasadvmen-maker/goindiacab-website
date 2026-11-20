@@ -11,13 +11,18 @@ export type SectionKind = "intro" | "why" | "airport" | "city" | "outstation" | 
 export type PageSection = { kind: SectionKind; heading: string; blocks: PageBlock[] };
 
 export interface InternationalPage {
-  locale: string; // URL segment, e.g. "en-us"
+  locale: string;
   code: string;
   country: string;
   short: string;
   flag: string;
   h1: string;
   h1Tagline: string;
+  metaTitle: string;
+  metaDescription: string;
+  metaDescriptionShort: string;
+  primaryKeyword: string;
+  secondaryKeywords: string[];
   sections: PageSection[];
   faqs: { question: string; answer: string }[];
 }
@@ -31,8 +36,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "USA",
     "short": "USA",
     "flag": "🇺🇸",
-    "h1": "Cab Service in India from USA",
-    "h1Tagline": "Safe, Reliable & Affordable Travel for International Visitors",
+    "h1": "Private Car with Driver in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for USA Travellers",
+    "metaTitle": "Private Car with Driver in Delhi, India | GoIndiaCab",
+    "metaDescription": "Visiting India from the USA? Book a private car with a driver in Delhi through GoIndiaCab. Explore comfortable travel options for airport transfers, sightseeing and city journeys.",
+    "metaDescriptionShort": "Private car with driver in Delhi for USA visitors",
+    "primaryKeyword": "Private Car with Driver in Delhi India",
+    "secondaryKeywords": ["Private Car Hire India", "Delhi Chauffeur Service", "Car Rental with Driver Delhi", "Delhi Airport Transfer", "India Private Driver Service"],
     "sections": [
       {
         "kind": "intro",
@@ -216,8 +226,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "United Kingdom",
     "short": "UK",
     "flag": "🇬🇧",
-    "h1": "Cab Service in India from UK",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Car Hire with Driver in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for UK Travellers",
+    "metaTitle": "Private Car Hire with Driver in Delhi, India | GoIndiaCab",
+    "metaDescription": "Travelling to India from the UK? Discover private car hire with a driver in Delhi. Explore airport transfers, sightseeing and convenient travel options with GoIndiaCab.",
+    "metaDescriptionShort": "Private car hire with driver in Delhi for UK visitors",
+    "primaryKeyword": "Private Car Hire with Driver in Delhi",
+    "secondaryKeywords": ["Chauffeur Driven Car Delhi", "Car Hire India with Driver", "Delhi Private Taxi Service", "Delhi Airport Car Service", "India Travel Car Rental"],
     "sections": [
       {
         "kind": "intro",
@@ -408,8 +423,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Canada",
     "short": "Canada",
     "flag": "🇨🇦",
-    "h1": "Cab Service in India from Canada",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Delhi Private Car Rental with Driver",
+    "h1Tagline": "Trusted Cab Service for Canadian Travellers",
+    "metaTitle": "Delhi Private Car Rental with Driver | GoIndiaCab",
+    "metaDescription": "Planning a trip to Delhi from Canada? Arrange a private car with driver for airport pickups, local sightseeing and comfortable travel across Delhi with GoIndiaCab.",
+    "metaDescriptionShort": "Delhi private car rental with driver for Canadian visitors",
+    "primaryKeyword": "Delhi Private Car Rental with Driver",
+    "secondaryKeywords": ["Private Driver Delhi India", "Delhi Car Hire Service", "India Chauffeur Service", "Delhi Airport Pickup", "Private Taxi Delhi"],
     "sections": [
       {
         "kind": "intro",
@@ -600,8 +620,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Australia",
     "short": "Australia",
     "flag": "🇦🇺",
-    "h1": "Cab Service in India from Australia",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Hire a Private Car with Driver in Delhi",
+    "h1Tagline": "Trusted Cab Service for Australian Travellers",
+    "metaTitle": "Hire a Private Car with Driver in Delhi | GoIndiaCab",
+    "metaDescription": "Visiting Delhi from Australia? Explore private car hire with a driver for airport transfers, sightseeing and local travel. Plan your India journey with GoIndiaCab.",
+    "metaDescriptionShort": "Hire private car with driver in Delhi for Australian visitors",
+    "primaryKeyword": "Hire Private Car with Driver Delhi",
+    "secondaryKeywords": ["Delhi Car Rental with Driver", "Private Chauffeur Delhi", "India Private Car Hire", "Delhi Airport Transfers", "Delhi Sightseeing Car"],
     "sections": [
       {
         "kind": "intro",
@@ -759,8 +784,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Singapore",
     "short": "Singapore",
     "flag": "🇸🇬",
-    "h1": "Cab Service in India from Singapore",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Car & Driver Service in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for Singapore Travellers",
+    "metaTitle": "Private Car & Driver Service in Delhi, India | GoIndiaCab",
+    "metaDescription": "Travelling from Singapore to Delhi? Book a private car with driver for airport transfers, business travel and sightseeing. Explore convenient travel options with GoIndiaCab.",
+    "metaDescriptionShort": "Private car and driver service in Delhi for Singapore visitors",
+    "primaryKeyword": "Private Car and Driver Service Delhi",
+    "secondaryKeywords": ["Delhi Private Car Service", "Chauffeur Service Delhi", "India Car Rental with Driver", "Delhi Business Travel Car", "Delhi Airport Pickup"],
     "sections": [
       {
         "kind": "intro",
@@ -926,8 +956,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Germany",
     "short": "Germany",
     "flag": "🇩🇪",
-    "h1": "Cab Service in India for Germany Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Car with Driver in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for German Travellers",
+    "metaTitle": "Private Car with Driver in Delhi, India | GoIndiaCab",
+    "metaDescription": "Visiting Delhi from Germany? Arrange a private car with a driver for airport transfers, sightseeing and local journeys. Explore your travel options with GoIndiaCab.",
+    "metaDescriptionShort": "Private car with driver in Delhi for German visitors",
+    "primaryKeyword": "Private Car with Driver Delhi India",
+    "secondaryKeywords": ["Delhi Chauffeur Service", "Private Car Rental India", "Delhi Airport Transfer", "Car Hire with Driver Delhi", "India Private Transport"],
     "sections": [
       {
         "kind": "intro",
@@ -1099,8 +1134,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "France",
     "short": "France",
     "flag": "🇫🇷",
-    "h1": "Cab Service in India for France Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Delhi Private Car Hire with Driver",
+    "h1Tagline": "Trusted Cab Service for French Travellers",
+    "metaTitle": "Delhi Private Car Hire with Driver | GoIndiaCab",
+    "metaDescription": "Planning a visit to Delhi from France? Discover private car hire with a driver for airport transfers, city tours and local travel. Plan your journey with GoIndiaCab.",
+    "metaDescriptionShort": "Delhi private car hire with driver for French visitors",
+    "primaryKeyword": "Delhi Private Car Hire with Driver",
+    "secondaryKeywords": ["Private Chauffeur Delhi", "Car Rental India with Driver", "Delhi Sightseeing Car", "Delhi Airport Pickup Service", "Private Transport India"],
     "sections": [
       {
         "kind": "intro",
@@ -1272,8 +1312,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Italy",
     "short": "Italy",
     "flag": "🇮🇹",
-    "h1": "Cab Service in India for Italy Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Driver & Car Rental in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for Italian Travellers",
+    "metaTitle": "Private Driver & Car Rental in Delhi, India | GoIndiaCab",
+    "metaDescription": "Travelling from Italy to Delhi? Find private car rental with a driver for airport transfers, sightseeing and city travel. Explore convenient booking options with GoIndiaCab.",
+    "metaDescriptionShort": "Private driver and car rental in Delhi for Italian visitors",
+    "primaryKeyword": "Private Driver and Car Rental Delhi",
+    "secondaryKeywords": ["Private Car Hire Delhi", "Delhi Chauffeur Driven Car", "India Car Rental Service", "Delhi Airport Transfer", "Delhi City Tour Car"],
     "sections": [
       {
         "kind": "intro",
@@ -1444,8 +1489,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Spain",
     "short": "Spain",
     "flag": "🇪🇸",
-    "h1": "Cab Service in India for Spain Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Car Rental with Driver in Delhi",
+    "h1Tagline": "Trusted Cab Service for Spanish Travellers",
+    "metaTitle": "Private Car Rental with Driver in Delhi | GoIndiaCab",
+    "metaDescription": "Visiting India from Spain? Arrange a private car with driver in Delhi for airport pickups, sightseeing and local travel. Explore comfortable travel options with GoIndiaCab.",
+    "metaDescriptionShort": "Private car rental with driver in Delhi for Spanish visitors",
+    "primaryKeyword": "Private Car Rental with Driver Delhi",
+    "secondaryKeywords": ["Delhi Private Driver", "Chauffeur Service India", "Delhi Airport Car Hire", "Private Taxi Delhi", "India Car Rental with Driver"],
     "sections": [
       {
         "kind": "intro",
@@ -1613,8 +1663,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Japan",
     "short": "Japan",
     "flag": "🇯🇵",
-    "h1": "Cab Service in India for Japan Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Delhi Private Chauffeur & Car Service",
+    "h1Tagline": "Trusted Cab Service for Japanese Travellers",
+    "metaTitle": "Delhi Private Chauffeur & Car Service | GoIndiaCab",
+    "metaDescription": "Planning a Delhi trip from Japan? Explore private chauffeur and car services for airport transfers, sightseeing and local journeys. Contact GoIndiaCab to plan your travel.",
+    "metaDescriptionShort": "Delhi private chauffeur and car service for Japanese visitors",
+    "primaryKeyword": "Delhi Private Chauffeur Service",
+    "secondaryKeywords": ["Private Car with Driver Delhi", "Delhi Airport Transfer", "India Chauffeur Car Rental", "Delhi Sightseeing Transport", "Private Driver India"],
     "sections": [
       {
         "kind": "intro",
@@ -1786,8 +1841,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "UAE (Dubai)",
     "short": "UAE",
     "flag": "🇦🇪",
-    "h1": "Cab Service in India for UAE (Dubai) Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Car with Driver in Delhi for UAE Travellers",
+    "h1Tagline": "Trusted Cab Service for UAE & Dubai Visitors",
+    "metaTitle": "Private Car with Driver in Delhi for UAE Travellers | GoIndiaCab",
+    "metaDescription": "Travelling from the UAE to Delhi? Book a private car with driver for airport transfers, family trips, sightseeing and local journeys with GoIndiaCab.",
+    "metaDescriptionShort": "Private car with driver in Delhi for UAE and Dubai visitors",
+    "primaryKeyword": "Private Car with Driver Delhi",
+    "secondaryKeywords": ["Delhi Chauffeur Service", "Private Car Hire India", "Delhi Airport Pickup", "Delhi Family Travel Car", "India Private Driver"],
     "sections": [
       {
         "kind": "intro",
@@ -1951,8 +2011,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Switzerland",
     "short": "Switzerland",
     "flag": "🇨🇭",
-    "h1": "Cab Service in India for Switzerland Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Car Hire with Driver in Delhi",
+    "h1Tagline": "Trusted Cab Service for Swiss Travellers",
+    "metaTitle": "Private Car Hire with Driver in Delhi | GoIndiaCab",
+    "metaDescription": "Visiting Delhi from Switzerland? Discover private car hire with a driver for airport transfers, sightseeing and convenient city travel with GoIndiaCab.",
+    "metaDescriptionShort": "Private car hire with driver in Delhi for Swiss visitors",
+    "primaryKeyword": "Private Car Hire with Driver Delhi",
+    "secondaryKeywords": ["Delhi Chauffeur Service", "India Private Car Rental", "Delhi Airport Transfer", "Private Driver India", "Delhi City Sightseeing Car"],
     "sections": [
       {
         "kind": "intro",
@@ -2124,8 +2189,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Netherlands",
     "short": "Netherlands",
     "flag": "🇳🇱",
-    "h1": "Cab Service in India for Netherlands (Holland) Tourists",
-    "h1Tagline": "",
+    "h1": "Delhi Private Car with Driver Service",
+    "h1Tagline": "Trusted Cab Service for Dutch Travellers",
+    "metaTitle": "Delhi Private Car with Driver Service | GoIndiaCab",
+    "metaDescription": "Planning a trip to Delhi from the Netherlands? Arrange private car travel with a driver for airport pickups, sightseeing and local journeys through GoIndiaCab.",
+    "metaDescriptionShort": "Delhi private car with driver service for Dutch visitors",
+    "primaryKeyword": "Delhi Private Car with Driver Service",
+    "secondaryKeywords": ["Private Car Rental Delhi", "Chauffeur Service India", "Delhi Airport Car Service", "India Car Hire with Driver", "Delhi Sightseeing Transport"],
     "sections": [
       {
         "kind": "intro",
@@ -2297,8 +2367,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "New Zealand",
     "short": "New Zealand",
     "flag": "🇳🇿",
-    "h1": "Cab Service in India for New Zealand Tourists",
-    "h1Tagline": "",
+    "h1": "Private Car Rental with Driver in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for New Zealand Travellers",
+    "metaTitle": "Private Car Rental with Driver in Delhi, India | GoIndiaCab",
+    "metaDescription": "Travelling from New Zealand to Delhi? Explore private car rental with a driver for airport transfers, sightseeing and local travel. Plan your trip with GoIndiaCab.",
+    "metaDescriptionShort": "Private car rental with driver in Delhi for New Zealand visitors",
+    "primaryKeyword": "Private Car Rental with Driver Delhi India",
+    "secondaryKeywords": ["Private Driver Delhi", "Delhi Chauffeur Service", "India Car Hire Delhi", "Delhi Airport Transfers", "Private Sightseeing Car Delhi"],
     "sections": [
       {
         "kind": "intro",
@@ -2466,8 +2541,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Mauritius",
     "short": "Mauritius",
     "flag": "🇲🇺",
-    "h1": "Cab Service in India for Mauritius Tourists",
-    "h1Tagline": "Safe, Reliable & Affordable Taxi Booking Across India",
+    "h1": "Private Driver & Car Hire in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for Mauritius Travellers",
+    "metaTitle": "Private Driver & Car Hire in Delhi, India | GoIndiaCab",
+    "metaDescription": "Visiting Delhi from Mauritius? Book a private car with driver for airport transfers, sightseeing and local travel. Discover convenient travel options with GoIndiaCab.",
+    "metaDescriptionShort": "Private driver and car hire in Delhi for Mauritius visitors",
+    "primaryKeyword": "Private Driver and Car Hire Delhi",
+    "secondaryKeywords": ["Delhi Private Car Rental India", "Chauffeur Service Delhi", "Delhi Airport Pickup", "Private Taxi Delhi", "Car Rental India with Driver"],
     "sections": [
       {
         "kind": "intro",
@@ -2639,8 +2719,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Poland",
     "short": "Poland",
     "flag": "🇵🇱",
-    "h1": "Cab Service in India for Poland Tourists",
-    "h1Tagline": "",
+    "h1": "Delhi Private Car Rental with Chauffeur",
+    "h1Tagline": "Trusted Cab Service for Polish Travellers",
+    "metaTitle": "Delhi Private Car Rental with Chauffeur | GoIndiaCab",
+    "metaDescription": "Planning a visit to Delhi from Poland? Explore private car rental with a chauffeur for airport transfers, sightseeing and local journeys with GoIndiaCab.",
+    "metaDescriptionShort": "Delhi private car rental with chauffeur for Polish visitors",
+    "primaryKeyword": "Delhi Private Car Rental with Chauffeur",
+    "secondaryKeywords": ["Private Car with Driver Delhi India", "Chauffeur Service Delhi", "Delhi Airport Transfer", "Car Hire Private Transport India", "Delhi Sightseeing Car"],
     "sections": [
       {
         "kind": "intro",
@@ -2812,8 +2897,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Fiji",
     "short": "Fiji",
     "flag": "🇫🇯",
-    "h1": "Cab Service in India for Fiji Tourists",
-    "h1Tagline": "",
+    "h1": "Private Car with Driver in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for Fiji Travellers",
+    "metaTitle": "Private Car with Driver in Delhi, India | GoIndiaCab",
+    "metaDescription": "Travelling from Fiji to Delhi? Discover private car services with a driver for airport transfers, sightseeing and city travel. Plan your journey with GoIndiaCab.",
+    "metaDescriptionShort": "Private car with driver in Delhi for Fiji visitors",
+    "primaryKeyword": "Private Car with Driver Delhi",
+    "secondaryKeywords": ["Delhi Car Rental Service India", "Private Driver Delhi", "Chauffeur Service Delhi", "Delhi Airport Pickup", "Private Car Hire India"],
     "sections": [
       {
         "kind": "intro",
@@ -2981,8 +3071,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Austria",
     "short": "Austria",
     "flag": "🇦🇹",
-    "h1": "Cab Service in India for Austria Tourists",
-    "h1Tagline": "",
+    "h1": "Private Chauffeur & Car Hire in Delhi",
+    "h1Tagline": "Trusted Cab Service for Austrian Travellers",
+    "metaTitle": "Private Chauffeur & Car Hire in Delhi | GoIndiaCab",
+    "metaDescription": "Visiting Delhi from Austria? Explore private chauffeur and car hire services for airport transfers, sightseeing and local travel. Contact GoIndiaCab to plan your trip.",
+    "metaDescriptionShort": "Private chauffeur and car hire in Delhi for Austrian visitors",
+    "primaryKeyword": "Private Chauffeur and Car Hire Delhi",
+    "secondaryKeywords": ["Delhi Private Car Rental India", "Chauffeur Service", "Private Driver Delhi", "Delhi Airport Transfer", "Car Hire India"],
     "sections": [
       {
         "kind": "intro",
@@ -3154,8 +3249,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Belgium",
     "short": "Belgium",
     "flag": "🇧🇪",
-    "h1": "Cab Service in India for Belgium Tourists",
-    "h1Tagline": "",
+    "h1": "Private Car with Driver in Delhi, India",
+    "h1Tagline": "Trusted Cab Service for Belgian Travellers",
+    "metaTitle": "Private Car with Driver in Delhi, India | GoIndiaCab",
+    "metaDescription": "Planning a Delhi trip from Belgium? Arrange a private car with driver for airport pickups, sightseeing and convenient city travel with GoIndiaCab.",
+    "metaDescriptionShort": "Private car with driver in Delhi for Belgian visitors",
+    "primaryKeyword": "Private Car with Driver Delhi India",
+    "secondaryKeywords": ["Delhi Chauffeur Service", "Private Car Rental India", "Delhi Airport Pickup", "India Car Hire with Driver", "Delhi Sightseeing Car"],
     "sections": [
       {
         "kind": "intro",
@@ -3327,8 +3427,13 @@ export const internationalPages: InternationalPage[] = [
     "country": "Sweden",
     "short": "Sweden",
     "flag": "🇸🇪",
-    "h1": "Cab Service in India for Sweden Tourists",
-    "h1Tagline": "",
+    "h1": "Delhi Private Car Hire & Driver Service",
+    "h1Tagline": "Trusted Cab Service for Swedish Travellers",
+    "metaTitle": "Delhi Private Car Hire & Driver Service | GoIndiaCab",
+    "metaDescription": "Travelling from Sweden to Delhi? Explore private car hire with a driver for airport transfers, sightseeing and local travel. Plan your India journey with GoIndiaCab.",
+    "metaDescriptionShort": "Delhi private car hire and driver service for Swedish visitors",
+    "primaryKeyword": "Delhi Private Car Hire and Driver Service",
+    "secondaryKeywords": ["Private Driver Delhi India", "Delhi Chauffeur Service India", "Private Car Rental Delhi", "Delhi Airport Transfer", "Delhi Sightseeing Transport"],
     "sections": [
       {
         "kind": "intro",

@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { CheckCircle2, ShieldCheck, Users, Clock, Award, Star, ArrowRight } from "lucide-react";
+import { CheckCircle2, Award, Star, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/src/config/site";
 
 export function AboutSection() {
   const points = [
-    { title: "100% Guaranteed Lowest Price", desc: "Best fare transparency with zero surge pricing." },
-    { title: "Verified & Experienced Drivers", desc: "Background checked professional drivers." },
-    { title: "No Hidden Charges", desc: "All-inclusive upfront quotes with no surprise fees." },
+    { title: "Fare Clarity Before Confirmation", desc: "Ask for a full fare breakup including tolls, driver allowance and state taxes." },
+    { title: "Verified & Experienced Drivers", desc: "Background-checked professional drivers for every trip." },
+    { title: "Multiple Vehicle Options", desc: "Sedan, SUV and Tempo Traveller based on group size and route." },
     { title: "24/7 Customer Support", desc: "Dedicated support team available round the clock." },
   ];
 
@@ -22,11 +22,11 @@ export function AboutSection() {
               
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white font-semibold text-xs mb-6 backdrop-blur-md">
                 <Award className="w-3.5 h-3.5 text-[#F27A1A]" />
-                India's Top-Rated Cab Operator
+                Trusted Cab Service Across India
               </span>
 
               <h3 className="text-2xl font-bold mb-6 text-white leading-snug">
-                Delivering Excellence Across Every Milestone
+                Serving Travellers Across India
               </h3>
 
               <div className="grid grid-cols-2 gap-4">
@@ -77,15 +77,22 @@ export function AboutSection() {
             </span>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
-              Go India Cab - <span className="text-[#0B4A9C]">Best Taxi Service in Delhi & India</span>
+              Cab Service in India for{" "}
+              <span className="text-[#0B4A9C]">Local, Airport &amp; Outstation Travel</span>
             </h2>
 
             <div className="space-y-4 text-gray-600 text-sm sm:text-base leading-relaxed mb-8">
               <p className="bg-slate-50 p-4 rounded-xl border-l-4 border-[#0B4A9C]">
-                Welcome to <strong className="text-gray-900 font-bold">Go India Cab</strong>, your trusted travel partner across India. We provide premium, reliable, and affordable taxi services in Delhi NCR and major Indian cities for local, outstation, and airport transfers.
+                <strong className="text-gray-900 font-bold">Go India Cab</strong> helps travellers request local, airport and outstation cab services across India. Choose a vehicle based on your group size, route and travel date, and review the complete fare before confirming.
               </p>
               <p>
-                With over <strong className="text-gray-900 font-bold">{siteConfig.stats.yearsOfExperience}</strong> of expertise and a track record of <strong className="text-gray-900 font-bold">{siteConfig.stats.happyCustomers} happy customers</strong>, we prioritize your safety, comfort, and punctuality on every ride.
+                With over <strong className="text-gray-900 font-bold">{siteConfig.stats.yearsOfExperience}</strong> of experience and a track record of <strong className="text-gray-900 font-bold">{siteConfig.stats.happyCustomers} happy customers</strong>, we prioritise safety, comfort and fare transparency on every journey.
+              </p>
+              <p>
+                Planning a trip from Delhi?{" "}
+                <Link href="/cab-service-in-delhi" className="text-[#0B4A9C] font-semibold underline underline-offset-2 hover:text-[#083875]">
+                  Cab Service in Delhi
+                </Link>{" "}— explore local, airport and outstation options from the capital.
               </p>
             </div>
 

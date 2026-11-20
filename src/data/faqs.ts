@@ -2,43 +2,43 @@ import { FAQ } from "@/src/types"
 
 export const homeFaqs: FAQ[] = [
   {
-    question: "Q1. Which is the best taxi service in Delhi?",
-    answer: "The best taxi service in Delhi should offer reliable drivers, clean vehicles, affordable pricing, and easy booking options. <b>Go India Cab</b> provides professional drivers, well-maintained cars, and 24/7 availability, making it a trusted option for comfortable travel in Delhi.",
+    question: "What cab services does Go India Cab provide?",
+    answer: "Go India Cab provides outstation, one-way, round-trip, local hourly and airport cab services across India. Availability depends on the route, date and vehicle.",
   },
   {
-    question: "Q2. How can I book a taxi service in Delhi quickly?",
-    answer: "Booking a taxi in Delhi is easy with Go India Cab. You can call us at +91-9792-000-555, fill the booking form on our website, or send us an email at info@goindiacab.com. We confirm your booking instantly.",
+    question: "Can I book a one-way cab from Delhi to another city?",
+    answer: "Yes. You can request a one-way outstation cab for supported routes. Enter your destination and travel date on the booking widget to check availability and fare conditions.",
   },
   {
-    question: "Q3. Are local taxi services available for travel within Delhi?",
-    answer: "Yes, many taxi services in Delhi offer local travel options. Go India Cab provides local cab services within Delhi for shopping, meetings, hospital visits, and more at affordable rates.",
+    question: "How do I book a Delhi to Agra cab?",
+    answer: "Visit the dedicated Delhi to Agra cab page, enter your pickup point, Agra drop location and travel date, and request the available vehicle and fare quote.",
   },
   {
-    question: "Q4. Do taxi services operate across Delhi NCR areas?",
-    answer: "Yes, Go India Cab operates across all Delhi NCR areas including Noida, Gurgaon, Faridabad, Ghaziabad and all major localities in Delhi.",
+    question: "Does Go India Cab provide airport pickup and drop?",
+    answer: "Yes. Airport transfers can be requested for supported airports. Share your flight details, terminal, arrival time and destination, then confirm waiting-time and parking policies before booking.",
   },
   {
-    question: "Q5. Are taxi services in Delhi safe for passengers?",
-    answer: "Go India Cab ensures passenger safety with verified drivers, GPS-tracked vehicles, and 24/7 customer support. All our drivers are background-checked and trained professionals.",
+    question: "How do I know what is included in the cab fare?",
+    answer: "Ask for a fare breakup before confirming. It should clarify fuel, driver allowance, tolls, parking, state taxes, waiting time and any additional charges. Review all inclusions and exclusions before confirming your booking.",
   },
   {
-    question: "Q6. What types of cars are available for taxi services in Delhi?",
-    answer: "Go India Cab offers a wide range of vehicles including budget sedans (Swift Dzire, Honda Amaze), SUVs (Ertiga, Innova), and luxury cars for all types of travel needs.",
+    question: "Can I book a cab for a family or group trip?",
+    answer: "Yes. Share your passenger count and luggage details to check sedan, SUV or Tempo Traveller availability. Confirm exact seating capacity and route suitability before booking.",
   },
   {
-    question: "Q7. Can I book a taxi in Delhi for airport pickup and drop?",
-    answer: "Yes, Go India Cab provides 24/7 airport taxi service in Delhi for pickup and drop at Indira Gandhi International Airport (IGI). We track your flight and ensure on-time pickup.",
+    question: "What is the difference between one-way and round-trip?",
+    answer: "A one-way cab drops you at the destination without a return journey in the same cab. A round-trip books the cab for both the outward and return journey. Fare conditions differ — review both options on the search results page.",
   },
   {
-    question: "Q8. Are taxi services in Delhi affordable for daily travel?",
-    answer: "Go India Cab offers competitive pricing starting from ₹11/km for outstation trips. We provide transparent pricing with no hidden charges.",
+    question: "How can I contact Go India Cab for booking assistance?",
+    answer: "Call +91-9792-000-555 or email info@goindiacab.com for booking assistance. Support is available to help with pickup instructions, route details and booking changes.",
   },
   {
-    question: "Q9. Can taxis be booked for outstation travel from Delhi?",
-    answer: "Yes, Go India Cab specializes in outstation taxi services from Delhi to Himachal Pradesh, Uttarakhand, Rajasthan, Uttar Pradesh, Punjab, and Jammu Kashmir.",
+    question: "Are local hourly cab rentals available?",
+    answer: "Yes. Local hourly rentals are available for meetings, shopping, hospital visits and sightseeing. Confirm the package duration, kilometre limits and extra-hour charges before booking.",
   },
   {
-    question: "Q10. What should I check before booking a taxi service in Delhi?",
-    answer: "Before booking a taxi in Delhi, check the company's reputation, driver verification process, vehicle condition, pricing transparency, and customer support availability. Go India Cab excels in all these areas.",
+    question: "Which vehicle should I choose for my trip?",
+    answer: "Choose based on passenger count, luggage and route. A sedan suits smaller groups; an SUV works for larger groups or extra luggage; a Tempo Traveller is suitable for family groups and events. Final vehicle allocation is subject to confirmation.",
   },
 ]

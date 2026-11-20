@@ -40,8 +40,8 @@ export function TaxiServicesSection() {
     <section className="py-20 neo-bg">
       <Container>
         <SectionTitle 
-          title="Our Outstation Taxi Services" 
-          subtitle="Explore incredible destinations across North India with our dedicated outstation cab services from Delhi."
+          title="Popular Outstation Routes from Delhi" 
+          subtitle="Starting in Delhi? Explore popular routes across North India. Select your destination and travel date to request a suitable vehicle."
         />
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

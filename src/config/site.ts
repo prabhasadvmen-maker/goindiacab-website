@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "GoIndiaCab",
   fullName: "Go India Cab",
   tagline: "Book Cab & Taxi Services Across India",
-  description: "Go India Cab is the best taxi service in Delhi NCR. Book reliable one-way, round-trip, local and airport taxi services across India.",
+  description: "Book cab services across India with Go India Cab. Choose one-way, round-trip, local and airport taxis, compare vehicle options and request a clear fare quote.",
   url: "https://www.goindiacab.com",
   logo: "/goindiacab-logo-wide.png", // cropped to the wordmark (the old square file was ~75% empty padding, so it rendered tiny)
   favicon: "/GoIndiaCab Favicon icon.png",

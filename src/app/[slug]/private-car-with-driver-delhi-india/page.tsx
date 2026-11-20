@@ -15,48 +15,48 @@ import {
   type PageBlock, type PageSection, type SectionKind,
 } from "@/src/data/internationalPages";
 
-// Only the locales in the data file exist (/en-us/..., /en-gb/..., ...). Any other first segment is a 404.
 export const dynamicParams = false;
 export function generateStaticParams() {
   return internationalPages.map((p) => ({ slug: p.locale }));
 }
 
 const absolute = (locale: string) => `${siteConfig.url}${internationalHref(locale)}`;
+const HUB_URL = `${siteConfig.url}/international-cab-service`;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const page = getInternationalPage(slug);
   if (!page) return {};
 
-  const hasCorporate = page.sections.some((s) => s.kind === "corporate");
-  const title = `${page.h1} | GoIndiaCab`;
-  const description =
-    `Safe, reliable and affordable cab service in India for ${page.short} travellers. Airport pickup, city taxis, outstation trips` +
-    `${hasCorporate ? " and corporate cars" : ""} with English-speaking drivers, GPS tracking and clear pricing. Book online.`;
+  const title = page.metaTitle || `${page.h1} | GoIndiaCab`;
+  const description = page.metaDescription || (
+    `Safe, reliable and affordable cab service in India for ${page.short} travellers. Airport pickup, city taxis, outstation trips with English-speaking drivers, GPS tracking and clear pricing. Book online.`
+  );
   const url = absolute(page.locale);
 
   return {
     title,
     description,
-    keywords: [
-      page.h1.toLowerCase(),
-      `taxi service in India from ${page.short}`,
-      `cab booking in India for ${page.short} travellers`,
-      "private car with driver Delhi India",
-      `airport taxi service in India for ${page.short} travellers`,
-    ],
     alternates: {
       canonical: url,
-      // hreflang: every country page points at all the others
-      languages: Object.fromEntries(
-        internationalPages.map((p) => [`en-${p.code.toUpperCase()}`, absolute(p.locale)])
-      ),
+      languages: {
+        "x-default": HUB_URL,
+        ...Object.fromEntries(
+          internationalPages.map((p) => [`en-${p.code.toUpperCase()}`, absolute(p.locale)])
+        ),
+      },
     },
-    openGraph: { title, description, url, siteName: siteConfig.fullName, locale: `en_${page.code.toUpperCase()}`, type: "website" },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: siteConfig.fullName,
+      locale: `en_${page.code.toUpperCase()}`,
+      type: "website",
+    },
   };
 }
 
-// Every href points at a page that already exists on the site.
 const CITY_LINKS: Record<string, string> = {
   Agra: "/popular-routes/cab-service-in-agra",
   Jaipur: "/popular-routes/cab-service-in-jaipur",
@@ -111,7 +111,6 @@ function Blocks({ blocks, kind }: { blocks: PageBlock[]; kind: SectionKind }) {
             </div>
           );
         }
-        // bullet list: cards for "Why choose", plain checklist elsewhere
         if (kind === "why") {
           return (
             <ul key={i} className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
@@ -174,11 +173,15 @@ export default async function InternationalCountryPage({ params }: { params: Pro
   const body = page.sections.filter((s) => s.kind !== "book");
   const others = internationalPages.filter((p) => p.locale !== page.locale);
 
-  const jsonLd = {
+  const title = page.metaTitle || `${page.h1} | GoIndiaCab`;
+  const description = page.metaDescription || `Safe, reliable cab service in India for ${page.short} travellers.`;
+
+  const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     name: page.h1,
-    serviceType: "Taxi and private car with driver service",
+    description,
+    serviceType: "Private Car with Driver",
     url,
     areaServed: { "@type": "Country", name: "India" },
     audience: { "@type": "Audience", audienceType: `Travellers from ${page.country}` },
@@ -189,18 +192,61 @@ export default async function InternationalCountryPage({ params }: { params: Pro
       telephone: siteConfig.phone.booking1,
       email: siteConfig.email,
     },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      description: "Private car with driver starting from ₹11/km. Airport transfers, city sightseeing, outstation trips.",
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "International Travellers", item: HUB_URL },
+      { "@type": "ListItem", position: 3, name: page.h1, item: url },
+    ],
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.fullName,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}${siteConfig.logo}`,
+    telephone: siteConfig.phone.booking1,
+    email: siteConfig.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.address,
+      addressLocality: "New Delhi",
+      addressCountry: "IN",
+    },
+    sameAs: Object.values(siteConfig.social),
   };
 
   return (
     <div className="bg-white">
-      <JsonLd data={jsonLd} />
+      <JsonLd data={serviceSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
+      <JsonLd data={organizationSchema} />
 
-      {/* Search: From / To opens the normal search results page */}
       <div id="top" className="scroll-mt-20">
         <CabSearchWidget />
       </div>
 
-      {/* Heading */}
       <div className="bg-gray-light py-10 md:py-14 border-b border-border">
         <Container>
           <Breadcrumb
@@ -223,6 +269,20 @@ export default async function InternationalCountryPage({ params }: { params: Pro
         <div className="max-w-4xl mx-auto space-y-16">
           {body.map((s, i) => <Section key={`${s.kind}-${i}`} s={s} />)}
 
+          {/* Keywords / secondary content block */}
+          {page.secondaryKeywords && page.secondaryKeywords.length > 0 && (
+            <section className="rounded-2xl bg-gray-light border border-border p-6">
+              <h2 className="text-lg font-bold text-dark mb-3">Related Services</h2>
+              <div className="flex flex-wrap gap-2">
+                {page.secondaryKeywords.map((kw) => (
+                  <span key={kw} className="rounded-full bg-white border border-border px-3.5 py-1.5 text-sm text-dark">
+                    {kw}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
+
           <section className="rounded-2xl bg-gray-light border border-border p-6 md:p-8">
             <h2 className="text-xl md:text-2xl font-bold text-dark mb-4">More ways to travel with us</h2>
             <div className="flex flex-wrap gap-3">
@@ -243,9 +303,8 @@ export default async function InternationalCountryPage({ params }: { params: Pro
         </div>
       </Container>
 
-      <FAQSection faqs={page.faqs.map((f) => ({ question: f.question, answer: f.answer }))} title={`FAQs – Cab Service in India for ${page.short} Travellers`} />
+      <FAQSection faqs={page.faqs.map((f) => ({ question: f.question, answer: f.answer }))} title={`FAQs – ${page.h1}`} />
 
-      {/* Closing CTA */}
       <section className="bg-slate-900 py-12 md:py-16">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
@@ -266,7 +325,6 @@ export default async function InternationalCountryPage({ params }: { params: Pro
         </Container>
       </section>
 
-      {/* Internal links to every other country page */}
       <section className="bg-gray-light border-t border-border py-10">
         <Container>
           <div className="max-w-5xl mx-auto">
