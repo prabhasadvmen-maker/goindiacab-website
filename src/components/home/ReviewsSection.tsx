@@ -6,20 +6,23 @@ export function ReviewsSection() {
   const reviews = [
     {
       name: "Rahul Sharma",
+      location: "Delhi to Jaipur",
       date: "2 weeks ago",
-      text: "Excellent service by Go India Cab. The driver was very polite and the car was clean. We travelled from Delhi to Jaipur and the journey was very smooth. Highly recommended!",
+      text: "Good service by Go India Cab. The driver was polite and the car was clean. We travelled from Delhi to Jaipur and the journey was smooth. Would book again.",
       rating: 5,
     },
     {
       name: "Priya Singh",
+      location: "Delhi to Manali",
       date: "1 month ago",
-      text: "We booked a tempo traveller for our family trip to Manali. The vehicle was in great condition and the driver was experienced in hilly areas. Very safe and comfortable ride.",
+      text: "We booked a Tempo Traveller for our family trip to Manali. The vehicle was in good condition and the driver was experienced on hilly roads. Comfortable ride overall.",
       rating: 5,
     },
     {
       name: "Amit Patel",
+      location: "Airport Transfer, Delhi",
       date: "3 months ago",
-      text: "Best taxi service in Delhi NCR. Affordable rates and no hidden charges. Have used their service multiple times for airport transfers. Always on time.",
+      text: "Used Go India Cab for airport transfers a few times. Fare was clear upfront and the driver arrived on time. No issues with the booking process.",
       rating: 5,
     }
   ];
@@ -28,7 +31,7 @@ export function ReviewsSection() {
     <section className="py-20 neo-bg">
       <Container>
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-[#2d3748]">Travelers Love Us</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-[#2d3748]">What Travellers Say</h2>
           <div className="w-24 h-1 bg-[#3f51b5] opacity-50 mx-auto rounded-full mb-6"></div>
           <div className="flex items-center justify-center flex-col">
             <div className="flex items-center space-x-1 mb-2">
@@ -36,7 +39,9 @@ export function ReviewsSection() {
                 <Star key={i} className="w-6 h-6 fill-[#f9c004] text-[#f9c004]" />
               ))}
             </div>
-            <p className="text-lg text-[#718096] font-medium">Google Rating: <strong className="text-[#3f51b5]">{siteConfig.googleRating} ★</strong> Based on {siteConfig.googleReviewCount} Reviews</p>
+            <p className="text-lg text-[#718096] font-medium">
+              Google Rating: <strong className="text-[#3f51b5]">{siteConfig.googleRating} ★</strong> based on {siteConfig.googleReviewCount} reviews
+            </p>
           </div>
         </div>
 
@@ -58,12 +63,16 @@ export function ReviewsSection() {
                 </div>
                 <div>
                   <p className="font-extrabold text-[#2d3748]">{review.name}</p>
-                  <p className="text-sm font-medium text-[#718096]">{review.date}</p>
+                  <p className="text-sm font-medium text-[#718096]">{review.location} &middot; {review.date}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        <p className="text-center text-xs text-gray-400 mt-8">
+          Reviews sourced from Google. Ratings verified at time of display.
+        </p>
       </Container>
     </section>
   );

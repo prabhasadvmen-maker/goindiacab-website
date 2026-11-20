@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
+import { siteConfig } from "@/src/config/site";
 
 export function OffersSection() {
   const offers = [
@@ -18,7 +19,7 @@ export function OffersSection() {
       badgeBg: "bg-[#00A5D9] text-white",
       cardBg: "bg-gradient-to-br from-[#e0f2fe] via-[#f0f9ff] to-[#ffffff]",
       title: "Flat 15% OFF on Outstation Cabs",
-      desc: "Use code GOINDIA15 on first booking",
+      desc: "Use code GOINDIA15 on first booking. Check terms before applying.",
       img: "/hero_white_sedan.png"
     },
     {
@@ -26,7 +27,7 @@ export function OffersSection() {
       badgeBg: "bg-[#f97316] text-white",
       cardBg: "bg-gradient-to-br from-[#ffedd5] via-[#fff7ed] to-[#ffffff]",
       title: "Flat ₹250 OFF on Airport Transfers",
-      desc: "Valid for Delhi T3 & IGI Airport Cabs",
+      desc: "Valid for IGI Airport cab bookings. Confirm terms at checkout.",
       img: "/offer_airplane.png"
     },
     {
@@ -34,7 +35,7 @@ export function OffersSection() {
       badgeBg: "bg-[#10b981] text-white",
       cardBg: "bg-gradient-to-br from-[#dcfce7] via-[#f0fdf4] to-[#ffffff]",
       title: "Save Extra 20% on Round Trips",
-      desc: "Keep cab for multi-day outstation trips",
+      desc: "Book a round-trip outstation cab. Check included km and terms.",
       img: "/offer_scenic_road.png"
     },
     {
@@ -42,7 +43,7 @@ export function OffersSection() {
       badgeBg: "bg-[#8b5cf6] text-white",
       cardBg: "bg-gradient-to-br from-[#f3e8ff] via-[#faf5ff] to-[#ffffff]",
       title: "₹500 Discount on Tempo Travellers",
-      desc: "Valid on 9 to 26 Seater Tempo Rentals",
+      desc: "Valid on 9 to 26 seater Tempo Traveller rentals. Confirm availability.",
       img: "/hero_white_sedan.png"
     },
   ];
@@ -59,22 +60,13 @@ export function OffersSection() {
             </div>
             <div>
               <h2 className="text-xl sm:text-2xl font-black text-gray-900 leading-none">
-                Offers For You
+                Offers &amp; Deals
               </h2>
               <p className="text-xs sm:text-sm text-gray-600 font-semibold mt-1">
-                Best deals on your next ride. Book now and save more!
+                Check available offers on your next cab booking. Confirm terms before applying.
               </p>
             </div>
           </div>
-
-          <button
-            onClick={() => alert("Viewing all promotional offers!")}
-            style={{ cursor: "pointer" }}
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:text-[#00A5D9] hover:border-[#00A5D9] font-bold text-xs transition-all cursor-pointer bg-white shadow-2xs"
-          >
-            <span>View All Offers</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         {/* 2. 4 Offer Cards Grid */}
@@ -105,21 +97,16 @@ export function OffersSection() {
               <div className="absolute right-2 bottom-3 w-16 h-14 pointer-events-none opacity-90">
                 <Image
                   src={offer.img}
-                  alt={offer.title}
+                  alt=""
                   fill
                   sizes="64px"
                   className="object-contain"
                 />
               </div>
 
-              <button 
-                onClick={() => alert(`Promo code ${offer.code} copied!`)}
-                style={{ cursor: "pointer" }}
-                className="mt-4 pt-2 border-t border-gray-200/60 text-xs font-black text-[#0066FF] hover:text-blue-800 flex items-center gap-1 cursor-pointer z-10"
-              >
-                <span>Apply Offer</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+              <div className="mt-4 pt-2 border-t border-gray-200/60 text-xs font-black text-[#0066FF]">
+                Apply at checkout
+              </div>
             </div>
           ))}
         </div>
@@ -132,8 +119,8 @@ export function OffersSection() {
               <Car className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <span className="block font-black text-sm text-gray-900">10,000+</span>
-              <span className="text-xs text-gray-600 font-semibold">Happy Customers</span>
+              <span className="block font-black text-sm text-gray-900">{siteConfig.stats.drivingCompleted}</span>
+              <span className="text-xs text-gray-600 font-semibold">Rides Completed</span>
             </div>
           </div>
 
@@ -142,8 +129,8 @@ export function OffersSection() {
               <Star className="w-5 h-5 fill-current" />
             </div>
             <div className="text-left">
-              <span className="block font-black text-sm text-gray-900">4.8 / 5</span>
-              <span className="text-xs text-gray-600 font-semibold">Customer Rating</span>
+              <span className="block font-black text-sm text-gray-900">{siteConfig.googleRating} / 5</span>
+              <span className="text-xs text-gray-600 font-semibold">Google Rating ({siteConfig.googleReviewCount})</span>
             </div>
           </div>
 
@@ -152,8 +139,8 @@ export function OffersSection() {
               <MapPin className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <span className="block font-black text-sm text-gray-900">200+</span>
-              <span className="text-xs text-gray-600 font-semibold">Cities Covered</span>
+              <span className="block font-black text-sm text-gray-900">{siteConfig.stats.yearsOfExperience}</span>
+              <span className="text-xs text-gray-600 font-semibold">Years Experience</span>
             </div>
           </div>
 
@@ -163,7 +150,7 @@ export function OffersSection() {
             </div>
             <div className="text-left">
               <span className="block font-black text-sm text-gray-900">24/7</span>
-              <span className="text-xs text-gray-600 font-semibold">Support Available</span>
+              <span className="text-xs text-gray-600 font-semibold">Booking Support</span>
             </div>
           </div>
 

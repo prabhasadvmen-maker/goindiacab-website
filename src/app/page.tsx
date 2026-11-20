@@ -15,6 +15,7 @@ import { TrustedSection } from "@/src/components/home/TrustedSection";
 import { QuickLinksSection } from "@/src/components/home/QuickLinksSection";
 import { homeFaqs } from "@/src/data/faqs";
 import { WelcomePopup } from "@/src/components/common/WelcomePopup";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Cab Service in India | Local & Outstation Cabs – Go India Cab",
@@ -156,6 +157,61 @@ export default function HomePage() {
       <ContactFormSection />
       <FAQSection faqs={homeFaqs} />
       <ReviewsSection />
+
+      {/* NRI & International Visitors Section */}
+      <section className="py-14 bg-white border-t border-gray-100">
+        <div className="max-w-[1400px] mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4">
+              Cab Travel for NRIs and International Visitors
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-6">
+              Returning to India or visiting from overseas? Plan airport pickups, local transfers and intercity journeys in advance. Share flight details, destination, travel dates and passenger requirements so the booking team can confirm pickup instructions, vehicle availability and fare.
+            </p>
+            <Link
+              href="/go-india-cab-the-perfect-travel-partner-for-nris-and-international-tourists"
+              className="inline-flex items-center gap-2 text-[#0B4A9C] font-bold underline underline-offset-2 hover:text-[#083875] transition-colors"
+            >
+              Read our guide for NRIs and international visitors →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-14 bg-[#0B4A9C]">
+        <div className="max-w-[1400px] mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-3">
+            Plan Your Next Journey
+          </h2>
+          <p className="text-blue-100 leading-relaxed mb-8 max-w-2xl mx-auto">
+            Tell us where you are travelling, when you want to leave and how many people are travelling. Request a suitable cab option and review the fare before confirming.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a
+              href="#search"
+              className="inline-flex items-center gap-2 bg-[#FF6600] hover:bg-[#e65200] text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition-all"
+            >
+              Search Cabs
+            </a>
+            <a
+              href={`tel:${siteConfig.phone.booking1}`}
+              className="inline-flex items-center gap-2 border border-white/40 text-white font-bold px-8 py-3.5 rounded-xl hover:bg-white/10 transition-all"
+            >
+              Call {siteConfig.phone.booking1}
+            </a>
+            <a
+              href="https://wa.me/919792000555"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-8 py-3.5 rounded-xl transition-all"
+            >
+              WhatsApp Us
+            </a>
+          </div>
+        </div>
+      </section>
+
       <TrustedSection />
       <QuickLinksSection />
       <WelcomePopup />

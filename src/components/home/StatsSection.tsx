@@ -39,7 +39,7 @@ export function StatsSection() {
     <section ref={sectionRef} className="py-16 neo-bg relative overflow-hidden">
       <Container className="relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-[#2d3748]">The Best Taxi Service In Delhi India</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-[#2d3748]">Go India Cab – Trusted Across India</h2>
           <div className="w-24 h-1 bg-[#3f51b5] opacity-50 mx-auto rounded-full"></div>
         </div>
 
