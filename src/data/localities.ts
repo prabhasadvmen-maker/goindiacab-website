@@ -55,7 +55,59 @@ export const cabServiceLocalities: Locality[] = [
     ]
   },
   { slug: "aerocity", area: "Aerocity", city: "Delhi", title: "Cab Service in Aerocity", metaTitle: "Cab Service in Aerocity Delhi | GoIndiaCab", metaDescription: "Book cab service in Aerocity Delhi. Airport taxi pickup and drop available 24/7.", description: "GoIndiaCab provides reliable cab service in Aerocity Delhi for airport transfers and local travel.", services: ["Airport Transfer", "Local Cab", "Corporate"], nearbyAreas: ["IGI Airport", "Dwarka", "Mahipalpur"], faqs: [] },
-  { slug: "agra", area: "Agra", city: "Agra", title: "Cab Service in Agra", metaTitle: "Cab Service in Agra | GoIndiaCab", metaDescription: "Book cab service in Agra. Visit Taj Mahal and other attractions with GoIndiaCab.", description: "GoIndiaCab offers best cab service in Agra for sightseeing, local travel and outstation trips.", services: ["Local Sightseeing", "Outstation", "Airport Transfer"], nearbyAreas: ["Mathura", "Vrindavan", "Fatehpur Sikri"], faqs: [] },
+  {
+    slug: "agra",
+    area: "Agra",
+    city: "Agra",
+    title: "Cab Service in Agra for Local Travel, Sightseeing & Outstation Trips",
+    metaTitle: "Cab Service in Agra | Local, Sightseeing & Outstation Taxi – Go India Cab",
+    metaDescription: "Book a cab service in Agra for local travel, Taj Mahal sightseeing, airport transfers and outstation trips. Request a vehicle and fare quote from Go India Cab.",
+    description: "Looking for a cab service in Agra for city travel, a Taj Mahal visit or an outstation journey? Go India Cab helps you request a taxi for local transfers, sightseeing, full-day travel and selected routes beyond Agra. Share your pickup location, destination, travel date and passenger count to check available vehicle options and receive a fare quote.",
+    services: ["Local Cab", "Sightseeing Taxi", "Full-Day Taxi", "Airport Transfer", "Outstation Cab", "One-Way Cab", "Round-Trip Taxi"],
+    nearbyAreas: ["Mathura", "Vrindavan", "Fatehpur Sikri", "Sikandra", "Bharatpur", "Gwalior", "Jaipur", "Delhi"],
+    faqs: [
+      {
+        question: "How can I book a cab service in Agra with Go India Cab?",
+        answer: "Enter your pickup and destination, select your travel date and trip type, and submit the booking enquiry. You can also call +91-9792-000-555 or email info@goindiacab.com."
+      },
+      {
+        question: "Can I book a taxi for Taj Mahal sightseeing?",
+        answer: "Yes. You can request a sightseeing cab for the Taj Mahal and other Agra attractions. Confirm the itinerary, duration, waiting charges and monument access timings before booking."
+      },
+      {
+        question: "Does Go India Cab offer local cab service in Agra?",
+        answer: "Yes. Local cab service is available in Agra for hotel transfers, railway station pickups, shopping and travel between attractions. Share your pickup point, stops and required duration to confirm availability and the applicable package."
+      },
+      {
+        question: "Can I book a full-day taxi in Agra?",
+        answer: "Yes. You can enquire about a full-day booking. Confirm the package hours, kilometre limit, extra-hour rate and waiting conditions before confirming."
+      },
+      {
+        question: "Can I book an outstation cab from Agra?",
+        answer: "Yes. Outstation routes listed include Delhi, Jaipur, Mathura, Vrindavan, Bharatpur and Gwalior. Confirm your exact route and travel date with the team."
+      },
+      {
+        question: "Is one-way taxi service available from Agra?",
+        answer: "Yes. One-way trips can be requested for supported routes. Ask whether driver return, tolls, permits or other charges apply before confirming."
+      },
+      {
+        question: "Can I book an airport taxi in Agra?",
+        answer: "Airport transfers to and from Kheria Airport can be requested. Confirm operational availability, flight-delay handling, meeting point and waiting charges before booking."
+      },
+      {
+        question: "What is included in the Agra taxi fare?",
+        answer: "Inclusions depend on the trip and package. Request a written fare breakup covering fuel, driver allowance, tolls, parking, permits, waiting time and extra kilometres before confirming."
+      },
+      {
+        question: "Can I book a round-trip or multi-day cab from Agra?",
+        answer: "Yes. Share all dates and stops, then confirm daily kilometre limits, driver allowance and overnight charges before booking."
+      },
+      {
+        question: "How do I book a Delhi to Agra cab?",
+        answer: "Visit the dedicated Delhi to Agra cab service page for route-specific details and booking options."
+      }
+    ]
+  },
   { slug: "connaught-place", area: "Connaught Place", city: "Delhi", title: "Cab Service in Connaught Place", metaTitle: "Cab Service in Connaught Place | GoIndiaCab", metaDescription: "Book cab service in Connaught Place Delhi. 24/7 taxi available.", description: "GoIndiaCab provides reliable cab service in Connaught Place for local and outstation travel.", services: ["Local Cab", "Airport Transfer", "Outstation"], nearbyAreas: ["Karol Bagh", "Paharganj", "Chandni Chowk"], faqs: [] },
   { slug: "karol-bagh", area: "Karol Bagh", city: "Delhi", title: "Cab Service in Karol Bagh", metaTitle: "Cab Service in Karol Bagh Delhi | GoIndiaCab", metaDescription: "Book cab service in Karol Bagh Delhi. Affordable taxi available 24/7.", description: "GoIndiaCab offers affordable cab service in Karol Bagh for all your travel needs.", services: ["Local Cab", "Airport Transfer", "Outstation"], nearbyAreas: ["Patel Nagar", "Rajouri Garden", "Connaught Place"], faqs: [] },
   { slug: "rohini", area: "Rohini", city: "Delhi", title: "Cab Service in Rohini", metaTitle: "Cab Service in Rohini Delhi | GoIndiaCab", metaDescription: "Book cab service in Rohini Delhi. Reliable taxi service available.", description: "GoIndiaCab provides reliable cab service in Rohini for local and outstation travel.", services: ["Local Cab", "Airport Transfer", "Outstation"], nearbyAreas: ["Pitampura", "Shalimar Bagh", "Model Town"], faqs: [] },
@@ -84,7 +136,59 @@ export const cabServiceLocalities: Locality[] = [
   { slug: "vikaspuri", area: "Vikaspuri", city: "Delhi", title: "Cab Service in Vikaspuri", metaTitle: "Cab Service in Vikaspuri Delhi | GoIndiaCab", metaDescription: "Book cab service in Vikaspuri Delhi.", description: "GoIndiaCab provides cab service in Vikaspuri for local and outstation travel.", services: ["Local Cab", "Airport Transfer"], nearbyAreas: ["Janakpuri", "Uttam Nagar", "Tilak Nagar"], faqs: [] },
   { slug: "uttam-nagar", area: "Uttam Nagar", city: "Delhi", title: "Cab Service in Uttam Nagar", metaTitle: "Cab Service in Uttam Nagar Delhi | GoIndiaCab", metaDescription: "Book cab service in Uttam Nagar Delhi.", description: "GoIndiaCab offers cab service in Uttam Nagar for all travel needs.", services: ["Local Cab", "Airport Transfer"], nearbyAreas: ["Janakpuri", "Vikaspuri", "Dwarka"], faqs: [] },
   { slug: "varanasi", area: "Varanasi", city: "Varanasi", title: "Cab Service in Varanasi", metaTitle: "Cab Service in Varanasi | GoIndiaCab", metaDescription: "Book cab service in Varanasi. Visit Kashi Vishwanath and ghats with GoIndiaCab.", description: "GoIndiaCab provides reliable cab service in Varanasi for sightseeing and local travel.", services: ["Local Sightseeing", "Outstation", "Airport Transfer"], nearbyAreas: ["Prayagraj", "Ayodhya", "Sarnath"], faqs: [] },
-  { slug: "jaipur", area: "Jaipur", city: "Jaipur", title: "Cab Service in Jaipur", metaTitle: "Cab Service in Jaipur | GoIndiaCab", metaDescription: "Book cab service in Jaipur. Explore Pink City with GoIndiaCab.", description: "GoIndiaCab offers best cab service in Jaipur for sightseeing and outstation travel.", services: ["Local Sightseeing", "Outstation", "Airport Transfer"], nearbyAreas: ["Ajmer", "Pushkar", "Agra"], faqs: [] },
+  {
+    slug: "jaipur",
+    area: "Jaipur",
+    city: "Jaipur",
+    title: "Cab Service in Jaipur for Local Travel, Sightseeing & Outstation Trips",
+    metaTitle: "Cab Service in Jaipur | Local, Airport & Outstation Taxi – Go India Cab",
+    metaDescription: "Book a cab service in Jaipur for local travel, sightseeing, airport transfers and outstation trips. Choose a suitable vehicle and request your fare quote from Go India Cab.",
+    description: "Looking for a cab service in Jaipur for city travel, sightseeing or an outstation journey? Go India Cab helps you enquire about local taxi bookings, airport transfers, sightseeing trips and travel to destinations beyond the Pink City. Share your pickup location, destination, travel date and passenger count to check available vehicle options and request a fare quote.",
+    services: ["Local Cab", "Sightseeing Taxi", "Airport Transfer", "Outstation Cab", "One-Way Cab", "Corporate Cab", "Wedding & Event Taxi"],
+    nearbyAreas: ["Ajmer", "Pushkar", "Udaipur", "Jodhpur", "Delhi", "Agra", "Bharatpur", "Alwar"],
+    faqs: [
+      {
+        question: "How can I book a cab service in Jaipur with Go India Cab?",
+        answer: "Submit your pickup, destination, travel date and trip type through the website booking form, or call +91-9792-000-555 to enquire. Confirm availability and fare terms before your trip."
+      },
+      {
+        question: "What types of taxi services are available in Jaipur?",
+        answer: "The Jaipur page lists local, outstation, one-way, airport, corporate and wedding/family-function travel. Confirm current availability for your specific requirement."
+      },
+      {
+        question: "Can I book a taxi for Jaipur sightseeing?",
+        answer: "You can enquire about a sightseeing cab for attractions such as Amber Fort, Hawa Mahal, City Palace and Jantar Mantar. Confirm the itinerary, duration and applicable charges."
+      },
+      {
+        question: "Does Go India Cab provide airport transfers in Jaipur?",
+        answer: "The page lists transfers to and from Jaipur International Airport. Confirm vehicle availability, pickup point, waiting allowance and flight-delay procedure before booking."
+      },
+      {
+        question: "Can I book an outstation taxi from Jaipur?",
+        answer: "The page mentions destinations such as Ajmer, Pushkar, Udaipur and Jodhpur. Share your exact route and travel date to check availability."
+      },
+      {
+        question: "Is one-way taxi service available from Jaipur?",
+        answer: "One-way taxi enquiries are listed. Confirm the destination, fare calculation and whether any driver return or route charges apply."
+      },
+      {
+        question: "What vehicles can I book in Jaipur?",
+        answer: "The page lists hatchbacks, sedans, SUVs and Tempo Travellers. Confirm the exact model, seating and luggage capacity for your date."
+      },
+      {
+        question: "How is the Jaipur taxi fare calculated?",
+        answer: "Fare can depend on vehicle type, distance, duration, trip type and package conditions. Request a written breakup covering tolls, parking, permits, waiting, driver allowance and extra kilometres."
+      },
+      {
+        question: "Can I book a cab for a wedding or corporate event in Jaipur?",
+        answer: "The page lists wedding/family-function and corporate cab services. Share the schedule and passenger requirements and confirm vehicle availability and terms."
+      },
+      {
+        question: "How can I book a Delhi to Jaipur taxi?",
+        answer: "Use the dedicated Delhi-to-Jaipur route page if available, or contact the booking team with your pickup, destination and travel date."
+      }
+    ]
+  },
   { slug: "ashok-vihar", area: "Ashok Vihar", city: "Delhi", title: "Cab Service in Ashok Vihar", metaTitle: "Cab Service in Ashok Vihar Delhi | GoIndiaCab", metaDescription: "Book cab service in Ashok Vihar Delhi.", description: "GoIndiaCab provides cab service in Ashok Vihar for local and outstation travel.", services: ["Local Cab", "Airport Transfer"], nearbyAreas: ["Model Town", "Shalimar Bagh", "Rohini"], faqs: [] },
   { slug: "chanakyapuri", area: "Chanakyapuri", city: "Delhi", title: "Cab Service in Chanakyapuri", metaTitle: "Cab Service in Chanakyapuri Delhi | GoIndiaCab", metaDescription: "Book cab service in Chanakyapuri Delhi.", description: "GoIndiaCab offers cab service in Chanakyapuri for all travel needs.", services: ["Local Cab", "Airport Transfer", "Corporate"], nearbyAreas: ["Anand Niketan", "Shanti Niketan", "Vasant Vihar"], faqs: [] },
   { slug: "civil-lines", area: "Civil Lines", city: "Delhi", title: "Cab Service in Civil Lines", metaTitle: "Cab Service in Civil Lines Delhi | GoIndiaCab", metaDescription: "Book cab service in Civil Lines Delhi.", description: "GoIndiaCab provides cab service in Civil Lines for local and outstation travel.", services: ["Local Cab", "Airport Transfer"], nearbyAreas: ["Model Town", "Ashok Vihar", "Rohini"], faqs: [] },

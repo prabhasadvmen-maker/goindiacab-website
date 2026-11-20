@@ -21,7 +21,7 @@ export function Card({ image, title, description, link, badge, className }: Card
           alt={title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-contain transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {badge && (
           <div className="absolute top-4 right-4 bg-accent text-dark text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10">

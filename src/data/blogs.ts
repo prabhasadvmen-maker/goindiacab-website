@@ -136,14 +136,141 @@ export const blogs: Blog[] = [
   {
     id: "12",
     slug: "go-india-cab-the-perfect-travel-partner-for-nris-and-international-tourists",
-    title: "Go India Cab The Perfect Travel Partner For Nris And International Tourists",
-    excerpt: "Read our comprehensive guide about Go India Cab The Perfect Travel Partner For Nris And International Tourists.",
-    content: "Placeholder content for Go India Cab The Perfect Travel Partner For Nris And International Tourists",
+    title: "A Reliable Cab Service in India for NRIs and International Tourists",
+    metaTitle: "Taxi Service in India for NRIs & International Tourists | Go India Cab",
+    excerpt: "Visiting India from overseas? Plan airport pickups, local travel and outstation cab journeys with Go India Cab. Share your itinerary for a tailored quote.",
+    content: `
+<div class="blog-cta-box" style="background:#f0f7ff;border-left:4px solid #1a73e8;padding:16px 20px;margin-bottom:28px;border-radius:6px;">
+  <p style="margin:0;font-size:1rem;"><strong>Planning a trip to India?</strong> Share your arrival date, pickup city and itinerary with Go India Cab to request a tailored cab quote. <a href="/contact-us" style="color:#1a73e8;font-weight:600;">Contact us to get started →</a></p>
+</div>
+
+<p>Planning a trip to India from another country involves more than booking flights and hotels. You may need an airport pickup after a long journey, transport between cities, local sightseeing, or a private cab for a family visit. Arranging these journeys in advance can make your travel plans easier to manage.</p>
+
+<p>Go India Cab provides <a href="/services/cab-service/cab-service-in-delhi">local cab services</a>, <a href="/blog/delhi-airport-taxi-service-reliable-cabs-for-airport-transfers">airport transfers</a> and <a href="/blog/outstation-taxi-service-in-delhi">outstation cab services</a>, along with travel options for visitors who need transportation during their stay in India. Whether you are returning to visit family or exploring the country for the first time, you can share your travel dates, pickup details and itinerary to discuss a suitable travel arrangement.</p>
+
+<h2>Why Plan Your Transport Before Arriving in India?</h2>
+
+<p>Pre-arranging your cab can reduce last-minute coordination after a flight or train journey. It also gives you time to discuss the route, vehicle category, luggage requirements, stops and estimated fare before travel.</p>
+
+<ul>
+  <li><strong>Airport arrival:</strong> Arrange a <a href="/blog/delhi-airport-taxi-service-reliable-cabs-for-airport-transfers">Delhi airport cab pickup</a> to your hotel, home or next destination.</li>
+  <li><strong>Family visits:</strong> Plan point-to-point journeys or keep a cab for multiple stops, subject to availability.</li>
+  <li><strong>Multi-city travel:</strong> Discuss a private itinerary covering destinations such as Delhi, Agra and Jaipur.</li>
+  <li><strong>Outstation journeys:</strong> Request a one-way or round-trip <a href="/blog/outstation-taxi-service-in-delhi">outstation cab from Delhi</a>.</li>
+  <li><strong>Group travel:</strong> Ask about a suitable vehicle based on passenger count and luggage.</li>
+</ul>
+
+<h2>Cab Services for NRIs and International Visitors</h2>
+
+<h3>1. Airport Pickup and Drop</h3>
+<p>After an international flight, a pre-arranged <a href="/blog/delhi-airport-taxi-service-reliable-cabs-for-airport-transfers">airport transfer</a> can make the first part of your journey simpler. When requesting a pickup, share your flight number, arrival date and time, terminal (if known), passenger count, luggage details and destination address. Confirm the meeting point, waiting-time rules and any flight-delay procedure directly with the booking team.</p>
+<p>Go India Cab lists airport transfers among its services. Confirm the airport coverage, pickup procedure and any meet-and-greet facility for your specific booking before paying.</p>
+
+<h3>2. Local City Travel</h3>
+<p>If you are staying in one city for a few days, you may need transport for family visits, business meetings, shopping, appointments or sightseeing. Our <a href="/services/cab-service/cab-service-in-delhi">local cab service in Delhi</a> can be booked by the hour, by a fixed package or by distance. Confirm the permitted usage area and extra-hour charges before booking.</p>
+
+<h3>3. Outstation and Multi-City Journeys</h3>
+<p>A private cab can be useful when your itinerary includes more than one city or you prefer flexible stops along the way. Popular North India travel plans may include <a href="/blog/the-golden-triangle-india-tourism-with-go-india-cab">Delhi, Agra and Jaipur (Golden Triangle)</a>, while other itineraries may cover destinations in Uttarakhand, Himachal Pradesh, Rajasthan, Punjab, Uttar Pradesh or Jammu &amp; Kashmir. Availability, route suitability and local travel rules should be confirmed for each destination.</p>
+
+<h3>4. Family, Group and Custom Travel</h3>
+<p>The right vehicle depends on the number of passengers, luggage volume, journey duration and road conditions. Share these details before selecting a vehicle. Do not choose a car based only on its passenger capacity; luggage space can be a deciding factor, particularly after an international flight.</p>
+
+<h2>How to Book a Cab from Outside India</h2>
+
+<ol>
+  <li>Share your arrival or travel date, pickup time and exact pickup and drop-off locations.</li>
+  <li>Provide your flight or train details when the booking involves an airport or railway station transfer.</li>
+  <li>Mention the number of adults and children, luggage count, preferred vehicle category and any accessibility requirements.</li>
+  <li>Share the complete itinerary, including sightseeing stops, overnight halts and return journey details.</li>
+  <li>Request a written fare quotation showing the vehicle, trip type, inclusions, exclusions, taxes, waiting charges and payment schedule.</li>
+  <li>Read the cancellation and refund terms before confirming the booking.</li>
+  <li>Ask when driver and vehicle details will be shared and which contact number to use if your plans change.</li>
+</ol>
+
+<h2>What International Travellers Should Confirm Before Booking</h2>
+
+<ul>
+  <li><strong>Fare details:</strong> Confirm whether the quote includes fuel, driver allowance, tolls, parking, state taxes, GST and waiting time.</li>
+  <li><strong>Payment:</strong> Ask which payment methods are accepted, the currency charged, any international-card fees and whether an advance is required.</li>
+  <li><strong>Communication:</strong> Confirm the support language and whether the assigned driver can communicate in the language you need.</li>
+  <li><strong>Airport coordination:</strong> Confirm the meeting point, waiting time, flight-delay process and contact procedure.</li>
+  <li><strong>Vehicle suitability:</strong> Confirm passenger capacity, luggage space, air-conditioning and vehicle category.</li>
+  <li><strong>Cancellation:</strong> Check the deadline, deductions, refund method and how to request a change. See our <a href="/terms-conditions">terms and conditions</a>.</li>
+  <li><strong>Documentation:</strong> Request a written booking confirmation and payment receipt.</li>
+</ul>
+
+<h2>Popular North India Itinerary Ideas</h2>
+
+<p>Your route should be planned around the number of days available, arrival/departure airports and interests. The following are examples for discussion, not fixed packages or guaranteed itineraries:</p>
+
+<ul>
+  <li><strong>Golden Triangle:</strong> <a href="/blog/the-golden-triangle-india-tourism-with-go-india-cab">Delhi – Agra – Jaipur</a>.</li>
+  <li><strong>Heritage and culture:</strong> Delhi – Agra, with additional destinations depending on the schedule.</li>
+  <li><strong>Spiritual travel:</strong> Delhi with selected destinations in Uttar Pradesh or Uttarakhand. See our <a href="/blog/char-dham-yatra-taxi-service-from-delhi">Char Dham Yatra taxi guide</a>.</li>
+  <li><strong>Hill travel:</strong> Delhi to selected destinations in <a href="/blog/explore-uttarakhand-with-go-india-cab-service">Uttarakhand</a> or <a href="/blog/things-to-do-in-himachal-pradesh">Himachal Pradesh</a>, subject to road and seasonal conditions.</li>
+</ul>
+
+<p>For longer trips, ask for a day-wise route plan and confirm realistic driving times, overnight stops and any restrictions on local taxis or tourist vehicles. Browse our <a href="/taxi-package">private taxi tour packages</a> for curated options.</p>
+
+<h2>Why Consider Go India Cab?</h2>
+
+<p>Go India Cab lists local, airport and outstation transportation among its services and provides booking contact options on its website. The company's website also presents travel options for North India destinations and tour packages. Before confirming, request written details for the exact route, vehicle, fare and service commitments relevant to your trip.</p>
+
+<ul>
+  <li>Discuss your itinerary and vehicle requirements before booking.</li>
+  <li>Request a written quote with fare inclusions and exclusions.</li>
+  <li>Keep the booking confirmation and support contact accessible during travel.</li>
+  <li>Confirm driver and vehicle details through the official booking channel.</li>
+</ul>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>Can NRIs book a cab in India before arriving?</h3>
+<p>You can <a href="/contact-us">contact Go India Cab</a> in advance through its listed booking channels to discuss your travel dates, route and vehicle requirements. Confirm availability and booking terms in writing.</p>
+
+<h3>Can international tourists arrange an airport pickup?</h3>
+<p>Go India Cab lists <a href="/blog/delhi-airport-taxi-service-reliable-cabs-for-airport-transfers">airport transfers</a> among its services. Confirm the airport, terminal, pickup point, waiting-time policy and flight-delay procedure for your booking.</p>
+
+<h3>Can I book a cab from the USA, UK, Canada or another country?</h3>
+<p>Contact the booking team using the website's phone, WhatsApp or email details. Confirm the accepted payment methods, currency and any international payment fees before making a payment.</p>
+
+<h3>Does Go India Cab provide English-speaking drivers?</h3>
+<p>The company mentions multilingual drivers. The language level and availability should be confirmed for your specific trip and destination before booking.</p>
+
+<h3>Can I book a cab for multiple cities?</h3>
+<p>Go India Cab lists <a href="/blog/outstation-taxi-service-in-delhi">outstation cab services</a> and <a href="/taxi-package">tour packages</a>. Share the full route and dates so the team can confirm vehicle availability, route feasibility and the quotation.</p>
+
+<h3>Are tolls, parking and taxes included in the fare?</h3>
+<p>Do not assume they are included. Ask for a written breakdown that lists fuel, driver allowance, tolls, parking, state taxes, GST and any other applicable charges.</p>
+
+<h3>Which vehicle should I book for a family with luggage?</h3>
+<p>Choose based on both passenger count and luggage volume. Share the number and approximate size of bags with the booking team before confirming the vehicle.</p>
+
+<h3>How do I contact Go India Cab?</h3>
+<p>Booking: +91-9792-000-555 | +91-8433-381-888. Support: +91-9557-479-080. Email: info@goindiacab.com. Visit the <a href="/contact-us">contact page</a> to verify current details before travel.</p>
+
+<h3>What happens if my flight is delayed?</h3>
+<p>Ask the booking team to explain its flight-monitoring and waiting-time process. Confirm whether any additional waiting charges apply.</p>
+
+<h3>Can I cancel or change my booking?</h3>
+<p>Cancellation and refund terms can vary by service. Review the <a href="/terms-conditions">applicable terms</a> before paying and keep written confirmation of any approved changes.</p>
+
+<h2>Plan Your India Trip with Go India Cab</h2>
+
+<p>Share your arrival details, destinations, travel dates, passenger count and luggage requirements with Go India Cab. Request a written quotation and confirm all service terms before your journey.</p>
+
+<div class="blog-cta-box" style="background:#f0f7ff;border-left:4px solid #1a73e8;padding:16px 20px;margin-top:24px;border-radius:6px;">
+  <p style="margin:0 0 8px 0;"><strong>Booking:</strong> +91-9792-000-555 | +91-8433-381-888</p>
+  <p style="margin:0 0 8px 0;"><strong>Support:</strong> +91-9557-479-080</p>
+  <p style="margin:0 0 8px 0;"><strong>Email:</strong> info@goindiacab.com</p>
+  <p style="margin:0 0 12px 0;"><strong>Website:</strong> www.goindiacab.com</p>
+  <a href="/contact-us" style="display:inline-block;background:#1a73e8;color:#fff;padding:10px 22px;border-radius:5px;text-decoration:none;font-weight:600;">Request a Cab Quote →</a>
+</div>`,
     image: "https://www.goindiacab.com/wp-content/uploads/2024/12/delhi.jpg.webp",
     author: "GoIndiaCab Team",
-    date: "December 12, 2024",
+    date: "November 13, 2026",
     category: "Travel Guide",
-    tags: ["Travel", "Guide"]
+    tags: ["NRI Travel", "International Tourists", "India Cab Service", "Airport Pickup", "Outstation Taxi", "Cab Booking India"]
   },
   {
     id: "13",

@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.goindiacab.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pub-advmenngo.r2.dev',
+      },
     ],
   },
   onDemandEntries: {

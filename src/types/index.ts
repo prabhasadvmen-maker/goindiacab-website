@@ -8,6 +8,12 @@ export interface Service {
   features?: string[]
 }
 
+export interface ContentSection {
+  title: string
+  content?: string
+  subsections?: ContentSection[]
+}
+
 export interface Route {
   id: string
   slug: string
@@ -18,6 +24,11 @@ export interface Route {
   fare: string
   image: string
   description: string
+  h1?: string
+  breadcrumb?: string
+  metaTitle?: string
+  metaDescription?: string
+  contentSections?: ContentSection[]
   faqs?: FAQ[]
 }
 
@@ -66,6 +77,7 @@ export interface Blog {
   id: string
   slug: string
   title: string
+  metaTitle?: string
   excerpt: string
   content: string
   image: string
@@ -94,4 +106,19 @@ export interface Review {
   comment: string
   date: string
   location?: string
+}
+
+export interface CityPage {
+  slug: string
+  city: string
+  image: string
+  metaTitle: string
+  metaDescription: string
+  h1: string
+  description: string
+  distance?: string
+  duration?: string
+  fare?: string
+  contentSections?: ContentSection[]
+  faqs?: FAQ[]
 }

@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const blog = blogs.find((b) => b.slug === slug);
   if (!blog) return { title: "Blog Not Found" };
   return {
-    title: `${blog.title} | GoIndiaCab Blog`,
+    title: blog.metaTitle ?? `${blog.title} | GoIndiaCab Blog`,
     description: blog.excerpt,
     alternates: { canonical: `${siteConfig.url}/blog/${blog.slug}` },
-    openGraph: { title: blog.title, description: blog.excerpt, images: [{ url: blog.image }] },
+    openGraph: { title: blog.metaTitle ?? blog.title, description: blog.excerpt, images: [{ url: blog.image }] },
   };
 }
 
@@ -41,8 +41,14 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           <Image src={blog.image} alt={blog.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" priority />
         </div>
         <div className="prose prose-lg max-w-none text-gray-text">
-          <p className="text-xl leading-relaxed">{blog.excerpt}</p>
-          <p className="leading-relaxed mt-6">{blog.content}</p>
+          {blog.content.startsWith('<') ? (
+            <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+          ) : (
+            <>
+              <p className="text-xl leading-relaxed">{blog.excerpt}</p>
+              <p className="leading-relaxed mt-6">{blog.content}</p>
+            </>
+          )}
         </div>
       </Container>
     </div>
