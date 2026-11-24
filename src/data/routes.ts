@@ -612,112 +612,124 @@ export const popularRoutes: Route[] = [
   {
     id: "agra",
     slug: "cab-service-in-agra",
-    from: "Delhi",
+    from: "Agra",
     to: "Agra",
-    distance: "200 km",
-    duration: "3-4 Hours",
+    distance: "Local & Outstation",
+    duration: "Flexible Hours",
     fare: "Starting ₹2,800",
     image: "/popular-outstation/agra.jpg.webp",
-    metaTitle: "Cab Service in Agra | Delhi to Agra Taxi, Taj Mahal Tour – Go India Cab",
-    metaDescription: "Book a cab service in Agra with Go India Cab. Plan a Delhi to Agra day trip, Taj Mahal sightseeing or outstation journey. Request a trip-specific fare quote.",
-    h1: "Cab Service in Agra – Delhi to Agra Taxi & Sightseeing",
+    metaTitle: "Cab Service in Agra | Local Taxi, Sightseeing & Outstation Cabs – Go India Cab",
+    metaDescription: "Need a cab in Agra? Book local taxis, Taj Mahal sightseeing, airport transfers and outstation cabs. Share your pickup, travel date and destination for a quote.",
+    h1: "Cab Service in Agra for Local Travel, Sightseeing & Outstation Trips",
     breadcrumb: "Cab Service in Agra",
-    description: "Planning a trip to Agra for the Taj Mahal, Agra Fort or a same-day tour from Delhi? Go India Cab offers cab booking assistance for Delhi to Agra transfers, local sightseeing and outstation travel. Choose from sedan, SUV and premium SUV categories, subject to availability. Share your pickup location, travel date, passenger count and trip type to request a fare quote.",
+    description: "Looking for a cab service in Agra for a local journey, sightseeing or an outstation trip? Go India Cab helps travellers request taxi services for city travel, monument visits, airport and railway station transfers, hourly rentals and journeys to nearby destinations. Share your pickup location, destination, travel date and passenger details to check vehicle availability and receive a fare quote.",
     contentSections: [
       {
-        title: "Book a Delhi to Agra Cab with Go India Cab",
-        content: "Agra is one of India's most visited destinations, known for the Taj Mahal, Agra Fort and Fatehpur Sikri. A pre-booked cab from Delhi to Agra helps you plan your departure time, manage luggage and cover multiple sightseeing stops without depending on local transport. Go India Cab lists this route at approximately 200 km with an estimated journey time of 3–4 hours. Actual distance and travel time vary with the exact pickup and drop points, route, traffic and road conditions."
+        title: "Book a Local Taxi in Agra",
+        content: "A local taxi is useful when you need to travel between hotels, homes, railway stations, markets, business locations and tourist attractions within Agra. Request a point-to-point ride or ask about an hourly package if you have several stops. Before confirming an hourly booking, check the package duration, kilometre limit, extra-hour charges and service area."
       },
       {
-        title: "Cab Services Available for Agra",
+        title: "Cab Services Available in Agra",
         subsections: [
           {
-            title: "Delhi to Agra One-Way Cab",
-            content: "If you are travelling from Delhi to Agra and do not need the same cab for the return journey, ask whether a one-way drop is available for your date. Confirm the fare calculation, minimum kilometre billing and any driver return charges that may apply."
+            title: "Local City Taxi Service",
+            content: "Book a cab for local travel across Agra, including hotel transfers, shopping at Sadar Bazaar and Kinari Bazaar, appointments, family visits and business meetings. Share exact pickup and drop locations so the team can confirm availability and the applicable fare."
           },
           {
-            title: "Delhi to Agra Round-Trip Cab",
-            content: "A round-trip cab is useful when you want the same vehicle to wait in Agra and bring you back to Delhi. Confirm the total hours, waiting charges, driver allowance and return journey fare before booking."
+            title: "Taj Mahal and Agra Sightseeing Cab",
+            content: "Explore Agra's major attractions with a cab planned around your schedule. Popular places include the Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), Mehtab Bagh and Akbar's Tomb at Sikandra. If you also want to visit Fatehpur Sikri, ask for it as a separate stop or extended itinerary and confirm additional travel time and fare. Monument tickets, guide services, parking and waiting charges should be confirmed separately unless expressly included in your written quote."
           },
           {
-            title: "Agra Same-Day Tour from Delhi",
-            content: "A same-day Agra tour typically covers the Taj Mahal, Agra Fort and Mehtab Bagh or Fatehpur Sikri, depending on your available time. Share your preferred departure time, planned stops and return time so the booking team can suggest a suitable vehicle and package. Confirm waiting time, parking charges and monument entry separately."
+            title: "Agra Airport Taxi Service",
+            content: "Need a cab to or from Agra Airport (Kheria)? Share flight details, arrival time, passenger count, luggage and destination when requesting a booking. Confirm airport pickup availability, meeting point, waiting-time allowance and flight-delay process before the trip."
           },
           {
-            title: "Local Sightseeing Cab in Agra",
-            content: "If you are already in Agra and need a local cab for sightseeing, hotel transfers or station pickups, share your planned stops and duration. Confirm whether the quote is hourly or distance-based and check waiting and parking arrangements."
+            title: "Agra Railway Station Pickup and Drop",
+            content: "Arrange a cab for pickup or drop at Agra Cantt, Agra Fort Railway Station or another station in the city. Provide your train number, arrival or departure time, station name and reachable mobile number. Confirm the designated pickup point and waiting charges."
           },
           {
-            title: "Agra to Delhi Airport Transfer",
-            content: "If you need a cab from Agra to Delhi airport after your visit, share your flight details, departure terminal and required pickup time. Confirm the route, estimated travel time and fare before booking to avoid missing your flight."
+            title: "Full-Day and Hourly Cab Rental in Agra",
+            content: "If you plan to visit several attractions, markets or business locations, ask about half-day, full-day or hourly packages. Compare included hours and kilometres, extra-hour rates, additional-kilometre charges and whether the cab remains assigned to you between stops."
+          },
+          {
+            title: "One-Way Taxi from Agra",
+            content: "For travel from Agra to another city without a return journey in the same cab, request a one-way outstation quote. Common destinations include Delhi, Mathura, Vrindavan, Jaipur and Gwalior. Confirm route support and any minimum-kilometre or driver-allowance conditions."
+          },
+          {
+            title: "Outstation Taxi from Agra",
+            content: "Plan an outstation journey from Agra for family visits, business travel or a holiday. Share your destination, departure date, return date if applicable, passenger count and preferred vehicle. One-way, round-trip and multi-day availability and pricing must be confirmed for the exact itinerary."
           }
         ]
       },
       {
-        title: "Places to Visit in Agra by Cab",
-        content: "Plan your Agra itinerary around the time available and the monuments you want to visit. Key attractions include:\n\n• Taj Mahal – a UNESCO World Heritage Site; check entry timings, ticket requirements and photography rules.\n• Agra Fort – a Mughal-era fort complex with palaces, mosques and audience halls.\n• Fatehpur Sikri – a well-preserved Mughal city about 40 km from Agra; plan as a separate stop.\n• Mehtab Bagh – a garden across the Yamuna offering a view of the Taj Mahal.\n• Itmad-ud-Daulah (Baby Taj) – a smaller Mughal mausoleum worth including if time allows.\n• Akbar's Tomb, Sikandra – located about 10 km from Agra city centre.\n\nConfirm monument entry fees, opening hours and parking arrangements before your visit. Cab waiting time at each stop should be agreed before booking."
+        title: "Popular Places to Visit in Agra by Cab",
+        content: "A local sightseeing itinerary can include a selection of these attractions, depending on opening hours, monument schedules, traffic and available time:\n\n• Taj Mahal – UNESCO World Heritage Site; check entry timings, ticket requirements and photography rules.\n• Agra Fort – Mughal-era fort complex with palaces, mosques and audience halls.\n• Itimad-ud-Daulah (Baby Taj) – a smaller Mughal mausoleum worth including if time allows.\n• Mehtab Bagh – a garden across the Yamuna offering a view of the Taj Mahal.\n• Akbar's Tomb, Sikandra – located about 10 km from Agra city centre.\n• Mariam-uz-Zamani Tomb – a lesser-visited Mughal heritage site.\n• Chini Ka Rauza – a unique Mughal-era monument near the Yamuna.\n• Ram Bagh – one of the oldest Mughal gardens in India.\n• Sadar Bazaar and Kinari Bazaar – Agra's main shopping areas for marble crafts and local goods.\n\nFatehpur Sikri is outside central Agra. Treat it as an additional excursion and confirm the extra route, duration, waiting time and fare rather than presenting it as an ordinary city-centre stop."
       },
       {
-        title: "Delhi to Agra Route Details",
-        content: "• Approximate distance: 200 km via Yamuna Expressway.\n• Indicative duration: 3–4 hours depending on traffic and departure time.\n• Starting fare displayed: ₹2,800.\n• Final fare: confirm against exact pickup and drop addresses, vehicle category, trip type and date.\n\nYamuna Expressway tolls apply on this route. Confirm whether tolls are included in the quoted fare or payable separately."
+        title: "How to Book a Cab in Agra",
+        content: "1. Enter your pickup location in Agra and destination or list of stops.\n2. Select travel date, pickup time and trip type: local, hourly, sightseeing, one-way or round trip.\n3. Share passenger count and luggage details.\n4. Request the available vehicle category and a written fare breakup.\n5. Check included kilometres or hours, tolls, parking, driver allowance, taxes and waiting charges.\n6. Review cancellation and payment terms before confirming.\n7. Save the booking confirmation and support contact details."
       },
       {
-        title: "Vehicle Options for Delhi to Agra",
-        content: "• Sedan (Dzire / Etios) – suitable for small groups with standard luggage; comfortable for a 3–4 hour journey.\n• SUV (Ertiga / Carens) – better for families or travellers with more luggage.\n• Premium SUV (Innova Crysta) – for a more comfortable ride; confirm availability and fare for your date.\n\nConfirm the actual vehicle model, seating capacity and luggage space at booking."
+        title: "Choose a Vehicle for Your Journey",
+        content: "Select a vehicle according to passenger count, luggage and route. Confirm the actual vehicle model, seating and luggage capacity before booking. For families or groups, share the number and size of bags as well as passenger count.\n\n• Sedan (Dzire / Etios) – suitable for small groups of up to 4 passengers with standard luggage.\n• SUV (Ertiga / Innova Crysta) – better for families, larger groups or travellers with more luggage.\n• Tempo Traveller – for larger groups; confirm seating capacity and route suitability."
       },
       {
-        title: "Agra Cab Fare – What to Check Before Booking",
-        content: "Before confirming your Delhi to Agra cab, request a written fare breakdown that covers the vehicle category, trip type, distance basis, Yamuna Expressway tolls, parking, driver allowance, waiting time, night charges and cancellation terms. For a same-day round trip, confirm the total hours included and the extra-hour rate."
+        title: "Why Book with Go India Cab?",
+        content: "Go India Cab lists local, airport and outstation cab services and provides online and phone-based booking options. Share your Agra travel plan and ask the team to confirm the vehicle, route, fare and booking terms before making a decision.\n\n• Local, sightseeing and outstation travel options listed on the website.\n• Different vehicle categories described for individual and group travel.\n• Phone and online enquiry options for booking assistance.\n• Fare details can be requested for the exact route and trip type."
       },
       {
-        title: "Why Choose Go India Cab for Agra?",
-        content: "• Booking assistance for Delhi to Agra one-way, round-trip and same-day tour packages.\n• Vehicle options for individuals, couples, families and groups, subject to availability.\n• Fare details and trip conditions shared before booking confirmation.\n• Support through the contact channels published on the Go India Cab website."
-      },
-      {
-        title: "How to Book Your Agra Cab",
-        content: "1. Choose one-way, round-trip or same-day sightseeing.\n2. Enter your Delhi pickup address and Agra drop or sightseeing itinerary.\n3. Select your travel date and preferred departure time.\n4. Share passenger count, luggage and preferred vehicle category.\n5. Request a written quote with all inclusions and charges listed.\n6. Review cancellation and waiting terms.\n7. Confirm the booking and save your trip reference and support contact."
+        title: "Book Your Agra Cab",
+        content: "Need a local cab, sightseeing taxi, airport transfer or outstation ride from Agra? Share your pickup point, destination, travel date, passenger count and luggage details to request a suitable vehicle and fare.\n\nBooking: +91-9792-000-555 | +91-8433-381-888 | Support: +91-9557-479-080 | Email: info@goindiacab.com\n\nConfirm availability, inclusions, exclusions and cancellation terms before payment."
       }
     ],
     faqs: [
       {
-        question: "How far is Agra from Delhi by cab?",
-        answer: "The route is approximately 200 km via Yamuna Expressway. Actual distance depends on your exact pickup and drop locations."
+        question: "How can I book a cab in Agra?",
+        answer: "Submit your travel details through the Go India Cab website or contact the booking team by phone. Share pickup, destination, date, time, passenger count and trip type to request availability and a quote."
       },
       {
-        question: "How long does it take to travel from Delhi to Agra by taxi?",
-        answer: "The estimated journey time is 3–4 hours. Traffic, departure time and road conditions can affect the actual duration."
+        question: "Does Go India Cab provide local taxi service in Agra?",
+        answer: "The Agra service page lists local city travel and hourly cab options. Confirm pickup locality, package terms and vehicle availability for your date."
       },
       {
-        question: "What is the starting fare for a Delhi to Agra cab?",
-        answer: "The page displays a starting price of ₹2,800. Confirm the current fare and inclusions with Go India Cab before booking."
+        question: "Can I book a cab for Taj Mahal sightseeing?",
+        answer: "Request a sightseeing itinerary covering the Taj Mahal and other Agra attractions. Confirm stops, duration, parking and waiting charges. Monument tickets and guide services should be checked separately."
       },
       {
-        question: "Can I book a same-day Agra tour from Delhi?",
-        answer: "Yes, a same-day tour covering the Taj Mahal and Agra Fort is a popular option. Share your departure time and planned stops to get a suitable package quote."
+        question: "Can I hire a cab in Agra for a full day?",
+        answer: "The page describes full-day and multi-day taxi options. Ask for included hours and kilometres, extra-hour charges and additional-kilometre rates."
       },
       {
-        question: "Can I book a one-way cab from Delhi to Agra?",
-        answer: "One-way drop options are available. Confirm availability for your date and ask for a written fare quote."
+        question: "Is airport pickup available in Agra?",
+        answer: "The page lists transfers to and from Agra's Kheria Airport. Confirm current availability, pickup instructions, waiting time and flight-delay handling."
       },
       {
-        question: "Are Yamuna Expressway tolls included in the fare?",
-        answer: "Toll inclusion varies by quote. Confirm whether tolls are included or payable separately before booking."
+        question: "Can I get a taxi from Agra Cantt Railway Station?",
+        answer: "Request a station pickup or drop. Share train details and confirm the pickup point and waiting policy."
       },
       {
-        question: "Which vehicle is best for a Delhi to Agra trip?",
-        answer: "A sedan suits small groups with standard luggage. An SUV or premium SUV is better for families or those needing more space. Confirm seating and luggage capacity at booking."
+        question: "Can I book a one-way taxi from Agra to Delhi?",
+        answer: "The Agra page lists one-way outstation travel. Request a quote for exact pickup, destination, date and vehicle, and confirm minimum-kilometre conditions."
       },
       {
-        question: "Can I visit Fatehpur Sikri on the same trip?",
-        answer: "Fatehpur Sikri is about 40 km from Agra. Mention it as a planned stop when booking so waiting time and fare can be adjusted accordingly."
+        question: "Can I book a cab from Agra to Mathura or Vrindavan?",
+        answer: "These are listed as nearby outstation destinations. Confirm route availability, one-way or round-trip options and the full fare."
       },
       {
-        question: "How do I book a cab for Agra sightseeing?",
-        answer: "Share your pickup point, planned stops, travel date, passenger count and preferred vehicle with Go India Cab to request a quote."
+        question: "Are tolls, parking and driver allowance included?",
+        answer: "Do not assume they are included. Ask for a written quote listing tolls, parking, driver allowance, state taxes, GST, waiting time and additional charges."
       },
       {
-        question: "Does the cab wait at the Taj Mahal during the visit?",
-        answer: "Waiting time arrangements depend on the package. Confirm the included waiting time and extra-hour charges before booking."
+        question: "Which car should I choose for Agra sightseeing?",
+        answer: "Choose according to passenger count, luggage, trip duration and comfort needs. Ask the team to confirm the exact vehicle model and luggage space."
+      },
+      {
+        question: "Can I add Fatehpur Sikri to my Agra sightseeing trip?",
+        answer: "Request it as an additional excursion. It is outside central Agra, so confirm the extra route, duration and fare."
+      },
+      {
+        question: "How do I contact Go India Cab?",
+        answer: "Call +91-9792-000-555 or +91-8433-381-888 for bookings, +91-9557-479-080 for support, or email info@goindiacab.com. Verify details against the live contact page before publishing."
       }
     ],
   },
