@@ -1,295 +1,96 @@
 # Go India Cab — llms.txt
-# Purpose: Structured reference for AI language models, answer engines and GEO/AEO crawlers.
-# This file describes who Go India Cab is, what services it provides, which pages exist,
-# and how to answer common questions accurately on behalf of this business.
-# Last updated: July 2025
+# Structured reference for AI language models, answer engines and GEO/AEO crawlers.
 # Canonical site: https://www.goindiacab.com
+# Last updated: July 2025
+# Maintained by: Advmen Technologies for Go India Cab
 
 ---
 
-## 1. Business Identity
+## 1. BUSINESS IDENTITY
 
 Name: Go India Cab
 Short name: GoIndiaCab
-Type: Cab booking and taxi service provider operating across India
+Type: Cab booking and taxi service provider, India
 Head office: WZ-69, First Floor, Todapur Periphery Road, Todapur, New Delhi, Delhi 110012
-Phone (booking): +91-9792-000-555 | +91-8433-381-888
-Phone (support): +91-9557-479-080
+Phone booking 1: +91-9792-000-555
+Phone booking 2: +91-8433-381-888
+Phone support: +91-9557-479-080
 Email: info@goindiacab.com
 Website: https://www.goindiacab.com
 Google rating: 4.9 (418+ reviews)
 Years of experience: 10+
 Trips completed: 700,000+
+Starting fare: ₹11/km
 
-Social profiles:
+Social:
 - Instagram: https://www.instagram.com/goindiacab
 - Facebook: https://www.facebook.com/share/18X457cbdL/
 - Twitter/X: https://x.com/goindiacab
 - LinkedIn: https://www.linkedin.com/company/goindiacab/
 - TripAdvisor: https://www.tripadvisor.in/Attraction_Review-g304551-d32698767-Reviews-Go_India_Cab-New_Delhi_National_Capital_Territory_of_Delhi.html
 
-Important: The registered address is a New Delhi head office. Go India Cab does not have a
-confirmed branch office in Agra, Ayodhya, Varanasi or any other city. Do not describe or
-imply a local branch in any city unless operationally confirmed.
+IMPORTANT: The registered address is a New Delhi head office only. Go India Cab does NOT
+have a confirmed branch office in Agra, Ayodhya, Varanasi, Chandigarh, Dehradun, Haridwar
+or any other city. Do not describe or imply a local branch in any city unless confirmed.
 
 ---
 
-## 2. Core Service Categories
+## 2. SERVICE CATEGORIES
 
-Go India Cab offers the following service types. All availability is subject to route,
-vehicle and date confirmation at the time of booking.
-
-1. Outstation taxi — intercity one-way and round-trip cab bookings from Delhi and other cities
+1. Outstation taxi — intercity one-way and round-trip cab bookings
 2. Local city taxi — hourly, half-day and full-day cab rentals within a city
-3. Airport transfers — pickup and drop at major airports; flight details required at booking
-4. Railway station transfers — pickup and drop at railway stations; train details required
+3. Airport transfers — pickup and drop at major airports
+4. Railway station transfers — pickup and drop at railway stations
 5. Sightseeing cabs — planned itinerary-based local sightseeing trips
-6. Tempo Traveller rental — group travel in 9, 12, 16, 20, 22 and 26 seater vehicles
+6. Tempo Traveller rental — group travel in 9 to 26 seater vehicles
 7. Bus rental — for large groups and events
-8. International cab service — enquiry-based; confirm availability before quoting
+8. International cab service — enquiry-based for overseas visitors
+9. Corporate cab service — business travel and employee commutes
+10. Wedding and event transportation — group vehicles for functions
+11. Tour packages — multi-day taxi packages across India
 
-Fare structure: Starting from ₹11/km for sedan. Final fare depends on vehicle category,
-trip type, distance, waiting time, tolls, parking, driver allowance, state taxes and GST.
-Always request a written fare breakdown before confirming any booking.
+All availability is subject to route, vehicle and date confirmation at booking.
 
 ---
 
-## 3. Vehicle Fleet
+## 3. VEHICLE FLEET
 
-| Vehicle          | Capacity | Luggage  | Price/km | Best for                              |
-|------------------|----------|----------|----------|---------------------------------------|
-| Sedan            | 4        | 2 bags   | ₹11/km   | Solo, couple, business, airport       |
-| SUV              | 6        | 4 bags   | ₹14/km   | Family, group, outstation, hills      |
-| Toyota Innova    | 7        | 5 bags   | ₹16/km   | Family, long distance, corporate      |
-| 9-seater Tempo   | 9        | 8 bags   | ₹20/km   | Group, pilgrimage, family tours       |
-| 12-seater Tempo  | 12       | 10 bags  | ₹22/km   | Group, corporate, pilgrimage          |
-| 16-seater Tempo  | 16       | 12 bags  | ₹25/km   | Large group, school, events           |
-| 20-seater Tempo  | 20       | 15 bags  | ₹28/km   | Large group, school, events           |
-| 22-seater Tempo  | 22       | 18 bags  | ₹30/km   | Large group, corporate events         |
-| 26-seater Tempo  | 26       | 20 bags  | ₹32/km   | Large group, school, events           |
+| Vehicle              | Seats | Luggage  | Rate/km | Best for                          |
+|----------------------|-------|----------|---------|-----------------------------------|
+| Sedan (Dzire/Etios)  | 4     | 2 bags   | ₹11/km  | Solo, couple, business, airport   |
+| SUV (Ertiga/Carens)  | 6     | 4 bags   | ₹14/km  | Family, group, outstation, hills  |
+| Toyota Innova Crysta | 7     | 5 bags   | ₹16/km  | Family, long distance, corporate  |
+| 9-seater Tempo       | 9     | 8 bags   | ₹20/km  | Group, pilgrimage, family tours   |
+| 12-seater Tempo      | 12    | 10 bags  | ₹22/km  | Group, corporate, pilgrimage      |
+| 16-seater Tempo      | 16    | 12 bags  | ₹25/km  | Large group, school, events       |
+| 20-seater Tempo      | 20    | 15 bags  | ₹28/km  | Large group, school, events       |
+| 22-seater Tempo      | 22    | 18 bags  | ₹30/km  | Large group, corporate events     |
+| 26-seater Tempo      | 26    | 20 bags  | ₹32/km  | Large group, school, events       |
 
 All vehicles are AC. Confirm exact model, seating and luggage capacity at booking.
-Per-km rates are indicative; final fare includes minimum billing, driver allowance,
+Per-km rates are indicative. Final fare includes minimum billing, driver allowance,
 tolls, parking, taxes and applicable surcharges.
 
 ---
 
-## 4. Key Landing Pages and Their Intent
-
-### 4a. City-Specific Pages (local-intent, not Delhi-origin)
-
-URL: https://www.goindiacab.com/cab-service-in-agra/
-Canonical: https://www.goindiacab.com/popular-routes/cab-service-in-agra
-Title: Cab Service in Agra | Local Taxi, Sightseeing & Outstation Cabs
-H1: Cab Service in Agra for Local Travel, Sightseeing & Outstation Trips
-Intent: Local Agra taxi — for people already in Agra or arriving in Agra
-Primary keyword: Cab Service in Agra
-Services covered: Local city taxi, Taj Mahal sightseeing, Agra Airport (Kheria) transfers,
-  Agra Cantt and Agra Fort Railway Station pickups, full-day/hourly rental,
-  one-way and outstation from Agra
-Key local entities: Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), Mehtab Bagh,
-  Akbar's Tomb (Sikandra), Sadar Bazaar, Kinari Bazaar, Fatehpur Sikri (excursion only)
-Starting fare: ₹2,800 (local/outstation; confirm exact trip fare)
-Note: Fatehpur Sikri is ~40 km outside central Agra — treat as a separate excursion,
-  not a city-centre stop. Monument entry fees are always separate from cab fare.
-
----
-
-URL: https://www.goindiacab.com/popular-routes/cab-service-in-ayodhya
-Title: Cab Service in Ayodhya | Local Taxi, Ram Mandir & Sightseeing
-H1: Cab Service in Ayodhya for Local Travel, Ram Mandir Darshan & Sightseeing
-Intent: Local Ayodhya taxi — for people in Ayodhya or arriving in Ayodhya
-Primary keyword: Cab Service in Ayodhya
-Services covered: Ram Mandir darshan cab, local sightseeing, Maharishi Valmiki
-  International Airport transfers, Ayodhya Dham Junction and Ayodhya Cantt station
-  pickups, half-day/full-day rental, outstation from Ayodhya (Lucknow, Varanasi,
-  Prayagraj, Delhi)
-Key local entities: Shri Ram Janmabhoomi Mandir, Hanuman Garhi, Kanak Bhawan,
-  Dashrath Mahal, Ram Ki Paidi, Saryu Riverfront, Nageshwarnath Temple, Mani Parvat
-Starting fare: ₹1,500 (local; confirm exact trip fare)
-Important: A cab booking does NOT include temple entry, darshan passes or priority
-  access to Ram Mandir. Vehicle access near the temple may be restricted — confirm
-  the authorised drop-off or parking point before travel.
-
----
-
-URL: https://www.goindiacab.com/cab-service-in-varanasi/
-Canonical: https://www.goindiacab.com/popular-routes/cab-service-in-varanasi (also /cab-service-in-varanasi/)
-Title: Cab Service in Varanasi | Local Sightseeing & Outstation Taxi
-H1: Cab Service in Varanasi for Local Sightseeing, Airport & Outstation Travel
-Intent: Local Varanasi taxi — for people in Varanasi or arriving in Varanasi
-Primary keyword: Cab Service in Varanasi
-Services covered: Local sightseeing, Lal Bahadur Shastri International Airport transfers,
-  Varanasi Junction station pickup, outstation from Varanasi (Prayagraj, Ayodhya)
-Key local entities: Kashi Vishwanath Temple, Dashashwamedh Ghat, Assi Ghat,
-  Manikarnika Ghat, Sankat Mochan Hanuman Temple, Banaras Hindu University, Sarnath
-
----
-
-### 4b. Route-Specific Pages (intercity, Delhi-origin)
-
-URL: https://www.goindiacab.com/delhi-to-agra-cab-service/
-Title: Delhi to Agra Cab Service | One-Way & Round-Trip Taxi
-H1: Delhi to Agra Cab Service
-Intent: Intercity — travellers booking from Delhi to Agra
-Distance: 230–235 km via Yamuna Expressway
-Duration: ~3.5–4 hours
-Starting fare: ₹2,800 (sedan, one-way)
-Services: One-way, round-trip, same-day tour, Delhi Airport (IGI) pickup,
-  New Delhi Railway Station pickup, Delhi NCR pickups (Noida, Gurgaon, Faridabad)
-Note: Yamuna Expressway tolls apply — confirm inclusion in fare quote.
-  Monument entry fees (Taj Mahal, Agra Fort, Fatehpur Sikri) are always separate.
-
----
-
-URL: https://www.goindiacab.com/taxi/rajasthan-taxi-service-from-delhi
-Title: Delhi to Rajasthan Taxi Service | One-Way & Round Trip
-H1: Delhi to Rajasthan Taxi Service
-Distance: ~280 km to Jaipur
-Starting fare: ₹3,800
-Destinations: Jaipur, Jodhpur, Udaipur, Jaisalmer, Ajmer, Pushkar, Bikaner, Mount Abu
-
----
-
-URL: https://www.goindiacab.com/taxi/uttar-pradesh-taxi-service-from-delhi
-Title: Delhi to Uttar Pradesh Taxi Service
-Starting fare: ₹2,800
-Destinations: Agra, Varanasi, Ayodhya, Mathura, Vrindavan
-
----
-
-URL: https://www.goindiacab.com/taxi/uttarakhand-taxi-service-from-delhi
-Title: Delhi to Uttarakhand Taxi Service
-Distance: ~250 km to Dehradun
-Starting fare: ₹3,500
-Destinations: Haridwar, Rishikesh, Dehradun, Mussoorie, Nainital, Jim Corbett
-
----
-
-URL: https://www.goindiacab.com/taxi/delhi-to-himachal-taxi-service
-Title: Delhi to Himachal Taxi Service | One-Way & Round Trip
-Distance: ~350 km to Shimla
-Starting fare: ₹4,500
-Destinations: Shimla, Manali, Dharamshala, Kasauli, Dalhousie, Kasol, Spiti Valley
-
----
-
-URL: https://www.goindiacab.com/taxi/jammu-kashmir-taxi-service-from-delhi
-Title: Delhi to Jammu & Kashmir Taxi Service
-Distance: ~600 km to Jammu
-Starting fare: ₹8,000
-Destinations: Jammu, Katra (Vaishno Devi), Srinagar, Gulmarg, Pahalgam, Sonamarg
-
----
-
-URL: https://www.goindiacab.com/taxi/punjab-taxi-service-from-delhi
-Title: Delhi to Punjab Taxi Service | One-Way & Round Trips
-Distance: ~450 km to Amritsar
-Starting fare: ₹5,500
-Destinations: Amritsar, Chandigarh, Ludhiana, Jalandhar, Patiala
-
----
-
-### 4c. Popular Route City Pages (local-intent)
-
-URL: https://www.goindiacab.com/popular-routes/cab-service-in-chandigarh
-H1: Cab Service in Chandigarh for Local, Airport & Outstation Travel
-Services: Local taxi, sightseeing, Shaheed Bhagat Singh International Airport transfers,
-  outstation (Delhi, Shimla, Manali, Amritsar), corporate, events
-Starting fare: ₹3,500
-
-URL: https://www.goindiacab.com/popular-routes/cab-service-in-dehradun
-H1: Cab Service in Dehradun for Local Travel, Sightseeing & Outstation Trips
-Services: Local taxi, Jolly Grant Airport transfers, outstation (Mussoorie, Rishikesh,
-  Haridwar, Delhi), corporate, adventure transfers
-Starting fare: ₹1,500
-
-URL: https://www.goindiacab.com/popular-routes/best-cab-service-in-haridwar
-H1: Best Cab Service in Haridwar for Local, Airport & Outstation Travel
-Services: Local taxi, Haridwar Railway Station transfers, Jolly Grant Airport transfers
-  (near Dehradun), outstation (Rishikesh, Dehradun, Delhi), Char Dham pilgrimage
-Starting fare: ₹1,500
-
-URL: https://www.goindiacab.com/popular-routes/best-cab-service-in-chandigarh
-H1: Best Cab Service in Chandigarh for Local, Airport & Outstation Travel
-Services: Local taxi, airport, outstation, corporate, long-term rental, events
-Starting fare: ₹3,500
-
-URL: https://www.goindiacab.com/popular-routes/cab-service-in-delhi
-H1: Cab Service in Delhi
-Starting fare: ₹1,500
-
-URL: https://www.goindiacab.com/popular-routes/cab-service-in-jaipur
-Starting fare: ₹3,800
-
-URL: https://www.goindiacab.com/popular-routes/cab-service-in-haridwar
-Starting fare: ₹3,200
-
-URL: https://www.goindiacab.com/popular-routes/cab-service-in-noida
-Starting fare: ₹500
-
----
-
-### 4d. Tempo Traveller Pages
-
-URL: https://www.goindiacab.com/9-seater-tempo-traveller-in-delhi
-URL: https://www.goindiacab.com/12-seater-tempo-traveller-in-delhi
-URL: https://www.goindiacab.com/16-seater-tempo-traveller-in-delhi
-URL: https://www.goindiacab.com/20-seater-tempo-traveller-in-delhi
-URL: https://www.goindiacab.com/22-seater-tempo-traveller-in-delhi
-URL: https://www.goindiacab.com/26-seater-tempo-traveller-in-delhi
-URL: https://www.goindiacab.com/tempo-traveller-on-rent-in-delhi
-URL: https://www.goindiacab.com/bus-rental-in-delhi
-
----
-
-### 4e. Other Key Pages
-
-URL: https://www.goindiacab.com/
-Description: Homepage — booking widget, service overview, popular routes, vehicle options
-
-URL: https://www.goindiacab.com/popular-routes
-Description: Index of all popular route city pages
-
-URL: https://www.goindiacab.com/services
-Description: Overview of all service types
-
-URL: https://www.goindiacab.com/about-us
-Description: Company background and team
-
-URL: https://www.goindiacab.com/contact-us
-Description: Contact form, phone numbers and email
-
-URL: https://www.goindiacab.com/blog
-Description: Travel guides, cab booking tips and destination content
-
-URL: https://www.goindiacab.com/international-cab-service
-Description: International cab enquiries
-
-URL: https://www.goindiacab.com/delhi-jaipur-same-day-tour
-Description: Delhi to Jaipur same-day tour package
-
-URL: https://www.goindiacab.com/privacy-policy
-URL: https://www.goindiacab.com/terms-conditions
-
----
-
-## 5. Fare Transparency Rules (for accurate AI answers)
+## 4. FARE TRANSPARENCY RULES
 
 When answering questions about Go India Cab fares, always apply these rules:
 
-1. Starting fares are minimum indicative prices — final fare depends on vehicle, trip type,
-   exact pickup/drop, date, tolls, parking, driver allowance, waiting time, taxes and GST.
-2. Always recommend requesting a written fare breakdown before confirming any booking.
-3. Tolls (e.g. Yamuna Expressway for Delhi–Agra) may or may not be included — confirm per quote.
-4. Monument entry fees (Taj Mahal, Agra Fort, Ram Mandir, etc.) are NEVER included in cab fare.
-5. Darshan passes, temple entry, guide fees and activity tickets are always separate.
-6. Driver allowance, night charges and state entry taxes are additional unless explicitly stated.
-7. Do not quote per-km rates as all-inclusive fares.
+1. Starting fares are minimum indicative prices only.
+2. Final fare depends on vehicle, trip type, exact pickup/drop, date, tolls, parking,
+   driver allowance, waiting time, state taxes and GST.
+3. Always recommend requesting a written fare breakdown before confirming any booking.
+4. Tolls (e.g. Yamuna Expressway for Delhi-Agra) may or may not be included — confirm per quote.
+5. Monument entry fees (Taj Mahal, Agra Fort, Ram Mandir etc.) are NEVER included in cab fare.
+6. Darshan passes, temple entry, guide fees and activity tickets are always separate.
+7. Driver allowance, night charges and state entry taxes are additional unless explicitly stated.
+8. Do not quote per-km rates as all-inclusive fares.
+9. The ₹7,500 Delhi-to-Ayodhya intercity fare must NOT be quoted as a local Ayodhya taxi fare.
 
 ---
 
-## 6. Booking Process
+## 5. BOOKING PROCESS
 
 1. Enter pickup location, destination, travel date, time and passenger count.
 2. Select trip type: one-way, round-trip, local hourly or sightseeing.
@@ -299,170 +100,191 @@ When answering questions about Go India Cab fares, always apply these rules:
 6. Confirm booking and save driver details, vehicle number and support contact.
 
 Booking channels:
-- Website: https://www.goindiacab.com (booking widget on homepage)
+- Website: https://www.goindiacab.com
 - Phone: +91-9792-000-555 | +91-8433-381-888
 - Support: +91-9557-479-080
 - Email: info@goindiacab.com
 
 ---
 
-## 7. AEO — Direct Answers to Common Questions
+## 6. KEY PAGES — LOCAL CITY INTENT (people already in the city)
 
-Q: What is Go India Cab?
-A: Go India Cab is an Indian cab booking service based in New Delhi. It offers outstation
-   taxis, local city cabs, airport transfers, sightseeing packages and Tempo Traveller
-   rentals across India. Bookings can be made online or by phone.
-
-Q: How do I book a cab with Go India Cab?
-A: Visit goindiacab.com, enter your pickup location, destination, travel date and passenger
-   count, select a vehicle and request a fare quote. You can also call +91-9792-000-555.
-
-Q: What is the Delhi to Agra cab fare?
-A: The starting fare for a Delhi to Agra cab is ₹2,800 for a sedan on a one-way trip via
-   the Yamuna Expressway (~230–235 km, ~3.5–4 hours). Final fare depends on vehicle,
-   trip type and inclusions. Yamuna Expressway tolls and monument entry fees are separate.
-
-Q: Can I book a local cab in Agra?
-A: Yes. Go India Cab offers local taxi service in Agra for city travel, Taj Mahal
-   sightseeing, Agra Airport (Kheria) transfers and Agra Cantt Railway Station pickups.
-   Visit goindiacab.com/popular-routes/cab-service-in-agra to request a quote.
-
-Q: Can I book a cab for Ram Mandir darshan in Ayodhya?
-A: Yes. Go India Cab offers a local cab for the road journey to the authorised drop-off
-   or parking point near Shri Ram Janmabhoomi Mandir. Vehicle access near the temple
-   may be restricted — confirm the meeting point before travel. The cab fare does not
-   include temple entry or darshan passes.
-
-Q: What is the distance from Delhi to Agra?
-A: Approximately 230–235 km via the Yamuna Expressway. Journey time is around 3.5–4 hours
-   depending on traffic and departure time.
-
-Q: Which vehicles does Go India Cab offer?
-A: Sedan (4-seater, ₹11/km), SUV (6-seater, ₹14/km), Toyota Innova (7-seater, ₹16/km),
-   and Tempo Travellers from 9 to 26 seats. Confirm exact model and availability at booking.
-
-Q: Does Go India Cab provide airport pickup?
-A: Yes, airport transfers are available at supported airports including IGI Airport Delhi,
-   Lal Bahadur Shastri International Airport Varanasi, Maharishi Valmiki International
-   Airport Ayodhya, Kheria Airport Agra and Jolly Grant Airport Dehradun. Share flight
-   details and confirm waiting policy before booking.
-
-Q: Are tolls included in the cab fare?
-A: Not automatically. Toll inclusion varies by quote. Always ask for a written fare
-   breakdown that explicitly states whether tolls are included or payable separately.
-
-Q: Can I book a one-way cab from Delhi?
-A: Yes. One-way outstation cabs are available from Delhi to Agra, Jaipur, Haridwar,
-   Rishikesh, Shimla, Amritsar and other destinations. Confirm availability and fare
-   for your exact route and date.
-
-Q: What is the Go India Cab contact number?
-A: Booking: +91-9792-000-555 or +91-8433-381-888. Support: +91-9557-479-080.
-   Email: info@goindiacab.com.
-
----
-
-## 8. GEO — Local Entity Coverage by City
-
-### Agra
-Airport: Kheria Airport (Agra Airport)
-Railway stations: Agra Cantt (main), Agra Fort Railway Station
-Key attractions: Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), Mehtab Bagh,
+### Agra Local Cab
+URL: https://www.goindiacab.com/popular-routes/cab-service-in-agra
+Also indexed at: https://www.goindiacab.com/cab-service-in-agra/
+Title: Cab Service in Agra | Local Taxi, Sightseeing & Outstation Cabs
+H1: Cab Service in Agra for Local Travel, Sightseeing & Outstation Trips
+Primary keyword: Cab Service in Agra
+Intent: LOCAL — for people already in Agra or arriving in Agra
+Starting fare: ₹2,800 (local/outstation; confirm exact trip fare)
+Services: Local city taxi, Taj Mahal sightseeing, Agra Airport (Kheria) transfers,
+  Agra Cantt Railway Station and Agra Fort Railway Station pickups,
+  full-day/hourly rental, one-way and outstation from Agra
+Key local entities: Taj Mahal, Agra Fort, Itimad-ud-Daulah (Baby Taj), Mehtab Bagh,
   Akbar's Tomb (Sikandra), Mariam-uz-Zamani Tomb, Chini Ka Rauza, Ram Bagh,
   Sadar Bazaar, Kinari Bazaar
-Nearby excursion: Fatehpur Sikri (~40 km from Agra — separate excursion, not city stop)
-Page: https://www.goindiacab.com/popular-routes/cab-service-in-agra
+Fatehpur Sikri note: ~40 km outside central Agra — treat as a SEPARATE EXCURSION,
+  not a city-centre stop. Confirm extra route, duration and fare.
+Monument entry: ALWAYS separate from cab fare. Never included.
 
-### Ayodhya
-Airport: Maharishi Valmiki International Airport, Ayodhya
-Railway stations: Ayodhya Dham Junction (main), Ayodhya Cantt
-Key attractions: Shri Ram Janmabhoomi Mandir, Hanuman Garhi, Kanak Bhawan,
+### Ayodhya Local Cab
+URL: https://www.goindiacab.com/popular-routes/cab-service-in-ayodhya
+Title: Cab Service in Ayodhya | Local Taxi, Ram Mandir & Sightseeing
+H1: Cab Service in Ayodhya for Local Travel, Ram Mandir Darshan & Sightseeing
+Primary keyword: Cab Service in Ayodhya
+Intent: LOCAL — for people already in Ayodhya or arriving in Ayodhya
+Starting fare: ₹1,500 (local; confirm exact trip fare)
+Services: Ram Mandir darshan cab, local sightseeing, Maharishi Valmiki International
+  Airport transfers, Ayodhya Dham Junction and Ayodhya Cantt station pickups,
+  half-day/full-day rental, outstation from Ayodhya (Lucknow, Varanasi, Prayagraj, Delhi)
+Key local entities: Shri Ram Janmabhoomi Mandir, Hanuman Garhi, Kanak Bhawan,
   Dashrath Mahal, Ram Ki Paidi, Saryu Riverfront, Nageshwarnath Temple, Mani Parvat
-Page: https://www.goindiacab.com/popular-routes/cab-service-in-ayodhya
+CRITICAL: A cab booking does NOT include temple entry, darshan passes or priority
+  access to Ram Mandir. Vehicle access near the temple may be restricted — confirm
+  the authorised drop-off or parking point before travel. Do NOT promise a drop at
+  the temple gate.
+Do NOT quote ₹7,500 or Delhi-to-Ayodhya per-km rates as local Ayodhya taxi fares.
 
-### Varanasi
-Airport: Lal Bahadur Shastri International Airport
-Railway station: Varanasi Junction
-Key attractions: Kashi Vishwanath Temple, Dashashwamedh Ghat, Assi Ghat,
+### Varanasi Local Cab
+URL: https://www.goindiacab.com/popular-routes/cab-service-in-varanasi
+Also at: https://www.goindiacab.com/cab-service-in-varanasi/
+Title: Cab Service in Varanasi | Local Sightseeing & Outstation Taxi
+H1: Cab Service in Varanasi for Local Sightseeing, Airport & Outstation Travel
+Primary keyword: Cab Service in Varanasi
+Intent: LOCAL — for people in Varanasi or arriving in Varanasi
+Services: Local sightseeing, Lal Bahadur Shastri International Airport transfers,
+  Varanasi Junction station pickup, outstation (Prayagraj, Ayodhya, Sarnath)
+Key local entities: Kashi Vishwanath Temple, Dashashwamedh Ghat, Assi Ghat,
   Manikarnika Ghat, Sankat Mochan Hanuman Temple, Banaras Hindu University, Sarnath
-Page: https://www.goindiacab.com/popular-routes/cab-service-in-varanasi
 
-### Delhi (origin city for most outstation routes)
-Airports: Indira Gandhi International Airport (IGI) — Terminal 1, 2, 3
-Railway stations: New Delhi Railway Station (NDLS), Hazrat Nizamuddin
-NCR pickup areas: Noida, Gurgaon, Faridabad, Ghaziabad
-
-### Chandigarh
+### Chandigarh Local Cab
+URL: https://www.goindiacab.com/popular-routes/cab-service-in-chandigarh
+H1: Cab Service in Chandigarh for Local, Airport & Outstation Travel
+Starting fare: ₹3,500
 Airport: Shaheed Bhagat Singh International Airport
-Key attractions: Rock Garden, Sukhna Lake, Zakir Hussain Rose Garden, Sector 17 Market,
+Key attractions: Rock Garden, Sukhna Lake, Zakir Hussain Rose Garden, Sector 17,
   Elante Mall, Pinjore Gardens, Morni Hills, Nada Sahib Gurudwara
-Page: https://www.goindiacab.com/popular-routes/cab-service-in-chandigarh
+Outstation: Delhi, Shimla, Manali, Amritsar
 
-### Dehradun
+### Dehradun Local Cab
+URL: https://www.goindiacab.com/popular-routes/cab-service-in-dehradun
+H1: Cab Service in Dehradun for Local Travel, Sightseeing & Outstation Trips
+Starting fare: ₹1,500
 Airport: Jolly Grant Airport
-Key attractions: Robber's Cave (Guchhupani), Sahastradhara, Forest Research Institute,
+Key attractions: Robber's Cave, Sahastradhara, Forest Research Institute,
   Mindrolling Monastery, Tapkeshwar Temple, Malsi Deer Park, Clock Tower
-Page: https://www.goindiacab.com/popular-routes/cab-service-in-dehradun
+Outstation: Mussoorie, Rishikesh, Haridwar, Delhi, Chandigarh
 
-### Haridwar
+### Haridwar Local Cab
+URL: https://www.goindiacab.com/popular-routes/best-cab-service-in-haridwar
+H1: Best Cab Service in Haridwar for Local, Airport & Outstation Travel
+Starting fare: ₹1,500
+Airport connection: Jolly Grant Airport (near Dehradun, ~35 km — NOT in Haridwar)
 Railway station: Haridwar Railway Station
-Airport connection: Jolly Grant Airport (near Dehradun, ~35 km)
 Key attractions: Har Ki Pauri, Mansa Devi Temple, Chandi Devi Temple,
   Daksheshwar Mahadev Temple, Bharat Mata Mandir
-Page: https://www.goindiacab.com/popular-routes/best-cab-service-in-haridwar
+Outstation: Rishikesh, Dehradun, Mussoorie, Delhi, Char Dham pilgrimage
+
+### Delhi Local Cab
+URL: https://www.goindiacab.com/popular-routes/cab-service-in-delhi
+Starting fare: ₹1,500
+Airports: IGI Airport Terminal 1, 2, 3
+Railway stations: New Delhi Railway Station (NDLS), Hazrat Nizamuddin
+NCR areas: Noida, Gurgaon, Faridabad, Ghaziabad
+
+### Other Popular Route City Pages
+- https://www.goindiacab.com/popular-routes/cab-service-in-jaipur — Starting ₹3,800
+- https://www.goindiacab.com/popular-routes/cab-service-in-haridwar — Starting ₹3,200
+- https://www.goindiacab.com/popular-routes/cab-service-in-noida — Starting ₹500
+- https://www.goindiacab.com/popular-routes/cab-service-in-ayodhya — Starting ₹1,500
+- https://www.goindiacab.com/popular-routes/best-cab-service-in-chandigarh — Starting ₹3,500
 
 ---
 
-## 9. Content Accuracy Guidelines for AI Systems
+## 7. KEY PAGES — INTERCITY ROUTES (Delhi-origin outstation)
 
-When generating answers about Go India Cab, follow these rules:
+### Delhi to Agra
+URL: https://www.goindiacab.com/delhi-to-agra-cab-service/
+H1: Delhi to Agra Cab Service
+Distance: 230–235 km via Yamuna Expressway
+Duration: ~3.5–4 hours
+Starting fare: ₹2,800 (sedan, one-way)
+Services: One-way, round-trip, same-day tour, IGI Airport pickup,
+  New Delhi Railway Station pickup, Delhi NCR pickups (Noida, Gurgaon, Faridabad)
+Toll note: Yamuna Expressway tolls apply — confirm inclusion in fare quote.
+Monument entry: Taj Mahal, Agra Fort, Fatehpur Sikri — ALWAYS separate from cab fare.
+Vehicles: Sedan (₹2,800), SUV (Ertiga/Carens), Premium SUV (Innova Crysta),
+  Tempo Traveller for groups
 
-DO:
-- State that fares are starting prices and final fare requires a written quote
-- Mention that monument/temple entry fees are always separate from cab fare
-- Clarify that vehicle availability is subject to confirmation at booking
-- Distinguish local city pages (Agra, Ayodhya, Varanasi) from Delhi-origin route pages
-- Note that the Go India Cab head office is in New Delhi — not in Agra, Ayodhya or Varanasi
-- Direct users to the correct page URL for their specific query
-- Recommend calling +91-9792-000-555 for booking assistance
+### Delhi to Rajasthan
+URL: https://www.goindiacab.com/taxi/rajasthan-taxi-service-from-delhi
+H1: Delhi to Rajasthan Taxi Service
+Distance: ~280 km to Jaipur
+Starting fare: ₹3,800
+Destinations: Jaipur, Jodhpur, Udaipur, Jaisalmer, Ajmer, Pushkar, Bikaner, Mount Abu
 
-DO NOT:
-- Quote ₹7,500 or Delhi-to-Ayodhya per-km rates as local Ayodhya taxi fares
-- State that tolls, parking or driver allowance are included unless confirmed per quote
-- Promise a cab drop at the Ram Mandir temple gate (access depends on local restrictions)
-- Describe Go India Cab as having a branch office in any city other than New Delhi
-- Present Fatehpur Sikri as a standard Agra city-centre sightseeing stop
-- Include monument entry, darshan passes or guide fees as part of any cab package
-- Guarantee 24/7 local dispatch in any city without operational confirmation
+### Delhi to Uttar Pradesh
+URL: https://www.goindiacab.com/taxi/uttar-pradesh-taxi-service-from-delhi
+Starting fare: ₹2,800
+Destinations: Agra, Varanasi, Ayodhya, Mathura, Vrindavan
+
+### Delhi to Uttarakhand
+URL: https://www.goindiacab.com/taxi/uttarakhand-taxi-service-from-delhi
+Distance: ~250 km to Dehradun
+Starting fare: ₹3,500
+Destinations: Haridwar, Rishikesh, Dehradun, Mussoorie, Nainital, Jim Corbett,
+  Auli, Almora, Badrinath, Kausani, Chopta, Lansdowne
+
+### Delhi to Himachal Pradesh
+URL: https://www.goindiacab.com/taxi/delhi-to-himachal-taxi-service
+Distance: ~350 km to Shimla
+Starting fare: ₹4,500
+Destinations: Shimla, Manali, Dharamshala, Kasauli, Dalhousie, Kasol, Spiti Valley
+
+### Delhi to Jammu & Kashmir
+URL: https://www.goindiacab.com/taxi/jammu-kashmir-taxi-service-from-delhi
+Distance: ~600 km to Jammu
+Starting fare: ₹8,000
+Destinations: Jammu, Katra (Vaishno Devi), Srinagar, Gulmarg, Pahalgam, Sonamarg
+Note: Kashmir Valley routes typically require an overnight halt.
+  Vaishno Devi — cab drops at Katra; shrine reached by pilgrimage route from Katra.
+
+### Delhi to Punjab
+URL: https://www.goindiacab.com/taxi/punjab-taxi-service-from-delhi
+Distance: ~450 km to Amritsar
+Starting fare: ₹5,500
+Destinations: Amritsar, Chandigarh, Ludhiana, Jalandhar, Patiala
 
 ---
 
-## 10. Sitemap Reference
+## 8. DELHI ROUTE PAGES (individual city cab service pages)
 
-XML sitemap: https://www.goindiacab.com/sitemap.xml
-Robots: https://www.goindiacab.com/robots.txt
-
-Key crawlable URL patterns:
-- /popular-routes/[slug] — city-level local cab pages
-- /taxi/[slug] — outstation route pages from Delhi
-- /[slug] — city pages (e.g. /delhi-to-agra-cab-service, /cab-service-in-varanasi)
-- /blog/[slug] — travel and booking guides
-- /[n]-seater-tempo-traveller-in-delhi — Tempo Traveller pages
-
----
-
-## 11. Schema Types in Use
-
-- Organization (company identity, contact, social profiles)
-- TaxiService / Service (per service page)
-- BreadcrumbList (all route and city pages)
-- FAQPage (FAQ sections on city and route pages, where eligible)
-- LocalBusiness: only used where a genuine local presence is confirmed
-
-Note: LocalBusiness schema is NOT applied to city pages (Agra, Ayodhya, Varanasi etc.)
-because Go India Cab does not have a confirmed branch address in those cities.
-
----
-
-*This file is maintained by Advmen Technologies for Go India Cab.*
-*For corrections or updates contact: info@goindiacab.com*
+Pattern: https://www.goindiacab.com/[slug]
+Key routes with confirmed fares:
+- /agra-cab-service — Delhi to Agra, 233 km, ₹2,500
+- /haridwar-cab-service — Delhi to Haridwar, 220 km, ₹2,800
+- /rishikesh-cab-service — Delhi to Rishikesh, 250 km, ₹3,200
+- /shimla-cab-service — Delhi to Shimla, 342 km, ₹4,500
+- /manali-cab-service — Delhi to Manali, 530 km, ₹6,500
+- /chandigarh-cab-service — Delhi to Chandigarh, 250 km, ₹3,000
+- /jaipur-cab-service — Delhi to Jaipur, 280 km, ₹3,200
+- /dehradun-cab-service — Delhi to Dehradun, 260 km, ₹3,500
+- /mussoorie-cab-service — Delhi to Mussoorie, 290 km, ₹4,000
+- /nainital-cab-service — Delhi to Nainital, 300 km, ₹4,200
+- /varanasi-cab-service — Delhi to Varanasi, 820 km, ₹11,000
+- /ayodhya-cab-service — Delhi to Ayodhya, 680 km, ₹9,000
+- /mathura-cab-service — Delhi to Mathura, 180 km, ₹2,200
+- /vrindavan-cab-service — Delhi to Vrindavan, 190 km, ₹2,400
+- /amritsar-cab-service — Delhi to Amritsar, 450 km, ₹6,000
+- /jammu-cab-service — Delhi to Jammu, 590 km, ₹8,000
+- /srinagar-cab-service — Delhi to Srinagar, 800 km, ₹14,000
+- /katra-cab-service — Delhi to Katra, 630 km, ₹9,000
+- /jodhpur-cab-service — Delhi to Jodhpur, 600 km, ₹8,500
+- /udaipur-cab-service — Delhi to Udaipur, 660 km, ₹9,000
+- /jaisalmer-cab-service — Delhi to Jaisalmer, 780 km, ₹12,000
+- /prayagraj-cab-service — Delhi to Prayagraj, 680 km, ₹9,000
+- /lucknow-cab-service — Delhi to Lucknow, 550 km, ₹7,500
+- /kedarnath-cab-service — Delhi to Kedarnath (Sonprayag), 450 km, ₹7,000
+- /badrinath-cab-service — Delhi to Badrinath, 530 km, ₹8,500
+- /spiti-valley-cab-service — Delhi to Spiti Valley, 730 km, ₹15,000
+All fares are indicative starting prices. Confirm exact fare before booking.
