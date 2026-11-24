@@ -242,6 +242,39 @@ export default async function PopularRouteDetailPage({ params }: { params: Promi
                 </ul>
               </div>
             )}
+
+            {slug === "cab-service-in-ayodhya" && (
+              <div className="pt-8 border-t border-border">
+                <h2 className="text-3xl font-bold text-dark mb-6">Related Services & Routes</h2>
+                <ul className="space-y-3 text-gray-text">
+                  <li>
+                    <Link href="/taxi/uttar-pradesh-taxi-service-from-delhi" className="text-primary hover:underline font-medium">
+                      Outstation taxi services across Uttar Pradesh
+                    </Link>{" "}– explore UP destinations including Agra, Mathura, Vrindavan and Varanasi.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-varanasi" className="text-primary hover:underline font-medium">
+                      Cab Service in Varanasi
+                    </Link>{" "}– plan your next pilgrimage destination after Ayodhya.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-agra" className="text-primary hover:underline font-medium">
+                      Local Cab Service in Agra
+                    </Link>{" "}– book a local taxi for Taj Mahal sightseeing and Agra city travel.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes" className="text-primary hover:underline font-medium">
+                      All popular routes
+                    </Link>{" "}– browse other destinations covered by Go India Cab.
+                  </li>
+                  <li>
+                    <Link href="/contact" className="text-primary hover:underline font-medium">
+                      Book a Cab / Contact Go India Cab
+                    </Link>{" "}– get in touch for a custom quote or booking assistance.
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="lg:col-span-1" id="book">

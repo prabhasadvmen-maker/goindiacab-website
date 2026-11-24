@@ -736,104 +736,120 @@ export const popularRoutes: Route[] = [
   {
     id: "ayodhya",
     slug: "cab-service-in-ayodhya",
-    from: "Delhi",
+    from: "Ayodhya",
     to: "Ayodhya",
-    distance: "~630 km",
-    duration: "9-10 Hours",
-    fare: "Starting ₹7,500",
+    distance: "Local & Outstation",
+    duration: "Flexible Hours",
+    fare: "Starting ₹1,500",
     image: "/popular-outstation/ayodhya.jpg.webp",
-    metaTitle: "Delhi to Ayodhya Cab Service | One-Way & Round Trip Taxi – Go India Cab",
-    metaDescription: "Book a Delhi to Ayodhya cab with Go India Cab. Compare sedan and SUV options, request a trip-specific fare and plan your journey to Ram Mandir.",
-    h1: "Delhi to Ayodhya Cab Service for Ram Mandir & Outstation Travel",
-    breadcrumb: "Delhi to Ayodhya Cab Service",
-    description: "Planning a road trip from Delhi to Ayodhya? Book an intercity cab with Go India Cab for a convenient journey to Ayodhya, including travel for Ram Mandir visits and other planned stops. Choose from sedan, SUV and premium SUV categories, subject to availability. Share your pickup location, travel date, passenger count and whether you need a one-way drop or a return journey to receive a trip-specific quotation.",
+    metaTitle: "Cab Service in Ayodhya | Local Taxi, Ram Mandir & Sightseeing – Go India Cab",
+    metaDescription: "Book a cab service in Ayodhya for Ram Mandir darshan, local sightseeing, hotel pickups, airport transfers and railway station drops. Share your trip details to check cab availability and fare.",
+    h1: "Cab Service in Ayodhya for Local Travel, Ram Mandir Darshan & Sightseeing",
+    breadcrumb: "Cab Service in Ayodhya",
+    description: "Looking for a cab service in Ayodhya? Go India Cab helps you plan local travel for temple visits, sightseeing, hotel transfers and pickup or drop from major travel points. Share your pickup location, travel date, preferred time and passenger count to check vehicle availability and receive a fare quote before confirming your booking.",
     contentSections: [
       {
-        title: "Book a Delhi to Ayodhya Taxi with Go India Cab",
-        content: "A pre-booked cab can help you plan your journey from Delhi to Ayodhya around your preferred departure time and travel requirements. Go India Cab lists this route at approximately 630 km with an estimated journey time of 9–10 hours. Actual distance and travel time can vary according to the exact pickup and drop points, route, traffic, road conditions and breaks during the journey."
+        title: "Local Taxi Service in Ayodhya",
+        content: "Book a local taxi in Ayodhya for sightseeing, family visits, shopping, hotel transfers and travel between important places in the city. Share your pickup point, the places you plan to visit and how long you need the cab. The booking team will confirm the available vehicle, applicable package or trip fare, and any additional charges before the journey.\n\nWhether you are visiting Shri Ram Janmabhoomi Mandir, exploring Ayodhya's important temples and ghats, or travelling between your hotel, railway station and airport, choose a cab option that suits your itinerary. Confirm the exact pickup point and vehicle access near busy temple areas at the time of booking."
       },
       {
-        title: "Delhi to Ayodhya Route Details",
-        content: "• Approximate distance: 630 km.\n• Indicative duration: 9–10 hours.\n• Starting price displayed: ₹7,500.\n• Final trip estimate: confirm against exact pickup/drop addresses, vehicle, date and trip type.\n\nAvoid treating the displayed distance or duration as guaranteed. Actual journey time depends on traffic, road conditions, route taken and planned breaks."
-      },
-      {
-        title: "Delhi to Ayodhya Cab Options",
+        title: "Cab Services Available in Ayodhya",
         subsections: [
           {
-            title: "Sedan Cab",
-            content: "The page lists Dzire / Etios sedan options at ₹11 per km. A sedan may suit a smaller passenger group with standard luggage. Confirm the actual vehicle model, seating and luggage capacity at booking."
+            title: "Cab for Ram Mandir Darshan in Ayodhya",
+            content: "Plan your visit to Shri Ram Janmabhoomi Mandir with a cab for the road journey to the permitted drop-off or parking point. Vehicle access close to the temple may change due to security arrangements, traffic management, events or local restrictions. Confirm the authorised meeting or drop point before starting the trip. A cab booking does not include temple entry, darshan passes or priority access."
           },
           {
-            title: "SUV Cab",
-            content: "The page lists Ertiga / Carens SUV options at ₹16 per km. An SUV may be suitable for families or travellers carrying more luggage, subject to the assigned vehicle's capacity."
+            title: "Ayodhya Local Sightseeing Cab",
+            content: "Explore Ayodhya's prominent religious and cultural attractions by planning a local sightseeing trip. Depending on your available time and local access conditions, your itinerary may include Shri Ram Janmabhoomi Mandir, Hanuman Garhi, Kanak Bhawan, Dashrath Mahal, Ram Ki Paidi and the Saryu riverfront and ghat area. The final sequence and number of stops should be planned according to temple timings, traffic, walking requirements, parking availability and local restrictions. Confirm whether waiting time and additional stops are included in the quoted fare."
           },
           {
-            title: "Premium SUV",
-            content: "The page lists Innova Crysta at ₹20 per km. Confirm availability for the requested date and clarify whether the quoted rate includes all trip-related charges."
+            title: "Ayodhya Airport Taxi Service",
+            content: "Arrange a cab pickup or drop to Maharishi Valmiki International Airport, Ayodhya. When requesting an airport transfer, share your flight number, arrival or departure time, passenger count, luggage details and destination. Confirm the pickup meeting point, waiting-time allowance, parking charges and flight-delay policy before booking."
+          },
+          {
+            title: "Ayodhya Railway Station Taxi Service",
+            content: "Request a taxi for pickup or drop at Ayodhya Dham Junction or Ayodhya Cantt railway station. Share your train number, arrival time, coach or platform details if available, number of passengers and luggage. Confirm the station pickup point and waiting charges with the booking team."
+          },
+          {
+            title: "Half-Day and Full-Day Taxi in Ayodhya",
+            content: "If you plan to visit multiple places, ask about a time-based local cab package. Before confirming, check the package duration, included kilometres, extra-kilometre rate, extra-hour rate, driver allowance, parking, tolls and applicable taxes. Confirm actual package options and prices with the booking team before finalising."
+          },
+          {
+            title: "Outstation Taxi from Ayodhya",
+            content: "Need to continue your journey beyond Ayodhya? Enquire about outstation taxi options to destinations such as Lucknow, Varanasi, Prayagraj or Delhi, subject to route and vehicle availability. Share your destination, travel date, passenger count and preferred vehicle to request a quote. Confirm one-way or round-trip availability, fare basis, tolls, parking and driver allowance before booking."
           }
         ]
       },
       {
-        title: "Delhi to Ayodhya Cab Fare and Inclusions",
-        content: "The page displays a starting price of ₹7,500 and vehicle-wise rates of ₹11/km for sedan, ₹16/km for SUV and ₹20/km for premium SUV. Before confirming, ask for a written fare breakdown that explains the minimum billable kilometres, one-way or round-trip calculation, driver allowance, tolls, parking, state taxes, night charges and any waiting or additional-stop charges."
+        title: "Popular Places to Visit in Ayodhya by Cab",
+        content: "A local sightseeing itinerary can include a selection of these attractions, depending on temple timings, local access conditions, traffic and available time:\n\n• Shri Ram Janmabhoomi Mandir – the primary pilgrimage destination; confirm the authorised vehicle drop-off point.\n• Hanuman Garhi – a prominent hilltop temple in the heart of Ayodhya.\n• Kanak Bhawan – a revered temple dedicated to Sita and Ram.\n• Dashrath Mahal – the palace associated with King Dashrath.\n• Ram Ki Paidi – the main ghat on the Saryu river, known for evening aarti.\n• Saryu Riverfront – a scenic area for walks and religious rituals.\n• Nageshwarnath Temple – one of the oldest temples in Ayodhya.\n• Mani Parvat – a hillock with religious significance and city views.\n\nConfirm monument and temple timings, parking arrangements and waiting charges before booking. Local traffic and security arrangements near the Ram Mandir area can affect the schedule."
       },
       {
-        title: "One-Way and Round-Trip Cab Options",
-        content: "If you are travelling from Delhi to Ayodhya and do not need the same cab for the return journey, ask whether a one-way drop is available for your date. If you plan to return to Delhi, request a round-trip quotation and confirm the number of days, total kilometres, driver allowance, overnight charges and waiting arrangements. Confirm only the trip types that the booking team can fulfil."
+        title: "How to Book a Local Cab in Ayodhya",
+        content: "1. Enter your pickup point in Ayodhya and travel date with preferred pickup time.\n2. Share your destination or list of sightseeing places.\n3. Select the passenger count and preferred vehicle category.\n4. Ask for a fare breakup, including package limits and extra charges.\n5. Confirm the booking only after the vehicle, pickup point and fare terms are shared.\n6. Save the booking confirmation and support contact details."
       },
       {
-        title: "Visiting Ram Mandir and Other Places in Ayodhya",
-        content: "Ayodhya is an important pilgrimage destination. Travellers commonly plan a visit to Shri Ram Janmabhoomi Mandir and other religious and cultural sites in the city. If you want to visit multiple locations after arriving, share your itinerary before booking. Confirm whether local sightseeing is included in the intercity package or needs a separate local cab arrangement. Temple entry, security procedures, parking and local traffic restrictions may affect the schedule.\n\n• Shri Ram Janmabhoomi Mandir\n• Hanuman Garhi\n• Kanak Bhawan\n• Saryu Riverfront / Ram Ki Paidi"
+        title: "Choose a Cab According to Your Group",
+        content: "Select a vehicle according to passenger count, luggage, mobility requirements and route conditions. Confirm seating capacity and luggage space before payment or booking confirmation.\n\n• Sedan (Dzire / Etios) – suitable for small groups of up to 4 passengers with standard luggage.\n• SUV (Ertiga / Innova Crysta) – better for families, larger groups or travellers with more luggage.\n• Tempo Traveller – for larger groups; confirm seating capacity and route suitability."
       },
       {
-        title: "Why Choose Go India Cab for Delhi to Ayodhya?",
-        content: "• Vehicle categories available for the route: sedan, SUV and premium SUV.\n• Fare information shown before booking, with a written breakdown available on request.\n• Booking assistance for pickup details, travel date and trip type.\n• Customer support contact details available on the website.\n\nClaims such as verified drivers, 24/7 support, free cancellation or safety guarantees should only be published when current terms and operational evidence support them."
+        title: "Why Book with Go India Cab?",
+        content: "Go India Cab lists local, airport and outstation cab services and provides online and phone-based booking options. Share your Ayodhya travel plan and ask the team to confirm the vehicle, route, fare and booking terms before making a decision.\n\n• Local, sightseeing and outstation travel options listed on the website.\n• Different vehicle categories described for individual and group travel.\n• Phone and online enquiry options for booking assistance.\n• Fare details can be requested for the exact route and trip type.\n\nClaims such as 24/7 support, verified drivers, flight tracking or guaranteed on-time pickup should be confirmed with the booking team before relying on them."
       },
       {
-        title: "How to Book Your Delhi to Ayodhya Cab",
-        content: "1. Select one-way or round-trip travel.\n2. Enter the exact Delhi pickup address and Ayodhya drop location.\n3. Choose your travel date and preferred departure time.\n4. Share the passenger count and luggage requirements.\n5. Select a sedan, SUV or premium SUV based on availability.\n6. Review the written quotation and all fare inclusions/exclusions.\n7. Confirm the booking and save the booking reference and support details."
+        title: "Book Your Ayodhya Cab",
+        content: "Share your pickup location, travel date, time, passenger count and itinerary with Go India Cab. The team can help you check the available cab option and understand the fare before you confirm. For temple-area trips, confirm the permitted drop or meeting point in advance.\n\nBooking: +91-9792-000-555 | +91-8433-381-888 | Support: +91-9557-479-080 | Email: info@goindiacab.com\n\nConfirm availability, inclusions, exclusions and cancellation terms before payment."
       }
     ],
     faqs: [
       {
-        question: "How far is Ayodhya from Delhi by cab?",
-        answer: "The Go India Cab page displays an approximate distance of 630 km. The actual distance depends on the exact pickup and drop locations and the route taken."
+        question: "Can I book a local taxi in Ayodhya for Ram Mandir darshan?",
+        answer: "You can enquire about a local cab for the road journey to the authorised drop-off or parking point for Shri Ram Janmabhoomi Mandir. Vehicle access near the temple may be restricted, so confirm the meeting point before travel."
       },
       {
-        question: "How long does it take to travel from Delhi to Ayodhya by taxi?",
-        answer: "The page displays an estimated journey time of 9–10 hours. Traffic, road conditions, route and travel breaks can change the actual duration."
+        question: "Does Go India Cab provide local sightseeing in Ayodhya?",
+        answer: "The Ayodhya page lists local sightseeing cab options. Share your planned stops, travel date and passenger count to confirm vehicle availability and the applicable fare."
       },
       {
-        question: "What is the starting fare for a Delhi to Ayodhya cab?",
-        answer: "The page currently displays a starting price of ₹7,500. Confirm the current fare and its inclusions with Go India Cab before booking."
+        question: "Can I book an Ayodhya airport pickup?",
+        answer: "The page lists airport pickup and drop at Maharishi Valmiki International Airport. Share your flight details, destination, passenger count and luggage information to request availability."
       },
       {
-        question: "What are the vehicle rates for Delhi to Ayodhya?",
-        answer: "The page lists sedan at ₹11/km, SUV at ₹16/km and premium SUV at ₹20/km. Ask the booking team how these per-kilometre rates are applied and what additional charges may apply."
+        question: "Can I get a taxi from Ayodhya Dham Junction?",
+        answer: "Station pickup can be arranged subject to local vehicle availability. Confirm the station gate or meeting point, train arrival time and waiting policy with the booking team."
       },
       {
-        question: "Can I book a one-way cab from Delhi to Ayodhya?",
-        answer: "Ask Go India Cab to confirm one-way availability for your travel date and obtain a written quote for the exact pickup and drop points."
+        question: "Are half-day and full-day taxis available in Ayodhya?",
+        answer: "Ask about half-day or full-day packages when booking. Confirm included hours and kilometres, extra-hour charges and other exclusions before confirming."
       },
       {
-        question: "Can I book a round-trip taxi from Delhi to Ayodhya?",
-        answer: "Request a round-trip quote and confirm the trip duration, kilometres, driver allowance, overnight charges and waiting terms."
+        question: "Can a cab drop passengers directly at Ram Mandir?",
+        answer: "Do not assume a drop at the temple gate. Access depends on current security, traffic and local vehicle restrictions. Confirm the authorised drop-off or parking point with the booking team."
       },
       {
-        question: "Can I visit Ram Mandir using this cab service?",
-        answer: "The page promotes travel to Ayodhya for a Ram Mandir visit. Confirm whether the cab package includes only the Delhi–Ayodhya transfer or also local sightseeing and waiting time."
+        question: "How much does a local taxi in Ayodhya cost?",
+        answer: "The fare depends on vehicle type, trip duration, kilometres, pickup point, waiting time and additional charges. Request a written fare breakup from the booking team for your specific trip."
       },
       {
-        question: "Does the fare include tolls and parking?",
-        answer: "Fare inclusions can vary by trip and quote. Confirm tolls, parking, taxes, driver allowance and other charges in writing before booking."
+        question: "Can I book an outstation taxi from Ayodhya?",
+        answer: "You can enquire about outstation trips to destinations such as Lucknow, Varanasi, Prayagraj and Delhi. Confirm one-way or round-trip availability, vehicle, fare basis, tolls, parking and driver allowance before booking."
       },
       {
-        question: "Which car is suitable for a family trip to Ayodhya?",
-        answer: "The page lists sedan, SUV and premium SUV categories. Choose based on passenger count and luggage, and confirm the assigned vehicle's seating and luggage capacity."
+        question: "Which car should I choose for a family sightseeing trip in Ayodhya?",
+        answer: "Choose based on passenger count, luggage and trip duration. A sedan suits small groups; an SUV is better for families with more luggage. Confirm the actual vehicle model and seating capacity at booking."
       },
       {
-        question: "How do I book a Delhi to Ayodhya cab?",
-        answer: "Share your pickup point, Ayodhya destination, travel date, passenger count and preferred vehicle with Go India Cab to request a quotation and confirm availability."
+        question: "Are tolls, parking and driver allowance included in the fare?",
+        answer: "Do not assume they are included. Ask for a written quote listing tolls, parking, driver allowance, state taxes, GST, waiting time and any additional charges."
+      },
+      {
+        question: "Can I book a cab from Ayodhya to Varanasi or Lucknow?",
+        answer: "These are listed as outstation destinations from Ayodhya. Confirm route availability, one-way or round-trip options and the full fare with the booking team."
+      },
+      {
+        question: "How do I contact Go India Cab for an Ayodhya booking?",
+        answer: "Call +91-9792-000-555 or +91-8433-381-888 for bookings, +91-9557-479-080 for support, or email info@goindiacab.com. Verify details against the live contact page before publishing."
       }
     ],
   },
