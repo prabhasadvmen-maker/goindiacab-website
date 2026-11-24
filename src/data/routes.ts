@@ -983,138 +983,104 @@ export const popularRoutes: Route[] = [
     fare: "Starting ₹1,500",
     image: "/popular-outstation/dehradun.jpg.webp",
     metaTitle: "Cab Service in Dehradun | Local, Airport & Outstation Taxi – Go India Cab",
-    metaDescription: "Book a cab service in Dehradun for local travel, sightseeing, Jolly Grant Airport transfers and outstation trips. Choose a suitable vehicle and request a fare quote.",
-    h1: "Cab Service in Dehradun for Local Travel, Sightseeing & Outstation Trips",
+    metaDescription: "Book a cab service in Dehradun for local travel, sightseeing, Jolly Grant Airport transfers and outstation trips. Share your pickup, date and route to check cab availability and fare.",
+    h1: "Cab Service in Dehradun for Local, Airport & Outstation Travel",
     breadcrumb: "Cab Service in Dehradun",
-    description: "Looking for a cab service in Dehradun for city travel, sightseeing or an outstation journey? Go India Cab helps you enquire about local taxi bookings, hourly rentals, airport transfers and trips to popular destinations across Uttarakhand and nearby states. Share your pickup location, destination, travel date and passenger count to check available vehicle options and request a fare quote.",
+    description: "Need a cab in Dehradun for city travel, sightseeing, an airport transfer or an outstation journey? Go India Cab helps travellers request a suitable vehicle based on their pickup location, destination, travel date and passenger count. Share your trip details to check availability and receive a fare breakup before confirming your booking. Whether you are travelling within Dehradun, arriving at Jolly Grant Airport or planning a trip to Mussoorie, Rishikesh or Haridwar, confirm the vehicle category, pickup point, trip duration and fare conditions in advance.",
     contentSections: [
       {
-        title: "Book a Taxi in Dehradun for City and Outstation Travel",
-        content: "Dehradun connects city neighbourhoods, educational institutions, business areas and popular destinations in Uttarakhand. A pre-booked taxi can help you travel between your hotel, railway station, Jolly Grant Airport, offices and sightseeing stops. Go India Cab lists local, hourly, airport and outstation taxi options for travellers who need transport in and around Dehradun.\n\nShare your planned stops and expected travel duration when requesting a quote. This helps the booking team confirm the suitable trip type, vehicle availability, package duration and applicable fare conditions."
+        title: "Local Taxi Service in Dehradun",
+        content: "Book a local taxi in Dehradun for meetings, shopping, hospital visits, hotel transfers and day-to-day city travel. If you need the cab for multiple stops, ask about an hourly or time-based rental package. Before confirming, check the package duration, kilometre limit, extra-hour rate, waiting charges and applicable taxes.\n\nShare your pickup point, the places you plan to visit and how long you need the cab. The booking team will confirm the available vehicle, applicable package or trip fare, and any additional charges before the journey."
       },
       {
-        title: "Cab Services Available in Dehradun",
-        subsections: [
-          {
-            title: "Local Cab Service in Dehradun",
-            content: "Book a local cab for hotel transfers, railway station pickups, shopping, hospital visits, office meetings and travel between city attractions. If you need a vehicle for multiple stops or a fixed number of hours, ask about the available hourly, half-day or full-day package. Confirm the included hours and kilometres, extra-hour rate, extra-kilometre rate and waiting charges before booking."
-          },
-          {
-            title: "Dehradun Sightseeing Taxi",
-            content: "Explore Dehradun with a sightseeing taxi and plan your stops around the time available. Popular places to consider include Robber's Cave (Guchhupani), Sahastradhara, Forest Research Institute and Mindrolling Monastery. If you want to visit attractions outside the city, such as Rajaji National Park or nearby hill destinations, confirm the route, travel time, entry requirements and total booking duration in advance."
-          },
-          {
-            title: "Jolly Grant Airport Taxi Service",
-            content: "Request a taxi for pickup or drop-off at Dehradun's Jolly Grant Airport. Share your flight number, arrival or departure time, pickup point and destination address. Before confirming, check the airport meeting point, waiting-time allowance, parking charges and procedure for flight delays. Airport transfers are subject to vehicle and service availability."
-          },
-          {
-            title: "Outstation Taxi Service from Dehradun",
-            content: "Planning to travel beyond Dehradun? Enquire about an outstation taxi for destinations such as Mussoorie, Rishikesh, Haridwar, Chandigarh, Delhi and other locations, subject to route availability. Choose a one-way drop or round trip where offered. Share the exact pickup and drop addresses, travel date, return plan and any stops so the team can prepare an accurate quote."
-          },
-          {
-            title: "One-Way Taxi from Dehradun",
-            content: "A one-way taxi is useful when you need a drop from Dehradun to another city without booking a return ride. Availability and pricing depend on the destination, vehicle category, date and operator terms. Confirm whether driver return, tolls, permits or other route-related charges apply."
-          },
-          {
-            title: "Corporate Cab Service in Dehradun",
-            content: "For business travel, request a cab for office transfers, meetings, events and scheduled employee commutes. Share passenger count, pickup schedule, number of stops and billing requirements. Confirm whether recurring bookings, monthly billing, GST invoices or dedicated vehicle arrangements are available before describing them as standard inclusions."
-          },
-          {
-            title: "Wedding and Event Taxi Service in Dehradun",
-            content: "For weddings, family functions and events, enquire about vehicles for guest transfers and scheduled pickups. Share event venues, dates, passenger numbers and movement schedules. Confirm the number of vehicles, seating capacity, waiting time and any decoration or special-use requirements in advance."
-          },
-          {
-            title: "Adventure and Tour Transfers",
-            content: "Dehradun is a starting point for outdoor trips and excursions across Uttarakhand. If you need transport for trekking, rafting, camping or other activities, share the destination, road access point, group size and luggage requirements. Confirm whether the cab can reach the planned drop location and whether the vehicle will remain available during the activity."
-          }
-        ]
+        title: "Dehradun Sightseeing by Cab",
+        content: "A local cab can make it easier to visit Dehradun's attractions in a planned sequence. Depending on your available time and local access conditions, your itinerary may include:\n\n• Robber's Cave (Guchhupani) – Natural cave and stream attraction; check local access and water conditions.\n• Sahastradhara – Known for its sulphur springs and scenic surroundings; confirm current visitor facilities.\n• Forest Research Institute (FRI) – Recognised for its colonial architecture and campus; check visitor access and timings.\n• Mindrolling Monastery – Buddhist monastery complex and major local attraction; confirm visitor rules.\n• Tapkeshwar Temple – Shiva temple destination that can be added to a local itinerary.\n• Malsi Deer Park – Family-friendly stop; verify current opening and entry details.\n• Clock Tower and Paltan Bazaar – City-centre landmarks and shopping area; consider traffic and parking.\n\nConfirm opening hours, entry fees, parking, waiting time and the number of included stops independently. Nearby destinations such as Mussoorie, Rishikesh and Haridwar should be treated as separate outstation trips rather than ordinary city sightseeing stops."
       },
       {
-        title: "Dehradun Sightseeing Taxi – Places to Visit",
-        content: "Plan your city sightseeing route around the time available and the places you want to explore. Check current visitor access, opening hours and local restrictions before travelling.\n\n• Robber's Cave (Guchhupani) – Natural cave and stream attraction; check local access and water conditions.\n• Sahastradhara – Known for its springs and scenic surroundings; confirm current visitor facilities.\n• Forest Research Institute – Recognised for its architecture and campus; check visitor access and timings.\n• Mindrolling Monastery – Buddhist monastery complex and major local attraction; confirm visitor rules.\n• Tapkeshwar Temple – Temple destination that can be added to a local itinerary.\n• Malsi Deer Park – Family-friendly stop; verify current opening and entry details.\n• Clock Tower and Paltan Bazaar – City-centre landmarks and shopping area; consider traffic and parking.\n\nNearby excursions such as Mussoorie, Rishikesh and Haridwar should be planned as separate trips or longer itineraries rather than being presented as short city sightseeing stops. Confirm total kilometres, duration and fare conditions with the booking team."
+        title: "Jolly Grant Airport Taxi Service",
+        content: "Arrange a pickup or drop between Dehradun and Jolly Grant Airport. When requesting an airport cab, share your flight number, arrival or departure time, passenger count, luggage details and destination address. Confirm the airport meeting point, waiting-time allowance, parking charges and flight-delay policy before booking.\n\nAirport transfers are subject to vehicle and service availability. Do not assume 24/7 dispatch or flight monitoring without confirming with the booking team."
       },
       {
-        title: "Outstation Taxi from Dehradun to Nearby Destinations",
-        content: "• Mussoorie – Hill-station day trip or overnight stay; check hill-road conditions and parking.\n• Rishikesh – Temple visits, riverside areas, yoga stays and activity transfers.\n• Haridwar – Pilgrimage travel and visits to ghats and temples.\n• Delhi – Intercity transfer; use a dedicated Delhi–Dehradun route page if available.\n• Chandigarh – Interstate business or personal travel, subject to availability.\n• Nainital / Almora – Longer Uttarakhand journeys; confirm route, duration and vehicle suitability.\n\nRoute availability, journey time and fare depend on exact pickup and drop addresses, road conditions, vehicle type, travel date and trip configuration. Request a route-specific quote and confirm whether the booking is one-way or round trip."
+        title: "Railway Station and ISBT Transfers",
+        content: "If this service is available for your travel date, request a pickup or drop at Dehradun Railway Station or the Inter-State Bus Terminal (ISBT). Share your train or bus arrival time, pickup landmark, passenger count and luggage details. Confirm the meeting point and waiting policy with the booking team before travel."
       },
       {
-        title: "Choose the Right Cab for Your Journey",
-        subsections: [
-          {
-            title: "Hatchback",
-            content: "A hatchback may suit solo travellers or small groups with limited luggage for short city trips. Confirm the available model and passenger capacity."
-          },
-          {
-            title: "Sedan",
-            content: "A sedan may be suitable for couples, small families and business travellers with standard luggage. Confirm passenger and luggage capacity."
-          },
-          {
-            title: "SUV",
-            content: "An SUV may be a better fit for families, hill travel or travellers carrying more luggage. Confirm the actual seating configuration and route suitability."
-          },
-          {
-            title: "Tempo Traveller",
-            content: "For larger groups, enquire about available Tempo Traveller seating configurations and luggage space. Confirm vehicle availability and whether the selected vehicle is suitable for the route."
-          }
-        ]
+        title: "Outstation Taxi from Dehradun",
+        content: "Planning to travel beyond the city? Enquire about one-way or round-trip cabs from Dehradun to nearby destinations. Common route-intent examples include:\n\n• Dehradun to Mussoorie – Hill-station day trip or overnight stay; check hill-road conditions and parking.\n• Dehradun to Rishikesh – Temple visits, riverside areas, yoga stays and activity transfers.\n• Dehradun to Haridwar – Pilgrimage travel and visits to ghats and temples.\n• Dehradun to Nainital or Almora – Longer Uttarakhand journeys; confirm route, duration and vehicle suitability.\n• Dehradun to Delhi – Intercity transfer; confirm one-way or round-trip availability and fare.\n• Dehradun to Chandigarh – Interstate business or personal travel, subject to availability.\n\nFor hill journeys, confirm the exact destination, route, vehicle suitability, road conditions, trip duration, night halt requirements and any local vehicle restrictions. Route availability, journey time and fare depend on exact pickup and drop addresses, road conditions, vehicle type, travel date and trip configuration."
       },
       {
-        title: "Dehradun Taxi Fare – What Affects the Price?",
-        content: "Taxi fares may depend on vehicle category, trip distance, duration, local package, outstation route, travel date and booking type. Before confirming, request a fare breakup and check what is included. Depending on the package and operator terms, additional charges may apply for tolls, parking, state permits or taxes, waiting time, extra kilometres, night travel, driver allowance, overnight stays or route changes.\n\nFor local hourly rentals, confirm included hours and kilometres and the extra-hour or extra-kilometre rate. For outstation trips, ask about minimum kilometre rules, one-way or round-trip calculations, driver allowance and overnight charges. Do not promise 'no hidden charges' or 'all-inclusive fares' unless the written quote clearly supports that statement."
+        title: "Corporate Cab Service in Dehradun",
+        content: "Businesses can enquire about cab requirements for meetings, guest transfers, events or employee transportation. If corporate transport is offered, provide details about route frequency, passenger volume, service timings, billing requirements and contract terms so the team can assess the requirement.\n\nConfirm whether recurring bookings, monthly billing, GST invoices or dedicated vehicle arrangements are available before describing them as standard inclusions."
+      },
+      {
+        title: "Vehicle Options for Your Journey",
+        content: "Choose a vehicle according to passenger count, luggage and route conditions. Confirm exact seating capacity, luggage space and hill-route suitability before payment or confirmation.\n\n• Hatchback – May suit solo travellers or small groups with limited luggage for short city trips. Confirm the available model and passenger capacity.\n• Sedan (Dzire / Etios) – Suitable for couples, small families and business travellers with standard luggage. Confirm passenger and luggage capacity.\n• SUV (Ertiga / Innova Crysta) – A better fit for families, hill travel or travellers carrying more luggage. Confirm the actual seating configuration and route suitability.\n• Tempo Traveller – For larger groups; enquire about available seating configurations and luggage space. Confirm vehicle availability and whether the selected vehicle is suitable for the route."
+      },
+      {
+        title: "Taxi Fare in Dehradun",
+        content: "The fare may depend on vehicle category, distance, trip duration, rental package and route. Before booking, request a written fare breakup covering:\n\n• Included kilometres or hours\n• Extra-hour and extra-kilometre charges\n• Tolls and parking\n• Driver allowance\n• State taxes and permits\n• Night charges\n• Waiting time charges\n• GST\n\nFor local hourly rentals, confirm included hours and kilometres and the extra-hour or extra-kilometre rate. For outstation trips, ask about minimum kilometre rules, one-way or round-trip calculations, driver allowance and overnight charges. Do not assume any charges are included unless the written quote explicitly states so."
+      },
+      {
+        title: "How to Book a Cab in Dehradun",
+        content: "1. Enter your pickup point and destination or sightseeing itinerary.\n2. Select the travel date, pickup time and passenger count.\n3. Share luggage details and your preferred vehicle category.\n4. Ask for the fare breakup and confirm all inclusions and exclusions.\n5. Review payment and cancellation terms.\n6. Confirm the booking after receiving the vehicle and pickup details."
       },
       {
         title: "Why Book with Go India Cab?",
-        content: "When choosing a taxi service in Dehradun, compare the vehicle, route coverage, booking support and fare conditions—not just the starting price. Go India Cab lists local, airport and outstation travel options for Dehradun. Share your itinerary in advance so the team can confirm the available trip type and suitable vehicle.\n\n• Local, hourly and outstation booking enquiries for Dehradun.\n• One-way and round-trip enquiries, subject to route and vehicle availability.\n• Vehicle suggestions based on passenger count, luggage and journey requirements.\n• Fare details and trip conditions can be checked before confirming.\n• Booking support through the phone numbers and email published on the website.\n\nClaims such as 24/7 support, GPS tracking, background-verified drivers, hill-trained drivers, no surge pricing, no hidden charges, sanitised vehicles, flight monitoring and guaranteed on-time pickup must be supported by current operational policies and evidence. Keep only verified claims on the live page."
+        content: "When choosing a taxi service in Dehradun, compare the vehicle, route coverage, booking support and fare conditions—not just the starting price. Go India Cab lists local, airport and outstation travel options for Dehradun.\n\n• Local, hourly and outstation booking enquiries for Dehradun.\n• One-way and round-trip enquiries, subject to route and vehicle availability.\n• Vehicle suggestions based on passenger count, luggage and journey requirements.\n• Fare details and trip conditions can be checked before confirming.\n• Booking support through the phone numbers and email published on the website.\n\nShare your itinerary in advance so the team can confirm the available trip type and suitable vehicle."
       },
       {
-        title: "How to Book a Taxi in Dehradun",
-        content: "1. Enter your pickup and drop locations.\n2. Select local, sightseeing, airport or outstation travel.\n3. Choose the date, pickup time, passenger count and preferred vehicle category.\n4. Share flight details, sightseeing stops or return dates where relevant.\n5. Review the fare breakup, inclusions, exclusions and cancellation terms.\n6. Confirm the booking and save the booking reference and driver details provided by the team."
+        title: "Book Your Dehradun Taxi",
+        content: "Call Go India Cab or submit your trip details online to check vehicle availability and request a fare quote. Keep your pickup landmark, travel date, time, passenger count and destination ready. For airport and outstation journeys, confirm the meeting point, waiting policy and complete fare before the trip.\n\nBooking: +91-9792-000-555 | +91-8433-381-888 | Support: +91-9557-479-080 | Email: info@goindiacab.com\n\nConfirm availability, inclusions, exclusions and cancellation terms before payment."
       }
     ],
     faqs: [
       {
-        question: "How can I book a cab service in Dehradun with Go India Cab?",
-        answer: "Submit your pickup, destination, travel date and trip type through the website booking form, or call +91-9792-000-555 to enquire. Confirm availability and fare terms before travelling."
+        question: "Can I book a local taxi in Dehradun for a few hours?",
+        answer: "Go India Cab lists local hourly rental options for Dehradun. Confirm the available package duration, kilometre limit, extra-hour rate and vehicle availability for your date before booking."
       },
       {
-        question: "Does Go India Cab offer local taxi service in Dehradun?",
-        answer: "The Dehradun page lists local hourly rental options. Share your pickup point, stops and required duration to confirm the package and availability."
+        question: "Does Go India Cab provide sightseeing cabs in Dehradun?",
+        answer: "The page describes local taxi rentals for tourist spots in Dehradun. Confirm the current sightseeing coverage, included stops, waiting time and parking arrangements with the booking team."
       },
       {
-        question: "Can I book a taxi from Dehradun to Mussoorie?",
-        answer: "You can enquire about a cab for Dehradun to Mussoorie. Confirm pickup and drop locations, vehicle availability, travel date, waiting time and whether the trip is one-way or round trip."
+        question: "Which airport does Dehradun use for flight transfers?",
+        answer: "Jolly Grant Airport serves the Dehradun area. Share your flight details and destination when requesting an airport pickup or drop."
       },
       {
-        question: "Can I book a Dehradun to Rishikesh taxi?",
-        answer: "You can request a taxi for travel between Dehradun and Rishikesh. Share your itinerary and confirm the fare and trip conditions before booking."
+        question: "Can I book a taxi from Jolly Grant Airport to Dehradun?",
+        answer: "The page lists airport pickup and drop services at Jolly Grant Airport. Confirm vehicle availability, airport meeting point, waiting time and parking charges before booking."
       },
       {
-        question: "Is airport taxi service available at Jolly Grant Airport?",
-        answer: "The page lists airport pickup and drop services. Confirm vehicle availability, airport meeting point, waiting allowance and flight-delay procedure."
+        question: "Can I book a cab from Dehradun to Mussoorie?",
+        answer: "Dehradun to Mussoorie is listed as an outstation route. Confirm one-way or round-trip availability, vehicle suitability for hill roads, fare and any local access restrictions before booking."
       },
       {
-        question: "Can I book an outstation cab from Dehradun?",
-        answer: "The page lists outstation travel, including destinations such as Mussoorie, Rishikesh and Haridwar. Contact the team with your exact route and date."
+        question: "Does Go India Cab offer Dehradun to Rishikesh and Haridwar trips?",
+        answer: "These routes are listed on the page as nearby outstation travel options. Confirm the exact pickup, drop, trip type and fare for your date with the booking team."
       },
       {
-        question: "Are one-way taxi bookings available from Dehradun?",
-        answer: "One-way journeys are mentioned on the page. Confirm destination coverage, fare calculation and any driver return or route charges."
+        question: "How is the taxi fare calculated in Dehradun?",
+        answer: "Fares depend on vehicle category, distance, trip duration and route. Ask for a complete fare breakup including package limits and any toll, parking, waiting, driver allowance, state tax or night charges before confirming."
       },
       {
-        question: "What types of vehicles can I book in Dehradun?",
-        answer: "The page refers to hatchbacks, sedans, SUVs and larger group vehicles. Confirm the exact model, seating and luggage capacity for your travel date."
+        question: "Can I book a corporate cab in Dehradun?",
+        answer: "The page lists corporate cab service for Dehradun. Businesses should confirm whether the required route, schedule, fleet size and contract billing are currently supported."
       },
       {
-        question: "How is the taxi fare in Dehradun calculated?",
-        answer: "Fare may depend on vehicle type, distance, duration, route and booking package. Request a written breakup that explains tolls, parking, permits, waiting time, driver allowance and extra kilometres."
+        question: "Is cab booking available for Dehradun Railway Station and ISBT?",
+        answer: "The page lists railway station and ISBT transfer options. Confirm vehicle availability, meeting point and waiting policy for your travel date with the booking team."
       },
       {
-        question: "Does Go India Cab provide corporate or wedding taxi services in Dehradun?",
-        answer: "These services are listed on the current page. Share your schedule and passenger requirements and confirm availability, vehicle count and billing terms."
+        question: "What vehicles are available for cab service in Dehradun?",
+        answer: "The page refers to hatchbacks, sedans, SUVs and Tempo Travellers. Confirm the exact model, seating capacity and luggage space for your travel date. For hill routes, confirm vehicle suitability in advance."
       },
       {
-        question: "Can I book a cab for Mussoorie, Rishikesh or Haridwar sightseeing?",
-        answer: "You can enquire about these destinations as separate trips or part of a longer itinerary. Confirm the planned stops, total duration and applicable package conditions."
+        question: "Can I book a one-way taxi from Dehradun to Delhi?",
+        answer: "One-way journeys from Dehradun to Delhi are available subject to route and vehicle availability. Confirm the fare calculation, driver return charges and any applicable tolls or permits before booking."
+      },
+      {
+        question: "How do I contact Go India Cab for a Dehradun booking?",
+        answer: "Call +91-9792-000-555 or +91-8433-381-888 for bookings, +91-9557-479-080 for support, or email info@goindiacab.com. Verify details against the live contact page before publishing."
       }
     ],
   },
@@ -1133,14 +1099,121 @@ export const popularRoutes: Route[] = [
   {
     id: "jaipur",
     slug: "cab-service-in-jaipur",
-    from: "Delhi",
+    from: "Jaipur",
     to: "Jaipur",
-    distance: "280 km",
-    duration: "5-6 Hours",
-    fare: "Starting ₹3,800",
+    distance: "Local & Outstation",
+    duration: "Flexible Hours",
+    fare: "Starting ₹1,500",
     image: "/popular-outstation/Best-Cab-Services-in-Jaipur.png.webp",
-    description: "Book cab service in Jaipur. Explore the Pink City with GoIndiaCab.",
-    faqs: [],
+    metaTitle: "Cab Service in Jaipur | Local Taxi, Sightseeing & Airport Cabs – Go India Cab",
+    metaDescription: "Book a cab service in Jaipur for local travel, sightseeing, airport transfers and outstation trips. Share your pickup, date and destination to check vehicle availability and get a fare quote.",
+    h1: "Cab Service in Jaipur for Local Travel, Sightseeing & Airport Transfers",
+    breadcrumb: "Cab Service in Jaipur",
+    description: "Looking for a cab service in Jaipur? Go India Cab helps travellers request a vehicle for local city travel, sightseeing, airport transfers and outstation journeys. Share your pickup location, destination or itinerary, travel date and passenger count to check availability and receive a fare quote before confirming your booking. Whether you are visiting Jaipur's forts and palaces, travelling to or from Jaipur International Airport, or planning an intercity trip, confirm the vehicle category, pickup point, fare inclusions and trip conditions before booking.",
+    contentSections: [
+      {
+        title: "Local Taxi Service in Jaipur",
+        content: "Book a local taxi in Jaipur for hotel transfers, shopping, business meetings, family visits and travel around the city. If you need the cab for multiple stops, ask about an hourly or full-day rental package. Before confirming, check the package duration, included kilometres, extra-hour rate, waiting charges, parking and applicable taxes.\n\nShare your pickup point, the places you plan to visit and how long you need the cab. The booking team will confirm the available vehicle, applicable package or trip fare, and any additional charges before the journey."
+      },
+      {
+        title: "Jaipur Sightseeing by Cab",
+        content: "Plan a Jaipur sightseeing trip around the places you want to visit. Depending on your schedule, traffic, opening hours and access arrangements, your itinerary may include:\n\n• Amber (Amer) Fort – a hilltop fort complex; confirm entry timings, elephant ride availability and parking.\n• City Palace – a royal palace complex in the heart of the old city; check museum timings and entry fees.\n• Hawa Mahal – the iconic five-storey palace of winds; best visited in the morning for photographs.\n• Jantar Mantar – UNESCO World Heritage astronomical observatory; confirm entry and guide availability.\n• Nahargarh Fort – hilltop fort with panoramic city views; confirm road access and opening hours.\n• Jaigarh Fort – adjacent to Amer Fort; confirm whether a combined ticket is available.\n• Jal Mahal – the water palace visible from the road; confirm current visitor access rules.\n• Albert Hall Museum – Rajasthan's oldest museum; check timings and entry fees.\n• Birla Mandir – a marble temple; confirm dress code and photography rules.\n• Patrika Gate – a decorative gateway popular for photography.\n• Galta Ji – a temple complex with natural springs; confirm access and dress requirements.\n\nSome attractions are spread across the city and surrounding hills. Confirm the route sequence, number of stops, waiting time, parking and any additional charges with the booking team. Entry tickets and guide services should not be assumed to be included in the cab fare."
+      },
+      {
+        title: "Jaipur Airport Taxi Service",
+        content: "Request a cab for pickup or drop at Jaipur International Airport (Sanganer Airport). Share your flight number, arrival or departure time, terminal information if available, passenger count, luggage details and destination. Confirm the airport meeting point, waiting-time allowance, parking charges and flight-delay policy before booking.\n\nAirport transfers are subject to vehicle and service availability. Do not assume 24/7 dispatch or real-time flight monitoring without confirming with the booking team."
+      },
+      {
+        title: "Railway Station and Bus Stand Transfers",
+        content: "If supported for your date and location, request a cab to or from Jaipur Junction railway station or a major bus terminal. Share your train or bus arrival time, pickup landmark, passenger count and luggage details. Confirm the pickup point and waiting policy with the booking team in advance."
+      },
+      {
+        title: "Outstation Taxi from Jaipur",
+        content: "Planning to travel beyond Jaipur? Enquire about a one-way or round-trip cab to destinations across Rajasthan and nearby regions. Common outstation routes from Jaipur include:\n\n• Jaipur to Ajmer – approximately 135 km; popular for the Dargah Sharif and Pushkar Lake nearby.\n• Jaipur to Pushkar – approximately 145 km; confirm the route via Ajmer and local access near the lake.\n• Jaipur to Udaipur – approximately 395 km; confirm vehicle suitability, trip duration and overnight arrangements.\n• Jaipur to Jodhpur – approximately 340 km; confirm route, travel time and fare basis.\n• Jaipur to Delhi – approximately 280 km; confirm one-way or round-trip availability and fare.\n• Jaipur to Agra – approximately 240 km; popular for Golden Triangle itineraries.\n\nFor each route, confirm approximate distance, journey time, vehicle availability, fare basis, tolls, state taxes and driver allowance before booking. Route availability, journey time and fare depend on exact pickup and drop addresses, road conditions, vehicle type, travel date and trip configuration."
+      },
+      {
+        title: "One-Way Cab Service from Jaipur",
+        content: "If you do not need the same cab for a return journey, ask about one-way taxi availability from Jaipur to your destination. Confirm whether the route is eligible for a one-way fare, the exact drop location, included charges and any return or dead-kilometre conditions.\n\nCommon one-way routes include Jaipur to Delhi, Jaipur to Agra, Jaipur to Ajmer and Jaipur to Jodhpur. Confirm availability and fare for your specific date and destination."
+      },
+      {
+        title: "Corporate and Wedding Cab Service in Jaipur",
+        content: "For business meetings, events or family functions, share the date, number of passengers, pickup locations, schedule and vehicle requirements. Confirm whether the required fleet, local coordination and booking terms are available before describing corporate or wedding transport as a standard service.\n\nFor weddings and group events, enquire about suitable vehicles, passenger capacity, reporting schedule and multiple pickup points. Confirm vehicle availability, seating capacity and event-day arrangements in advance."
+      },
+      {
+        title: "Vehicle Options for Your Jaipur Journey",
+        content: "Choose a vehicle according to passenger count, luggage and trip type. Confirm exact seating capacity, luggage space and route suitability before payment or confirmation.\n\n• Hatchback – May suit solo travellers or small groups with limited luggage for short city trips. Confirm the available model and passenger capacity.\n• Sedan (Dzire / Etios) – Suitable for couples, small families and business travellers with standard luggage. Confirm passenger and luggage capacity.\n• SUV (Ertiga / Innova Crysta) – A better fit for families, larger groups or travellers with more luggage. Confirm the actual seating configuration and route suitability.\n• Tempo Traveller – For larger groups; enquire about available seating configurations and luggage space. Confirm vehicle availability and route suitability."
+      },
+      {
+        title: "Jaipur Taxi Fare and What Is Included",
+        content: "The fare may depend on vehicle category, trip duration, distance, route and rental package. Before booking, request a written fare breakup covering:\n\n• Included kilometres or hours\n• Extra-kilometre and extra-hour charges\n• Tolls and parking\n• Driver allowance\n• State taxes and permits\n• Night charges\n• Waiting time charges\n• Cancellation terms\n• GST\n\nFor local hourly rentals, confirm included hours and kilometres and the extra-hour or extra-kilometre rate. For outstation trips, ask about minimum kilometre rules, one-way or round-trip calculations, driver allowance and overnight charges. Do not assume any charges are included unless the written quote explicitly states so."
+      },
+      {
+        title: "How to Book a Cab in Jaipur",
+        content: "1. Enter your pickup location and destination or sightseeing itinerary.\n2. Select your travel date, pickup time and passenger count.\n3. Share luggage details and preferred vehicle category.\n4. Review the fare breakup, package limits and additional charges.\n5. Confirm the booking after receiving the vehicle and pickup instructions.\n6. Save the booking confirmation and support contact details."
+      },
+      {
+        title: "Why Book with Go India Cab?",
+        content: "When choosing a taxi service in Jaipur, compare the vehicle, route coverage, booking support and fare conditions—not just the starting price. Go India Cab lists local, airport and outstation travel options for Jaipur.\n\n• Local, hourly and outstation booking enquiries for Jaipur.\n• One-way and round-trip enquiries, subject to route and vehicle availability.\n• Vehicle suggestions based on passenger count, luggage and journey requirements.\n• Fare details and trip conditions can be checked before confirming.\n• Booking support through the phone numbers and email published on the website.\n\nShare your itinerary in advance so the team can confirm the available trip type and suitable vehicle."
+      },
+      {
+        title: "Book Your Jaipur Cab",
+        content: "Submit your travel details through the booking form or contact Go India Cab using the verified booking number shown on the website. Keep your pickup landmark, date, time, passenger count and destination ready. Confirm the vehicle category, fare and service conditions before the journey.\n\nBooking: +91-9792-000-555 | +91-8433-381-888 | Support: +91-9557-479-080 | Email: info@goindiacab.com\n\nConfirm availability, inclusions, exclusions and cancellation terms before payment."
+      }
+    ],
+    faqs: [
+      {
+        question: "How can I book a cab service in Jaipur?",
+        answer: "Submit your pickup location, destination, travel date, time and passenger count through the Go India Cab booking form or contact the booking team by phone. Confirm the vehicle and complete fare before booking."
+      },
+      {
+        question: "Does Go India Cab provide local taxi service in Jaipur?",
+        answer: "The Jaipur page lists local cab services for city travel, sightseeing, airport and railway station pickups. Confirm the exact local service and vehicle availability for your date."
+      },
+      {
+        question: "Can I book a taxi for Jaipur sightseeing?",
+        answer: "The page describes local sightseeing around Jaipur attractions such as Amber Fort, Hawa Mahal and City Palace. Confirm the itinerary, package duration, included kilometres, parking and waiting charges before booking."
+      },
+      {
+        question: "Do you provide Jaipur airport pickup and drop?",
+        answer: "The page lists transfers to and from Jaipur International Airport. Share your flight details and destination, then confirm the pickup point, waiting allowance and parking charges before booking."
+      },
+      {
+        question: "Can I book a one-way taxi from Jaipur?",
+        answer: "The page lists one-way taxi service from Jaipur. Availability and fare conditions depend on the destination and date, so confirm whether your route qualifies for a one-way fare and what charges apply."
+      },
+      {
+        question: "Which outstation destinations can I travel to from Jaipur?",
+        answer: "The page names Ajmer, Pushkar, Udaipur, Jodhpur, Delhi and Agra among its outstation destinations. Confirm route availability, trip type and fare before booking."
+      },
+      {
+        question: "What types of cars are available in Jaipur?",
+        answer: "The page lists hatchbacks, sedans, SUVs and Tempo Travellers. Confirm the exact model, seating capacity and luggage space before your booking is finalised."
+      },
+      {
+        question: "Can I book a cab from Jaipur to Ajmer or Pushkar?",
+        answer: "Ajmer and Pushkar are listed as outstation destinations from Jaipur. Confirm one-way or round-trip availability, approximate distance, fare and any local access conditions before booking."
+      },
+      {
+        question: "Can I book a cab from Jaipur to Delhi?",
+        answer: "Jaipur to Delhi is listed as an outstation route. The approximate distance is 280 km. Confirm one-way or round-trip availability, fare basis, tolls and driver allowance for your travel date."
+      },
+      {
+        question: "How much does a taxi in Jaipur cost?",
+        answer: "The fare depends on vehicle category, duration, distance and route. Request a written quote with all inclusions and exclusions—including tolls, parking, driver allowance, state taxes and waiting charges—before confirming."
+      },
+      {
+        question: "Are tolls, parking and driver allowance included in the Jaipur cab fare?",
+        answer: "Do not assume they are included. Ask for a written fare breakup listing tolls, parking, driver allowance, state taxes, GST, waiting time and any additional charges before confirming."
+      },
+      {
+        question: "Does Go India Cab offer corporate or wedding cab service in Jaipur?",
+        answer: "The page lists corporate and wedding transport. Confirm whether the required fleet, schedule, local coordination and billing terms are currently supported before booking."
+      },
+      {
+        question: "How do I contact Go India Cab for a Jaipur booking?",
+        answer: "Call +91-9792-000-555 or +91-8433-381-888 for bookings, +91-9557-479-080 for support, or email info@goindiacab.com. Verify details against the live contact page before publishing."
+      }
+    ],
   },
   {
     id: "noida",
@@ -1159,12 +1232,95 @@ export const popularRoutes: Route[] = [
     slug: "cab-service-in-varanasi",
     from: "Delhi",
     to: "Varanasi",
-    distance: "820 km",
-    duration: "12-13 Hours",
+    distance: "~820 km (approx.)",
+    duration: "12-13 Hours (approx.)",
     fare: "Starting ₹9,500",
     image: "/popular-outstation/varanasi.jpg.webp",
-    description: "Book cab service in Varanasi. Visit Kashi Vishwanath and sacred ghats with GoIndiaCab.",
-    faqs: [],
+    metaTitle: "Delhi to Varanasi Cab Service | One-Way & Round-Trip Taxi – Go India Cab",
+    metaDescription: "Book a Delhi to Varanasi cab for a one-way or round-trip journey. Compare sedan and SUV options, share your pickup and travel date, and confirm the complete fare before booking.",
+    h1: "Delhi to Varanasi Cab Service for One-Way & Round-Trip Travel",
+    breadcrumb: "Delhi to Varanasi Cab",
+    description: "Planning a road journey from Delhi to Varanasi? Go India Cab helps you request an intercity taxi for a one-way drop or round-trip journey. Share your pickup location in Delhi, destination in Varanasi, travel date, passenger count and preferred vehicle category to check availability and receive a fare quote before confirming your booking. If your itinerary includes Kashi Vishwanath Temple, the ghats or Sarnath after reaching the city, discuss local travel requirements separately with the booking team.",
+    contentSections: [
+      {
+        title: "Delhi to Varanasi Distance and Travel Time",
+        content: "The approximate distance for the Delhi to Varanasi route is around 820 km with an estimated journey duration of 12–13 hours. Treat these as indicative website estimates only. Actual distance and travel time depend on the exact Delhi pickup point, Varanasi drop location, selected route, traffic, road conditions, planned breaks and departure time.\n\nConfirm the final route estimate with the booking team before travel. Do not use these figures as guaranteed journey promises."
+      },
+      {
+        title: "One-Way and Round-Trip Delhi to Varanasi Taxi",
+        content: "Choose a one-way cab if you need only a drop in Varanasi without a planned return journey in the same vehicle. Confirm whether the route qualifies for one-way pricing and what dead-kilometre or return conditions apply.\n\nFor a round-trip booking, share your return date, expected stay duration and any planned stops. The quote should clearly state whether driver allowance, night halt, tolls, parking and taxes are included or payable separately.\n\nFor multi-day itineraries that include sightseeing in Varanasi, Sarnath or nearby destinations, share the complete plan so the team can calculate the applicable fare and vehicle arrangements."
+      },
+      {
+        title: "Choose a Cab for Delhi to Varanasi",
+        content: "Select a vehicle based on your group size, luggage and journey requirements. The page currently references the following vehicle categories and indicative per-kilometre rates. Verify all rates, minimum billing and vehicle availability before booking:\n\n• Sedan (Dzire / Etios) – Indicative rate: ₹11/km. Suitable for small groups of up to 4 passengers with standard luggage.\n• SUV (Ertiga / Carens) – Indicative rate: ₹16/km. Better for families, larger groups or travellers with more luggage.\n• Premium SUV (Innova Crysta) – Indicative rate: ₹20/km. For groups requiring more space and comfort on a long-distance journey.\n\nBefore confirming, ask whether the quote is one-way or round-trip, the minimum billable kilometres, driver allowance, tolls, state taxes, parking, night charges, extra stops and any return-distance conditions. Confirm the exact model, seating capacity and luggage space."
+      },
+      {
+        title: "Delhi to Varanasi Taxi Fare",
+        content: "The page displays a starting fare of ₹9,500 for the Delhi to Varanasi route. Before booking, confirm the following with the booking team:\n\n• Which vehicle category and trip type (one-way or round-trip) the ₹9,500 starting fare applies to.\n• Minimum billable kilometres and how extra kilometres are charged.\n• Whether driver allowance, fuel, tolls, parking, state taxes, night charges and GST are included or payable separately.\n• Waiting time charges and cancellation terms.\n• Whether an overnight halt is required and how it is billed.\n\nRequest a written fare breakup before confirming your booking. Do not assume any charge is included unless the written quote explicitly states so."
+      },
+      {
+        title: "Plan Local Travel After Reaching Varanasi",
+        content: "Need a cab within Varanasi after arrival? The Delhi-to-Varanasi intercity booking covers the road journey from Delhi. It should not be assumed to include local sightseeing, ghat visits or city transfers unless this has been explicitly included in the written quote.\n\nFor local Varanasi travel — including Kashi Vishwanath Temple visits, ghat and Ganga Aarti transfers, Sarnath trips, airport pickups and railway station drops — use the dedicated local Cab Service in Varanasi page or contact the booking team to arrange a separate local booking.\n\nVehicle access in the old city and near busy temple or ghat areas may be restricted. Confirm the permitted drop-off or meeting point and any walking distance before travel."
+      },
+      {
+        title: "Why Book with Go India Cab?",
+        content: "Go India Cab lists intercity taxi options for the Delhi to Varanasi route. Share your complete itinerary in advance so the team can confirm the available trip type, vehicle and fare conditions.\n\n• One-way and round-trip booking enquiries for Delhi to Varanasi.\n• Vehicle categories for individuals, families and groups, subject to availability.\n• Fare details and trip conditions shared before booking confirmation.\n• Booking assistance for multi-stop and multi-day itineraries.\n• Support through the contact channels published on the Go India Cab website.\n\nService features such as driver verification, GPS tracking, 24/7 support and vehicle maintenance should be confirmed with the booking team for your specific trip."
+      },
+      {
+        title: "How to Book a Delhi to Varanasi Cab",
+        content: "1. Enter your Delhi pickup point and Varanasi drop location.\n2. Select one-way or round-trip and add the travel date and pickup time.\n3. Choose a vehicle category based on passenger count and luggage.\n4. Request a complete fare breakup and confirm all inclusions and exclusions.\n5. Review payment and cancellation terms.\n6. Confirm the booking after receiving vehicle and driver details."
+      },
+      {
+        title: "Book Your Delhi to Varanasi Taxi",
+        content: "Share your pickup, drop, date, passenger count and trip type with Go India Cab to check availability and receive a quote. Confirm the vehicle category, route estimate, fare basis, included charges and cancellation terms before the journey.\n\nBooking: +91-9792-000-555 | +91-8433-381-888 | Support: +91-9557-479-080 | Email: info@goindiacab.com\n\nConfirm availability, inclusions, exclusions and cancellation terms before payment."
+      }
+    ],
+    faqs: [
+      {
+        question: "How far is Varanasi from Delhi by road?",
+        answer: "The page displays an approximate distance of 820 km for the Delhi to Varanasi route. Actual distance depends on the exact pickup and drop points and the route taken. Treat this as an indicative estimate and confirm with the booking team."
+      },
+      {
+        question: "How long does it take to travel from Delhi to Varanasi by cab?",
+        answer: "The page estimates 12–13 hours for the Delhi to Varanasi journey. Actual travel time depends on traffic, road conditions, route, breaks and departure time. Confirm an estimated journey time for your specific itinerary."
+      },
+      {
+        question: "What is the starting fare for a Delhi to Varanasi taxi?",
+        answer: "The page displays a starting fare of ₹9,500. Before booking, confirm which vehicle category and trip type this applies to, and request a written fare breakup covering all inclusions and exclusions."
+      },
+      {
+        question: "Can I book a one-way cab from Delhi to Varanasi?",
+        answer: "One-way taxi service is available. Confirm whether the route qualifies for one-way pricing, the exact drop location, included charges and any dead-kilometre or return conditions."
+      },
+      {
+        question: "Can I book a round-trip taxi from Delhi to Varanasi?",
+        answer: "Round-trip bookings are available. Share your return date, expected stay duration and any planned stops to receive a trip-specific quotation."
+      },
+      {
+        question: "Which vehicles are available for Delhi to Varanasi?",
+        answer: "The page lists Sedan (Dzire/Etios), SUV (Ertiga/Carens) and Premium SUV (Innova Crysta). Confirm the exact model, seating capacity, luggage space and current availability before booking."
+      },
+      {
+        question: "Are tolls, parking and driver allowance included in the fare?",
+        answer: "Do not assume they are included. Request a written fare breakup that clearly lists tolls, parking, driver allowance, state taxes, night charges, GST and any other applicable charges."
+      },
+      {
+        question: "Does the Delhi to Varanasi cab include local sightseeing in Varanasi?",
+        answer: "The intercity booking covers the road journey from Delhi to Varanasi. Local sightseeing, ghat visits and city transfers are not included unless explicitly stated in the written quote. Arrange local travel separately."
+      },
+      {
+        question: "Is an overnight halt required for Delhi to Varanasi?",
+        answer: "The journey is approximately 12–13 hours. Depending on departure time and road conditions, an overnight halt may be required. Confirm overnight arrangements, driver halt charges and the planned break point with the booking team."
+      },
+      {
+        question: "Can I book a cab from Delhi to Kashi (Varanasi) for a pilgrimage trip?",
+        answer: "Yes, Varanasi (Kashi) is a popular pilgrimage destination. Book the intercity cab for the Delhi to Varanasi road journey. For temple visits, ghat transfers and local sightseeing after arrival, arrange a separate local cab booking."
+      },
+      {
+        question: "How do I contact Go India Cab for a Delhi to Varanasi booking?",
+        answer: "Call +91-9792-000-555 or +91-8433-381-888 for bookings, +91-9557-479-080 for support, or email info@goindiacab.com. Verify details against the live contact page before publishing."
+      }
+    ],
   },
   {
     id: "delhi",

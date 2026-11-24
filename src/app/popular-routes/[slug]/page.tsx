@@ -243,6 +243,120 @@ export default async function PopularRouteDetailPage({ params }: { params: Promi
               </div>
             )}
 
+            {slug === "cab-service-in-varanasi" && (
+              <div className="pt-8 border-t border-border">
+                <h2 className="text-3xl font-bold text-dark mb-6">Related Services & Routes</h2>
+                <ul className="space-y-3 text-gray-text">
+                  <li>
+                    <Link href="/cab-service-in-varanasi" className="text-primary hover:underline font-medium">
+                      Local Cab Service in Varanasi
+                    </Link>{" "}– already in Varanasi? Book a local taxi for Kashi Vishwanath darshan, ghat visits, Sarnath trips, airport transfers and railway station pickups.
+                  </li>
+                  <li>
+                    <Link href="/taxi/uttar-pradesh-taxi-service-from-delhi" className="text-primary hover:underline font-medium">
+                      Delhi to Uttar Pradesh Taxi Service
+                    </Link>{" "}– explore other UP destinations from Delhi including Agra, Mathura, Vrindavan and Ayodhya.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-ayodhya" className="text-primary hover:underline font-medium">
+                      Cab Service in Ayodhya
+                    </Link>{" "}– plan a pilgrimage journey to Ayodhya before or after your Varanasi visit.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-agra" className="text-primary hover:underline font-medium">
+                      Cab Service in Agra
+                    </Link>{" "}– add Agra and the Taj Mahal to your Uttar Pradesh itinerary.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes" className="text-primary hover:underline font-medium">
+                      All popular routes
+                    </Link>{" "}– browse other destinations covered by Go India Cab.
+                  </li>
+                  <li>
+                    <Link href="/contact-us" className="text-primary hover:underline font-medium">
+                      Book a Delhi to Varanasi Cab / Contact Go India Cab
+                    </Link>{" "}– get in touch for a custom quote or booking assistance.
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {slug === "cab-service-in-jaipur" && (
+              <div className="pt-8 border-t border-border">
+                <h2 className="text-3xl font-bold text-dark mb-6">Related Services & Routes</h2>
+                <ul className="space-y-3 text-gray-text">
+                  <li>
+                    <Link href="/taxi/rajasthan-taxi-service-from-delhi" className="text-primary hover:underline font-medium">
+                      Delhi to Rajasthan Taxi Service
+                    </Link>{" "}– travelling from Delhi to Jaipur or other Rajasthan destinations? See the dedicated state route page for one-way and round-trip fares.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-agra" className="text-primary hover:underline font-medium">
+                      Cab Service in Agra
+                    </Link>{" "}– plan a Golden Triangle journey from Jaipur to Agra for Taj Mahal sightseeing.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-ayodhya" className="text-primary hover:underline font-medium">
+                      Cab Service in Ayodhya
+                    </Link>{" "}– explore other popular pilgrimage and heritage destinations covered by Go India Cab.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-chandigarh" className="text-primary hover:underline font-medium">
+                      Cab Service in Chandigarh
+                    </Link>{" "}– browse intercity cab options for other major cities.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes" className="text-primary hover:underline font-medium">
+                      All popular routes
+                    </Link>{" "}– browse other destinations covered by Go India Cab.
+                  </li>
+                  <li>
+                    <Link href="/contact-us" className="text-primary hover:underline font-medium">
+                      Book a Jaipur Cab / Contact Go India Cab
+                    </Link>{" "}– get in touch for a custom quote or booking assistance.
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {slug === "cab-service-in-dehradun" && (
+              <div className="pt-8 border-t border-border">
+                <h2 className="text-3xl font-bold text-dark mb-6">Related Services & Routes</h2>
+                <ul className="space-y-3 text-gray-text">
+                  <li>
+                    <Link href="/taxi/uttarakhand-taxi-service-from-delhi" className="text-primary hover:underline font-medium">
+                      Delhi to Uttarakhand Taxi Service
+                    </Link>{" "}– travelling from Delhi to Dehradun or other Uttarakhand destinations? See the dedicated state route page.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-haridwar" className="text-primary hover:underline font-medium">
+                      Cab Service in Haridwar
+                    </Link>{" "}– plan a pilgrimage or ghat visit from Dehradun to Haridwar.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/best-cab-service-in-haridwar" className="text-primary hover:underline font-medium">
+                      Best Cab Service in Haridwar
+                    </Link>{" "}– explore local and outstation taxi options in Haridwar.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes/cab-service-in-chandigarh" className="text-primary hover:underline font-medium">
+                      Cab Service in Chandigarh
+                    </Link>{" "}– book an intercity cab from Dehradun to Chandigarh for business or personal travel.
+                  </li>
+                  <li>
+                    <Link href="/popular-routes" className="text-primary hover:underline font-medium">
+                      All popular routes
+                    </Link>{" "}– browse other destinations covered by Go India Cab.
+                  </li>
+                  <li>
+                    <Link href="/contact-us" className="text-primary hover:underline font-medium">
+                      Book a Dehradun Cab / Contact Go India Cab
+                    </Link>{" "}– get in touch for a custom quote or booking assistance.
+                  </li>
+                </ul>
+              </div>
+            )}
+
             {slug === "cab-service-in-ayodhya" && (
               <div className="pt-8 border-t border-border">
                 <h2 className="text-3xl font-bold text-dark mb-6">Related Services & Routes</h2>
