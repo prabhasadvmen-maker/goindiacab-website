@@ -12,6 +12,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { CabSearchWidget } from "@/src/components/home/CabSearchWidget";
 
+export function generateStaticParams() {
+  return cityPages.map((p) => ({ slug: p.slug }));
+}
+
 function renderContent(content: string) {
   const lines = content.split("\n").filter((l) => l.trim() !== "");
   const elements: React.ReactNode[] = [];
@@ -136,7 +140,7 @@ export default async function GenericCityServicePage({ params }: { params: Promi
                 </div>
                 <div className="flex flex-wrap gap-3 pt-1">
                   <Link href="#book">
-                    <Button size="lg" className="bg-[#00A5D9] hover:bg-blue-600">Get Varanasi Cab Fare</Button>
+                    <Button size="lg" className="bg-[#00A5D9] hover:bg-blue-600">Get {cityPage.city} Cab Fare</Button>
                   </Link>
                   <a href={`tel:${siteConfig.phone.booking1}`} className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold text-sm px-5 py-3 rounded-xl hover:bg-white/20 transition">
                     <Phone className="w-4 h-4" /> {siteConfig.phone.booking1}
@@ -221,30 +225,63 @@ export default async function GenericCityServicePage({ params }: { params: Promi
                 </section>
               ))}
 
-              {/* Internal Links */}
-              <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 space-y-3">
-                <h3 className="font-black text-dark text-base">Related Routes & Services</h3>
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <Link href="/popular-routes/cab-service-in-varanasi" className="text-[#00A5D9] hover:underline font-semibold">
-                      Delhi to Varanasi Cab Service →
-                    </Link>
-                    <span className="text-gray-text ml-2">Intercity transfer from Delhi to Varanasi (~820 km)</span>
-                  </li>
-                  <li>
-                    <Link href="/most-popular-routes-covered-by-go-india-cab" className="text-[#00A5D9] hover:underline font-semibold">
-                      All Popular Routes →
-                    </Link>
-                    <span className="text-gray-text ml-2">Browse all outstation routes covered by Go India Cab</span>
-                  </li>
-                  <li>
-                    <Link href="/popular-routes/cab-service-in-ayodhya" className="text-[#00A5D9] hover:underline font-semibold">
-                      Varanasi to Ayodhya Cab →
-                    </Link>
-                    <span className="text-gray-text ml-2">Pilgrimage route to Ayodhya from Varanasi</span>
-                  </li>
-                </ul>
-              </div>
+              {/* Internal Links — dynamic per city page */}
+              {cityPage.slug === "delhi-to-agra-cab-service" && (
+                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 space-y-3">
+                  <h3 className="font-black text-dark text-base">Related Routes &amp; Services</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li>
+                      <Link href="/popular-routes/cab-service-in-agra" className="text-[#00A5D9] hover:underline font-semibold">
+                        Agra Local Sightseeing Cab →
+                      </Link>
+                      <span className="text-gray-text ml-2">Local cab for Taj Mahal, Agra Fort and city sightseeing</span>
+                    </li>
+                    <li>
+                      <Link href="/taxi/rajasthan-taxi-service-from-delhi" className="text-[#00A5D9] hover:underline font-semibold">
+                        Delhi to Jaipur Cab →
+                      </Link>
+                      <span className="text-gray-text ml-2">Golden Triangle: Delhi–Agra–Jaipur (~280 km)</span>
+                    </li>
+                    <li>
+                      <Link href="/taxi/uttar-pradesh-taxi-service-from-delhi" className="text-[#00A5D9] hover:underline font-semibold">
+                        Delhi to Mathura &amp; Vrindavan Cab →
+                      </Link>
+                      <span className="text-gray-text ml-2">Combine with Agra for a multi-stop UP tour</span>
+                    </li>
+                    <li>
+                      <Link href="/popular-routes" className="text-[#00A5D9] hover:underline font-semibold">
+                        All Popular Routes →
+                      </Link>
+                      <span className="text-gray-text ml-2">Browse all outstation routes covered by Go India Cab</span>
+                    </li>
+                  </ul>
+                </div>
+              )}
+              {cityPage.slug === "cab-service-in-varanasi" && (
+                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 space-y-3">
+                  <h3 className="font-black text-dark text-base">Related Routes &amp; Services</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li>
+                      <Link href="/popular-routes/cab-service-in-varanasi" className="text-[#00A5D9] hover:underline font-semibold">
+                        Delhi to Varanasi Cab Service →
+                      </Link>
+                      <span className="text-gray-text ml-2">Intercity transfer from Delhi to Varanasi (~820 km)</span>
+                    </li>
+                    <li>
+                      <Link href="/popular-routes/cab-service-in-ayodhya" className="text-[#00A5D9] hover:underline font-semibold">
+                        Varanasi to Ayodhya Cab →
+                      </Link>
+                      <span className="text-gray-text ml-2">Pilgrimage route to Ayodhya from Varanasi</span>
+                    </li>
+                    <li>
+                      <Link href="/popular-routes" className="text-[#00A5D9] hover:underline font-semibold">
+                        All Popular Routes →
+                      </Link>
+                      <span className="text-gray-text ml-2">Browse all outstation routes covered by Go India Cab</span>
+                    </li>
+                  </ul>
+                </div>
+              )}
 
               {cityPage.faqs && cityPage.faqs.length > 0 && (
                 <div className="pt-8 border-t border-border">
