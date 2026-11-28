@@ -58,6 +58,26 @@ export default function PayNowForm() {
     }
 
     try {
+      // Step 0: Verify booking exists before opening Razorpay
+      const checkRes = await fetch(`${BASE}/api/booking/${encodeURIComponent(bookingRef)}`);
+      const checkData = await checkRes.json();
+
+      if (!checkRes.ok || !checkData.bookingId) {
+        setErrorMsg(`Booking "${bookingRef}" not found. Please check your Booking ID (format: GIC-XXXXXXXX) and try again.`);
+        setStatus("error");
+        return;
+      }
+      if (checkData.paymentStatus === "paid") {
+        setErrorMsg(`This booking is already paid. No further payment is needed.`);
+        setStatus("error");
+        return;
+      }
+      if (checkData.status === "cancelled") {
+        setErrorMsg(`This booking has been cancelled. Payment is not possible.`);
+        setStatus("error");
+        return;
+      }
+
       // Step 1: Create Razorpay order from backend
       const orderRes = await fetch(`${BASE}/api/payment/create-order`, {
         method: "POST",
@@ -67,7 +87,13 @@ export default function PayNowForm() {
       const orderData = await orderRes.json();
 
       if (!orderRes.ok) {
-        setErrorMsg(orderData.message || "Could not initiate payment. Please check your Booking ID.");
+        if (orderData.error === "ALREADY_PAID") {
+          setErrorMsg("This booking is already paid.");
+        } else if (orderData.error === "BOOKING_CANCELLED") {
+          setErrorMsg("This booking has been cancelled.");
+        } else {
+          setErrorMsg(orderData.message || "Could not initiate payment. Please check your Booking ID.");
+        }
         setStatus("error");
         return;
       }
@@ -183,6 +209,7 @@ export default function PayNowForm() {
           <div>
             <label htmlFor="pay_ref" className="block text-sm font-medium text-dark mb-2">Booking ID *</label>
             <input type="text" id="pay_ref" required className="w-full px-4 py-3 rounded-xl border border-border focus:ring-2 focus:ring-primary outline-none bg-gray-50 uppercase" placeholder="GIC-XXXXXXXX" />
+            <p className="text-xs text-gray-400 mt-1">Find your Booking ID in the confirmation email/WhatsApp (starts with GIC-)</p>
           </div>
         </div>
         <div>
