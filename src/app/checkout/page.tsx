@@ -847,10 +847,21 @@ type RazorpayCtor = new (options: Record<string, unknown>) => { open: () => void
 function loadRazorpay(): Promise<void> {
   return new Promise((resolve, reject) => {
     if ((window as unknown as { Razorpay?: RazorpayCtor }).Razorpay) { resolve(); return; }
+    // Remove any previously failed script tag before retrying
+    const existing = document.querySelector('script[src*="razorpay"]');
+    if (existing) existing.remove();
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Failed to load Razorpay"));
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.onload = () => {
+      if ((window as unknown as { Razorpay?: RazorpayCtor }).Razorpay) {
+        resolve();
+      } else {
+        reject(new Error("Razorpay loaded but not available on window"));
+      }
+    };
+    script.onerror = () => reject(new Error("Failed to load Razorpay. Please check your internet connection and try again."));
     document.body.appendChild(script);
   });
 }

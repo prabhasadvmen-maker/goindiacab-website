@@ -7,8 +7,9 @@ async function apiFetch<T>(
   path: string,
   options?: RequestInit
 ): Promise<T> {
+  const isPayment = path.includes("/payment/");
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 10_000);
+  const timer = setTimeout(() => controller.abort(), isPayment ? 30_000 : 10_000);
   try {
     const res = await fetch(`${BASE}${path}`, {
       ...options,
